@@ -21,15 +21,8 @@ cb_panel::cb_panel(QWidget *parent):
     prefs.append(prefs_struct{-1,"Thermistor beta",0,-1});
     prefs.append(prefs_struct{-1,"Diff PD alarm level, V",2,-1});
 
-    ui->lssyncst->installEventFilter(this);
-    ui->lsbfreq->installEventFilter(this);
     ui->lscfreq->installEventFilter(this);
     ui->lseaomst->installEventFilter(this);
-    ui->lsbfreq->installEventFilter(this);
-    ui->lsfedaldl->installEventFilter(this);
-    ui->lsnspulsw->installEventFilter(this);
-    ui->lssyncdl->installEventFilter(this);
-    ui->lsfedalst->installEventFilter(this);
     ui->lseaomdl->installEventFilter(this);
 }
 
@@ -71,42 +64,13 @@ void cb_panel::data_received_and_profed()
 {
     if(param_check(raw_params,0)=="lrstatus"){
         emit sig_usr_changes("l_footer_connection_status",1);
-        ui->seed_state_label->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
-        ui->pb_on_off_seed->setChecked(param_check(raw_params,3).toInt());
-        ui->power_state_label->setText(param_check(raw_params,4).toInt()?"ВКЛ.":"ВЫКЛ.");
-        ui->pb_on_off_eaom->setChecked(param_check(raw_params,4).toInt());
-        ui->mode_label->setText(param_check(raw_params,5).toInt()?"External":"Internal");
-
-        ui->bfreq_label->setText(QString::number(param_check(raw_params,6).toDouble())+" Hz");
-        ui->cfreq_label->setText(QString::number(param_check(raw_params,7).toDouble())+" Hz");
-        ui->ns_width_label->setText(QString::number(param_check(raw_params,8).toDouble())+" ns");
-        ui->width_mode_label->setText(param_check(raw_params,9).toInt()?(param_check(raw_params,9).toInt()==1?"1 us":"0.1 us"):"10 us");
-        ui->eaom_start->setText(QString::number(param_check(raw_params,10).toDouble())+" nS");
-        ui->eaom_delay->setText(QString::number(param_check(raw_params,11).toDouble())+" nS");
-        ui->fedal_start->setText(QString::number(param_check(raw_params,12).toDouble())+" nS");
-        ui->fedal_delay->setText(QString::number(param_check(raw_params,13).toDouble())+" nS");
-        ui->sync_start->setText(QString::number(param_check(raw_params,14).toDouble())+" nS");
-        ui->sync_delay->setText(QString::number(param_check(raw_params,15).toDouble())+" nS");
-        //base_freq
-        //cut_freq
-        //ns_ctrl_pulse_width
-        //width_mode
-        //eaom_start
-        //eaom_delay
-        //fedal_start
-        //fedal_delay
-        //sync_start
-        //sync_delay
         panel_state.clear();
         panel_state.append(QString::number(ui->lseaomst->value()));
         panel_state.append(QString::number(ui->lseaomdl->value()));
 
-        ui->fedal_temp_1->setText(QString::number(param_check(raw_params,16).toDouble())+" C");
-        ui->fedal_temp_2->setText(QString::number(param_check(raw_params,17).toDouble())+" C");
         ui->fp_label_1->setText(QString::number(param_check(raw_params,18).toDouble()));
         ui->fp_label_2->setText(QString::number(param_check(raw_params,19).toDouble()));
         ui->fp_label_3->setText(QString::number(param_check(raw_params,20).toDouble()));
-        ui->pf_diff->setText(QString::number(param_check(raw_params,21).toDouble()));
         //diff_photo
     }else if(param_check(raw_params,0)=="lrconf0"){
         ui->lseaomst->setValue(param_check(raw_params,19).toDouble());
