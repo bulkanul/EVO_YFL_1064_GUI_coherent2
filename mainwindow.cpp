@@ -68,11 +68,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_connect_btn_clicked()
 {
-    if(ui->rb_tcp->isChecked()){
-        emit send_connection_type(ui->ip_adress->text(),7878);
-    }else if(ui->rb_serial->isChecked()){
-        emit send_connection_type(ui->serial_combo_box->currentData().toString(),404);
-    }
+    emit send_connection_type(ui->serial_combo_box->currentData().toString(),404);
     ui->menu_button->setText("Настройки подключения");
     ui->stackedWidget->setCurrentIndex(0);
     conn->tmr->start();
