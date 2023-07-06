@@ -33,7 +33,7 @@ public:
 
     QString serial="";
     bool first_set_write=true;
-    bool logg=false;
+    bool logg=true;
     bool stop_search=false;
 
     bool start_finding=false;
@@ -70,6 +70,7 @@ signals:
 public slots:
     void data_received();
     void data_write(QString,int,QString);
+    void data_write(int,int,QString);
     void raw_command_write(QByteArray);
     void data_ver_write(QString);
     void sender();

@@ -574,7 +574,7 @@ QProgressBar::chunk:disabled {
                       <number>0</number>
                      </property>
                      <property name="maximum">
-                      <number>700</number>
+                      <number>600</number>
                      </property>
                      <property name="value">
                       <number>200</number>

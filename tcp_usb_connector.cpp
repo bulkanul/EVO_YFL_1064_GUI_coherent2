@@ -30,7 +30,7 @@ void tcp_usb_connector::init_connection(QString adress, int port)
 void tcp_usb_connector::serial_set_prefs(QString serial_port)
 {
     _sSocket->setPortName(serial_port);
-    _sSocket->setBaudRate(4800);
+    _sSocket->setBaudRate(115200);
     _sSocket->setDataBits( QSerialPort::Data8);
     _sSocket->setFlowControl(QSerialPort::NoFlowControl);
     _sSocket->setStopBits(QSerialPort::OneStop);
@@ -52,6 +52,7 @@ void tcp_usb_connector::serial_connect(QString serial_port)
         _sSocket->flush();
         _sSocket->clear(QSerialPort::AllDirections);
         qDebug("serial port is opened SUCCESSFULLY");
+        display_connected();
     }
 }
 
@@ -128,7 +129,17 @@ void tcp_usb_connector::tcp_disconnect(void)
 {
     _pSocket->abort();
 }
-
+void tcp_usb_connector::data_write(int command,int number,QString data){
+    QString message;
+    if(data=="404"){
+        message=QString("%1").arg(command, 2, 16, QLatin1Char( '0' ));
+        crupto_fifo_command.append(message.toUtf8());
+    }else{
+        message="t"+QString("%1").arg(number, 3, 16, QLatin1Char( '0' ))+"8"+QString("%1").arg(command, 2, 16, QLatin1Char( '0' ))+QString("%1").arg(data.toInt(), 14, 16, QLatin1Char('0'));
+        crupto_fifo_command.append(message.toUtf8());
+    }
+    if(logg)qDebug()<<"fifo add data_write"+message;
+}
 
 void tcp_usb_connector::data_write(QString command,int number,QString data){
     QString message;
@@ -185,7 +196,7 @@ void tcp_usb_connector::sender()
     }else{
         if(!no_reconnect_by_dev && count>20)display_reconnect();
     }
-    if(logg)qDebug()<<"fifo add "<<pref_identificator<<crupto_fifo_command;
+//    if(logg)qDebug()<<"fifo add "<<pref_identificator<<crupto_fifo_command;
     if(crupto_fifo_command.length()>0){
         if(connection_is_tcp){
             if(_pSocket->isOpen()&&_pSocket->isWritable()){
@@ -216,8 +227,8 @@ void tcp_usb_connector::sender()
                             if(logg)qDebug()<<"socket s send "<<"gvers";
                         }
                     }else{
-                        _sSocket->write(crupto_fifo_command[0]+'\r'+'\n');
-                        if(logg)qDebug()<<"socket s send "<<crupto_fifo_command[0]+'\r'+'\n';
+                        _sSocket->write(crupto_fifo_command[0]);
+                        if(logg)qDebug()<<"socket s send "<<crupto_fifo_command[0];
                     }
                 }else{
                     if(logg)qDebug()<<"socket not";
@@ -246,6 +257,8 @@ void tcp_usb_connector::data_received(){
                         temp.append(c.unicode()-100);
                     }
                     data += temp;
+                }else{
+                   data =_pSocket->readLine();
                 }
             }
         }else{
@@ -256,7 +269,9 @@ void tcp_usb_connector::data_received(){
                         temp.append(c.unicode()-100);
                     }
                     data += temp;
-                }
+                }else{
+                    data =_sSocket->readLine();
+                 }
             }
         }
         raw_params=double_localizator(data);
@@ -265,11 +280,7 @@ void tcp_usb_connector::data_received(){
         if(first_set_write){
             qDebug() << "saved"<<connection_is_tcp<<ip<<serial;
             QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
-            if(pref_identificator.contains("ip_")){
-             settings.setValue(pref_identificator,ip);
-            }else{
-             settings.setValue(pref_identificator,serial);
-            }
+            settings.setValue("prev_connection",serial);
             first_set_write=false;
         }
         count=0;
@@ -321,9 +332,9 @@ QStringList tcp_usb_connector::double_localizator(QByteArray data){
                 QStringList list;
                 if(raw_command.lastIndexOf("lrerrclr")==0){
                     list =  raw_command.right(raw_command.length()
-                                      - raw_command.indexOf("lr")).left(raw_command.indexOf("\r")).split(" ");
+                                      - raw_command.indexOf("t")).left(raw_command.indexOf("\r")).split(" ");
                 }else{
-                    list = raw_command.right(raw_command.length() - raw_command.lastIndexOf("lr")).left(raw_command.indexOf("\r")).split(" ");
+                    list = raw_command.right(raw_command.length() - raw_command.lastIndexOf("t")).left(raw_command.indexOf("\r")).split(" ");
                 }
                 for(int i=0; i<list.length();i++){
                    list[i].replace(",",".");

@@ -27,6 +27,7 @@ public:
     bool first_calib=true;
 
     QStringList raw_params;
+    QByteArray very_raw_params;
     QStringList double_localizator(QByteArray data);
     QString param_check(QStringList,int);
     QList<QString> pref_names;
@@ -48,6 +49,7 @@ public:
 
 public slots:
     void data_received(QStringList);
+    void data_received(QByteArray);
     void send_laser(QString,QString);
     void sl_data_set(QString, int ,QString);
     void sl_data_get(QString, int ,QString);

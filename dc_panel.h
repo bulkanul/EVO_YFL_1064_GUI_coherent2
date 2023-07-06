@@ -30,10 +30,13 @@ public:
     QTimer* tmr;
     int auto_call=6;
     bool connection_lost=true;
+    QString internal_address;
 
 public slots:
     void data_received(QString);
     void key_catcher(QObject*);
+    void internal_address_write(QString);
+    void data_received_and_profed();
 
 private slots:
     void on_on_off_button_clicked(bool checked);
@@ -44,7 +47,7 @@ private slots:
 signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);
-    void send_command(int,int,QString);
+    void send_command(QByteArray);
 
 private:
     Ui::dc_panel *ui;

@@ -23,6 +23,18 @@ public:
     dc_panel *dc2;
     cb_panel *cb;
     tcp_usb_connector *conn;
+    static QString internal_address;
+signals:
+    void send_connection_type(QString,int);
+    void update_internal_address(QString);
+private slots:
+    void on_connect_btn_clicked();
+    void on_menu_button_clicked();
+
+    void on_refresh_ports_clicked();
+
+    void on_ip_adress_2_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -13,10 +13,10 @@
 
 device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
-    tmr=new QTimer();
-    tmr->setInterval(800);
-    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-    tmr->start();
+//    tmr=new QTimer();
+//    tmr->setInterval(800);
+//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+//    tmr->start();
 }
 
 bool device_panel::eventFilter(QObject *target, QEvent *event)
@@ -82,8 +82,8 @@ QStringList device_panel::double_localizator(QByteArray data){
 
 void device_panel::data_received(QStringList message)
 {
-
 //    qDebug()<<"data_received call"<<message<<ID<<family<<key;
+
     if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
         raw_params=message;
         count_no_responce=0;
@@ -109,6 +109,14 @@ void device_panel::data_received(QStringList message)
         }
         first_pref_cmd=true;
 //        if(dialog.isVisible())pref_status->setText("Сохранено");
+    }
+}
+
+void device_panel::data_received(QByteArray data)
+{
+    if(data.mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
+        very_raw_params=data;
+        emit command_proofed();
     }
 }
 

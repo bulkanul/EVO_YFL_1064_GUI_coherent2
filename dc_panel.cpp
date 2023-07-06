@@ -1,6 +1,8 @@
 #include "dc_panel.h"
+#include "ui_cb_panel.h"
 #include "ui_dc_panel.h"
 #include "device_panel.h"
+#include "mainwindow.h"
 
 #include <QTimer>
 #include <QDebug>
@@ -13,10 +15,11 @@ dc_panel::dc_panel(QWidget *parent):
     ui->setupUi(this);
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-//    tmr=new QTimer();
-//    tmr->setInterval(1000);
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();
+    tmr=new QTimer();
+    tmr->setInterval(2000);
+    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+    tmr->start();
+    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
 //    installEventFilter(this);
 //    ID=7;
 }
@@ -34,9 +37,14 @@ void dc_panel::key_catcher(QObject* key)
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){
-            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
+//            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
         }
     }
+}
+
+void dc_panel::internal_address_write(QString data)
+{
+    internal_address =data;
 }
 
 void dc_panel::data_received(QString message)
@@ -66,16 +74,38 @@ void dc_panel::data_received(QString message)
         }
     }
 }
+void dc_panel::data_received_and_profed()
+{
+    bool bStatus = false;
+    uint nHex = very_raw_params.right(8).toUInt(&bStatus,16);
+    if(very_raw_params.mid(1,3).toUInt()==internal_address.toUInt() && very_raw_params.mid(9,2).toUInt()==ID){
+        qDebug()<<very_raw_params.mid(5,2);
+        if(very_raw_params.mid(5,2)=="a0"){
+            ui->temp_label->setText(QString::number(nHex/10.0)+" C");
+            indicate(nHex/10.0);
+        }
+    }
+}
 
 void dc_panel::indicate(double count)
 {
-    ui->indicator->setValue(int(count*10));
+    ui->indicator->setValue(int(count*10)-100);
 }
 
 void dc_panel::on_on_off_button_clicked(bool checked)
 {
-    emit send_command(ON_OFF_LASER,ID,QString::number(checked));
-    emit send_command(ON_OFF_LASER,ID,QString::number(checked));
+    QString message ="t";
+    message.append(internal_address);
+    message.append("818");
+    message.append("00");
+    message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+    message.append("00");
+    int value=checked;
+    unsigned char *bytes = (unsigned char *)&value;
+    unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+    QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+    message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+    emit send_command(message.toUtf8()+'\r');
 }
 
 void dc_panel::auto_telemetry_call()
@@ -85,16 +115,16 @@ void dc_panel::auto_telemetry_call()
         enable_widget(false);
         connection_lost=true;
     }
-    if(connection_lost){
-        emit send_command(79,ID,"404");
-        emit send_command(21302,ID,"404");
-    }
-    emit send_command(VOLT_IN_LASER+CALL_SUFFIX,ID,"");
-    emit send_command(VOLT_OUT_LASER+CALL_SUFFIX,ID,"");
-    emit send_command(CURRENT_LASER+CALL_SUFFIX,ID,"");
-    emit send_command(MODE_LASER+CALL_SUFFIX,ID,"");
-    emit send_command(TEMP_LASER+CALL_SUFFIX,ID,"");
-    emit send_command(ON_OFF_LASER+CALL_SUFFIX,ID,"");
+//    if(connection_lost){
+//        emit send_command(79,ID,"404");
+//        emit send_command(21302,ID,"404");
+//    }
+    emit send_command(QString("t"+internal_address+"8a000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//    emit send_command(VOLT_OUT_LASER+CALL_SUFFIX,ID,"");
+//    emit send_command(CURRENT_LASER+CALL_SUFFIX,ID,"");
+//    emit send_command(MODE_LASER+CALL_SUFFIX,ID,"");
+//    emit send_command(TEMP_LASER+CALL_SUFFIX,ID,"");
+//    emit send_command(ON_OFF_LASER+CALL_SUFFIX,ID,"");
 }
 
 void dc_panel::enable_widget(bool state)
@@ -104,5 +134,5 @@ void dc_panel::enable_widget(bool state)
 
 void dc_panel::on_mode_currentIndexChanged(int index)
 {
-    emit send_command(MODE_LASER,ID,QString::number(index));
+//    emit send_command(MODE_LASER,ID,QString::number(index));
 }

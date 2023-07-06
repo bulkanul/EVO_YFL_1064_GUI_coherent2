@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>333</height>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -159,7 +159,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>1</string>
+                   <string>0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -239,7 +239,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>2</string>
+                   <string>1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -319,7 +319,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>3</string>
+                   <string>2</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -440,7 +440,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>1</string>
+                   <string>0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -520,7 +520,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>2</string>
+                   <string>1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -600,7 +600,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>3</string>
+                   <string>2</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -721,7 +721,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>1</string>
+                   <string>0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -801,7 +801,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>2</string>
+                   <string>1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -881,7 +881,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>3</string>
+                   <string>2</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1002,7 +1002,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>1</string>
+                   <string>0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1082,7 +1082,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>2</string>
+                   <string>1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1162,7 +1162,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string>3</string>
+                   <string>2</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
@@ -1469,31 +1469,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_43">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Обр. фото 2:</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_42">
                <property name="minimumSize">
@@ -1516,31 +1491,6 @@
                </property>
                <property name="text">
                 <string>Обр. фото 1:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_41">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Обр. фото 3:</string>
                </property>
               </widget>
              </item>
@@ -1569,6 +1519,31 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_43">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Обр. фото 2:</string>
+               </property>
+              </widget>
+             </item>
              <item row="4" column="1">
               <widget class="QLabel" name="fp_label_5">
                <property name="minimumSize">
@@ -1594,8 +1569,333 @@
                </property>
               </widget>
              </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_41">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Обр. фото 3:</string>
+               </property>
+              </widget>
+             </item>
              <item row="5" column="1">
               <widget class="QLabel" name="fp_label_6">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог прямой 1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLabel" name="label_39">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог прямой 2:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_40">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог прямой 3:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="label_44">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог обр. 1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_45">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог обр. 2:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_46">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Порог обр. 3:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLabel" name="fp_label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QLabel" name="fp_label_8">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QLabel" name="fp_label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="1">
+              <widget class="QLabel" name="fp_label_10">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QLabel" name="fp_label_11">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QLabel" name="fp_label_12">
                <property name="minimumSize">
                 <size>
                  <width>80</width>
