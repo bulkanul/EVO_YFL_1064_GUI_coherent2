@@ -20,7 +20,7 @@ dc_panel::dc_panel(QWidget *parent):
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
     tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
-//    installEventFilter(this);
+    ui->spin->installEventFilter(this);
 //    ID=7;
 }
 
