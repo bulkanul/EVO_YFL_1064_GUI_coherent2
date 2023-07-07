@@ -185,7 +185,7 @@ void tcp_usb_connector::sender()
     QByteArray temp;
     if(crypto_version_controller){
         if(count>20){
-            if(crupto_fifo_command.length()>0)crupto_fifo_command.removeLast();
+            if(crupto_fifo_command.length()>0)crupto_fifo_command.removeFirst();
             data_ver_write("gvers");
             display_reconnect();
         }
@@ -237,7 +237,7 @@ void tcp_usb_connector::sender()
                 }
                 if(crupto_fifo_command.length()>0){
                     if(logg)qDebug()<<"fifo removed"<<crupto_fifo_command.length();
-                    crupto_fifo_command.removeLast();
+                    crupto_fifo_command.removeFirst();
                 }
                 if(logg)qDebug()<<"fifo length "<<crupto_fifo_command.length();
             }
