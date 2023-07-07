@@ -83,41 +83,42 @@ QStringList device_panel::double_localizator(QByteArray data){
 void device_panel::data_received(QStringList message)
 {
 //    qDebug()<<"data_received call"<<message<<ID<<family<<key;
-
-    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
+    if(message[0].mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
         raw_params=message;
-        count_no_responce=0;
-        enable_widget(key);
-        if(silence_count<=0){
-            emit command_proofed();
-        }else{
-            silence_count--;
-        }
+        emit command_proofed();
     }
-    if(param_check(message,3)=="ERR"){
-        enable_widget(false);
-    }
-    if(param_check(raw_params,0)=="lrconf" && family!="usr"){
-        writed_values.clear();
-        for (int i=3;i<prefs.length()+3;i++ ) {
-             prefs[i-3].value=param_check(raw_params,i).toDouble();
-            if(dialog!=nullptr){
-//                if(container_values.length()>(i-3) && prefs.length()>(i-3)){
-                    container_values[i-3]->setText(QString::number(param_check(raw_params,i).toDouble(),'d',prefs[i-3].precision));
-//                }
-            }
-        }
-        first_pref_cmd=true;
-//        if(dialog.isVisible())pref_status->setText("Сохранено");
-    }
+
+//    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
+//        raw_params=message;
+//        count_no_responce=0;
+//        enable_widget(key);
+//        if(silence_count<=0){
+//            emit command_proofed();
+//        }else{
+//            silence_count--;
+//        }
+//    }
+//    if(param_check(message,3)=="ERR"){
+//        enable_widget(false);
+//    }
+//    if(param_check(raw_params,0)=="lrconf" && family!="usr"){
+//        writed_values.clear();
+//        for (int i=3;i<prefs.length()+3;i++ ) {
+//             prefs[i-3].value=param_check(raw_params,i).toDouble();
+//            if(dialog!=nullptr){
+////                if(container_values.length()>(i-3) && prefs.length()>(i-3)){
+//                    container_values[i-3]->setText(QString::number(param_check(raw_params,i).toDouble(),'d',prefs[i-3].precision));
+////                }
+//            }
+//        }
+//        first_pref_cmd=true;
+////        if(dialog.isVisible())pref_status->setText("Сохранено");
+//    }
 }
 
 void device_panel::data_received(QByteArray data)
 {
-    if(data.mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
-        very_raw_params=data;
-        emit command_proofed();
-    }
+
 }
 
 void device_panel::sl_data_set(QString comm,int number,QString data)

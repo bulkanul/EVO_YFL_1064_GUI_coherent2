@@ -19,21 +19,21 @@ MainWindow::MainWindow(QWidget *parent)
     dc = new dc_panel(this);
     connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QByteArray)),dc, SLOT(data_received(QByteArray)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
 
     ui->groupBox->layout()->addWidget(dc);
     dc->ID=0;
     dc1 = new dc_panel(this);
     connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QByteArray)),dc1, SLOT(data_received(QByteArray)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
 
     ui->groupBox->layout()->addWidget(dc1);
     dc1->ID=1;
     dc2 = new dc_panel(this);
     connect(dc2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QByteArray)),dc2, SLOT(data_received(QByteArray)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
 
     ui->groupBox->layout()->addWidget(dc2);
     dc2->ID=2;
@@ -58,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
         on_refresh_ports_clicked();
         on_connect_btn_clicked();
     }
+    emit update_internal_address(ui->ip_adress_2->text());
 }
 
 MainWindow::~MainWindow()

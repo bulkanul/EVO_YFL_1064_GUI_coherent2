@@ -37,6 +37,18 @@ void dc_panel::key_catcher(QObject* key)
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){
+            QString message ="t";
+            message.append(internal_address);
+            message.append("819");
+            message.append("00");
+            message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+            message.append("00");
+            int value=ui->spin->value()*100;
+            unsigned char *bytes = (unsigned char *)&value;
+            unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+            QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+            message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+            emit send_command(message.toUtf8()+'\r');
 //            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
         }
     }
@@ -77,12 +89,14 @@ void dc_panel::data_received(QString message)
 void dc_panel::data_received_and_profed()
 {
     bool bStatus = false;
-    uint nHex = very_raw_params.right(8).toUInt(&bStatus,16);
-    if(very_raw_params.mid(1,3).toUInt()==internal_address.toUInt() && very_raw_params.mid(9,2).toUInt()==ID){
-        qDebug()<<very_raw_params.mid(5,2);
-        if(very_raw_params.mid(5,2)=="a0"){
+    uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
+    if(raw_params[0].mid(1,3).toUInt()==internal_address.toUInt() && raw_params[0].mid(9,2).toUInt()==ID){
+        qDebug()<<raw_params[0].mid(5,2);
+        if(raw_params[0].mid(5,2)=="A0"){
             ui->temp_label->setText(QString::number(nHex/10.0)+" C");
             indicate(nHex/10.0);
+        }else if(raw_params[0].mid(5,2)=="99"){
+            ui->current_ld_label->setText(QString::number(nHex/100.0)+" C");
         }
     }
 }
@@ -115,10 +129,6 @@ void dc_panel::auto_telemetry_call()
         enable_widget(false);
         connection_lost=true;
     }
-//    if(connection_lost){
-//        emit send_command(79,ID,"404");
-//        emit send_command(21302,ID,"404");
-//    }
     emit send_command(QString("t"+internal_address+"8a000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 //    emit send_command(VOLT_OUT_LASER+CALL_SUFFIX,ID,"");
 //    emit send_command(CURRENT_LASER+CALL_SUFFIX,ID,"");

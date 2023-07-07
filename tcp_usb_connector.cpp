@@ -53,6 +53,8 @@ void tcp_usb_connector::serial_connect(QString serial_port)
         _sSocket->clear(QSerialPort::AllDirections);
         qDebug("serial port is opened SUCCESSFULLY");
         display_connected();
+            emit raw_command_write(QString("O").toUtf8());
+            emit raw_command_write(QString("S6").toUtf8());
     }
 }
 
@@ -302,7 +304,7 @@ void tcp_usb_connector::data_received(){
                 }
             }
         }else{
-            emit send_to_dev(data);
+            emit send_to_dev(raw_params);
         }
 
         emit connection_state(false);
