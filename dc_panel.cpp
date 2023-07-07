@@ -16,7 +16,7 @@ dc_panel::dc_panel(QWidget *parent):
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     tmr=new QTimer();
-    tmr->setInterval(2000);
+    tmr->setInterval(800);
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
     tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));

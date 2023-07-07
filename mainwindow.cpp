@@ -55,6 +55,11 @@ MainWindow::MainWindow(QWidget *parent)
     if(settings.value("prev_connection").toString()!=""){
         qDebug() <<"saved writed"<<settings.value("prev_port").toString();
         conn->serial=settings.value("prev_connection").toString();
+        if(settings.value("local_addr").toString()!=""){
+            ui->ip_adress_2->setText(settings.value("local_addr").toString());
+        }else{
+            ui->ip_adress_2->setText("00A");
+        }
         on_refresh_ports_clicked();
         on_connect_btn_clicked();
     }
@@ -100,6 +105,8 @@ void MainWindow::on_refresh_ports_clicked()
 
 void MainWindow::on_ip_adress_2_editingFinished()
 {
+    QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
+    settings.setValue("local_addr",ui->ip_adress_2->text());
     emit update_internal_address(ui->ip_adress_2->text());
 }
 
