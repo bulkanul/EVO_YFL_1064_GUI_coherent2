@@ -90,7 +90,7 @@ void dc_panel::data_received_and_profed()
 {
     bool bStatus = false;
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
-    if(raw_params[0].mid(1,3).toUInt()==internal_address.toUInt() && raw_params[0].mid(9,2).toUInt()==ID){
+    if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
         qDebug()<<raw_params[0].mid(5,2);
         if(raw_params[0].mid(5,2)=="A0"){
             ui->temp_label->setText(QString::number(nHex/10.0)+" C");
