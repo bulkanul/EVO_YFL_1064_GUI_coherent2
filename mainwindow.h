@@ -27,6 +27,7 @@ public:
 signals:
     void send_connection_type(QString,int);
     void update_internal_address(QString);
+    void send_command(QByteArray);
 private slots:
     void on_connect_btn_clicked();
     void on_menu_button_clicked();

@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 //    connect(this, SIGNAL(send_ver_command(QString)),conn, SLOT(data_ver_write(QString)));
 //    connect(this, SIGNAL(search_script(int)),conn, SLOT(start_search(int)));
 //    connect(conn, SIGNAL(send_device_list(QList<int>)),this, SLOT(show_dev_list(QList<int>)));
-
+    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 
     dc = new dc_panel(this);
     connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
@@ -78,6 +78,8 @@ void MainWindow::on_connect_btn_clicked()
     ui->menu_button->setText("Настройки подключения");
     ui->stackedWidget->setCurrentIndex(0);
     conn->tmr->start();
+    emit send_command(QString("O").toUtf8()+'\r');
+    emit send_command(QString("S6").toUtf8()+'\r');
 }
 
 

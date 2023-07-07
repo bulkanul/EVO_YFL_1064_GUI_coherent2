@@ -53,8 +53,8 @@ void tcp_usb_connector::serial_connect(QString serial_port)
         _sSocket->clear(QSerialPort::AllDirections);
         qDebug("serial port is opened SUCCESSFULLY");
         display_connected();
-            emit raw_command_write(QString("O").toUtf8());
-            emit raw_command_write(QString("S6").toUtf8());
+            emit raw_command_write(QString("O").toUtf8()+'\r');
+            emit raw_command_write(QString("S6").toUtf8()+'\r');
     }
 }
 
@@ -185,7 +185,7 @@ void tcp_usb_connector::sender()
     QByteArray temp;
     if(crypto_version_controller){
         if(count>20){
-            if(crupto_fifo_command.length()>0)crupto_fifo_command.removeFirst();
+            if(crupto_fifo_command.length()>0)crupto_fifo_command.removeLast();
             data_ver_write("gvers");
             display_reconnect();
         }
@@ -237,7 +237,7 @@ void tcp_usb_connector::sender()
                 }
                 if(crupto_fifo_command.length()>0){
                     if(logg)qDebug()<<"fifo removed"<<crupto_fifo_command.length();
-                    crupto_fifo_command.removeFirst();
+                    crupto_fifo_command.removeLast();
                 }
                 if(logg)qDebug()<<"fifo length "<<crupto_fifo_command.length();
             }
