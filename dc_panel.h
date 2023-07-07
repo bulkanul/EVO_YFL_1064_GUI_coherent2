@@ -31,6 +31,14 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QString internal_address;
+    QStringList errors_dc_list={"flag_REBOOTED",
+                                "flag_ALARM_INTERLOCK",
+                                "flag_Overtemp",
+                                "flag_OverCurrent",
+                                "flag_UnderVoltage_IN",
+                                "flag_OverVoltage_IN",
+                                "flag_UnderVoltage_OUT",
+                                "flag_OverCurrent_IND" };
 
 public slots:
     void data_received(QString);
@@ -44,6 +52,8 @@ private slots:
     void indicate(double);
     void auto_telemetry_call();
     void enable_widget(bool);
+    void on_button_error_clicked();
+
 signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);
