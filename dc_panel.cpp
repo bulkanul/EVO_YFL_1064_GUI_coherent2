@@ -105,6 +105,7 @@ void dc_panel::data_received_and_profed()
         }else if(raw_params[0].mid(5,2)=="A2"){
             if(error_displayer){
                 call_msg_box(pars_bits(nHex,errors_dc_list));
+                error_displayer=false;
             }
             ui->button_error->setVisible(nHex!=0);
             ui->label_error->setVisible(nHex!=0);

@@ -89,26 +89,6 @@
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QToolButton" name="toolButton">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="images/images.qrc">
-            <normaloff>:/interface/conf_icon.png</normaloff>
-            <disabledoff>:/images/images/conf_icon_disabled.png</disabledoff>
-            <selectedoff>:/interface/conf_icon_disabled.png</selectedoff>
-            <selectedon>:/interface/conf_icon_disabled.png</selectedon>:/interface/conf_icon.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>23</width>
-            <height>23</height>
-           </size>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
@@ -169,7 +149,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_15">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomst">
+                   <widget class="QDoubleSpinBox" name="forward_0">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -249,7 +229,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_12">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomdl">
+                   <widget class="QDoubleSpinBox" name="forward_1">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -329,7 +309,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_32">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lscfreq">
+                   <widget class="QDoubleSpinBox" name="forward_2">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -450,7 +430,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_16">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomst_2">
+                   <widget class="QDoubleSpinBox" name="backward_0">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -530,7 +510,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_13">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomdl_2">
+                   <widget class="QDoubleSpinBox" name="backward_1">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -610,7 +590,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_33">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lscfreq_2">
+                   <widget class="QDoubleSpinBox" name="backward_2">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -731,7 +711,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_17">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomst_3">
+                   <widget class="QDoubleSpinBox" name="forward_treashold_0">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -811,7 +791,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_14">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomdl_3">
+                   <widget class="QDoubleSpinBox" name="forward_treashold_1">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -891,7 +871,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_34">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lscfreq_3">
+                   <widget class="QDoubleSpinBox" name="forward_treashold_2">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -1012,7 +992,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_18">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomst_4">
+                   <widget class="QDoubleSpinBox" name="backward_treashold_0">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -1092,7 +1072,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_19">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lseaomdl_4">
+                   <widget class="QDoubleSpinBox" name="backward_treashold_1">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -1172,7 +1152,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_35">
                   <item>
-                   <widget class="QDoubleSpinBox" name="lscfreq_4">
+                   <widget class="QDoubleSpinBox" name="backward_treashold_2">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                       <horstretch>100</horstretch>
@@ -1944,8 +1924,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="images/images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

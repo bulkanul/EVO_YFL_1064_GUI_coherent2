@@ -11,19 +11,8 @@ cb_panel::cb_panel(QWidget *parent):
     ui(new Ui::cb_panel)
 {
     ui->setupUi(this);
-//    connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
-
-
-    family="cb";
-    prefs.append(prefs_struct{-1,"Resistance at 25C, Ohm",0,-1});
-    prefs.append(prefs_struct{-1,"Thermistor beta",0,-1});
-    prefs.append(prefs_struct{-1,"Diff PD alarm level, V",2,-1});
-
-    ui->lscfreq->installEventFilter(this);
-    ui->lseaomst->installEventFilter(this);
-    ui->lseaomdl->installEventFilter(this);
 }
 
 cb_panel::~cb_panel()
@@ -34,89 +23,49 @@ cb_panel::~cb_panel()
 void cb_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
-                                        "Подтверждение",
-                                        "Отправить команду в cb "+QString::number(ID)+"?",
+                                        "Conformation",
+                                        "Send command on dc "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         QDoubleSpinBox *target = static_cast<QDoubleSpinBox*>(key);
-        emit sl_data_set(target->objectName(),ID,QString::number(target->value()).replace(",","."));
-
-//        if(key->objectName() == "ns_freq"){
-//            emit sl_data_set("lsbfreq",ID,QString::number(ui->ns_freq->value()).replace(",","."));
-//        }else   if(key->objectName() == "eaom_freq"){
-//            emit sl_data_set("lscfreq",ID,QString::number(ui->eaom_freq->value()).replace(",","."));
-//        }else   if(key->objectName() == "ns_freq"){
-//            emit sl_data_set("lsbfreq",ID,QString::number(ui->ns_freq->value()).replace(",","."));
-//        }else   if(key->objectName() == "ns_freq"){
-//            emit sl_data_set("lsbfreq",ID,QString::number(ui->ns_freq->value()).replace(",","."));
-//        }else   if(key->objectName() == "ns_freq"){
-//            emit sl_data_set("lsbfreq",ID,QString::number(ui->ns_freq->value()).replace(",","."));
-//        }else
+        QString command;
+        command=key->objectName().contains("treashold")?(key->objectName().contains("forward")?"1A":"16"):
+                                                        (key->objectName().contains("forward")?"9B":"96");
+        QString message ="t";
+        message.append(internal_address);
+        message.append("8");
+        message.append(command);
+        message.append("00");
+        message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+        message.append("00");
+        int value=target->value()*100;
+        unsigned char *bytes = (unsigned char *)&value;
+        unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+        QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+        message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+        emit send_command(message.toUtf8()+'\r');
     }
-}
 
-void cb_panel::on_mode_currentIndexChanged(int index)
-{
-    emit sl_data_set("lsmode",ID,QString::number(index));
 }
 
 void cb_panel::data_received_and_profed()
 {
-    if(param_check(raw_params,0)=="lrstatus"){
-        emit sig_usr_changes("l_footer_connection_status",1);
-        panel_state.clear();
-        panel_state.append(QString::number(ui->lseaomst->value()));
-        panel_state.append(QString::number(ui->lseaomdl->value()));
-
-        ui->fp_label_1->setText(QString::number(param_check(raw_params,18).toDouble()));
-        ui->fp_label_2->setText(QString::number(param_check(raw_params,19).toDouble()));
-        ui->fp_label_3->setText(QString::number(param_check(raw_params,20).toDouble()));
-        //diff_photo
-    }else if(param_check(raw_params,0)=="lrconf0"){
-        ui->lseaomst->setValue(param_check(raw_params,19).toDouble());
-        ui->lseaomdl->setValue(param_check(raw_params,20).toDouble());
-    }else if(param_check(raw_params,0)=="lrconf1"){
-        ui->lseaomst->setValue(param_check(raw_params,14).toDouble());
-        ui->lseaomdl->setValue(param_check(raw_params,15).toDouble());
+    bool bStatus = false;
+    uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
+    if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
+        qDebug()<<raw_params[0].mid(5,2);
+        if(raw_params[0].mid(5,2)=="A2"){
+//            ui->temp_label->setText(QString::number(nHex/10.0)+" C");
+//            indicate(nHex/10.0);
+        }else if(raw_params[0].mid(5,2)=="95"){
+            if(error_displayer){
+                call_msg_box(pars_bits(nHex,errors_cb_list));
+                error_displayer=false;
+            }
+            emit call_ui_buttons(nHex!=0);
+//            ui->button_error->setVisible(nHex!=0);
+//            ui->label_error->setVisible(nHex!=0);
+            enable_widget(nHex==0);
+        }
     }
-    if(param_check(raw_params,0)=="lrerrclr"){
-       error_displayer=true;
-    }
-
 }
-
-void cb_panel::on_button_error_clicked()
-{
-    error_displayer=true;
-}
-
-void cb_panel::on_pb_on_off_seed_clicked(bool checked)
-{
-    emit sl_data_set("lsseed",ID,QString::number(checked));
-    silence_counter(2);
-}
-
-void cb_panel::on_pb_on_off_eaom_clicked(bool checked)
-{
-    emit sl_data_set("lsqeaom",ID,QString::number(checked));
-    silence_counter(2);
-}
-
-
-void cb_panel::on_cb_mode_activated(int index)
-{
-    emit sl_data_set("lsmode",ID,QString::number(index));
-}
-
-
-void cb_panel::on_cb_width_mode_activated(int index)
-{
-    emit sl_data_set("lswmode",ID,QString::number(index));
-}
-
-
-void cb_panel::on_lssave_clicked()
-{
-    emit sl_data_set("lssave",ID,QString::number(1));
-}
-

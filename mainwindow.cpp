@@ -20,27 +20,32 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
-
     ui->groupBox->layout()->addWidget(dc);
     dc->ID=0;
+
     dc1 = new dc_panel(this);
     connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
-
     ui->groupBox->layout()->addWidget(dc1);
     dc1->ID=1;
+
     dc2 = new dc_panel(this);
     connect(dc2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
-
     ui->groupBox->layout()->addWidget(dc2);
     dc2->ID=2;
 
     cb = new cb_panel(this);
     cb->ID=0;
+    connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),cb, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
+    connect(cb, SIGNAL(call_ui_buttons(bool)),conn, SLOT(update_ui(bool)));
     ui->groupBox->layout()->addWidget(cb);
+
+    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 //    dc2 = new dc_panel(this);
 //    dc2->ID=2;
 //    dc2->enable_widget(false);
@@ -69,6 +74,11 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::update_ui(bool state)
+{
+    ui->pb_error_cleaner->setVisible(state);
 }
 
 
@@ -112,4 +122,10 @@ void MainWindow::on_ip_adress_2_editingFinished()
     emit update_internal_address(ui->ip_adress_2->text());
 }
 
+void MainWindow::on_pb_error_cleaner_clicked()
+{
+    ui->pb_error_cleaner->setVisible(false);
+    QString message ="t00a081c00000000000000";
+    emit send_command(message.toUtf8());
+}
 
