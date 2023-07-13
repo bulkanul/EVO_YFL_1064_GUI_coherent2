@@ -16,7 +16,7 @@ dc_panel::dc_panel(QWidget *parent):
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     tmr=new QTimer();
-    tmr->setInterval(800);
+    tmr->setInterval(1300);
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
     tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
@@ -91,12 +91,14 @@ void dc_panel::data_received_and_profed()
     bool bStatus = false;
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
+        count=0;
+        enable_widget(true && raw_params[0].mid(5,2)!="A2");
         qDebug()<<raw_params[0].mid(5,2);
         if(raw_params[0].mid(5,2)=="A0"){
-            ui->temp_label->setText(QString::number(nHex/10.0)+" C");
+            ui->temp_label->setText(QString::number(nHex/10.0,'d',1)+" C");
             indicate(nHex/10.0);
         }else if(raw_params[0].mid(5,2)=="99"){
-            ui->current_ld_label->setText(QString::number(nHex/100.0)+" A");
+            ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" A");
         }else if(raw_params[0].mid(5,2)=="98"){
             ui->power_state_label->setText(nHex?"ON":"OFF");
             ui->on_off_button->setChecked(nHex);
@@ -142,7 +144,7 @@ void dc_panel::auto_telemetry_call()
         enable_widget(false);
         connection_lost=true;
     }
-    emit send_command(QString("t"+internal_address+"8a000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+    emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 //    emit send_command(VOLT_OUT_LASER+CALL_SUFFIX,ID,"");
 //    emit send_command(CURRENT_LASER+CALL_SUFFIX,ID,"");
@@ -151,10 +153,10 @@ void dc_panel::auto_telemetry_call()
 //    emit send_command(ON_OFF_LASER+CALL_SUFFIX,ID,"");
 }
 
-void dc_panel::enable_widget(bool state)
-{
-    ui->cw_widget->setEnabled(state);
-}
+//void dc_panel::enable_widget(bool state)
+//{
+//    ui->cw_widget->setEnabled(state);
+//}
 
 void dc_panel::on_mode_currentIndexChanged(int index)
 {

@@ -85,13 +85,12 @@ void device_panel::data_received(QStringList message)
 //    qDebug()<<"data_received call"<<message<<ID<<family<<key;
     if(message[0].mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
         raw_params=message;
+        count_no_responce=0;
         emit command_proofed();
     }
 
 //    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
 //        raw_params=message;
-//        count_no_responce=0;
-//        enable_widget(key);
 //        if(silence_count<=0){
 //            emit command_proofed();
 //        }else{

@@ -29,7 +29,7 @@ public:
     QString ip="";
     int port=0;
     int finded=0;
-    int standart_delay=50;
+    int standart_delay=40;
 
     QString serial="";
     bool first_set_write=true;

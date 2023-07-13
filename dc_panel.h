@@ -51,7 +51,7 @@ private slots:
     void on_mode_currentIndexChanged(int index);
     void indicate(double);
     void auto_telemetry_call();
-    void enable_widget(bool);
+//    void enable_widget(bool);
     void on_button_error_clicked();
 
 signals:

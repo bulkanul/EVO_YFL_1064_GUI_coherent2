@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),cb, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
-    connect(cb, SIGNAL(call_ui_buttons(bool)),conn, SLOT(update_ui(bool)));
+    connect(cb, SIGNAL(call_ui_buttons(bool)),this, SLOT(update_ui(bool)));
     ui->groupBox->layout()->addWidget(cb);
 
     connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));

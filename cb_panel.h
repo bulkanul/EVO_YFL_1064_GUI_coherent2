@@ -30,6 +30,8 @@ public:
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);
+    void auto_telemetry_call();
+    void internal_address_write(QString);
 
 signals:
     void send_message_window(QString,QString);
