@@ -25,6 +25,8 @@ public:
                                 "forward PD 2",
                                 "ITERLOCK",
                                 "Internal ERROR" };
+//    QList<QDoubleSpinBox*> dsb_list;
+    QList<QLabel*> label_list;
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);

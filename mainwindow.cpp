@@ -129,3 +129,11 @@ void MainWindow::on_pb_error_cleaner_clicked()
     emit send_command(message.toUtf8());
 }
 
+
+void MainWindow::on_all_save_in_memory_clicked()
+{
+    ui->pb_error_cleaner->setVisible(false);
+    QString message ="t00a08d200000000000000";
+    emit send_command(message.toUtf8());
+}
+

@@ -33,6 +33,8 @@ private slots:
     void on_ip_adress_2_editingFinished();
     void on_pb_error_cleaner_clicked();
 
+    void on_all_save_in_memory_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
