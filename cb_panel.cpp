@@ -30,6 +30,19 @@ cb_panel::cb_panel(QWidget *parent):
     label_list.append(ui->temp_label_0);
     label_list.append(ui->temp_label_1);
     label_list.append(ui->temp_label_2);
+
+    ui->forward_0->installEventFilter(this);
+    ui->forward_1->installEventFilter(this);
+    ui->forward_2->installEventFilter(this);
+    ui->backward_0->installEventFilter(this);
+    ui->backward_1->installEventFilter(this);
+    ui->backward_2->installEventFilter(this);
+    ui->forward_treashold_0->installEventFilter(this);
+    ui->forward_treashold_1->installEventFilter(this);
+    ui->forward_treashold_2->installEventFilter(this);
+    ui->backward_treashold_0->installEventFilter(this);
+    ui->backward_treashold_1->installEventFilter(this);
+    ui->backward_treashold_2->installEventFilter(this);
     tmr=new QTimer();
     tmr->setInterval(1300);
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
