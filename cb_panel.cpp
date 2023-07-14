@@ -128,15 +128,15 @@ void cb_panel::data_received_and_profed()
             emit call_ui_buttons(nHex!=0);
             enable_widget(nHex==0);
         }else if(raw_params[0].mid(5,2)=="9B"){
-            label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+            label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="97"){
-            label_list[3+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+            label_list[3+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="9A"){
-            label_list[6+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+            label_list[6+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="96"){
-            label_list[9+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+            label_list[9+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="92"){
-            label_list[12+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+            label_list[12+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/10.0)+"");
         }
     }
 }
