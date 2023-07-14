@@ -19,12 +19,17 @@ cb_panel::cb_panel(QWidget *parent):
     label_list.append(ui->backward_label_0);
     label_list.append(ui->backward_label_1);
     label_list.append(ui->backward_label_2);
+
     label_list.append(ui->forward_level_label_0);
     label_list.append(ui->forward_level_label_1);
     label_list.append(ui->forward_level_label_2);
     label_list.append(ui->backward_level_label_0);
     label_list.append(ui->backward_level_label_1);
     label_list.append(ui->backward_level_label_2);
+
+    label_list.append(ui->temp_label_0);
+    label_list.append(ui->temp_label_1);
+    label_list.append(ui->temp_label_2);
     tmr=new QTimer();
     tmr->setInterval(1300);
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
@@ -108,8 +113,6 @@ void cb_panel::data_received_and_profed()
                 error_displayer=false;
             }
             emit call_ui_buttons(nHex!=0);
-//            ui->button_error->setVisible(nHex!=0);
-//            ui->label_error->setVisible(nHex!=0);
             enable_widget(nHex==0);
         }else if(raw_params[0].mid(5,2)=="9B"){
             label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
@@ -119,6 +122,8 @@ void cb_panel::data_received_and_profed()
             label_list[6+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
         }else if(raw_params[0].mid(5,2)=="96"){
             label_list[9+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
+        }else if(raw_params[0].mid(5,2)=="92"){
+            label_list[12+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex)+"");
         }
     }
 }
