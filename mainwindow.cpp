@@ -140,18 +140,19 @@ void MainWindow::on_ip_adress_2_editingFinished()
 void MainWindow::on_pb_error_cleaner_clicked()
 {
     ui->pb_error_cleaner->setVisible(false);
-    QString message ="t00a081c00000000000000";
-    emit send_command(message.toUtf8());
+    QString message ="t"+ui->ip_adress_2->text()+"81c00000000000000";
+    emit send_command(message.toUtf8()+'\r');
     dc->error_displayer=true;
     dc1->error_displayer=true;
     dc2->error_displayer=true;
+    cb->error_displayer=true;
 }
 
 
 void MainWindow::on_all_save_in_memory_clicked()
 {
     ui->pb_error_cleaner->setVisible(false);
-    QString message ="t00a08d200000000000000";
-    emit send_command(message.toUtf8());
+    QString message ="t"+ui->ip_adress_2->text()+"8d200000000000000";
+    emit send_command(message.toUtf8()+'\r');
 }
 
