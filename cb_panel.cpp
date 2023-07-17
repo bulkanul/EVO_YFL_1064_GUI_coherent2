@@ -72,6 +72,8 @@ void cb_panel::auto_telemetry_call()
     emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+
+    emit send_command(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 }
 
 void cb_panel::key_catcher(QObject* key)
