@@ -36,7 +36,7 @@ public slots:
 signals:
     void send_message_window(QString,QString);
     void send_command(QByteArray);
-    void call_ui_buttons(bool);
+    void call_ui_buttons(QString,bool);
 private:
     Ui::cb_panel *ui;
 };

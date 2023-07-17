@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
+    connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
     ui->groupBox->layout()->addWidget(dc);
     dc->ID=0;
 
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
+    connect(dc1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
     ui->groupBox->layout()->addWidget(dc1);
     dc1->ID=1;
 
@@ -35,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dc2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
+    connect(dc2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
     ui->groupBox->layout()->addWidget(dc2);
     dc2->ID=2;
 
@@ -43,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),cb, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
-    connect(cb, SIGNAL(call_ui_buttons(bool)),this, SLOT(update_ui(bool)));
+    connect(cb, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
     ui->groupBox->layout()->addWidget(cb);
 
     user = new user_panel(this);
@@ -84,9 +87,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::update_ui(bool state)
+void MainWindow::update_ui(QString name,bool state)
 {
-    ui->pb_error_cleaner->setVisible(state);
+    if(name=="dc0")dc_err=state;
+    else if(name=="dc1")dc1_err=state;
+    else if(name=="dc2")dc2_err=state;
+    else if(name=="cb")cb_err=state;
+    ui->pb_error_cleaner->setVisible(dc_err || dc1_err || dc2_err || cb_err);
 }
 
 

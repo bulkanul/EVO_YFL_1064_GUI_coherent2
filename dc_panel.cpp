@@ -109,6 +109,7 @@ void dc_panel::data_received_and_profed()
                 call_msg_box(pars_bits(nHex,errors_dc_list));
                 error_displayer=false;
             }
+            emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
             ui->button_error->setVisible(nHex!=0);
             ui->label_error->setVisible(nHex!=0);
 //            enable_widget(nHex==0);

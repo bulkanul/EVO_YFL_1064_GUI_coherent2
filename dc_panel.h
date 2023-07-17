@@ -58,6 +58,7 @@ signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);
     void send_command(QByteArray);
+    void call_ui_buttons(QString,bool);
 
 private:
     Ui::dc_panel *ui;

@@ -121,7 +121,7 @@ void cb_panel::data_received_and_profed()
                 call_msg_box(pars_bits(nHex,errors_cb_list));
                 error_displayer=false;
             }
-            emit call_ui_buttons(nHex!=0);
+            emit call_ui_buttons("cb",nHex!=0);
         }else if(raw_params[0].mid(5,2)=="9B"){
             label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="97"){

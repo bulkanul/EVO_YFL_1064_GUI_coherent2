@@ -22,12 +22,16 @@ public:
     cb_panel *cb;
     user_panel *user;
     tcp_usb_connector *conn;
+    bool dc_err=false;
+    bool dc1_err=false;
+    bool dc2_err=false;
+    bool cb_err=false;
 signals:
     void send_connection_type(QString,int);
     void update_internal_address(QString);
     void send_command(QByteArray);
 public slots:
-    void update_ui(bool);
+    void update_ui(QString,bool);
 private slots:
     void on_connect_btn_clicked();
     void on_menu_button_clicked();
