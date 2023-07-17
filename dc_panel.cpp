@@ -146,11 +146,6 @@ void dc_panel::auto_telemetry_call()
     }
     emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-//    emit send_command(VOLT_OUT_LASER+CALL_SUFFIX,ID,"");
-//    emit send_command(CURRENT_LASER+CALL_SUFFIX,ID,"");
-//    emit send_command(MODE_LASER+CALL_SUFFIX,ID,"");
-//    emit send_command(TEMP_LASER+CALL_SUFFIX,ID,"");
-//    emit send_command(ON_OFF_LASER+CALL_SUFFIX,ID,"");
 }
 
 //void dc_panel::enable_widget(bool state)

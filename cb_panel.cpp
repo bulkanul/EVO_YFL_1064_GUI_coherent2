@@ -96,8 +96,9 @@ void cb_panel::key_catcher(QObject* key)
         message.append("8");
         message.append(command);
         message.append("00");
-        message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
         message.append("00");
+        qDebug()<<"mess"<<key->objectName().right(1);
+        message.append(QString("%1").arg(key->objectName().right(1).toInt(), 2, 16, QLatin1Char( '0' )));
         int value=target->value()*100;
         unsigned char *bytes = (unsigned char *)&value;
         unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
