@@ -59,7 +59,7 @@ void user_panel::data_received_and_profed()
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
         count=0;
-        enable_widget(true && raw_params[0].mid(5,2)!="A2");
+        enable_widget(true);
         if(raw_params[0].mid(5,2)=="91"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" %");
         }else if(raw_params[0].mid(5,2)=="90"){
