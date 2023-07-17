@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "user_panel.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -44,6 +45,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
     connect(cb, SIGNAL(call_ui_buttons(bool)),this, SLOT(update_ui(bool)));
     ui->groupBox->layout()->addWidget(cb);
+
+    user = new user_panel(this);
+    connect(user, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),user, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),user, SLOT(data_received(QStringList)));
+    ui->groupBox->layout()->addWidget(user);
+    user->ID=0;
 
     connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 //    dc2 = new dc_panel(this);
@@ -127,6 +135,9 @@ void MainWindow::on_pb_error_cleaner_clicked()
     ui->pb_error_cleaner->setVisible(false);
     QString message ="t00a081c00000000000000";
     emit send_command(message.toUtf8());
+    dc->error_displayer=true;
+    dc1->error_displayer=true;
+    dc2->error_displayer=true;
 }
 
 

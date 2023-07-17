@@ -15,19 +15,22 @@ SOURCES += \
     dc_panel.cpp \
     cb_panel.cpp \
     tcp_usb_connector.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    user_panel.cpp
 
 HEADERS += \
     device_panel.h \
     dc_panel.h \
     cb_panel.h \
     tcp_usb_connector.h \
-    mainwindow.h
+    mainwindow.h \
+    user_panel.h
 
 FORMS += \
     dc_panel.ui \
     cb_panel.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    user_panel.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

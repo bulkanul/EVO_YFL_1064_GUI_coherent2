@@ -5,6 +5,7 @@
 #include <dc_panel.h>
 #include "device_panel.h"
 #include <tcp_usb_connector.h>
+#include <user_panel.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,6 +20,7 @@ public:
     dc_panel *dc1;
     dc_panel *dc2;
     cb_panel *cb;
+    user_panel *user;
     tcp_usb_connector *conn;
 signals:
     void send_connection_type(QString,int);

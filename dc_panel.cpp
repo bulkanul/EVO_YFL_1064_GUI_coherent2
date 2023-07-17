@@ -111,7 +111,7 @@ void dc_panel::data_received_and_profed()
             }
             ui->button_error->setVisible(nHex!=0);
             ui->label_error->setVisible(nHex!=0);
-            enable_widget(nHex==0);
+//            enable_widget(nHex==0);
         }
     }
 }

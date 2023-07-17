@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dc_panel</class>
- <widget class="device_panel" name="dc_panel">
+ <class>user_panel</class>
+ <widget class="QWidget" name="user_panel">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>247</height>
+    <width>789</width>
+    <height>193</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Power DCDC</string>
+           <string>User panel</string>
           </property>
          </widget>
         </item>
@@ -254,53 +254,6 @@ QPushButton::disabled  {
                  </item>
                 </layout>
                </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_7">
-                 <item>
-                  <widget class="QLabel" name="label_2">
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Режим</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_4">
-                   <item>
-                    <widget class="QComboBox" name="mode">
-                     <property name="font">
-                      <font>
-                       <pointsize>12</pointsize>
-                      </font>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>Mode CW</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>External TTL</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>External Analog</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
               </layout>
              </item>
              <item>
@@ -319,7 +272,7 @@ QPushButton::disabled  {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Drive current</string>
+                  <string>Power</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -361,13 +314,13 @@ QProgressBar::chunk:disabled {
 }</string>
                      </property>
                      <property name="minimum">
-                      <number>100</number>
+                      <number>0</number>
                      </property>
                      <property name="maximum">
-                      <number>250</number>
+                      <number>100</number>
                      </property>
                      <property name="value">
-                      <number>200</number>
+                      <number>12</number>
                      </property>
                      <property name="textVisible">
                       <bool>false</bool>
@@ -391,7 +344,7 @@ QProgressBar::chunk:disabled {
                      <item>
                       <widget class="QLabel" name="curr_min_label">
                        <property name="text">
-                        <string>10</string>
+                        <string>0</string>
                        </property>
                       </widget>
                      </item>
@@ -417,7 +370,7 @@ QProgressBar::chunk:disabled {
                         </sizepolicy>
                        </property>
                        <property name="text">
-                        <string>25</string>
+                        <string>100</string>
                        </property>
                       </widget>
                      </item>
@@ -459,177 +412,28 @@ QProgressBar::chunk:disabled {
                       <string notr="true">background: rgb(255,255,255)</string>
                      </property>
                      <property name="suffix">
-                      <string> A</string>
+                      <string> %</string>
                      </property>
                      <property name="decimals">
                       <number>0</number>
                      </property>
                      <property name="minimum">
-                      <double>10.000000000000000</double>
+                      <double>0.000000000000000</double>
                      </property>
                      <property name="maximum">
-                      <double>25.000000000000000</double>
+                      <double>100.000000000000000</double>
                      </property>
                      <property name="singleStep">
                       <double>1.000000000000000</double>
                      </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_12">
-               <item>
-                <widget class="QLabel" name="label_25">
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>12</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Temperature</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_14">
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_14">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QProgressBar" name="tem_indicator">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>16777215</width>
-                       <height>10</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QProgressBar {
-    border: 1px solid grey;
-}
-
-QProgressBar::chunk {
-	background-color: rgb(0, 160, 18);
-}
-
-QProgressBar::chunk:disabled {
-	background-color: rgb(150, 150, 150);
-}</string>
-                     </property>
-                     <property name="minimum">
-                      <number>0</number>
-                     </property>
-                     <property name="maximum">
-                      <number>600</number>
-                     </property>
                      <property name="value">
-                      <number>200</number>
-                     </property>
-                     <property name="textVisible">
-                      <bool>false</bool>
-                     </property>
-                     <property name="textDirection">
-                      <enum>QProgressBar::TopToBottom</enum>
-                     </property>
-                     <property name="format">
-                      <string/>
+                      <double>0.000000000000000</double>
                      </property>
                     </widget>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_26">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <property name="leftMargin">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <widget class="QLabel" name="curr_min_label_3">
-                       <property name="text">
-                        <string>10</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_10">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>40</width>
-                         <height>10</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="curr_max_label_3">
-                       <property name="sizePolicy">
-                        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-                         <horstretch>0</horstretch>
-                         <verstretch>0</verstretch>
-                        </sizepolicy>
-                       </property>
-                       <property name="text">
-                        <string>70</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
                    </item>
                   </layout>
                  </item>
                 </layout>
-               </item>
-               <item>
-                <spacer name="verticalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </item>
@@ -811,149 +615,6 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_32">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Temperature:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLabel" name="temp_label">
-               <property name="minimumSize">
-                <size>
-                 <width>80</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>80</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>0.0 C</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_error">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Ошибки:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QPushButton" name="button_error">
-               <property name="text">
-                <string>Список</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_29">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Режим:</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLabel" name="mode_label">
-               <property name="minimumSize">
-                <size>
-                 <width>80</width>
-                 <height>36</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>80</width>
-                 <height>36</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Mode CW</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
             </layout>
            </item>
           </layout>
@@ -966,14 +627,6 @@ QProgressBar::chunk:disabled {
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>device_panel</class>
-   <extends>QWidget</extends>
-   <header>device_panel.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
