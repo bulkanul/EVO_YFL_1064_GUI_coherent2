@@ -13,12 +13,12 @@ cb_panel::cb_panel(QWidget *parent):
     ui->setupUi(this);
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
-    label_list.append(ui->forward_label_0);
-    label_list.append(ui->forward_label_1);
-    label_list.append(ui->forward_label_2);
-    label_list.append(ui->backward_label_0);
-    label_list.append(ui->backward_label_1);
-    label_list.append(ui->backward_label_2);
+//    label_list.append(ui->forward_label_0);
+//    label_list.append(ui->forward_label_1);
+//    label_list.append(ui->forward_label_2);
+//    label_list.append(ui->backward_label_0);
+//    label_list.append(ui->backward_label_1);
+//    label_list.append(ui->backward_label_2);
 
     label_list.append(ui->forward_level_label_0);
     label_list.append(ui->forward_level_label_1);
@@ -31,12 +31,12 @@ cb_panel::cb_panel(QWidget *parent):
     label_list.append(ui->temp_label_1);
     label_list.append(ui->temp_label_2);
 
-    ui->forward_0->installEventFilter(this);
-    ui->forward_1->installEventFilter(this);
-    ui->forward_2->installEventFilter(this);
-    ui->backward_0->installEventFilter(this);
-    ui->backward_1->installEventFilter(this);
-    ui->backward_2->installEventFilter(this);
+//    ui->forward_0->installEventFilter(this);
+//    ui->forward_1->installEventFilter(this);
+//    ui->forward_2->installEventFilter(this);
+//    ui->backward_0->installEventFilter(this);
+//    ui->backward_1->installEventFilter(this);
+//    ui->backward_2->installEventFilter(this);
     ui->forward_treashold_0->installEventFilter(this);
     ui->forward_treashold_1->installEventFilter(this);
     ui->forward_treashold_2->installEventFilter(this);
@@ -62,21 +62,21 @@ void cb_panel::auto_telemetry_call()
         connection_lost=true;
     }
     emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 
     emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
 
     emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+//    emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
 }
 
@@ -128,16 +128,16 @@ void cb_panel::data_received_and_profed()
             }
             emit call_ui_buttons(nHex!=0);
             enable_widget(nHex==0);
-        }else if(raw_params[0].mid(5,2)=="9B"){
-            label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
-        }else if(raw_params[0].mid(5,2)=="97"){
-            label_list[3+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
+//        }else if(raw_params[0].mid(5,2)=="9B"){
+//            label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
+//        }else if(raw_params[0].mid(5,2)=="97"){
+//            label_list[3+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="9A"){
-            label_list[6+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
+            label_list[raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="96"){
-            label_list[9+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
+            label_list[3+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="92"){
-            label_list[12+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/10.0)+"");
+            label_list[6+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/10.0)+"");
         }
     }
 }
