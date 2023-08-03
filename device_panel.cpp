@@ -50,7 +50,7 @@ void device_panel::auto_telemetry_call()
     count++;
     count_no_responce++;
     if(count_no_responce>6){
-         enable_widget(true);
+         enable_widget(false);
          first_pref_cmd=false;
          first_status_cmd=true;
          first_calib=true;
@@ -136,36 +136,7 @@ void device_panel::send_laser(QString type, QString mess){
 
 void device_panel::on_toolButton_clicked()
 {
-//    if(first_pref){
-//        dialog.setGeometry(400, 600, 300, 100);
-//        QVBoxLayout* dialogLay = new QVBoxLayout(&dialog);
-//        int i=0;
-//        foreach(QString name ,pref_names){
-//            QSplitter* splitter = new QSplitter(Qt::Horizontal,&dialog);
-//            QLabel* name_label=new QLabel(name,&dialog);
-//            name_label->setGeometry(0, 0, 100, 30);
-//            splitter->addWidget(name_label);
-//            container_values.append(new QLabel(writed_values[i]));
-//            splitter->addWidget(container_values.last());
-//            container_values.last()->setGeometry(0, 0, 100, 30);
-//            spiners.append(new QDoubleSpinBox(&dialog));
-//            spiners.last()->setMaximum(50000);
-//            splitter->addWidget(spiners.last());
-//            dialogLay->addWidget(splitter);
-//            i++;
-//        }
 
-//        QSplitter* buttonsplitter = new QSplitter(Qt::Horizontal,&dialog);
-//        QDialogButtonBox* diagButton =new QDialogButtonBox(QDialogButtonBox::Save,&dialog);
-//        connect(diagButton,SIGNAL(accepted()),this,SLOT(send_pref()));
-////        connect(diagButton,SIGNAL(accepted()),&dialog,SLOT(accept()));
-//        pref_status=new QLabel("",&dialog);
-//        dialogLay->addWidget(pref_status);
-//        buttonsplitter->addWidget(diagButton);
-//        dialogLay->addWidget(buttonsplitter);
-//        first_pref=false;
-//    }
-//    dialog.exec();
     dialog = new QDialog();
     dialog->setWindowTitle(family + " configuration");
     dialog->setModal(true);

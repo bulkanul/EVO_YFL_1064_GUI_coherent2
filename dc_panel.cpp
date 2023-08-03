@@ -21,6 +21,7 @@ dc_panel::dc_panel(QWidget *parent):
     tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     ui->spin->installEventFilter(this);
+    prefs.append(prefs_struct{-1,"Max current, A",4,-1});
 //    ID=7;
 }
 
@@ -99,6 +100,11 @@ void dc_panel::data_received_and_profed()
             indicate(nHex/10.0);
         }else if(raw_params[0].mid(5,2)=="99"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" A");
+        }else if(raw_params[0].mid(5,2)=="93"){
+            ui->spin->setMaximum(nHex/100.0);
+            ui->curr_max_label->setText(QString::number(nHex/100.0,'d',2));
+            ui->indicator->setMaximum(nHex/10.0);
+
         }else if(raw_params[0].mid(5,2)=="98"){
             ui->power_state_label->setText(nHex?"ON":"OFF");
             ui->on_off_button->setChecked(nHex);
@@ -117,9 +123,33 @@ void dc_panel::data_received_and_profed()
     }
 }
 
+void dc_panel::send_pref()
+{
+    qDebug()<<"value len"<<spiners.length();
+    if(spiners.length()>0){
+//        qDebug()<<"value"<<spiners[0]->value();
+//        ui->spin->setMaximum(spiners[0]->value());
+//        ui->curr_max_label->setText(QString::number(spiners[0]->value(),'d',1));
+//        ui->indicator->setMaximum(spiners[0]->value()*10);
+
+        QString message ="t";
+        message.append(internal_address);
+        message.append("813");
+        message.append("00");
+        message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+        message.append("00");
+        int value=spiners[0]->value()*100;
+        unsigned char *bytes = (unsigned char *)&value;
+        unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+        QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+        message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+        emit send_command(message.toUtf8()+'\r');
+    }
+}
+
 void dc_panel::indicate(double count)
 {
-    ui->indicator->setValue(int(count*10)-100);
+    ui->indicator->setValue(int(count*10));
 }
 
 void dc_panel::on_on_off_button_clicked(bool checked)
@@ -141,7 +171,7 @@ void dc_panel::on_on_off_button_clicked(bool checked)
 void dc_panel::auto_telemetry_call()
 {
     count++;
-    if(count>30){
+    if(count>6){
         enable_widget(false);
         connection_lost=true;
     }
