@@ -106,7 +106,7 @@ void dc_panel::data_received_and_profed()
             ui->spin->setMaximum(nHex/100.0);
             ui->curr_max_label->setText(QString::number(nHex/100.0,'d',2));
             ui->indicator->setMaximum(nHex/10.0);
-            container_values[0]->setText(QString::number(nHex/10.0,'d',2));
+            container_values[0]->setText(QString::number(nHex/100.0,'d',2));
         }else if(raw_params[0].mid(5,2)=="98"){
             ui->power_state_label->setText(nHex?"ON":"OFF");
             ui->on_off_button->setChecked(nHex);
