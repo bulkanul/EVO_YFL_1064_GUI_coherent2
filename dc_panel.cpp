@@ -187,6 +187,7 @@ void dc_panel::auto_telemetry_call()
     }
     emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+    emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 }
 
