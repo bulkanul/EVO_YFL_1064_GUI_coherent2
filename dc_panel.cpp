@@ -100,7 +100,7 @@ void dc_panel::data_received_and_profed()
             indicate(nHex/10.0);
         }else if(raw_params[0].mid(5,2)=="99"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" A");
-        }else if(raw_params[0].mid(5,2)=="93"){
+        }else if(raw_params[0].mid(5,2)=="94"){
             ui->spin->setMaximum(nHex/100.0);
             ui->curr_max_label->setText(QString::number(nHex/100.0,'d',2));
             ui->indicator->setMaximum(nHex/10.0);
@@ -134,7 +134,7 @@ void dc_panel::send_pref()
 
         QString message ="t";
         message.append(internal_address);
-        message.append("813");
+        message.append("814");
         message.append("00");
         message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
         message.append("00");
@@ -144,6 +144,7 @@ void dc_panel::send_pref()
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
         emit send_command(message.toUtf8()+'\r');
+        emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     }
 }
 
