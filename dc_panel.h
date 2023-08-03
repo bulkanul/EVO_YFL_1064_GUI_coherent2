@@ -50,12 +50,11 @@ public slots:
 
 private slots:
     void on_on_off_button_clicked(bool checked);
-    void on_mode_currentIndexChanged(int index);
     void indicate(double);
     void auto_telemetry_call();
-//    void enable_widget(bool);
     void on_button_error_clicked();
     void update_pref();
+    void on_mode_activated(int index);
 
 signals:
     void sig_dis_enabled(QWidget*,bool);

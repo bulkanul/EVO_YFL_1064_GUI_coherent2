@@ -191,12 +191,21 @@ void dc_panel::auto_telemetry_call()
     emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 }
 
-//void dc_panel::enable_widget(bool state)
-//{
-//    ui->cw_widget->setEnabled(state);
-//}
 
-void dc_panel::on_mode_currentIndexChanged(int index)
+
+void dc_panel::on_button_error_clicked()
+{
+    error_displayer=true;
+}
+
+void dc_panel::update_pref()
+{
+    emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+}
+
+
+
+void dc_panel::on_mode_activated(int index)
 {
     QString message ="t";
     message.append(internal_address);
@@ -210,17 +219,5 @@ void dc_panel::on_mode_currentIndexChanged(int index)
     QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
     message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
     emit send_command(message.toUtf8()+'\r');
-//    emit send_command(MODE_LASER,ID,QString::number(index));
+    //    emit send_command(MODE_LASER,ID,QString::number(index));
 }
-
-void dc_panel::on_button_error_clicked()
-{
-    error_displayer=true;
-}
-
-void dc_panel::update_pref()
-{
-    emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-}
-
-
