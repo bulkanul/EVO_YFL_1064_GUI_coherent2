@@ -24,7 +24,6 @@ dc_panel::dc_panel(QWidget *parent):
 
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
-    emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     //    ID=7;
 }
 
