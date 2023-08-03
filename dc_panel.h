@@ -31,6 +31,7 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QString internal_address;
+    bool first_call=true;
     QStringList errors_dc_list={"flag_REBOOTED",
                                 "flag_ALARM_INTERLOCK",
                                 "flag_Overtemp",
