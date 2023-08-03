@@ -136,7 +136,7 @@ void device_panel::send_laser(QString type, QString mess){
 
 void device_panel::on_toolButton_clicked()
 {
-
+    emit tool_clicked();
     dialog = new QDialog();
     dialog->setWindowTitle(family + " configuration");
     dialog->setModal(true);

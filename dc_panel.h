@@ -54,6 +54,7 @@ private slots:
     void auto_telemetry_call();
 //    void enable_widget(bool);
     void on_button_error_clicked();
+    void update_pref();
 
 signals:
     void sig_dis_enabled(QWidget*,bool);

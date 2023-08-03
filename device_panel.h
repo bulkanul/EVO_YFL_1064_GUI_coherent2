@@ -72,6 +72,7 @@ signals:
     void enter_event(QObject*);
     void sl_data_set(QString,QString);
     void command_proofed();
+    void tool_clicked();
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;

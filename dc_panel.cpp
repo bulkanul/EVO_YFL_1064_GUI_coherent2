@@ -20,9 +20,12 @@ dc_panel::dc_panel(QWidget *parent):
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
     tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
+    connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
+
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
-//    ID=7;
+    emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+    //    ID=7;
 }
 
 dc_panel::~dc_panel()
@@ -104,7 +107,7 @@ void dc_panel::data_received_and_profed()
             ui->spin->setMaximum(nHex/100.0);
             ui->curr_max_label->setText(QString::number(nHex/100.0,'d',2));
             ui->indicator->setMaximum(nHex/10.0);
-
+            container_values[0]->setText(QString::number(nHex/10.0,'d',2));
         }else if(raw_params[0].mid(5,2)=="98"){
             ui->power_state_label->setText(nHex?"ON":"OFF");
             ui->on_off_button->setChecked(nHex);
@@ -207,4 +210,10 @@ void dc_panel::on_button_error_clicked()
 {
     error_displayer=true;
 }
+
+void dc_panel::update_pref()
+{
+    emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+}
+
 
