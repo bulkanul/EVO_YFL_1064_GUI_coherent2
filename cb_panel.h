@@ -17,6 +17,7 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QString internal_address;
+    QString family="cd";
     QStringList errors_cb_list={"backward PD 0",
                                 "forward PD 0",
                                 "backward PD 1",
@@ -32,7 +33,7 @@ public slots:
     void key_catcher(QObject*);
     void auto_telemetry_call();
     void internal_address_write(QString);
-
+    void telemetry_call(QString);
 signals:
     void send_message_window(QString,QString);
     void send_command(QByteArray);

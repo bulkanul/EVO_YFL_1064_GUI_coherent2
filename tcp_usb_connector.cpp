@@ -8,6 +8,10 @@ tcp_usb_connector::tcp_usb_connector()
     tmr=new QTimer();
     tmr->setInterval(standart_delay);
     connect(tmr,SIGNAL(timeout()),this,SLOT(sender()));
+
+    tmr1=new QTimer();
+    tmr1->setInterval(standart_delay+standart_delay/2);
+    connect(tmr1,SIGNAL(timeout()),this,SLOT(get_command_pool()));
 }
 
 void tcp_usb_connector::init_connection(QString adress, int port)
@@ -78,6 +82,7 @@ void tcp_usb_connector::change_timer_delay(int delay)
         if(logg)qDebug()<<"now delay is "<< delay;
     }
 }
+
 
 void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
 {
@@ -181,7 +186,7 @@ void tcp_usb_connector::data_ver_write(QString command)
 void tcp_usb_connector::sender()
 {
     count++;
-    if(logg)qDebug()<<"count "<<count<<_pSocket<<pref_identificator;
+    if(logg)qDebug()<<"sender count "<<count<<pool_count<<crupto_fifo_command.length();
     QByteArray temp;
     if(crypto_version_controller){
         if(count>20){
@@ -217,6 +222,10 @@ void tcp_usb_connector::sender()
                 }else{
                     if(logg)qDebug()<<"socket not";
                 }
+                if(crupto_fifo_command.length()>0){
+                    if(logg)qDebug()<<"fifo removed"<<crupto_fifo_command.length();
+                    crupto_fifo_command.removeFirst();
+                }
             }
         }else{
             if(_sSocket->isOpen()&&_sSocket->isWritable()){
@@ -243,6 +252,14 @@ void tcp_usb_connector::sender()
             }
         }
     }
+}
+
+
+void tcp_usb_connector::get_command_pool()
+{
+   pool_count++;
+   emit get_command(dev_list[pool_count%5]);
+
 }
 
 void tcp_usb_connector::data_received(){

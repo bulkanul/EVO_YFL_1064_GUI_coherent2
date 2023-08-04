@@ -22,14 +22,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
     connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(dc);
-    dc->ID=0;
+    dc->ID=0; 
 
     dc1 = new dc_panel(this);
     connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
     connect(dc1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc1, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(dc1);
     dc1->ID=1;
 
@@ -38,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
     connect(dc2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc2, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(dc2);
     dc2->ID=2;
 
@@ -47,12 +50,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, SIGNAL(update_internal_address(QString)),cb, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
     connect(cb, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),cb, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(cb);
 
     user = new user_panel(this);
     connect(user, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
     connect(this, SIGNAL(update_internal_address(QString)),user, SLOT(internal_address_write(QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)),user, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),user, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(user);
     user->ID=0;
 
@@ -102,7 +107,10 @@ void MainWindow::on_connect_btn_clicked()
     emit send_connection_type(ui->serial_combo_box->currentData().toString(),404);
     ui->menu_button->setText("Настройки подключения");
     ui->stackedWidget->setCurrentIndex(0);
-    conn->tmr->start();
+    if(conn->connected){
+        conn->tmr->start();
+        conn->tmr1->start();
+    }
     emit send_command(QString("O").toUtf8()+'\r');
     emit send_command(QString("S6").toUtf8()+'\r');
 }

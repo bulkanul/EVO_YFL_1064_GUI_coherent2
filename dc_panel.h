@@ -32,6 +32,7 @@ public:
     bool connection_lost=true;
     QString internal_address;
     bool first_call=true;
+    QString family="dc";
     QStringList errors_dc_list={"flag_REBOOTED",
                                 "flag_ALARM_INTERLOCK",
                                 "flag_Overtemp",
@@ -52,6 +53,7 @@ private slots:
     void on_on_off_button_clicked(bool checked);
     void indicate(double);
     void auto_telemetry_call();
+    void telemetry_call(QString);
     void on_button_error_clicked();
     void update_pref();
     void on_mode_activated(int index);

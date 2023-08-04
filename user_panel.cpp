@@ -3,6 +3,7 @@
 
 #include <QMessageBox>
 #include <QTimer>
+#include <QDebug>
 
 user_panel::user_panel(QWidget *parent) :
     device_panel(parent),
@@ -11,10 +12,10 @@ user_panel::user_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-    tmr=new QTimer();
-    tmr->setInterval(1300);
-    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-    tmr->start();
+//    tmr=new QTimer();
+//    tmr->setInterval(1300);
+//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+//    tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     ui->spin->installEventFilter(this);
 //    ID=7;
@@ -58,7 +59,7 @@ void user_panel::data_received_and_profed()
     bool bStatus = false;
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
-        count=0;
+        count_no_responce=0;
         enable_widget(true);
         if(raw_params[0].mid(5,2)=="91"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" %");
@@ -101,10 +102,32 @@ void user_panel::on_on_off_button_clicked(bool checked)
 void user_panel::auto_telemetry_call()
 {
     count++;
-    if(count>30){
+    count_no_responce++;
+    if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
     }
     emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
     emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+}
+
+void user_panel::telemetry_call(QString family)
+{
+    count++;
+    count_no_responce++;
+    if(count_no_responce>6){
+        enable_widget(false);
+        connection_lost=true;
+//        first_call=true;
+    }
+    if(family==this->family){
+//        if(first_call){
+//            first_call=false;
+//            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//        }else{
+            if(count%2==0)      emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%2==1) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//        }
+            qDebug()<<"call"<<family<<ID << count;
+    }
 }

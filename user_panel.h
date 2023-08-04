@@ -19,11 +19,13 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QString internal_address;
+    QString family="usr";
 
 public slots:
     void key_catcher(QObject*);
     void internal_address_write(QString);
     void data_received_and_profed();
+    void telemetry_call(QString);
 
 private slots:
     void on_on_off_button_clicked(bool checked);

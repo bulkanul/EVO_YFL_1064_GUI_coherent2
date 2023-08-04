@@ -29,7 +29,7 @@ public:
     QString ip="";
     int port=0;
     int finded=0;
-    int standart_delay=40;
+    int standart_delay=50;
 
     QString serial="";
     bool first_set_write=true;
@@ -39,6 +39,7 @@ public:
     bool start_finding=false;
 
     int count=60;
+    int pool_count=0;
     bool connection_is_tcp=true;
     bool reconnect=true;
     bool no_reconnect_by_dev=false;
@@ -51,8 +52,12 @@ public:
     QList<int> fifo_finder;
     bool version_protection =true;
     QTimer* tmr;
+    QTimer* tmr1;
 //    bool crypto=true;
     bool crypto_version_controller=true;
+
+    QStringList dev_list={"dc","dc2","dc3","cd","usr"};
+
 signals:
     void send_to_dev(QStringList);
     void send_to_dev(QByteArray);
@@ -66,6 +71,7 @@ signals:
     void version_error(QString);
     void sig_usr_changes(QString,int);
     void start_timer(QString);
+    void get_command(QString);
 
 public slots:
     void data_received();
@@ -91,6 +97,7 @@ public slots:
     void serial_handle_error(QSerialPort::SerialPortError error);
     void serial_disconnect();
     void change_timer_delay(int);
+    void get_command_pool();
 };
 
 #endif // CONNECTOR_H

@@ -37,10 +37,10 @@ cb_panel::cb_panel(QWidget *parent):
     ui->backward_treashold_0->installEventFilter(this);
     ui->backward_treashold_1->installEventFilter(this);
     ui->backward_treashold_2->installEventFilter(this);
-    tmr=new QTimer();
-    tmr->setInterval(1300);
-    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-    tmr->start();
+//    tmr=new QTimer();
+//    tmr->setInterval(1300);
+//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+//    tmr->start();
 }
 
 cb_panel::~cb_panel()
@@ -50,8 +50,8 @@ cb_panel::~cb_panel()
 
 void cb_panel::auto_telemetry_call()
 {
-    count++;
-    if(count>30){
+    count_no_responce++;
+    if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
     }
@@ -74,6 +74,43 @@ void cb_panel::auto_telemetry_call()
     emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
 
     emit send_command(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+}
+void cb_panel::telemetry_call(QString family)
+{
+    count++;
+    count_no_responce++;
+    if(count_no_responce>6){
+        enable_widget(false);
+        connection_lost=true;
+//        first_call=true;
+    }
+    if(family==this->family){
+//        if(first_call){
+//            first_call=false;
+//            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+//        }else{
+            if(count%16==0)      emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%16==1) emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%16==2) emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%16==3) emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%16==4) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+
+            else if(count%16==5) emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%16==6) emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%16==7) emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%16==8) emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%16==9) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+
+            else if(count%16==10) emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+            else if(count%16==11) emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+            else if(count%16==12) emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+            else if(count%16==13) emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+            else if(count%16==14) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+
+            else if(count%16==15) emit send_command(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            qDebug()<<"call"<<family<<ID << count;
+//        }
+    }
 }
 
 void cb_panel::key_catcher(QObject* key)
@@ -114,7 +151,7 @@ void cb_panel::data_received_and_profed()
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
         qDebug()<<raw_params[0].mid(5,2);
-        count=0;
+        count_no_responce=0;
         enable_widget(true);
         if(raw_params[0].mid(5,2)=="95"){
             if(error_displayer){
