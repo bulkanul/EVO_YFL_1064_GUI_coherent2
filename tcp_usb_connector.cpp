@@ -186,7 +186,7 @@ void tcp_usb_connector::data_ver_write(QString command)
 void tcp_usb_connector::sender()
 {
     count++;
-    if(logg)qDebug()<<"sender count "<<count<<pool_count<<crupto_fifo_command.length();
+
     QByteArray temp;
     if(crypto_version_controller){
         if(count>20){
@@ -258,6 +258,7 @@ void tcp_usb_connector::sender()
 void tcp_usb_connector::get_command_pool()
 {
    pool_count++;
+   if(logg)qDebug()<<"sender count "<<count<<pool_count<<crupto_fifo_command.length();
    emit get_command(dev_list[pool_count%5]);
 
 }
