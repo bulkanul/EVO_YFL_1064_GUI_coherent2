@@ -99,28 +99,17 @@ void user_panel::on_on_off_button_clicked(bool checked)
     emit send_command(message.toUtf8()+'\r');
 }
 
-void user_panel::auto_telemetry_call()
-{
-    count++;
-    count_no_responce++;
-    if(count_no_responce>6){
-        enable_widget(false);
-        connection_lost=true;
-    }
-    emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-}
 
 void user_panel::telemetry_call(QString family)
 {
-    count++;
-    count_no_responce++;
     if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
 //        first_call=true;
     }
     if(family==this->family){
+        count++;
+        count_no_responce++;
 //        if(first_call){
 //            first_call=false;
 //            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');

@@ -52,7 +52,6 @@ public slots:
 private slots:
     void on_on_off_button_clicked(bool checked);
     void indicate(double);
-    void auto_telemetry_call();
     void telemetry_call(QString);
     void on_button_error_clicked();
     void update_pref();

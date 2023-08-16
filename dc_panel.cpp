@@ -173,31 +173,17 @@ void dc_panel::on_on_off_button_clicked(bool checked)
     emit send_command(message.toUtf8()+'\r');
 }
 
-void dc_panel::auto_telemetry_call()
-{
-    count++;
-    if(count_no_responce>6){
-        enable_widget(false);
-        connection_lost=true;
-        first_call=true;
-    }
-
-    emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-    emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-}
 
 void dc_panel::telemetry_call(QString family)
 {
-    count++;
-    count_no_responce++;
     if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
         first_call=true;
     }
     if(family==this->family+QString::number(ID)){
+        count++;
+        count_no_responce++;
         if(first_call){
             first_call=false;
             emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');

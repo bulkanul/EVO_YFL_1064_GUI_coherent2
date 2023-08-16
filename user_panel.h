@@ -30,8 +30,6 @@ public slots:
 private slots:
     void on_on_off_button_clicked(bool checked);
     void indicate(double);
-    void auto_telemetry_call();
-
 signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);
