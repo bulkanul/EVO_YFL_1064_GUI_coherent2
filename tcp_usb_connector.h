@@ -10,11 +10,14 @@
 #include <QFile>
 #include <QTimer>
 
+#define PROTOCOL_VERSION_NAME "1_5kW_coherent_system_main_control_board06092023"
+
 class tcp_usb_connector: public QObject
 {
     Q_OBJECT
 
 public:
+    // ~tcp_usb_connector();
     tcp_usb_connector();
     void update_tcp_socket();
     void update_serial_socket();
@@ -23,61 +26,47 @@ public:
 
     QString sketched_message;
     QByteArray sketch;
-    QString pref_identificator="";
-    QString board_identificator="";
 
     QString ip="";
     int port=0;
     int finded=0;
-    int standart_delay=50;
 
     QString serial="";
     bool first_set_write=true;
-    bool logg=true;
+    bool logg=false;
     bool stop_search=false;
 
     bool start_finding=false;
 
     int count=60;
-    int pool_count=0;
     bool connection_is_tcp=true;
     bool reconnect=true;
-    bool no_reconnect_by_dev=false;
     bool connected=false;
     QStringList raw_params;
     bool double_caller=false;
-//    QStringList fifo_command;
-    QByteArrayList crupto_fifo_command;
+    QStringList fifo_command;
     QStringList fifo_searcher;
+//    QStringList fifo_finder;
     QList<int> fifo_finder;
     bool version_protection =true;
     QTimer* tmr;
-    QTimer* tmr1;
-//    bool crypto=true;
-    bool crypto_version_controller=true;
-
-    QStringList dev_list={"dc0","dc1","dc2","cd","usr"};
-
 signals:
+//    void send_to_dc(QString);
     void send_to_dev(QStringList);
-    void send_to_dev(QByteArray);
-    void err_changes(QString,int,int);
+//    void send_to_dc(QStringList);
+//    void send_to_usr(QStringList);
+//    void send_to_cw(QString);
     void send_to_amplifaer(QStringList);
     void send_to_resonator(QStringList);
     void send_to_user(QStringList);
-    void connection_state(bool);
+    void connection_state(int);
     void version_failed();
     void send_device_list(QList<int>);
-    void version_error(QString);
-    void sig_usr_changes(QString,int);
-    void start_timer(QString);
-    void get_command(QString);
+    void version_error();
 
 public slots:
     void data_received();
     void data_write(QString,int,QString);
-    void data_write(int,int,QString);
-    void raw_command_write(QByteArray);
     void data_ver_write(QString);
     void sender();
     void init_connection(QString,int);
@@ -96,8 +85,6 @@ public slots:
     void serial_reconnect();
     void serial_handle_error(QSerialPort::SerialPortError error);
     void serial_disconnect();
-    void change_timer_delay(int);
-    void get_command_pool();
 };
 
 #endif // CONNECTOR_H

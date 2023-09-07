@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>247</height>
+    <width>895</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,6 +40,9 @@
       <string/>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="spacing">
+       <number>3</number>
+      </property>
       <property name="leftMargin">
        <number>3</number>
       </property>
@@ -63,7 +66,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Power DCDC</string>
+           <string>Блок DCDC</string>
           </property>
          </widget>
         </item>
@@ -86,9 +89,9 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../1kW_ipg_control_panel/images/conf_icon.png</normaloff>
-            <disabledoff>../1kW_ipg_control_panel/images/conf_icon_disabled.png</disabledoff>../1kW_ipg_control_panel/images/conf_icon.png</iconset>
+           <iconset resource="images/images.qrc">
+            <normaloff>:/interface/conf_icon.png</normaloff>
+            <selectedoff>:/interface/conf_icon_disabled.png</selectedoff>:/interface/conf_icon.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -101,7 +104,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QWidget" name="cw_widget" native="true">
+       <widget class="QWidget" name="dc_widget" native="true">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -211,27 +214,27 @@
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QPushButton {
-	border-image: url(:/images/images/switch_btn_off_80x25.png);
+	border-image: url(:/interface/switch_btn_off_80x25.png);
 }
 
 QPushButton::hover {
-	border-image: url(:/images/images/switch_btn_off_hover_80x25.png);
+	border-image: url(:/interface/switch_btn_off_hover_80x25.png);
 }
 
 QPushButton::checked  {	
-	border-image: url(:/images/images/switch_btn_on_108x25.png);
+	border-image: url(:/interface/switch_btn_on_108x25.png);
 }
 
 QPushButton::hover:checked  {	
-	border-image: url(:/images/images/switch_btn_on_hover_108x25.png);
+	border-image: url(:/interface/switch_btn_on_hover_108x25.png);
 }
 
 QPushButton::checked:disabled  {	
-	border-image: url(:/images/images/switch_btn_on_disabled_108x25.png);
+	border-image: url(:/interface/switch_btn_on_disabled_108x25.png);
 }
 
 QPushButton::disabled  {
-	border-image: url(:/images/images/switch_btn_off_disabled_108x25.png);
+	border-image: url(:/interface/switch_btn_off_disabled_108x25.png);
 }</string>
                    </property>
                    <property name="text">
@@ -305,12 +308,17 @@ QPushButton::disabled  {
                      </item>
                      <item>
                       <property name="text">
-                       <string>External TTL</string>
+                       <string>TTL</string>
                       </property>
                      </item>
                      <item>
                       <property name="text">
                        <string>External Analog</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Analog+TTL</string>
                       </property>
                      </item>
                     </widget>
@@ -337,7 +345,7 @@ QPushButton::disabled  {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Drive current</string>
+                  <string>Ток привода</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -382,10 +390,10 @@ QProgressBar::chunk:disabled {
                       <number>0</number>
                      </property>
                      <property name="maximum">
-                      <number>250</number>
+                      <number>100</number>
                      </property>
                      <property name="value">
-                      <number>200</number>
+                      <number>0</number>
                      </property>
                      <property name="textVisible">
                       <bool>false</bool>
@@ -435,7 +443,7 @@ QProgressBar::chunk:disabled {
                         </sizepolicy>
                        </property>
                        <property name="text">
-                        <string>25</string>
+                        <string>5</string>
                        </property>
                       </widget>
                      </item>
@@ -480,7 +488,7 @@ QProgressBar::chunk:disabled {
                       <string> A</string>
                      </property>
                      <property name="decimals">
-                      <number>0</number>
+                      <number>1</number>
                      </property>
                      <property name="minimum">
                       <double>0.000000000000000</double>
@@ -489,7 +497,7 @@ QProgressBar::chunk:disabled {
                       <double>25.000000000000000</double>
                      </property>
                      <property name="singleStep">
-                      <double>1.000000000000000</double>
+                      <double>0.100000000000000</double>
                      </property>
                     </widget>
                    </item>
@@ -528,7 +536,7 @@ QProgressBar::chunk:disabled {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Temperature</string>
+                  <string>Температура</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
@@ -573,7 +581,7 @@ QProgressBar::chunk:disabled {
                       <number>0</number>
                      </property>
                      <property name="maximum">
-                      <number>600</number>
+                      <number>700</number>
                      </property>
                      <property name="value">
                       <number>200</number>
@@ -666,6 +674,13 @@ QProgressBar::chunk:disabled {
              </property>
             </spacer>
            </item>
+           <item>
+            <widget class="QCheckBox" name="chb_debug">
+             <property name="text">
+              <string>Debug onoff</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -715,6 +730,9 @@ QProgressBar::chunk:disabled {
            </item>
            <item>
             <layout class="QFormLayout" name="formLayout_2">
+             <property name="verticalSpacing">
+              <number>0</number>
+             </property>
              <property name="leftMargin">
               <number>3</number>
              </property>
@@ -850,7 +868,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Temperature:</string>
+                <string>Температура:</string>
                </property>
               </widget>
              </item>
@@ -881,6 +899,108 @@ QProgressBar::chunk:disabled {
               </widget>
              </item>
              <item row="3" column="0">
+              <widget class="QLabel" name="label_33">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Выходной В:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="output_voltage_label">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0 V</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_34">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Входной В:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="input_voltage_label">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0 V</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QLabel" name="label_error">
                <property name="minimumSize">
                 <size>
@@ -905,14 +1025,14 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="5" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
                 <string>Список</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="6" column="0">
               <widget class="QLabel" name="label_29">
                <property name="minimumSize">
                 <size>
@@ -940,7 +1060,7 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="6" column="1">
               <widget class="QLabel" name="mode_label">
                <property name="minimumSize">
                 <size>
@@ -988,10 +1108,13 @@ QProgressBar::chunk:disabled {
   <customwidget>
    <class>device_panel</class>
    <extends>QWidget</extends>
-   <header>device_panel.h</header>
+   <header location="global">device_panel.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="images/images.qrc"/>
+  <include location="images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

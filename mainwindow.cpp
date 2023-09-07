@@ -1,90 +1,83 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "user_panel.h"
+
+#include <QMessageBox>
+#include <QThread>
+#include <QKeyEvent>
+#include <QButtonGroup>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    conn=new tcp_usb_connector;
-    conn->crypto_version_controller=false;
-    connect(this,SIGNAL(send_connection_type(QString,int)),conn, SLOT(init_connection(QString,int)));
-//    connect(conn,SIGNAL(connection_state(int)),this,SLOT(display_connection(int)));
-//    connect(conn,SIGNAL(version_failed()),this,SLOT(display_version_error()));
-//    connect(this, SIGNAL(send_ver_command(QString)),conn, SLOT(data_ver_write(QString)));
-//    connect(this, SIGNAL(search_script(int)),conn, SLOT(start_search(int)));
-//    connect(conn, SIGNAL(send_device_list(QList<int>)),this, SLOT(show_dev_list(QList<int>)));
-    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 
-    dc = new dc_panel(this);
-    connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
-    connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(dc);
-    dc->ID=0; 
+    connect(this,SIGNAL(pass_event(QKeyEvent *)),this,SLOT(pass_controller(QKeyEvent *)));
 
-    dc1 = new dc_panel(this);
-    connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
-    connect(dc1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),dc1, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(dc1);
-    dc1->ID=1;
+    conn = new tcp_usb_connector();
+    connect(this,SIGNAL(set_conn_params(QString,int)),conn,SLOT(init_connection(QString,int)));
+    connect(conn,SIGNAL(version_error()),this,SLOT(version_conflict()));
+    connect(this, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn,SIGNAL(connection_state(int)),this,SLOT(connection_state(int)));
 
-    dc2 = new dc_panel(this);
-    connect(dc2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
-    connect(dc2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),dc2, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(dc2);
-    dc2->ID=2;
+    QGridLayout* layout = new QGridLayout(ui->groupBox);
 
-    cb = new cb_panel(this);
-    cb->ID=0;
-    connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),cb, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),cb, SLOT(data_received(QStringList)));
-    connect(cb, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),cb, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(cb);
+    gen = new generator_panel(this);
+    gen->ID = 0;
+    // gen->enable_widget(false);
+    layout->addWidget(gen, 0, 0, 4, 1);
+    connect(gen, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(gen, SIGNAL(sig_usr_changes(QString,int)),this, SLOT(change_interface(QString,int)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), gen, SLOT(data_received(QStringList)));
 
-    user = new user_panel(this);
-    connect(user, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),user, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),user, SLOT(data_received(QStringList)));
-    connect(conn, SIGNAL(get_command(QString)),user, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(user);
-    user->ID=0;
+    chan1 = new channel_panel(this);
+    layout->addWidget(chan1, 0, 1);
 
-    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-//    dc2 = new dc_panel(this);
-//    dc2->ID=2;
-//    dc2->enable_widget(false);
-//    ui->groupBox->layout()->addWidget(dc2);
-//    connect(dc2, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
-//    connect(dc2, SIGNAL(sig_usr_changes(QString,int)),this, SLOT(change_interface(QString,int)));
-//    connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
+    chan2 = new channel_panel(this);
+    layout->addWidget(chan2, 1, 1);
 
+    chan3 = new channel_panel(this);
+    layout->addWidget(chan3, 2, 1);
 
+    chan4 = new channel_panel(this);
+    layout->addWidget(chan4, 3, 1);
+
+    ui->groupBox->setLayout(layout);
+
+//    dc = new dc_panel(this);
+//    dc->ID=0;
+//    dc->enable_widget(false);
+//    dc->setTitle("MULT");
+//    ui->groupBox->layout()->addWidget(dc);
+//    connect(dc, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+//    connect(dc, SIGNAL(sig_usr_changes(QString,int)),this, SLOT(change_interface(QString,int)));
+//    connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
     if(settings.value("prev_connection").toString()!=""){
-        qDebug() <<"saved writed"<<settings.value("prev_port").toString();
-        conn->serial=settings.value("prev_connection").toString();
-        if(settings.value("local_addr").toString()!=""){
-            ui->ip_adress_2->setText(settings.value("local_addr").toString());
-        }else{
-            ui->ip_adress_2->setText("00A");
+        qDebug() <<"saved writed"
+                 <<settings.value("prev_connection").toString()
+                 <<settings.value("prev_ip").toString()
+                 <<settings.value("prev_port").toString();
+        conn->connection_is_tcp=settings.value("prev_connection").toString()=="TCP";
+
+        if(settings.value("prev_ip").toString()!=""){
+            ui->ip_adress->setText(settings.value("prev_ip").toString());
+            conn->ip=settings.value("prev_ip").toString();
         }
-        on_refresh_ports_clicked();
-        on_connect_btn_clicked();
+
+        conn->serial=settings.value("prev_port").toString();
+        if(settings.value("prev_connection").toString()=="true"){
+            ui->rb_tcp->setChecked(true);
+        }else{
+            ui->rb_serial->setChecked(true);
+            on_refresh_ports_clicked();
+        }
+        QThread::msleep(100);
+        on_pushButton_clicked();
     }
-    emit update_internal_address(ui->ip_adress_2->text());
+    installEventFilter(this);
+    ui->pb_error_cleaner->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -92,36 +85,76 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::update_ui(QString name,bool state)
+void MainWindow::change_interface(QString name, int state)
 {
-    if(name=="dc0")dc_err=state;
-    else if(name=="dc1")dc1_err=state;
-    else if(name=="dc2")dc2_err=state;
-    else if(name=="cb")cb_err=state;
-    ui->pb_error_cleaner->setVisible(dc_err || dc1_err || dc2_err || cb_err);
-}
-
-
-void MainWindow::on_connect_btn_clicked()
-{
-    emit send_connection_type(ui->serial_combo_box->currentData().toString(),404);
-    ui->menu_button->setText("Настройки подключения");
-    ui->stackedWidget->setCurrentIndex(0);
-    if(conn->connected){
-        conn->tmr->start();
-        conn->tmr1->start();
+    if(name=="pb_error_cleaner"){
+        ui->pb_error_cleaner->setVisible(state);
+    }else if(name.contains("l_footer_emission")==true){
+        if(name.split(" ")[1]=="cw")light_state[name.split(" ")[2].toUInt()]=state;
+        else if(name.split(" ")[1]=="dc")light_state[5]=state;
+        else if(name.split(" ")[1]=="ns")light_state[6]=state;
+        bool max=0;
+        for(int i=0;i<7;i++){
+           max|=light_state[i];
+        }
+        ui->l_footer_emission->setEnabled(!max);
+    }else if(name.contains("l_footer_key")==true){
+        ui->l_footer_key->setEnabled(state);
+    }else if(name=="l_footer_connection_status"){
+        ui->l_footer_connection_status->setText(state?"Состояние : ПОДКЛЮЧЕНО":"Состояние : ОТКЛЮЧЕНО");
+    }else if(name=="l_footer_interlock"){
+        ui->l_footer_interlock->setEnabled(state);
+    }else if(name=="l_footer_acdc_ok"){
+        ui->l_footer_acdc_ok->setEnabled(state);
+    }else if(name=="l_footer_acdc_t_alarm"){
+        ui->l_footer_acdc_t_alarm->setEnabled(state);
     }
-    emit send_command(QString("O").toUtf8()+'\r');
-    emit send_command(QString("S6").toUtf8()+'\r');
 }
 
+void MainWindow::on_pushButton_clicked()
+{
+//    if(ui->pushButton->text()=="Connect"){
+//        laser->first_set_write=true;
+        if(ui->rb_tcp->isChecked()){
+            conn->connection_is_tcp=true;
+            emit set_conn_params(ui->ip_adress->text()/*"127.0.0.1"*/,7878);
+        }else if(ui->rb_serial->isChecked()){
+            conn->connection_is_tcp=false;
+            emit set_conn_params(ui->serial_combo_box->currentText().split(" ").last(),404);
+        }
+        on_menu_main_clicked();
+//    }else{
+//        if(conn->connection_is_tcp){
+//            conn->tcp_disconnect();
+//        }else{
+//            conn->serial_disconnect();
+//        }
+//    }
+}
+
+void MainWindow::version_conflict()
+{
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
+                                        "Failed",
+                                        "Version Conflict",
+                                        QMessageBox::Ok);
+    if(mesg->exec()==QMessageBox::Ok){
+    }
+}
 
 void MainWindow::on_menu_button_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(!ui->stackedWidget->currentIndex());
-    ui->menu_button->setText(ui->stackedWidget->currentIndex()?"Главная":"Настройки подключения");
+//    if(ui->stackedWidget->currentIndex()==0){
+        ui->stackedWidget->setCurrentIndex(1);
+//    }else if(ui->stackedWidget->currentIndex()==1){
+//        ui->stackedWidget->setCurrentIndex(0);
+//    }
 }
 
+void MainWindow::on_menu_main_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
 
 void MainWindow::on_refresh_ports_clicked()
 {
@@ -134,33 +167,102 @@ void MainWindow::on_refresh_ports_clicked()
     }
     current_port_index = ui->serial_combo_box->findData(conn->serial);
     ui->serial_combo_box->setCurrentIndex(current_port_index);
-    ui->serial_combo_box->setCurrentText(ui->serial_combo_box->itemText(current_port_index));
-}
-
-
-void MainWindow::on_ip_adress_2_editingFinished()
-{
-    QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
-    settings.setValue("local_addr",ui->ip_adress_2->text());
-    emit update_internal_address(ui->ip_adress_2->text());
+//    ui->serial_combo_box->setCurrentText(ui->serial_combo_box->itemText(current_port_index));
 }
 
 void MainWindow::on_pb_error_cleaner_clicked()
 {
+    emit send_command("lserrclr usr",0,"");
     ui->pb_error_cleaner->setVisible(false);
-    QString message ="t"+ui->ip_adress_2->text()+"81c00000000000000";
-    emit send_command(message.toUtf8()+'\r');
-    dc->error_displayer=true;
-    dc1->error_displayer=true;
-    dc2->error_displayer=true;
-    cb->error_displayer=true;
 }
 
+void MainWindow::on_all_reset_1_clicked()
+{
+    QMessageBox *mesg;
+    mesg = new QMessageBox(QMessageBox::Information,"Conformation", "factory reset?");
+    mesg->addButton(QMessageBox::Yes);
+    mesg->addButton(QMessageBox::No);
+    mesg->show();
+    if(mesg->exec()==QMessageBox::Yes){
+        emit send_command("lsfactrst",0,"");
+    }
+}
+
+void MainWindow::on_all_save_seed_clicked()
+{
+
+}
+
+void MainWindow::on_all_restore_seed_clicked()
+{
+
+}
 
 void MainWindow::on_all_save_in_memory_clicked()
 {
-    ui->pb_error_cleaner->setVisible(false);
-    QString message ="t"+ui->ip_adress_2->text()+"85200000000000000";
-    emit send_command(message.toUtf8()+'\r');
+
 }
 
+void MainWindow::connection_state(int i)
+{
+
+}
+
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+{
+    if(event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        emit pass_event(keyEvent);
+    }
+    return false;
+}
+
+void MainWindow::pass_controller(QKeyEvent *keyEvent)
+{
+    if(keyEvent->key() == Qt::Key_A){
+        admin_pass++;
+    }else if(keyEvent->key() == Qt::Key_D && admin_pass==1){
+        admin_pass++;
+    }else if(keyEvent->key() == Qt::Key_M && admin_pass==2){
+        admin_pass++;
+    }else if(keyEvent->key() == Qt::Key_I && admin_pass==3){
+        admin_pass++;
+    }else if(keyEvent->key() == Qt::Key_N && admin_pass==4){
+        admin_pass++;
+    }else{
+        admin_pass=0;
+    }
+    if(admin_pass==5){
+        ui->groupBox_2->setVisible(true);
+        user_ui=false;
+    }
+
+    if(keyEvent->key() == Qt::Key_U ){
+        user_pass++;
+    }else if(keyEvent->key() == Qt::Key_S && user_pass==1){
+        user_pass++;
+    }else if(keyEvent->key() == Qt::Key_E && user_pass==2){
+        user_pass++;
+    }else if(keyEvent->key() == Qt::Key_R && user_pass==3){
+        user_pass++;
+    }else{
+        user_pass=0;
+        pass="";
+    }
+    if(user_pass==4){
+        ui->groupBox_2->setVisible(false);
+        user_ui=true;
+    }
+
+}
+
+void MainWindow::on_disconnect_clicked()
+{
+    if(conn->connection_is_tcp){
+        conn->tcp_disconnect();
+    }else{
+        conn->serial_disconnect();
+    }
+    ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
+}

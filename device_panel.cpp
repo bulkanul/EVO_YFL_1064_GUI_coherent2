@@ -13,10 +13,10 @@
 
 device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
-//    tmr=new QTimer();
-//    tmr->setInterval(800);
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();
+    tmr=new QTimer();
+    tmr->setInterval(800);
+    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+    tmr->start();
 }
 
 bool device_panel::eventFilter(QObject *target, QEvent *event)
@@ -47,20 +47,21 @@ bool device_panel::eventFilter(QObject *target, QEvent *event)
 
 void device_panel::auto_telemetry_call()
 {
+    if (family == "" && ID == -1)
+        return;
     count++;
     count_no_responce++;
     if(count_no_responce>6){
-         enable_widget(false);
-         first_pref_cmd=false;
-         first_status_cmd=true;
-         first_calib=true;
+        if (family != "debug")
+            enable_widget(false);
+        first_pref_cmd=false;
+        first_status_cmd=true;
+        first_calib=true;
     }
 //    qDebug()<<"auto_telemetry_call"<<family<<ID<<count_no_responce;
-    if(count%2==0 || first_pref_cmd){
+    if (family != "debug")
         sl_data_get("lgstatus",ID,"");
-    }else{
-        sl_data_get("lgconf",ID,"");
-    }
+
 }
 
 QString device_panel::param_check(QStringList list,int number){
@@ -82,42 +83,41 @@ QStringList device_panel::double_localizator(QByteArray data){
 
 void device_panel::data_received(QStringList message)
 {
+
 //    qDebug()<<"data_received call"<<message<<ID<<family<<key;
-    if(message[0].mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
+    if((param_check(message,2).toInt()==ID && param_check(message,1)==family)){// || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
         raw_params=message;
         count_no_responce=0;
+        enable_widget(key);
+        if(silence_count<=0){
+            emit command_proofed();
+        }else{
+            silence_count--;
+        }
+    }
+    if(message.size() == 2 && param_check(message, 1) != "NL_SSL_eth_board_29032023" && family == "debug"){ //debug only
+        raw_params=message;
         emit command_proofed();
     }
-
-//    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
-//        raw_params=message;
-//        if(silence_count<=0){
-//            emit command_proofed();
-//        }else{
-//            silence_count--;
-//        }
-//    }
-//    if(param_check(message,3)=="ERR"){
-//        enable_widget(false);
-//    }
-//    if(param_check(raw_params,0)=="lrconf" && family!="usr"){
-//        writed_values.clear();
-//        for (int i=3;i<prefs.length()+3;i++ ) {
-//             prefs[i-3].value=param_check(raw_params,i).toDouble();
-//            if(dialog!=nullptr){
-////                if(container_values.length()>(i-3) && prefs.length()>(i-3)){
-//                    container_values[i-3]->setText(QString::number(param_check(raw_params,i).toDouble(),'d',prefs[i-3].precision));
-////                }
-//            }
-//        }
-//        first_pref_cmd=true;
-////        if(dialog.isVisible())pref_status->setText("Сохранено");
-//    }
-}
-
-void device_panel::data_received(QByteArray data)
-{
-
+    if(param_check(message,0)=="lrstatus"){
+       qDebug();
+    }
+    if(param_check(message,3)=="ERR"){
+        enable_widget(false);
+    }
+    if(param_check(raw_params,0)=="lrconf" && family!="usr"){
+        writed_values.clear();
+        for (int i=3;i<prefs.length()+3;i++ ) {
+             prefs[i-3].value=param_check(raw_params,i).toDouble();
+            if(dialog!=nullptr){
+//                if(container_values.length()>(i-3) && prefs.length()>(i-3)){
+                    container_values[i-3]->setText(QString::number(param_check(raw_params,i).toDouble(),'d',prefs[i-3].precision));
+//                }
+            }
+        }
+        first_pref_cmd=true;
+//        if(dialog.isVisible())pref_status->setText("Сохранено");
+    }
 }
 
 void device_panel::sl_data_set(QString comm,int number,QString data)
@@ -136,33 +136,18 @@ void device_panel::send_laser(QString type, QString mess){
 
 void device_panel::on_toolButton_clicked()
 {
-    emit tool_clicked();
     dialog = new QDialog();
     dialog->setWindowTitle(family + " configuration");
     dialog->setModal(true);
     dialog->setMinimumWidth(500);
     dialog->setMaximumWidth(500);
-//        dialog->setWindowIcon(QIcon(":/interface/conf_icon.ico"));
     QVBoxLayout* dialogLay = new QVBoxLayout(dialog);
     QLabel* title_label=new QLabel("Laser (" + family +") configuration",dialog);
-//        QLabel* note_label = new QLabel("prefs_note",dialog);
-//        QGroupBox* can_gb = new QGroupBox(dialog);
-//        QVBoxLayout* can_v_layout= new QVBoxLayout(dialog);
     QFont title_font = title_label->font();
-//        note_label->setWordWrap(true);
     title_font.setPointSize(14);
     title_font.setBold(true);
     title_label->setFont(title_font);
-//        can_gb->setStyleSheet(  "QGroupBox {"
-//                                "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #FFFFFF);"
-//                                "border: 1px solid gray;"
-//                                "margin-top: 1ex;"
-//                                "}");
-//        can_gb->setLayout(can_v_layout);
-//        can_gb->layout()->addWidget(new QLabel("Device reset is nessesary after CAN ID change",dialog));
     dialogLay->addWidget(title_label);
-//        dialogLay->addWidget(note_label);
-//        dialogLay->addWidget(can_gb);
     spiners.clear();
     container_values.clear();
     for(int i = 0; i < prefs.length(); i ++)
@@ -180,9 +165,6 @@ void device_panel::on_toolButton_clicked()
         spinbox->setValue(prefs[i].value);
         splitter->addWidget(container_values[i]);
         splitter->addWidget(spinbox);
-//            if(i == 0)
-//                can_v_layout->addLayout(splitter);
-//            else
         dialogLay->addLayout(splitter);
     }
     QHBoxLayout* splitter = new QHBoxLayout(dialog);
