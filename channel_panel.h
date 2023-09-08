@@ -14,14 +14,15 @@ class channel_panel : public QWidget
     Q_OBJECT
 
 public:
-    explicit channel_panel(QWidget *parent = nullptr);
+    explicit channel_panel(int num, QWidget *parent = nullptr);
     ~channel_panel();
 
-private:
     preamplifier_panel* preamp;
     amplifier_panel* amp;
 
+private:
     Ui::channel_panel *ui;
+    int ID;
 };
 
 #endif // CHANNEL_PANEL_H

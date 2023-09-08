@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "dc_panel.h"
 #include "generator_panel.h"
+#include "general_panel.h"
 #include "channel_panel.h"
 #include "tcp_usb_connector.h"
 
@@ -19,8 +20,11 @@ class MainWindow : public QMainWindow
     channel_panel* chan2;
     channel_panel* chan3;
     channel_panel* chan4;
+    channel_panel* chan5;
 
     generator_panel* gen;
+
+    general_panel* general;
 
     tcp_usb_connector *conn;
     QString serial_port;

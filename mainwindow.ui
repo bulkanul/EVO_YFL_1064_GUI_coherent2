@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1072</width>
-    <height>835</height>
+    <width>1374</width>
+    <height>780</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -387,8 +387,8 @@ QPushButton::hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1070</width>
-             <height>704</height>
+             <width>1372</width>
+             <height>687</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -714,100 +714,6 @@ QPushButton::hover {
         </item>
        </layout>
       </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="styleSheet">
-       <string notr="true">QGroupBox {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                      stop: 0 #ffffff, stop: 1 #FFFFFF);
-    border: 1px solid gray;
-    margin-top: 1ex; /* leave space at the top for the title */
-}
-</string>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_18">
-       <property name="spacing">
-        <number>3</number>
-       </property>
-       <property name="leftMargin">
-        <number>3</number>
-       </property>
-       <property name="topMargin">
-        <number>3</number>
-       </property>
-       <property name="rightMargin">
-        <number>3</number>
-       </property>
-       <property name="bottomMargin">
-        <number>3</number>
-       </property>
-       <item>
-        <widget class="QPushButton" name="all_save_seed">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Установить параметры запуска</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="all_restore_seed">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Восстановить параметры запуска</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="all_save_in_memory">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сохранить в память</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_18">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="all_reset_1">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сброс до заводских настроек</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
     <item>

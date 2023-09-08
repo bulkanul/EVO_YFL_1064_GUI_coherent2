@@ -25,22 +25,47 @@ MainWindow::MainWindow(QWidget *parent)
     gen = new generator_panel(this);
     gen->ID = 0;
     // gen->enable_widget(false);
-    layout->addWidget(gen, 0, 0, 4, 1);
+    layout->addWidget(gen, 0, 0, 3, 1);
     connect(gen, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
-    connect(gen, SIGNAL(sig_usr_changes(QString,int)),this, SLOT(change_interface(QString,int)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), gen, SLOT(data_received(QStringList)));
 
-    chan1 = new channel_panel(this);
+    chan1 = new channel_panel(1, this);
+    connect(chan1->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan1->preamp, SLOT(data_received(QStringList)));
+    connect(chan1->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan1->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan1, 0, 1);
 
-    chan2 = new channel_panel(this);
+    chan2 = new channel_panel(2, this);
+    connect(chan2->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan2->preamp, SLOT(data_received(QStringList)));
+    connect(chan2->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan2->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan2, 1, 1);
 
-    chan3 = new channel_panel(this);
+    chan3 = new channel_panel(3, this);
+    connect(chan3->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan3->preamp, SLOT(data_received(QStringList)));
+    connect(chan3->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan3->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan3, 2, 1);
 
-    chan4 = new channel_panel(this);
+    chan4 = new channel_panel(4, this);
+    connect(chan4->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan4->preamp, SLOT(data_received(QStringList)));
+    connect(chan4->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan4->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan4, 3, 1);
+
+    chan5 = new channel_panel(5, this);
+    connect(chan5->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->preamp, SLOT(data_received(QStringList)));
+    connect(chan5->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->amp, SLOT(data_received(QStringList)));
+    layout->addWidget(chan5, 4, 1);
+
+    general = new general_panel(this);
+    layout->addWidget(general, 3, 0);
 
     ui->groupBox->setLayout(layout);
 
@@ -234,7 +259,7 @@ void MainWindow::pass_controller(QKeyEvent *keyEvent)
         admin_pass=0;
     }
     if(admin_pass==5){
-        ui->groupBox_2->setVisible(true);
+        //ui->groupBox_2->setVisible(true);
         user_ui=false;
     }
 
@@ -251,7 +276,7 @@ void MainWindow::pass_controller(QKeyEvent *keyEvent)
         pass="";
     }
     if(user_pass==4){
-        ui->groupBox_2->setVisible(false);
+        //ui->groupBox_2->setVisible(false);
         user_ui=true;
     }
 

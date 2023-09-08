@@ -22,6 +22,10 @@ private slots:
 
     void on_pb_tec_2_onoff_clicked(bool checked);
 
+    void data_received_and_profed();
+    void key_catcher(QObject *key);
+    void on_pb_laser_onoff_clicked(bool checked);
+
 private:
     Ui::generator_panel *ui;
 };

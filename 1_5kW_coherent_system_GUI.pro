@@ -12,6 +12,7 @@ CONFIG += c++17
 SOURCES += \
     amplifier_panel.cpp \
     channel_panel.cpp \
+    general_panel.cpp \
     generator_panel.cpp \
     main.cpp \
     device_panel.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     channel_panel.h \
     device_panel.h \
     dc_panel.h \
+    general_panel.h \
     generator_panel.h \
     preamplifier_panel.h \
     tcp_usb_connector.h \
@@ -34,6 +36,7 @@ FORMS += \
     amplifier_panel.ui \
     channel_panel.ui \
     dc_panel.ui \
+    general_panel.ui \
     generator_panel.ui \
     mainwindow.ui \
     preamplifier_panel.ui
