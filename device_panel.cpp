@@ -100,7 +100,7 @@ void device_panel::data_received(QStringList message)
         emit command_proofed();
     }
     if(param_check(message,0)=="lrstatus"){
-       qDebug();
+       // qDebug();
     }
     if(param_check(message,3)=="ERR"){
         enable_widget(false);

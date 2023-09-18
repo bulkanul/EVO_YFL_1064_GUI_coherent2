@@ -28,7 +28,7 @@ void preamplifier_panel::on_pb_onoff_clicked(bool checked)
 void preamplifier_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
-        ui->l_state->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
+        ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " Вт");
         ui->l_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
         ui->l_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
@@ -39,7 +39,7 @@ void preamplifier_panel::data_received_and_profed()
         ui->l_pd_forw_2->setText(QString::number(param_check(raw_params,12).toDouble()) + " В");
     }
     else if (param_check(raw_params,0) == "lronoff"){
-        ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
+        // ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
     }
 }
 

@@ -36,16 +36,17 @@ void generator_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
         ui->l_laser_state->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
+        ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->l_laser_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
         ui->l_laser_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
         ui->l_laser_temp_2->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
         ui->l_tec_state_1->setText(param_check(raw_params,9).toInt()?"ВКЛ.":"ВЫКЛ.");
+        ui->pb_tec_1_onoff->setChecked(param_check(raw_params,9).toInt());
         ui->l_tec_state_2->setText(param_check(raw_params,10).toInt()?"ВКЛ.":"ВЫКЛ.");
+        ui->pb_tec_2_onoff->setChecked(param_check(raw_params,10).toInt());
         ui->l_tec_temp_1->setText(QString::number(param_check(raw_params,11).toDouble()) + " °C");
         ui->l_tec_temp_2->setText(QString::number(param_check(raw_params,12).toDouble()) + " °C");
-        ui->l_tec_temp_1->setText(QString::number(param_check(raw_params,13).toDouble()) + " °C");
-        ui->l_pd_back->setText(QString::number(param_check(raw_params,14).toDouble()) + " В");
-        ui->l_pd_forw->setText(QString::number(param_check(raw_params,15).toDouble()) + " В");
+        ui->l_pd_forw->setText(QString::number(param_check(raw_params,13).toDouble()) + " В");
     }
     else if (param_check(raw_params,0) == "lronoff"){
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
@@ -77,5 +78,6 @@ void generator_panel::key_catcher(QObject* key)
 void generator_panel::on_pb_laser_onoff_clicked(bool checked)
 {
     send_command("lsonoff " + family, ID, QString::number(checked));
+    silence_counter(2);
 }
 

@@ -16,6 +16,8 @@ public:
     explicit preamplifier_panel(QWidget *parent = nullptr);
     ~preamplifier_panel();
 
+    friend class channel_panel;
+
 private slots:
     void on_pb_onoff_clicked(bool checked);
 

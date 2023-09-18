@@ -64,19 +64,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan5, 4, 1);
 
-    general = new general_panel(this);
-    layout->addWidget(general, 3, 0);
+    chan_all = new channel_all_panel(0, this);
+    connect(chan_all->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->preamp, SLOT(data_received(QStringList)));
+    connect(chan_all->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->amp, SLOT(data_received(QStringList)));
+    layout->addWidget(chan_all, 5, 1);
 
     ui->groupBox->setLayout(layout);
-
-//    dc = new dc_panel(this);
-//    dc->ID=0;
-//    dc->enable_widget(false);
-//    dc->setTitle("MULT");
-//    ui->groupBox->layout()->addWidget(dc);
-//    connect(dc, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
-//    connect(dc, SIGNAL(sig_usr_changes(QString,int)),this, SLOT(change_interface(QString,int)));
-//    connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
     if(settings.value("prev_connection").toString()!=""){

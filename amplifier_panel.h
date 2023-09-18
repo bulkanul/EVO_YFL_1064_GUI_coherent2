@@ -16,6 +16,7 @@ public:
     explicit amplifier_panel(QWidget *parent = nullptr);
     ~amplifier_panel();
 
+    friend class channel_panel;
 private slots:
     void data_received_and_profed();
     void key_catcher(QObject *key);

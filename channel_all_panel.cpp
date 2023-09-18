@@ -1,22 +1,20 @@
-#include "channel_panel.h"
-#include "ui_channel_panel.h"
+#include "channel_all_panel.h"
+#include "ui_channel_all_panel.h"
 
-#include <QFrame>
-#include <QGridLayout>
-
-channel_panel::channel_panel(int num, QWidget *parent) :
+channel_all_panel::channel_all_panel(int num, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::channel_panel)
+    ui(new Ui::channel_all_panel)
 {
     ui->setupUi(this);
 
-    ID = num - 1;
-    ui->groupBox->setTitle("Канал " + QString::number(ID));
+    ID = num;
+    ui->groupBox->setTitle("Общий канал");
+    // ui->groupBox->setCheckable(true);
 
     QGridLayout* layout = new QGridLayout();
     layout->setMargin(2);
 
-    preamp = new preamplifier_panel();
+    preamp = new preamplifier_all_panel();
     preamp->ID = ID;
     layout->addWidget(preamp, 0, 0);
 
@@ -26,14 +24,14 @@ channel_panel::channel_panel(int num, QWidget *parent) :
     line->setFrameShadow(QFrame::Sunken);
     layout->addWidget(line, 0, 1);
 
-    amp = new amplifier_panel();
+    amp = new amplifier_all_panel();
     amp->ID = ID;
     layout->addWidget(amp, 0, 2);
 
     ui->groupBox->setLayout(layout);
 }
 
-channel_panel::~channel_panel()
+channel_all_panel::~channel_all_panel()
 {
     delete ui;
 }
