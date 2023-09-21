@@ -13,6 +13,7 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
 
     QGridLayout* layout = new QGridLayout();
     layout->setMargin(2);
+    layout->setContentsMargins(2, 32, 2, 2);
 
     preamp = new preamplifier_all_panel();
     preamp->ID = ID;

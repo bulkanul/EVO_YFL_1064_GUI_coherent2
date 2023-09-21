@@ -72,6 +72,8 @@ MainWindow::MainWindow(QWidget *parent)
     layout->addWidget(chan_all, 5, 1);
 
     flags = new flag_panel(this);
+    connect(flags, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), flags, SLOT(data_received(QStringList)));
     layout->addWidget(flags, 3, 0, 2, 1);
 
     ui->groupBox->setLayout(layout);
