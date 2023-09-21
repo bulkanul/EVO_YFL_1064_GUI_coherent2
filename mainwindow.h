@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "dc_panel.h"
 #include "generator_panel.h"
 #include "channel_panel.h"
 #include "channel_all_panel.h"
 #include "tcp_usb_connector.h"
+#include "flag_panel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +23,8 @@ class MainWindow : public QMainWindow
     channel_panel* chan5;
 
     channel_all_panel* chan_all;
+
+    flag_panel* flags;
 
     generator_panel* gen;
 

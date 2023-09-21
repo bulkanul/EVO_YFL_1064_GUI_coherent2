@@ -71,6 +71,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan_all, 5, 1);
 
+    flags = new flag_panel(this);
+    layout->addWidget(flags, 3, 0, 2, 1);
+
     ui->groupBox->setLayout(layout);
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
