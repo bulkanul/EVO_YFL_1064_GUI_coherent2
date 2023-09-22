@@ -1,6 +1,6 @@
 #include "preamplifier_panel.h"
 #include "ui_preamplifier_panel.h"
-
+#include <QDebug>
 #include <QMessageBox>
 
 preamplifier_panel::preamplifier_panel(QWidget *parent) :
@@ -18,11 +18,6 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
 preamplifier_panel::~preamplifier_panel()
 {
     delete ui;
-}
-
-void preamplifier_panel::on_pb_onoff_clicked(bool checked)
-{
-    send_command("lsonoff " + family, ID, QString::number(checked));
 }
 
 void preamplifier_panel::data_received_and_profed()
@@ -55,3 +50,11 @@ void preamplifier_panel::key_catcher(QObject* key)
         }
     }
 }
+
+
+void preamplifier_panel::on_pb_onoff_clicked(bool checked)
+{
+    ui->pb_onoff->setChecked(!checked);
+    send_command("lsonoff " + family, ID, QString::number(checked));
+}
+

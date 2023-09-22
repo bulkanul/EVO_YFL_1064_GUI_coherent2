@@ -19,10 +19,11 @@ public:
     friend class channel_panel;
 
 private slots:
-    void on_pb_onoff_clicked(bool checked);
-
     void data_received_and_profed();
     void key_catcher(QObject *key);
+
+    void on_pb_onoff_clicked(bool checked);
+
 private:
     Ui::preamplifier_panel *ui;
 };

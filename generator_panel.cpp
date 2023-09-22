@@ -23,12 +23,14 @@ generator_panel::~generator_panel()
 
 void generator_panel::on_pb_tec_1_onoff_clicked(bool checked)
 {
+    ui->pb_tec_1_onoff->setChecked(!checked);
     send_command("lsteconoff gen", ID, "0 " + QString::number(checked));
 }
 
 
 void generator_panel::on_pb_tec_2_onoff_clicked(bool checked)
 {
+    ui->pb_tec_2_onoff->setChecked(!checked);
     send_command("lsteconoff " + family, ID, "1 " + QString::number(checked));
 }
 
@@ -77,7 +79,7 @@ void generator_panel::key_catcher(QObject* key)
 
 void generator_panel::on_pb_laser_onoff_clicked(bool checked)
 {
+    ui->pb_laser_onoff->setChecked(!checked);
     send_command("lsonoff " + family, ID, QString::number(checked));
-    silence_counter(2);
 }
 

@@ -22,6 +22,7 @@ preamplifier_all_panel::~preamplifier_all_panel()
 
 void preamplifier_all_panel::on_pb_onoff_clicked(bool checked)
 {
+    // ui->pb_onoff->setChecked(!checked);
     send_command("lsonoff " + family, ID, QString::number(checked));
 }
 

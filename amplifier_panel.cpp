@@ -55,12 +55,14 @@ void amplifier_panel::key_catcher(QObject* key)
 
 void amplifier_panel::on_pb_laser_onoff_clicked(bool checked)
 {
+    ui->pb_laser_onoff->setChecked(!checked);
     send_command("lsonoff " + family, ID, QString::number(checked));
 }
 
 
 void amplifier_panel::on_pb_pilot_onoff_clicked(bool checked)
 {
+    ui->pb_pilot_onoff->setChecked(!checked);
     send_command("lspilotonoff " + family, ID, QString::number(checked));
 }
 
