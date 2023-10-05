@@ -23,12 +23,12 @@ flag_panel::flag_panel(QWidget *parent) :
         lines.append(line);
         origin->addWidget(line);
 
-        QFrame* hline = new QFrame(this);
-        hline->setFrameShape(QFrame::HLine);
-        hline->setFrameShadow(QFrame::Sunken);
-        origin->addWidget(hline);
-    }
 
+    }
+    QFrame* hline = new QFrame(this);
+    hline->setFrameShape(QFrame::HLine);
+    hline->setFrameShadow(QFrame::Sunken);
+    origin->addWidget(hline);
     ui->widget->setLayout(origin);
 
     ui->l_water_thresh->setStyleSheet("QLabel{\n"
@@ -70,10 +70,10 @@ void flag_panel::data_received_and_profed()
             lines[i - 17]->l_temp_marker->setEnabled(param_check(raw_params, i).toInt());
         }
         ui->l_water_marker->setEnabled(param_check(raw_params, 24).toInt());
-        ui->l_interlock_1->setEnabled(param_check(raw_params, 25).toInt());
-        ui->l_interlock_2->setEnabled(param_check(raw_params, 26).toInt());
-        ui->l_interlock_alarm->setEnabled(param_check(raw_params, 27).toInt());
-        ui->l_key->setEnabled(param_check(raw_params, 28).toInt());
+        ui->l_interlock_1->setEnabled(!param_check(raw_params, 25).toInt());
+        ui->l_interlock_2->setEnabled(!param_check(raw_params, 26).toInt());
+        ui->l_interlock_alarm->setEnabled(!param_check(raw_params, 27).toInt());
+        ui->l_key->setEnabled(!param_check(raw_params, 28).toInt());
     } else if (param_check(raw_params,0) == "lrconf") {
         ui->l_water_thresh->setText(param_check(raw_params, 3) + " Гц");
     }

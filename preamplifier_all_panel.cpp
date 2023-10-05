@@ -12,7 +12,7 @@ preamplifier_all_panel::preamplifier_all_panel(QWidget *parent) :
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     family="allpreamp";
 
-    ui->dsb_power->installEventFilter(this);
+    // ui->dsb_power->installEventFilter(this);
 }
 
 preamplifier_all_panel::~preamplifier_all_panel()
@@ -29,7 +29,7 @@ void preamplifier_all_panel::on_pb_onoff_clicked(bool checked)
 void preamplifier_all_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
-        ui->l_power->setText(QString::number(param_check(raw_params, 3).toDouble()) + " Вт");
+        ui->l_power->setText(QString::number(param_check(raw_params, 3).toDouble()) + " %");
     }
     else if (param_check(raw_params,0) == "lronoff"){
 
@@ -42,9 +42,9 @@ void preamplifier_all_panel::key_catcher(QObject* key)
                                         "Подтверждение",
                                         "Отправить команду усилителю "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
-    if(mesg->exec()==QMessageBox::Yes){
-        if(key->objectName() == "dsb_power"){
-            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value()).replace(",","."));
-        }
-    }
+//    if(mesg->exec()==QMessageBox::Yes){
+//        if(key->objectName() == "dsb_power"){
+//            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value()).replace(",","."));
+//        }
+//    }
 }

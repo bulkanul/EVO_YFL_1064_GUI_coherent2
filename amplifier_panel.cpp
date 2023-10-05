@@ -25,12 +25,13 @@ void amplifier_panel::data_received_and_profed()
     if (param_check(raw_params,0) == "lrstatus") {
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->pb_pilot_onoff->setChecked(param_check(raw_params,4).toInt());
-        ui->l_power->setText(QString::number(param_check(raw_params,6).toDouble()) + " Вт");
+        ui->l_power->setText(QString::number(param_check(raw_params,6).toDouble()) + " %");
         ui->l_temp_0->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
         ui->l_temp_1->setText(QString::number(param_check(raw_params,9).toDouble()) + " °C");
         ui->l_temp_2->setText(QString::number(param_check(raw_params,10).toDouble()) + " °C");
         ui->l_pd_back->setText(QString::number(param_check(raw_params,11).toDouble()) + " В");
         ui->l_pd_forw->setText(QString::number(param_check(raw_params,12).toDouble()) + " В");
+        ui->l_diff_pd->setText(QString::number(param_check(raw_params,13).toDouble()) + " В");
     }
 //    else if (param_check(raw_params,0) == "lronoff"){
 //        ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());

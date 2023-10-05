@@ -12,7 +12,7 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     family="preamp";
 
-    ui->dsb_power->installEventFilter(this);
+    // ui->dsb_power->installEventFilter(this);
 }
 
 preamplifier_panel::~preamplifier_panel()
@@ -24,7 +24,7 @@ void preamplifier_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
         ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
-        ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " Вт");
+        ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " %");
         ui->l_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
         ui->l_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
         ui->l_temp_2->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
@@ -44,11 +44,11 @@ void preamplifier_panel::key_catcher(QObject* key)
                                         "Подтверждение",
                                         "Отправить команду усилителю "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
-    if(mesg->exec()==QMessageBox::Yes){
-        if(key->objectName() == "dsb_power"){
-            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value()).replace(",","."));
-        }
-    }
+//    if(mesg->exec()==QMessageBox::Yes){
+//        if(key->objectName() == "dsb_power"){
+//            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value()).replace(",","."));
+//        }
+//    }
 }
 
 

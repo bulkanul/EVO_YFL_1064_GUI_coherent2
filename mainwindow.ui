@@ -104,6 +104,7 @@
            <property name="font">
             <font>
              <pointsize>16</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -205,6 +206,7 @@ QPushButton:hover
            <property name="font">
             <font>
              <pointsize>16</pointsize>
+             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -284,6 +286,7 @@ QPushButton:hover
           <font>
            <family>Arial</family>
            <pointsize>-1</pointsize>
+           <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>
@@ -358,7 +361,7 @@ QPushButton::hover {
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="admin_page">
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -587,8 +590,8 @@ QPushButton::hover {
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="images/images.qrc">
-                    <normaloff>:/interface/refresh.png</normaloff>:/interface/refresh.png</iconset>
+                   <iconset>
+                    <normaloff>images/refresh.png</normaloff>images/refresh.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -796,6 +799,7 @@ QPushButton::hover {
   </widget>
  </widget>
  <resources>
+  <include location="images/images.qrc"/>
   <include location="images/images.qrc"/>
  </resources>
  <connections/>
