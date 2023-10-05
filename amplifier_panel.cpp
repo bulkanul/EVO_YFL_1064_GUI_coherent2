@@ -35,9 +35,9 @@ void amplifier_panel::data_received_and_profed()
 //    else if (param_check(raw_params,0) == "lronoff"){
 //        ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
 //    }
-    else if (param_check(raw_params,0) == "lrpilotonoff"){
-        ui->pb_pilot_onoff->setChecked(param_check(raw_params,3).toInt());
-    }
+//    else if (param_check(raw_params,0) == "lrpilotonoff"){
+//        ui->pb_pilot_onoff->setChecked(param_check(raw_params,3).toInt());
+//    }
 }
 
 void amplifier_panel::key_catcher(QObject* key)

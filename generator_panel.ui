@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>290</width>
+    <width>286</width>
     <height>16777215</height>
    </size>
   </property>
@@ -53,7 +53,6 @@
       <font>
        <family>Arial</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -270,6 +269,7 @@ QPushButton::disabled  {
                <widget class="QDoubleSpinBox" name="dsb_temp_1">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>11</pointsize>
                  </font>
                 </property>
@@ -385,6 +385,7 @@ QPushButton::disabled  {
                <widget class="QDoubleSpinBox" name="dsb_temp_2">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>11</pointsize>
                  </font>
                 </property>
@@ -432,7 +433,6 @@ QPushButton::disabled  {
            <font>
             <family>Arial</family>
             <pointsize>12</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -483,7 +483,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -523,7 +522,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -563,7 +561,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -603,7 +600,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -643,7 +639,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -683,7 +678,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -723,7 +717,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -763,7 +756,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -803,7 +795,6 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>11</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>

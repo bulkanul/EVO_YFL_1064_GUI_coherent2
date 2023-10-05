@@ -1,6 +1,8 @@
 #include "flag_panel.h"
 #include "ui_flag_panel.h"
 
+#include <QMessageBox>
+
 flag_panel::flag_panel(QWidget *parent) :
     device_panel(parent),
     ui(new Ui::flag_panel)
@@ -10,30 +12,49 @@ flag_panel::flag_panel(QWidget *parent) :
 
     family = "usr";
 
+    connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
 
-    QVBoxLayout *origin = new QVBoxLayout(ui->groupBox);
-    origin->setContentsMargins(9, 27, 9, 9);
-
+    QVBoxLayout *origin = new QVBoxLayout(ui->widget);
+    origin->setContentsMargins(9, 27, 9, 0);
+    origin->setSpacing(2);
     for (int i = 0; i < lineCount; i++) {
         flag_panel_line* line = new flag_panel_line(i);
         lines.append(line);
         origin->addWidget(line);
 
-        if (i == lineCount - 1)
-            continue;
         QFrame* hline = new QFrame(this);
         hline->setFrameShape(QFrame::HLine);
         hline->setFrameShadow(QFrame::Sunken);
         origin->addWidget(hline);
     }
 
-    ui->groupBox->setLayout(origin);
+    ui->widget->setLayout(origin);
+
+    ui->l_water_thresh->setStyleSheet("QLabel{\n"
+                                      " font:11pt;\n"
+                                      " font-weight:bold;\n"
+                                      "}");
+
+    ui->dsb_water_thresh->installEventFilter(this);
 }
 
 flag_panel::~flag_panel()
 {
     delete ui;
+}
+
+void flag_panel::key_catcher(QObject *key)
+{
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
+                                        "Подтверждение",
+                                        "Отправить команду блоку usr "+QString::number(ID)+"?",
+                                        QMessageBox::Yes | QMessageBox::No);
+    if(mesg->exec()==QMessageBox::Yes){
+        if(key->objectName() == "dsb_water_thresh"){
+            emit sl_data_set("lsconf", ID, QString::number(ui->dsb_water_thresh->value()).replace(",","."));
+        }
+    }
 }
 
 void flag_panel::data_received_and_profed()
@@ -48,6 +69,13 @@ void flag_panel::data_received_and_profed()
         for (int i = 17; i < 24; i++) {
             lines[i - 17]->l_temp_marker->setEnabled(param_check(raw_params, i).toInt());
         }
+        ui->l_water_marker->setEnabled(param_check(raw_params, 24).toInt());
+        ui->l_interlock_1->setEnabled(param_check(raw_params, 25).toInt());
+        ui->l_interlock_2->setEnabled(param_check(raw_params, 26).toInt());
+        ui->l_interlock_alarm->setEnabled(param_check(raw_params, 27).toInt());
+        ui->l_key->setEnabled(param_check(raw_params, 28).toInt());
+    } else if (param_check(raw_params,0) == "lrconf") {
+        ui->l_water_thresh->setText(param_check(raw_params, 3) + " Гц");
     }
 }
 

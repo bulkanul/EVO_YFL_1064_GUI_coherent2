@@ -7,6 +7,7 @@
 #include "channel_all_panel.h"
 #include "tcp_usb_connector.h"
 #include "flag_panel.h"
+#include "divider_panel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +28,8 @@ class MainWindow : public QMainWindow
     flag_panel* flags;
 
     generator_panel* gen;
+
+    divider_panel* div;
 
     tcp_usb_connector *conn;
     QString serial_port;

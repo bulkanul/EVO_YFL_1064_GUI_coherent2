@@ -28,6 +28,10 @@ private slots:
 
 private:
     Ui::generator_panel *ui;
+
+signals:
+    void sig_usr_changes(QString, int);
+
 };
 
 #endif // GENERATOR_PANEL_H

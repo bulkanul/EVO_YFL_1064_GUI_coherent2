@@ -37,6 +37,7 @@ void generator_panel::on_pb_tec_2_onoff_clicked(bool checked)
 void generator_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
+        emit sig_usr_changes("l_footer_connection_status", true);
         ui->l_laser_state->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->l_laser_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");

@@ -21,6 +21,7 @@ public:
     ~flag_panel();
 
 private slots:
+    void key_catcher(QObject *key);
     void data_received_and_profed();
 
 private:

@@ -95,10 +95,10 @@ void device_panel::data_received(QStringList message)
             silence_count--;
         }
     }
-    if(message.size() == 2 && param_check(message, 1) != "NL_SSL_eth_board_29032023" && family == "debug"){ //debug only
-        raw_params=message;
-        emit command_proofed();
-    }
+//    if(message.size() == 2 && param_check(message, 1) != "NL_SSL_eth_board_29032023" && family == "debug"){ //debug only
+//        raw_params=message;
+//        emit command_proofed();
+//    }
     if(param_check(message,0)=="lrstatus"){
        // qDebug();
     }

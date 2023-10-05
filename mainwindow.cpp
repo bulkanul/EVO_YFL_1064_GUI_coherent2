@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     gen->ID = 0;
     // gen->enable_widget(false);
     layout->addWidget(gen, 0, 0, 3, 1);
+    connect(gen, SIGNAL(sig_usr_changes(QString, int)), this, SLOT(change_interface(QString,int)));
     connect(gen, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), gen, SLOT(data_received(QStringList)));
 
@@ -76,6 +77,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), flags, SLOT(data_received(QStringList)));
     layout->addWidget(flags, 3, 0, 2, 1);
 
+    div = new divider_panel(this);
+    connect(div, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)), div, SLOT(data_received(QStringList)));
+    layout->addWidget(div, 5, 0);
+
     ui->groupBox->setLayout(layout);
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
@@ -112,28 +118,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::change_interface(QString name, int state)
 {
-    if(name=="pb_error_cleaner"){
-        ui->pb_error_cleaner->setVisible(state);
-    }else if(name.contains("l_footer_emission")==true){
-        if(name.split(" ")[1]=="cw")light_state[name.split(" ")[2].toUInt()]=state;
-        else if(name.split(" ")[1]=="dc")light_state[5]=state;
-        else if(name.split(" ")[1]=="ns")light_state[6]=state;
-        bool max=0;
-        for(int i=0;i<7;i++){
-           max|=light_state[i];
-        }
-        ui->l_footer_emission->setEnabled(!max);
-    }else if(name.contains("l_footer_key")==true){
-        ui->l_footer_key->setEnabled(state);
-    }else if(name=="l_footer_connection_status"){
+//    if(name=="pb_error_cleaner"){
+//        ui->pb_error_cleaner->setVisible(state);
+//    }else if(name.contains("l_footer_emission")==true){
+//        if(name.split(" ")[1]=="cw")light_state[name.split(" ")[2].toUInt()]=state;
+//        else if(name.split(" ")[1]=="dc")light_state[5]=state;
+//        else if(name.split(" ")[1]=="ns")light_state[6]=state;
+//        bool max=0;
+//        for(int i=0;i<7;i++){
+//           max|=light_state[i];
+//        }
+//        ui->l_footer_emission->setEnabled(!max);
+//    }else if(name.contains("l_footer_key")==true){
+//        ui->l_footer_key->setEnabled(state);
+    if(name=="l_footer_connection_status"){
         ui->l_footer_connection_status->setText(state?"Состояние : ПОДКЛЮЧЕНО":"Состояние : ОТКЛЮЧЕНО");
-    }else if(name=="l_footer_interlock"){
-        ui->l_footer_interlock->setEnabled(state);
-    }else if(name=="l_footer_acdc_ok"){
-        ui->l_footer_acdc_ok->setEnabled(state);
-    }else if(name=="l_footer_acdc_t_alarm"){
-        ui->l_footer_acdc_t_alarm->setEnabled(state);
     }
+//    }else if(name=="l_footer_interlock"){
+//        ui->l_footer_interlock->setEnabled(state);
+//    }else if(name=="l_footer_acdc_ok"){
+//        ui->l_footer_acdc_ok->setEnabled(state);
+//    }else if(name=="l_footer_acdc_t_alarm"){
+//        ui->l_footer_acdc_t_alarm->setEnabled(state);
+//    }
 }
 
 void MainWindow::on_pushButton_clicked()
