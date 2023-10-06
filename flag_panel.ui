@@ -12,13 +12,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>280</width>
+    <width>0</width>
     <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>290</width>
+    <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
@@ -221,26 +221,6 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-                <weight>50</weight>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Текущее значение:</string>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QLabel" name="l_water_thresh">
               <property name="enabled">
@@ -264,11 +244,27 @@
                </font>
               </property>
               <property name="text">
-               <string>100 Гц</string>
+               <string>0 Гц</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_water_clear">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>СБРОС</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

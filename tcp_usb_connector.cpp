@@ -51,7 +51,7 @@ void tcp_usb_connector::serial_reconnect(void)
 void tcp_usb_connector::serial_disconnect(void)
 {
     _sSocket->close();
-    //    ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
+    // ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
 }
 
 void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
@@ -293,7 +293,7 @@ void tcp_usb_connector::display_reconnect()
 void tcp_usb_connector::display_connected()
 {
     connected=true;
-//    emit connection_state(1);
+    emit connection_state(1);
     count=0;
 }
 

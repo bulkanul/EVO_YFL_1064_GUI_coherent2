@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    this->setWindowTitle("Main control board");
     connect(this,SIGNAL(pass_event(QKeyEvent *)),this,SLOT(pass_controller(QKeyEvent *)));
 
     conn = new tcp_usb_connector();
@@ -131,9 +131,9 @@ void MainWindow::change_interface(QString name, int state)
 //        ui->l_footer_emission->setEnabled(!max);
 //    }else if(name.contains("l_footer_key")==true){
 //        ui->l_footer_key->setEnabled(state);
-    if(name=="l_footer_connection_status"){
-        ui->l_footer_connection_status->setText(state?"Состояние : ПОДКЛЮЧЕНО":"Состояние : ОТКЛЮЧЕНО");
-    }
+////    if(name=="l_footer_connection_status"){
+////        ui->l_footer_connection_status->setText(state?"Состояние : ПОДКЛЮЧЕНО":"Состояние : ОТКЛЮЧЕНО");
+////    }
 //    }else if(name=="l_footer_interlock"){
 //        ui->l_footer_interlock->setEnabled(state);
 //    }else if(name=="l_footer_acdc_ok"){
@@ -235,8 +235,18 @@ void MainWindow::on_all_save_in_memory_clicked()
 
 }
 
-void MainWindow::connection_state(int i)
+void MainWindow::connection_state(int state)
 {
+    switch (state){
+    case 0:
+        ui->l_footer_connection_status->setText("Состояние : ОТКЛЮЧЕНО");
+        break;
+    case 1:
+        ui->l_footer_connection_status->setText("Состояние : ПОДКЛЮЧЕНО");
+        break;
+    case 2:
+        ui->l_footer_connection_status->setText("Состояние : ПЕРЕПОДКЛЮЧЕНИЕ...");
+    }
 
 }
 

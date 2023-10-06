@@ -24,6 +24,8 @@ private slots:
     void key_catcher(QObject *key);
     void data_received_and_profed();
 
+    void on_pb_water_clear_clicked();
+
 private:
     Ui::flag_panel *ui;
     QList<flag_panel_line*> lines;

@@ -61,7 +61,7 @@ void flag_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
         for (int i = 3; i < 10; i++) {
-            lines[i - 3]->l_input_marker->setEnabled(param_check(raw_params, i).toInt());
+            lines[i - 3]->l_input_marker->setEnabled(!param_check(raw_params, i).toInt());
         }
         for (int i = 10; i < 17; i++) {
             lines[i - 10]->l_output_marker->setEnabled(param_check(raw_params, i).toInt());
@@ -69,13 +69,13 @@ void flag_panel::data_received_and_profed()
         for (int i = 17; i < 24; i++) {
             lines[i - 17]->l_temp_marker->setEnabled(param_check(raw_params, i).toInt());
         }
-        ui->l_water_marker->setEnabled(param_check(raw_params, 24).toInt());
+        ui->l_water_marker->setEnabled(!param_check(raw_params, 24).toInt());
         ui->l_interlock_1->setEnabled(!param_check(raw_params, 25).toInt());
         ui->l_interlock_2->setEnabled(!param_check(raw_params, 26).toInt());
         ui->l_interlock_alarm->setEnabled(!param_check(raw_params, 27).toInt());
         ui->l_key->setEnabled(!param_check(raw_params, 28).toInt());
     } else if (param_check(raw_params,0) == "lrconf") {
-        ui->l_water_thresh->setText(param_check(raw_params, 3) + " Гц");
+        ui->l_water_thresh->setText(QString::number(param_check(raw_params, 3).toDouble()) + " Гц");
     }
 }
 
@@ -133,3 +133,9 @@ flag_panel_line::flag_panel_line(int num)
 
     this->setLayout(layout);
 }
+
+void flag_panel::on_pb_water_clear_clicked()
+{
+    emit sl_data_set("lserrclear", ID, "");
+}
+
