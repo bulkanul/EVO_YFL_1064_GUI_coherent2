@@ -12,6 +12,8 @@ generator_panel::generator_panel(QWidget *parent) :
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     family="gen";
 
+    ui->w_error_box->hide();
+
     ui->dsb_temp_1->installEventFilter(this);
     ui->dsb_temp_2->installEventFilter(this);
 }
@@ -40,6 +42,15 @@ void generator_panel::data_received_and_profed()
         emit sig_usr_changes("l_footer_connection_status", true);
         ui->l_laser_state->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
+
+        if(param_check(raw_params, 5).toInt()){
+            error_code = param_check(raw_params, 5).toInt();
+            ui->w_error_box->show();
+            error_displayer = false;
+        } else {
+            ui->w_error_box->hide();
+        }
+
         ui->l_laser_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
         ui->l_laser_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
         ui->l_laser_temp_2->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
@@ -82,5 +93,11 @@ void generator_panel::on_pb_laser_onoff_clicked(bool checked)
 {
     ui->pb_laser_onoff->setChecked(!checked);
     send_command("lsonoff " + family, ID, QString::number(checked));
+}
+
+
+void generator_panel::on_pushButton_clicked()
+{
+    call_msg_box(parse_bits(error_code, errors_list));
 }
 

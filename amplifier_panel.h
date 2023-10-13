@@ -12,6 +12,16 @@ class amplifier_panel : public device_panel
 {
     Q_OBJECT
 
+QStringList errors_list={"Backward PD 0",
+                         "Forward PD 0",
+                         "N\\A",
+                         "N\\A",
+                         "N\\A",
+                         "N\\A",
+                         "INTERLOCK",
+                         "DCDC fail"
+                        };
+
 public:
     explicit amplifier_panel(QWidget *parent = nullptr);
     ~amplifier_panel();
@@ -24,8 +34,11 @@ private slots:
 
     void on_pb_pilot_onoff_clicked(bool checked);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::amplifier *ui;
+    int error_code;
 };
 
 #endif // AMPLIFIER_PANEL_H

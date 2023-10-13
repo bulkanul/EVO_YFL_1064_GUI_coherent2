@@ -18,12 +18,15 @@ flag_panel::flag_panel(QWidget *parent) :
     QVBoxLayout *origin = new QVBoxLayout(ui->widget);
     origin->setContentsMargins(9, 27, 9, 0);
     origin->setSpacing(2);
-    for (int i = 0; i < lineCount; i++) {
+    // for (int i = 0; i < lineCount; i++) {
+    for (int i = 0; i < 2; i++) {
         flag_panel_line* line = new flag_panel_line(i);
         lines.append(line);
         origin->addWidget(line);
 
-
+        if (i > 1) {                        /// delete
+            line->setDisabled(true);        /// delete
+        }                                   /// delete
     }
     QFrame* hline = new QFrame(this);
     hline->setFrameShape(QFrame::HLine);
@@ -32,6 +35,11 @@ flag_panel::flag_panel(QWidget *parent) :
     ui->widget->setLayout(origin);
 
     ui->l_water_thresh->setStyleSheet("QLabel{\n"
+                                      " font:11pt;\n"
+                                      " font-weight:bold;\n"
+                                      "}");
+
+    ui->l_water_speed->setStyleSheet("QLabel{\n"
                                       " font:11pt;\n"
                                       " font-weight:bold;\n"
                                       "}");
@@ -60,22 +68,27 @@ void flag_panel::key_catcher(QObject *key)
 void flag_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
-        for (int i = 3; i < 10; i++) {
+        emit sl_data_get("lgwater_speed", ID, "");
+        for (int i = 3; i < 5; i++) { // fix 5 to 10
             lines[i - 3]->l_input_marker->setEnabled(!param_check(raw_params, i).toInt());
         }
-        for (int i = 10; i < 17; i++) {
-            lines[i - 10]->l_output_marker->setEnabled(param_check(raw_params, i).toInt());
+        for (int i = 10; i < 12; i++) { // fix 12 to 17
+            lines[i - 10]->l_output_marker->setEnabled(!param_check(raw_params, i).toInt());
         }
-        for (int i = 17; i < 24; i++) {
-            lines[i - 17]->l_temp_marker->setEnabled(param_check(raw_params, i).toInt());
+        for (int i = 17; i < 19; i++) { // fix 19 to 24
+            lines[i - 17]->l_temp_marker->setEnabled(!param_check(raw_params, i).toInt());
         }
         ui->l_water_marker->setEnabled(!param_check(raw_params, 24).toInt());
         ui->l_interlock_1->setEnabled(!param_check(raw_params, 25).toInt());
         ui->l_interlock_2->setEnabled(!param_check(raw_params, 26).toInt());
         ui->l_interlock_alarm->setEnabled(!param_check(raw_params, 27).toInt());
         ui->l_key->setEnabled(!param_check(raw_params, 28).toInt());
-    } else if (param_check(raw_params,0) == "lrconf") {
+    } else if (param_check(raw_params, 0) == "lrconf") {
         ui->l_water_thresh->setText(QString::number(param_check(raw_params, 3).toDouble()) + " Гц");
+    } else if (param_check(raw_params,0) == "lrwater_speed") {
+        auto prr = raw_params;
+        double water_speed = 10000.0 / param_check(raw_params, 3).toDouble();
+        ui->l_water_speed->setText(QString::number(water_speed) + " Гц");
     }
 }
 

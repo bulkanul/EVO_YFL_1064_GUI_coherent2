@@ -14,6 +14,8 @@ divider_panel::divider_panel(QWidget *parent) :
     family="div";
     ID = 0;
 
+    ui->w_error_box->hide();
+
     ui->dsb_pd_forw->installEventFilter(this);
 }
 
@@ -25,8 +27,17 @@ divider_panel::~divider_panel()
 void divider_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
-        // flag
-        ui->l_pd_forw->setText(QString::number(param_check(raw_params, 4).toDouble()) + " В");
+
+        if(param_check(raw_params, 3).toInt()){
+            error_code = param_check(raw_params, 3).toInt();
+            ui->w_error_box->show();
+            error_displayer = false;
+        } else {
+            ui->w_error_box->hide();
+        }
+
+        auto pd_value = QString::number(param_check(raw_params, 4).toDouble(), 'f', 2);
+        ui->l_pd_forw->setText(QString::number(pd_value.toDouble()) + " В");
     }
 }
 
@@ -42,3 +53,9 @@ void divider_panel::key_catcher(QObject* key)
         }
     }
 }
+
+void divider_panel::on_pushButton_clicked()
+{
+    call_msg_box(parse_bits(error_code, errors_list));
+}
+

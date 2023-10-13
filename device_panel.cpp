@@ -197,7 +197,7 @@ void device_panel::send_pref()
     emit sl_data_set("lsconf",ID,message);
 }
 
-QString device_panel::pars_bits(unsigned char mess,QStringList list){
+QString device_panel::parse_bits(unsigned char mess,QStringList list){
     QString answer;
     for (int i=0;i<8;i++){
          if(((mess & (1<<(i)))!=0 )){
@@ -208,14 +208,14 @@ QString device_panel::pars_bits(unsigned char mess,QStringList list){
 }
 
 void device_panel::call_msg_box(QString msg){
-    if(error_displayer && msg!=""){
-        error_displayer=false;
+//    if(error_displayer && msg!=""){
+//        error_displayer=false;
 
         QMessageBox *mesg;
         mesg = new QMessageBox(QMessageBox::Information,family+" Ошибка", msg);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
-    }
+//    }
 }
 
 void device_panel::silence_counter(int count)

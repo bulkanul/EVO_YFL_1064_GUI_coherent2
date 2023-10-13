@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(chan3->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan3->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan3, 2, 1);
+    chan3->setDisabled(true);
 
     chan4 = new channel_panel(4, this);
     connect(chan4->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
@@ -57,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(chan4->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan4->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan4, 3, 1);
+    chan4->setDisabled(true);
 
     chan5 = new channel_panel(5, this);
     connect(chan5->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
@@ -64,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(chan5->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan5, 4, 1);
+    chan5->setDisabled(true);
 
     chan_all = new channel_all_panel(0, this);
     connect(chan_all->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));

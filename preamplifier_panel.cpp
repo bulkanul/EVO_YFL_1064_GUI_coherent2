@@ -12,6 +12,8 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     family="preamp";
 
+    ui->w_error_box->hide();
+
     // ui->dsb_power->installEventFilter(this);
 }
 
@@ -25,6 +27,15 @@ void preamplifier_panel::data_received_and_profed()
     if (param_check(raw_params,0) == "lrstatus") {
         ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " %");
+
+        if(param_check(raw_params, 5).toInt()){
+            error_code = param_check(raw_params, 5).toInt();
+            ui->w_error_box->show();
+            error_displayer = false;
+        } else {
+            ui->w_error_box->hide();
+        }
+
         ui->l_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
         ui->l_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
         ui->l_temp_2->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
@@ -56,5 +67,11 @@ void preamplifier_panel::on_pb_onoff_clicked(bool checked)
 {
     ui->pb_onoff->setChecked(!checked);
     send_command("lsonoff " + family, ID, QString::number(checked));
+}
+
+
+void preamplifier_panel::on_pushButton_clicked()
+{
+    call_msg_box(parse_bits(error_code, errors_list));
 }
 
