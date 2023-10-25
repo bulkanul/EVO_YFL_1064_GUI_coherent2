@@ -27,16 +27,16 @@ void amplifier_panel::data_received_and_profed()
     if (param_check(raw_params,0) == "lrstatus") {
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->pb_pilot_onoff->setChecked(param_check(raw_params,4).toInt());
+        ui->l_power->setText(QString::number(param_check(raw_params,6).toDouble()) + " %");
 
-        if(param_check(raw_params, 5).toInt()){
-            error_code = param_check(raw_params, 5).toInt();
+        if(param_check(raw_params, 7).toInt()){
+            error_code = param_check(raw_params, 7).toInt();
             ui->w_error_box->show();
             error_displayer = false;
         } else {
             ui->w_error_box->hide();
         }
 
-        ui->l_power->setText(QString::number(param_check(raw_params,6).toDouble()) + " %");
         ui->l_temp_0->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
         ui->l_temp_1->setText(QString::number(param_check(raw_params,9).toDouble()) + " °C");
         ui->l_temp_2->setText(QString::number(param_check(raw_params,10).toDouble()) + " °C");

@@ -74,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(chan_all->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->amp, SLOT(data_received(QStringList)));
     layout->addWidget(chan_all, 5, 1);
+    chan_all->setDisabled(true);
 
     flags = new flag_panel(this);
     connect(flags, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));

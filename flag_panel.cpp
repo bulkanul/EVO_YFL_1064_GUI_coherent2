@@ -1,4 +1,5 @@
 #include "flag_panel.h"
+#include "qtimer.h"
 #include "ui_flag_panel.h"
 
 #include <QMessageBox>
@@ -11,6 +12,12 @@ flag_panel::flag_panel(QWidget *parent) :
     ID = 0;
 
     family = "usr";
+
+    delete tmr;
+    tmr = new QTimer();
+    tmr->setInterval(1400);
+    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+    tmr->start();
 
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
@@ -68,7 +75,13 @@ void flag_panel::key_catcher(QObject *key)
 void flag_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
+
         emit sl_data_get("lgwater_speed", ID, "");
+        if (firstStatus) {
+            firstStatus = false;
+            emit sl_data_get("lgconf", ID, "");
+        }
+
         for (int i = 3; i < 5; i++) { // fix 5 to 10
             lines[i - 3]->l_input_marker->setEnabled(!param_check(raw_params, i).toInt());
         }
@@ -150,5 +163,11 @@ flag_panel_line::flag_panel_line(int num)
 void flag_panel::on_pb_water_clear_clicked()
 {
     emit sl_data_set("lserrclear", ID, "");
+}
+
+
+void flag_panel::on_pushButton_clicked()
+{
+    emit sl_data_set("lsinitall", ID, "");
 }
 

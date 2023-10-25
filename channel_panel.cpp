@@ -12,9 +12,9 @@ channel_panel::channel_panel(int num, QWidget *parent) :
 
     ID = num - 1;
     if (num > 2) {
-        ui->groupBox->setTitle("Канал " + QString::number(ID) + " (НЕ АКТИВЕН)");
+        ui->groupBox->setTitle("Канал " + QString::number(num) + " (НЕ АКТИВЕН)");
     } else {
-        ui->groupBox->setTitle("Канал " + QString::number(ID));
+        ui->groupBox->setTitle("Канал " + QString::number(num));
     }
 
     QGridLayout* layout = new QGridLayout();

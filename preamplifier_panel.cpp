@@ -26,7 +26,7 @@ void preamplifier_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
         ui->pb_onoff->setChecked(param_check(raw_params,3).toInt());
-        ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " %");
+        // ui->l_power->setText(QString::number(param_check(raw_params,4).toDouble()) + " %");
 
         if(param_check(raw_params, 5).toInt()){
             error_code = param_check(raw_params, 5).toInt();
@@ -60,6 +60,7 @@ void preamplifier_panel::key_catcher(QObject* key)
 //            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value()).replace(",","."));
 //        }
 //    }
+    delete mesg;
 }
 
 

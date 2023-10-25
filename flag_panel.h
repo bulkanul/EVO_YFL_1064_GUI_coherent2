@@ -26,10 +26,13 @@ private slots:
 
     void on_pb_water_clear_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::flag_panel *ui;
     QList<flag_panel_line*> lines;
     const int lineCount = 7;
+    bool firstStatus = true;
 };
 
 class flag_panel_line : public QWidget {

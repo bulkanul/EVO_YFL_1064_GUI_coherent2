@@ -15,11 +15,11 @@ class amplifier_panel : public device_panel
 QStringList errors_list={"Backward PD 0",
                          "Forward PD 0",
                          "N\\A",
-                         "N\\A",
+                         "QBH fault",
                          "N\\A",
                          "N\\A",
                          "INTERLOCK",
-                         "DCDC fail"
+                         "Internal ERROR"
                         };
 
 public:

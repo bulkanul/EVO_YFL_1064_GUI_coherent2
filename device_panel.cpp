@@ -14,7 +14,7 @@
 device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
     tmr=new QTimer();
-    tmr->setInterval(800);
+    tmr->setInterval(1200);
     connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
     tmr->start();
 }
