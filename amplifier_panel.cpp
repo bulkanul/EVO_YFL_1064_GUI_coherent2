@@ -25,6 +25,7 @@ amplifier_panel::~amplifier_panel()
 void amplifier_panel::data_received_and_profed()
 {
     if (param_check(raw_params,0) == "lrstatus") {
+        auto tmp = raw_params;
         ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
         ui->pb_pilot_onoff->setChecked(param_check(raw_params,4).toInt());
         ui->l_power->setText(QString::number(param_check(raw_params,6).toDouble()) + " %");
@@ -69,14 +70,18 @@ void amplifier_panel::key_catcher(QObject* key)
 void amplifier_panel::on_pb_laser_onoff_clicked(bool checked)
 {
     ui->pb_laser_onoff->setChecked(!checked);
-    send_command("lsonoff " + family, ID, QString::number(checked));
+    // send_command("lsonoff " + family, ID, QString::number(checked));
+    sl_data_set("lsonoff", ID, QString::number(checked));
+    silence_counter(10);
+
 }
 
 
 void amplifier_panel::on_pb_pilot_onoff_clicked(bool checked)
 {
     ui->pb_pilot_onoff->setChecked(!checked);
-    send_command("lspilotonoff " + family, ID, QString::number(checked));
+    //send_command("lspilotonoff " + family, ID, QString::number(checked));
+    sl_data_set("lspilotonoff", ID, QString::number(checked));
 }
 
 

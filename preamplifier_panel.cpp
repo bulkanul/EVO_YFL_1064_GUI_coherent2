@@ -67,7 +67,9 @@ void preamplifier_panel::key_catcher(QObject* key)
 void preamplifier_panel::on_pb_onoff_clicked(bool checked)
 {
     ui->pb_onoff->setChecked(!checked);
-    send_command("lsonoff " + family, ID, QString::number(checked));
+    // send_command("lsonoff " + family, ID, QString::number(checked));
+    emit sl_data_set("lsonoff", ID, QString::number(checked));
+    silence_counter(2);
 }
 
 

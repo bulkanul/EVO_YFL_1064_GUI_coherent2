@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     conn = new tcp_usb_connector();
     connect(this,SIGNAL(set_conn_params(QString,int)),conn,SLOT(init_connection(QString,int)));
     connect(conn,SIGNAL(version_error()),this,SLOT(version_conflict()));
-    connect(this, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    // connect(this, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn,SIGNAL(connection_state(int)),this,SLOT(connection_state(int)));
 
     QGridLayout* layout = new QGridLayout(ui->groupBox);
@@ -29,12 +29,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gen, SIGNAL(sig_usr_changes(QString, int)), this, SLOT(change_interface(QString,int)));
     connect(gen, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), gen, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)), gen, SLOT(auto_telemetry_call(QString)));
 
     chan1 = new channel_panel(1, this);
     connect(chan1->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan1->preamp, SLOT(data_received(QStringList)));
     connect(chan1->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan1->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan1->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan1->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan1, 0, 1);
 
     chan2 = new channel_panel(2, this);
@@ -42,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan2->preamp, SLOT(data_received(QStringList)));
     connect(chan2->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan2->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan2->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan2->preamp, SLOT(auto_telemetry_call(QString)));
+
     layout->addWidget(chan2, 1, 1);
 
     chan3 = new channel_panel(3, this);
@@ -49,6 +55,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan3->preamp, SLOT(data_received(QStringList)));
     connect(chan3->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan3->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan3->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan3->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan3, 2, 1);
     chan3->setDisabled(true);
 
@@ -57,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan4->preamp, SLOT(data_received(QStringList)));
     connect(chan4->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan4->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan4->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan4->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan4, 3, 1);
     chan4->setDisabled(true);
 
@@ -65,6 +75,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->preamp, SLOT(data_received(QStringList)));
     connect(chan5->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan5->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan5->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan5, 4, 1);
     chan5->setDisabled(true);
 
@@ -73,17 +85,21 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->preamp, SLOT(data_received(QStringList)));
     connect(chan_all->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), chan_all->amp, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)),chan_all->amp, SLOT(auto_telemetry_call(QString)));
+    connect(conn, SIGNAL(get_command(QString)),chan_all->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan_all, 5, 1);
     chan_all->setDisabled(true);
 
     flags = new flag_panel(this);
     connect(flags, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), flags, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)), flags, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(flags, 3, 0, 2, 1);
 
     div = new divider_panel(this);
     connect(div, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), div, SLOT(data_received(QStringList)));
+    connect(conn, SIGNAL(get_command(QString)), div, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(div, 5, 0);
 
     ui->groupBox->setLayout(layout);

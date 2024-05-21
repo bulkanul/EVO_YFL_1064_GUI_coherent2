@@ -52,7 +52,7 @@ public slots:
     void sl_data_set(QString, int ,QString);
     void sl_data_get(QString, int ,QString);
 
-    void auto_telemetry_call();
+    void auto_telemetry_call(QString family);
     void enable_widget(bool);
 
     QString parse_bits(unsigned char mess,QStringList);

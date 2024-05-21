@@ -10,11 +10,11 @@ divider_panel::divider_panel(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    delete tmr;
-    tmr = new QTimer();
-    tmr->setInterval(1400);
-    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-    tmr->start();
+//    delete tmr;
+//    tmr = new QTimer();
+//    tmr->setInterval(1400);
+//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
+//    tmr->start();
 
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));

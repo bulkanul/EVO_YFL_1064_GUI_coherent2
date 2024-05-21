@@ -49,13 +49,20 @@ public:
 //    QStringList fifo_finder;
     QList<int> fifo_finder;
     bool version_protection =true;
+    int standart_delay=12;
+    int pool_count=0;
     QTimer* tmr;
+    // QStringList dev_list={"sns0","snscw0","tec0","dc0","usr0"};
+    QStringList dev_list={"gen0",
+                          "preamp0","preamp1","preamp2","preamp3","preamp4",
+                          "allpreamp0",
+                          "amp0","amp1","amp2","amp3","amp4",
+                          "allamp0",
+                          "usr0",
+                          "div0"};
+    QTimer* tmr1;
 signals:
-//    void send_to_dc(QString);
     void send_to_dev(QStringList);
-//    void send_to_dc(QStringList);
-//    void send_to_usr(QStringList);
-//    void send_to_cw(QString);
     void send_to_amplifaer(QStringList);
     void send_to_resonator(QStringList);
     void send_to_user(QStringList);
@@ -63,6 +70,7 @@ signals:
     void version_failed();
     void send_device_list(QList<int>);
     void version_error();
+    void get_command(QString);
 
 public slots:
     void data_received();
@@ -85,6 +93,7 @@ public slots:
     void serial_reconnect();
     void serial_handle_error(QSerialPort::SerialPortError error);
     void serial_disconnect();
+    void get_command_pool();
 };
 
 #endif // CONNECTOR_H

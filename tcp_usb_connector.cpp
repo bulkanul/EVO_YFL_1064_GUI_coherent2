@@ -2,16 +2,15 @@
 #include <QThread>
 #include <qtimer.h>
 
-//tcp_usb_connector::~tcp_usb_connector()
-//{
-//    tcp_disconnect();
-//}
-
 tcp_usb_connector::tcp_usb_connector()
 {
     tmr=new QTimer();
-    tmr->setInterval(50);
+    tmr->setInterval(standart_delay);
     connect(tmr,SIGNAL(timeout()),this,SLOT(sender()));
+
+    tmr1=new QTimer();
+    tmr1->setInterval(standart_delay * 17);
+    connect(tmr1,SIGNAL(timeout()),this,SLOT(get_command_pool()));
 }
 void tcp_usb_connector::serial_set_prefs(QString serial_port)
 {
@@ -51,7 +50,6 @@ void tcp_usb_connector::serial_reconnect(void)
 void tcp_usb_connector::serial_disconnect(void)
 {
     _sSocket->close();
-    // ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
 }
 
 void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
@@ -59,9 +57,7 @@ void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
     if ( (_sSocket->isOpen()) && (error == QSerialPort::ResourceError))
     {
         _sSocket->close();
-//        interface_enabled(false);
-//        ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО ИЗ-ЗА ОШИБКИ");
-        qDebug("serial port DISONNECTED by error"+ error);
+        qDebug("serial port DISONNECTED by error" + error);
     }
 }
 
@@ -104,35 +100,32 @@ void tcp_usb_connector::tcp_reconnect(void)
 void tcp_usb_connector::tcp_disconnect(void)
 {
     reconnect=true;
-    // _pSocket->abort();
     _pSocket->close();
 }
 
 
 void tcp_usb_connector::data_write(QString command,int number,QString data){
     QString message;
-    if (command.contains("lg_") || command.contains("ls_")) // debug only
-        fifo_command.append(command); //debug only
-    else{
-        message= command+" "+QString::number(number)+" "+data;
-        fifo_command.append(message);
-    }
-    //qDebug()<<"fifo add "+command;
+    message= command+" "+QString::number(number)+" "+data;
+    fifo_command.append(message);
+    if(logg) qDebug() << "Appended to fifo: " << fifo_command.last();
 }
 
 void tcp_usb_connector::data_ver_write(QString command)
 {
      fifo_command.append("l"+command.toUtf8());
-     //qDebug()<<"fifo add "+command;
+     if(logg) qDebug() << "Appended to fifo: " << fifo_command.last();
 }
 
 void tcp_usb_connector::sender()
 {
+    auto tmp = fifo_command;
     count++;
-    // qDebug() << "fifo length: " << fifo_command.length();
-    if(logg)qDebug()<<"count "<<count;
+    // if(logg)qDebug()<<"count "<<count;
+    if(logg)qDebug()<<"fifo length "<<fifo_command.length();
     if(count>60){
-        if(fifo_command.length()>0)fifo_command.removeFirst();
+        if(fifo_command.length()>0)
+            fifo_command.removeFirst();
         data_ver_write("gvers");
         display_reconnect();
     }
@@ -149,7 +142,6 @@ void tcp_usb_connector::sender()
             }else{
                 if(logg)qDebug()<<"socket not";
             }
-//            if(fifo_command.length()>=1)fifo_command.removeFirst();
             }
         }else{
             if(_sSocket->isOpen()&&_sSocket->isWritable()){
@@ -159,17 +151,15 @@ void tcp_usb_connector::sender()
             }
         }
         if(fifo_command.length()>0){
-            //qDebug()<<"fifo removed"<<fifo_command.length();
+            if(logg) qDebug() << "Removed from fifo: " << fifo_command.first();
             fifo_command.removeFirst();
         }
-        //qDebug()<<"fifo length "<<fifo_command.length();
     }
 }
 
 void tcp_usb_connector::init_connection(QString adress, int port)
 {
     first_set_write=true;
-//    qDebug()<<_sSocket->objectName()<<_pSocket->objectName();
     if(_sSocket!=nullptr)_sSocket->close();
     if(_pSocket!=nullptr)_pSocket->abort();
     if(port==404){
@@ -181,6 +171,16 @@ void tcp_usb_connector::init_connection(QString adress, int port)
     }
     tmr->stop();
     tmr->start();
+    tmr1->stop();
+    tmr1->start();
+}
+
+void tcp_usb_connector::get_command_pool()
+{
+    pool_count++;
+    if(logg)qDebug()<<"sender count "<<count<<pool_count<<dev_list[pool_count%dev_list.length()];
+    emit get_command(dev_list[pool_count%dev_list.length()]);
+
 }
 
 void tcp_usb_connector::data_received(){
@@ -192,7 +192,6 @@ void tcp_usb_connector::data_received(){
             do{
                 int bytes = _pSocket->bytesAvailable();
                 data = _pSocket->readLine();
-                // qDebug() << data.count() << "vs" << bytes;
                 raw_params=double_localizator(data);
             }while(_pSocket->bytesAvailable() != 0);
         }
@@ -200,7 +199,6 @@ void tcp_usb_connector::data_received(){
             do{
                 int bytes = _sSocket->bytesAvailable();
                 data = _sSocket->readLine();
-                qDebug() << data.count() << "vs" << bytes;
                 raw_params=double_localizator(data);
             }while(_sSocket->bytesAvailable() != 0);
         }
@@ -221,9 +219,14 @@ void tcp_usb_connector::data_received(){
             }else{
                 version_protection=false;
                 fifo_command.clear();
+//                data_write("lgconf sns", 0, "");
+//                data_write("lgconf snscw", 0, "");
+//                data_write("lgconf tec", 0, "");
+//                data_write("lgconf cb", 0, "");
+//                data_write("lgconf usr", 0, "");
             }
         }
-        if(logg)qDebug()<<"sl_data_readed "<<raw_params;
+        /*if(logg)*/qDebug()<<"sl_data_readed "<<raw_params;
 
         if(params(3).indexOf("ERR")!=0 && !version_protection){
                 emit send_to_dev(raw_params);
@@ -251,7 +254,6 @@ QStringList tcp_usb_connector::double_localizator(QByteArray data){
             return QStringList("error unknown");
         }else{
             double_caller=false;
-//            if(raw_command.lastIndexOf("lr")>=0){
                 QStringList list;
                 if(raw_command.lastIndexOf("lrerrclr")==0){
                     list =  raw_command.right(raw_command.length()
@@ -263,7 +265,6 @@ QStringList tcp_usb_connector::double_localizator(QByteArray data){
                    list[i].replace(",",".");
                 }
                 list.last().remove("\r");
-                qDebug()<<"filtred "<<list;
                 return list ;
         }
     }
@@ -280,7 +281,7 @@ QString tcp_usb_connector::params(int number){
 void tcp_usb_connector::display_reconnect()
 {
     version_protection=true;
-    if(count%100==0){
+    if(count%100==0 && reconnect){
         emit connection_state(2);
         if(connection_is_tcp){
             tcp_reconnect();
@@ -293,7 +294,6 @@ void tcp_usb_connector::display_reconnect()
 void tcp_usb_connector::display_connected()
 {
     connected=true;
-    emit connection_state(1);
     count=0;
 }
 
