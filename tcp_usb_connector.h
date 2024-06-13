@@ -49,7 +49,7 @@ public:
 //    QStringList fifo_finder;
     QList<int> fifo_finder;
     bool version_protection =true;
-    int standart_delay=12;
+    int standart_delay=30;
     int pool_count=0;
     QTimer* tmr;
     // QStringList dev_list={"sns0","snscw0","tec0","dc0","usr0"};

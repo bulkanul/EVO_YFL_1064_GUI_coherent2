@@ -56,16 +56,8 @@ void device_panel::auto_telemetry_call(QString family)
     if(family==this->family+QString::number(ID)){
         count_no_responce++;
         count++;
-        if(first_pref_cmd || this->family=="usr"){
-            sl_data_get("lgstatus",ID,"");
-        }/*else{
-            sl_data_get("lgconf",ID,"");
-        }*/
-    }
-
-    if (family != "debug")
         sl_data_get("lgstatus",ID,"");
-
+    }
 }
 
 QString device_panel::param_check(QStringList list,int number){

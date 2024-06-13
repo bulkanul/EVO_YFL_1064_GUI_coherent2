@@ -9,7 +9,7 @@ tcp_usb_connector::tcp_usb_connector()
     connect(tmr,SIGNAL(timeout()),this,SLOT(sender()));
 
     tmr1=new QTimer();
-    tmr1->setInterval(standart_delay * 17);
+    tmr1->setInterval(standart_delay * 1.5);
     connect(tmr1,SIGNAL(timeout()),this,SLOT(get_command_pool()));
 }
 void tcp_usb_connector::serial_set_prefs(QString serial_port)

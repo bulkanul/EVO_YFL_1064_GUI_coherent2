@@ -72,7 +72,7 @@ void amplifier_panel::on_pb_laser_onoff_clicked(bool checked)
     ui->pb_laser_onoff->setChecked(!checked);
     // send_command("lsonoff " + family, ID, QString::number(checked));
     sl_data_set("lsonoff", ID, QString::number(checked));
-    silence_counter(10);
+    silence_counter(2);
 
 }
 
