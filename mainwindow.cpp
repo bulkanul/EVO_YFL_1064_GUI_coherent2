@@ -10,35 +10,19 @@ MainWindow::MainWindow(QWidget *parent)
     conn=new tcp_usb_connector;
     conn->crypto_version_controller=false;
     connect(this,SIGNAL(send_connection_type(QString,int)),conn, SLOT(init_connection(QString,int)));
+    connect(this,SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 
-    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-
-    dc = new dc_panel(this);
-    connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
-    connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(dc);
-    dc->ID=0;
-
-    tec1 = new tec_panel(this);
-    connect(tec1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec1, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec1, SLOT(data_received(QStringList)));
-    connect(tec1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec1, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec1);
-    tec1->ID=0;
-
-    tec2 = new tec_panel(this);
-    connect(tec2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec2, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec2, SLOT(data_received(QStringList)));
-    connect(tec2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec2, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec2);
-    tec2->ID=1;
+    for(int i=0;i<10;i++){
+        dc_panel* dc = new dc_panel(this);
+        connect(dc, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+        connect(this, SIGNAL(update_internal_address(QString)),dc, SLOT(internal_address_write(QString)));
+        connect(conn, SIGNAL(send_to_dev(QStringList)),dc, SLOT(data_received(QStringList)));
+        connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+        connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
+        ui->groupBox->layout()->addWidget(dc);
+        dc->ID=i;
+        dc_list.append(dc);
+    }
 
     cb = new cb_panel(this);
     cb->ID=0;
@@ -57,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->groupBox->layout()->addWidget(user);
     user->ID=0;
 
+    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
     if(settings.value("prev_connection").toString()!=""){
@@ -71,6 +56,11 @@ MainWindow::MainWindow(QWidget *parent)
         on_connect_btn_clicked();
     }
     emit update_internal_address(ui->ip_adress_2->text());
+    ui->pb_error_cleaner->setVisible(false);
+    ui->button_error->setVisible(false);
+    ui->all_restore_seed->setVisible(false);
+    ui->all_save_seed->setVisible(false);
+    ui->all_reset->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -81,8 +71,22 @@ MainWindow::~MainWindow()
 void MainWindow::update_ui(QString name,bool state)
 {
     if(name=="dc0")dc_err=state;
+    else if(name=="dc1")dc1_err=state;
+    else if(name=="dc2")dc2_err=state;
+
+    else if(name=="dc3")dc3_err=state;
+    else if(name=="dc4")dc4_err=state;
+    else if(name=="dc5")dc5_err=state;
+
+    else if(name=="dc6")dc6_err=state;
+    else if(name=="dc7")dc7_err=state;
+    else if(name=="dc8")dc8_err=state;
+    else if(name=="dc9")dc8_err=state;
+
     else if(name=="cb")cb_err=state;
-    ui->pb_error_cleaner->setVisible(dc_err || cb_err);
+    ui->pb_error_cleaner->setVisible(dc_err || dc1_err || dc2_err || dc3_err || dc4_err || dc5_err ||dc6_err || dc7_err || dc8_err || dc9_err || cb_err);
+    ui->button_error->setVisible(cb_err);
+
 }
 
 
@@ -132,17 +136,27 @@ void MainWindow::on_ip_adress_2_editingFinished()
 void MainWindow::on_pb_error_cleaner_clicked()
 {
     ui->pb_error_cleaner->setVisible(false);
+    ui->button_error->setVisible(false);
     QString message ="t"+ui->ip_adress_2->text()+"81c00000000000000";
     emit send_command(message.toUtf8()+'\r');
-    dc->error_displayer=true;
-    cb->error_displayer=true;
+//    foreach (dc_panel* dc, dc_list) {
+//        dc->error_displayer=true;
+//    }
+//    cb->error_displayer=true;
 }
 
 
 void MainWindow::on_all_save_in_memory_clicked()
 {
-    ui->pb_error_cleaner->setVisible(false);
+//    ui->pb_error_cleaner->setVisible(false);
+
     QString message ="t"+ui->ip_adress_2->text()+"85200000000000000";
     emit send_command(message.toUtf8()+'\r');
+}
+
+
+void MainWindow::on_button_error_clicked()
+{
+    cb->error_displayer=true;
 }
 

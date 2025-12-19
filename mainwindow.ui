@@ -188,7 +188,14 @@ QPushButton::hover {
 </string>
              </property>
              <property name="text">
-              <string>Отчистить ошибки</string>
+              <string>Очистить ошибки</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="button_error">
+             <property name="text">
+              <string>Детали</string>
              </property>
             </widget>
            </item>
@@ -235,7 +242,7 @@ QPushButton::hover {
            </size>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="admin_page">
            <layout class="QVBoxLayout" name="verticalLayout_3">

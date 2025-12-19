@@ -16,7 +16,6 @@ SOURCES += \
     cb_panel.cpp \
     tcp_usb_connector.cpp \
     mainwindow.cpp \
-    tec_panel.cpp \
     user_panel.cpp
 
 HEADERS += \
@@ -25,14 +24,12 @@ HEADERS += \
     cb_panel.h \
     tcp_usb_connector.h \
     mainwindow.h \
-    tec_panel.h \
     user_panel.h
 
 FORMS += \
     dc_panel.ui \
     cb_panel.ui \
     mainwindow.ui \
-    tec_panel.ui \
     user_panel.ui
 
 # Default rules for deployment.

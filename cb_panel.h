@@ -21,7 +21,7 @@ public:
     QStringList errors_cb_list={"backward PD 0",
                                 "forward PD 0",
                                 "backward PD 1",
-                                "forward PD 1",
+                                "QBH fault",
                                 "backward PD 2",
                                 "forward PD 2",
                                 "ITERLOCK",
@@ -33,8 +33,6 @@ public slots:
     void key_catcher(QObject*);
     void internal_address_write(QString);
     void telemetry_call(QString);
-private slots:
-     void on_button_error_clicked();
 signals:
     void send_message_window(QString,QString);
     void send_command(QByteArray);

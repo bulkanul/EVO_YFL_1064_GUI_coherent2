@@ -1,7 +1,6 @@
 #include "dc_panel.h"
 #include "ui_cb_panel.h"
 #include "ui_dc_panel.h"
-
 #include "device_panel.h"
 #include "mainwindow.h"
 
@@ -24,7 +23,10 @@ dc_panel::dc_panel(QWidget *parent):
     connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
 
     ui->spin->installEventFilter(this);
+    ui->mode->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
+    ui->button_error->setVisible(false);
+    ui->label_error->setVisible(false);
     //    ID=7;
 }
 
@@ -103,6 +105,8 @@ void dc_panel::data_received_and_profed()
             indicate(nHex/10.0);
         }else if(raw_params[0].mid(5,2)=="99"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" A");
+        }else if(raw_params[0].mid(5,2)=="9E"){
+            ui->diff_pd_label->setText(QString::number(nHex/100.0,'d',2)+" V");
         }else if(raw_params[0].mid(5,2)=="94"){
             ui->spin->setMaximum(nHex/100.0);
             ui->curr_max_label->setText(QString::number(nHex/100.0,'d',2));
@@ -173,6 +177,7 @@ void dc_panel::on_on_off_button_clicked(bool checked)
     message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
     emit send_command(message.toUtf8()+'\r');
 }
+
 void dc_panel::telemetry_call(QString family)
 {
     if(count_no_responce>6){
@@ -187,14 +192,15 @@ void dc_panel::telemetry_call(QString family)
             first_call=false;
             emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
         }else{
-            if(count%5==0) emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%5==1) emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%5==2) emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%5==3) emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%5==4) emit send_command(QString("t"+internal_address+"89900"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-
-            }
-        qDebug()<<"call"<<family<<ID << count%4;
+            if(count%6==0) emit send_command(QString("t"+internal_address+"8A000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==1) emit send_command(QString("t"+internal_address+"89800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==2) emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==3) emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==4) emit send_command(QString("t"+internal_address+"89900"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==5) emit send_command(QString("t"+internal_address+"89E00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        }
+        qDebug()<<"call"<<family<<ID << count;
+        ui->id_label->setText(QString::number(ID));
     }
 
 }

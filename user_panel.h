@@ -31,6 +31,8 @@ private slots:
     void on_on_off_button_clicked(bool checked);
     void indicate(double);
 
+    void on_on_off_pilot_button_clicked(bool checked);
+
 signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);

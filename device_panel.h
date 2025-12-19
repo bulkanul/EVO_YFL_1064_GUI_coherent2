@@ -19,7 +19,7 @@ public:
     QTimer* tmr;
     bool key=true;
     bool connection_lost=true;
-    bool error_displayer=true;
+    bool error_displayer=false;
     bool first_status_cmd=true;
 
     bool first_pref_cmd=false;
@@ -71,7 +71,7 @@ signals:
     void send_command(QString,int,QString);
     void enter_event(QObject*);
     void sl_data_set(QString,QString);
-    void command_profed();
+    void command_proofed();
     void tool_clicked();
 
 protected:

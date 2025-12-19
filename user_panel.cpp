@@ -12,12 +12,9 @@ user_panel::user_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-//    tmr=new QTimer();
-//    tmr->setInterval(1300);
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     ui->spin->installEventFilter(this);
+    ui->calib->installEventFilter(this);
 //    ID=7;
 }
 user_panel::~user_panel()
@@ -44,7 +41,19 @@ void user_panel::key_catcher(QObject* key)
             QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
             message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
             emit send_command(message.toUtf8()+'\r');
-//            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
+        }else if(key->objectName() == "calib"){
+            QString message ="t";
+            message.append(internal_address);
+            message.append("823");
+            message.append("00");
+            message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+            message.append("00");
+            int value=ui->calib->value()*1000;
+            unsigned char *bytes = (unsigned char *)&value;
+            unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+            QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+            message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+            emit send_command(message.toUtf8()+'\r');
         }
     }
 }
@@ -62,25 +71,33 @@ void user_panel::data_received_and_profed()
         count_no_responce=0;
         enable_widget(true);
         if(raw_params[0].mid(5,2)=="91"){
-            ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" %");
+            if(raw_params[0].mid(11,2)=="00"){
+                ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" %");
+            }else if(raw_params[0].mid(11,2)=="01"){
+                ui->current_ld_label_2->setText(QString::number(nHex/100.0,'d',2)+" %");
+            }
         }else if(raw_params[0].mid(5,2)=="90"){
             ui->power_state_label->setText(nHex?"ON":"OFF");
             ui->on_off_button->setChecked(nHex);
-//        }else if(raw_params[0].mid(5,2)=="A2"){
-//            if(error_displayer){
-//                call_msg_box(pars_bits(nHex,errors_dc_list));
-//                error_displayer=false;
-//            }
-//            ui->button_error->setVisible(nHex!=0);
-//            ui->label_error->setVisible(nHex!=0);
-//            enable_widget(nHex==0);
+        }else if(raw_params[0].mid(5,2)=="9D"){
+            ui->pilot_state_label->setText(nHex?"ON":"OFF");
+            ui->on_off_pilot_button->setChecked(nHex);
+        }else if(raw_params[0].mid(5,2)=="A3"){
+            ui->koeffi_label->setText(QString::number(nHex/1000.0,'d',3));
+        }else if(raw_params[0].mid(5,2)=="A4"){
+            ui->ret_pow_label->setText(QString::number(nHex/100.0,'d',2)+"кВт");
+        }
+    }
+    if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==0){
+        if(raw_params[0].mid(5,2)=="9E"){
+            ui->diff_pd_label->setText(QString::number(nHex/100.0,'d',2)+" V");
         }
     }
 }
 
 void user_panel::indicate(double count)
 {
-    ui->indicator->setValue(int(count*10)-100);
+    ui->indicator->setValue(count);
 }
 
 void user_panel::on_on_off_button_clicked(bool checked)
@@ -99,6 +116,23 @@ void user_panel::on_on_off_button_clicked(bool checked)
     emit send_command(message.toUtf8()+'\r');
 }
 
+void user_panel::on_on_off_pilot_button_clicked(bool checked)
+{
+    QString message ="t";
+    message.append(internal_address);
+    message.append("81d");
+    message.append("00");
+    message.append(QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )));
+    message.append("00");
+    int value=checked;
+    unsigned char *bytes = (unsigned char *)&value;
+    unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
+    QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
+    message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
+    emit send_command(message.toUtf8()+'\r');
+}
+
+
 
 void user_panel::telemetry_call(QString family)
 {
@@ -114,9 +148,14 @@ void user_panel::telemetry_call(QString family)
 //            first_call=false;
 //            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 //        }else{
-            if(count%2==0)      emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%2==1) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            if(count%6==0)      emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==1) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==2) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%6==3) emit send_command(QString("t"+internal_address+"89d00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==4) emit send_command(QString("t"+internal_address+"8A300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%6==5) emit send_command(QString("t"+internal_address+"8A400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 //        }
             qDebug()<<"call"<<family<<ID << count;
     }
 }
+

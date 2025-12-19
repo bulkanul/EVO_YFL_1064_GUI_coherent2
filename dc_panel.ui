@@ -68,6 +68,18 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="id_label">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="horizontalSpacer_14">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -828,7 +840,7 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="label_32">
                <property name="minimumSize">
                 <size>
@@ -853,7 +865,7 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="3" column="1">
               <widget class="QLabel" name="temp_label">
                <property name="minimumSize">
                 <size>
@@ -879,7 +891,7 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_error">
                <property name="minimumSize">
                 <size>
@@ -904,14 +916,14 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="4" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
-                <string>Список</string>
+                <string>Детали</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="label_29">
                <property name="minimumSize">
                 <size>
@@ -939,7 +951,7 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="5" column="1">
               <widget class="QLabel" name="mode_label">
                <property name="minimumSize">
                 <size>
@@ -968,6 +980,57 @@ QProgressBar::chunk:disabled {
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_33">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Differential PD:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="diff_pd_label">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>0.0 V</string>
                </property>
               </widget>
              </item>

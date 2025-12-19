@@ -14,35 +14,27 @@ cb_panel::cb_panel(QWidget *parent):
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     label_list.append(ui->forward_label_0);
-
+    label_list.append(ui->backward_label_0);
     label_list.append(ui->forward_level_label_0);
-
+    label_list.append(ui->backward_level_label_0);
     label_list.append(ui->temp_label_0);
     label_list.append(ui->temp_label_1);
-
+    label_list.append(ui->temp_label_2);
+    label_list.append(ui->temp_level_label_0);
+    label_list.append(ui->temp_level_label_1);
+    label_list.append(ui->temp_level_label_2);
     ui->forward_treashold_0->installEventFilter(this);
-    ui->tec_temp_0->installEventFilter(this);
-    ui->tec_temp_1->installEventFilter(this);
-    ui->laser_level_temp_0->installEventFilter(this);
-
-    prefs.append(prefs_struct{-1,"Resistance at 25 °C",0,-1});
-    prefs.append(prefs_struct{-1,"Thermistor beta",0,-1});
-    prefs.append(prefs_struct{-1,"Max current HPLD 1000",1,-1});
-    prefs.append(prefs_struct{-1,"TEC temperature",1,-1});
-    prefs.append(prefs_struct{-1,"TEC state",0,-1});
-    prefs.append(prefs_struct{-1,"Fan temperature",1,-1});
-    prefs.append(prefs_struct{-1,"Overhreat temperature",1,-1});
-
-    prefs.append(prefs_struct{-1,"BW PD ",0,-1});
-    prefs.append(prefs_struct{-1,"TEC state",0,-1});
-    prefs.append(prefs_struct{-1,"TEC state",0,-1});
-
+    ui->backward_treashold_0->installEventFilter(this);
+    ui->temp_level_0->installEventFilter(this);
+    ui->temp_level_1->installEventFilter(this);
+    ui->temp_level_2->installEventFilter(this);
 }
 
 cb_panel::~cb_panel()
 {
     delete ui;
 }
+
 
 void cb_panel::telemetry_call(QString family)
 {
@@ -58,36 +50,41 @@ void cb_panel::telemetry_call(QString family)
 //            first_call=false;
 //            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 //        }else{
-                 if(count%6==0) emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%6==1) emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            if(count%11==0)      emit send_command(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==1) emit send_command(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==2) emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==3) emit send_command(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==4) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==5) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%11==6) emit send_command(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
 
-            else if(count%6==2) emit send_command(QString("t"+internal_address+"8A800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%6==3) emit send_command(QString("t"+internal_address+"8A800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
-            else if(count%6==4) emit send_command(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-            else if(count%6==5) emit send_command(QString("t"+internal_address+"89F00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==7) emit send_command(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+
+            else if(count%11==8) emit send_command(QString("t"+internal_address+"89F00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+            else if(count%11==9) emit send_command(QString("t"+internal_address+"89F00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+            else if(count%11==10)emit send_command(QString("t"+internal_address+"89F00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0200000000").toUtf8()+'\r');
+
             qDebug()<<"call"<<family<<ID << count;
 //        }
     }
-}
-
-void cb_panel::on_button_error_clicked()
-{
-    error_displayer=true;
 }
 
 void cb_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on cb "+QString::number(ID)+"?",
+                                        "Send command on dc "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         QDoubleSpinBox *target = static_cast<QDoubleSpinBox*>(key);
         QString command;
-        if(target->objectName().contains("laser_level_temp")){
-            command="1F";
+        int value;
+        if(key->objectName().contains("temp_level")){
+           command="1F";
+            value=target->value()*10;
         }else{
-            command=target->objectName().contains("tec")?"28":"1A";
+           command=key->objectName().contains("forward")?"1A":"16";
+            value=target->value()*100;
         }
         QString message ="t";
         message.append(internal_address);
@@ -97,7 +94,6 @@ void cb_panel::key_catcher(QObject* key)
         message.append("00");
         qDebug()<<"mess"<<key->objectName().right(1);
         message.append(QString("%1").arg(key->objectName().right(1).toInt(), 2, 16, QLatin1Char( '0' )));
-        int value=target->value()*(target->objectName().contains("laser_level_temp")?10:100);
         unsigned char *bytes = (unsigned char *)&value;
         unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
@@ -127,12 +123,16 @@ void cb_panel::data_received_and_profed()
             emit call_ui_buttons("cb",nHex!=0);
         }else if(raw_params[0].mid(5,2)=="9B"){
             label_list[0]->setText(QString::number(nHex/100.0)+"");
-        }else if(raw_params[0].mid(5,2)=="9A"){
+        }else if(raw_params[0].mid(5,2)=="97"){
             label_list[1]->setText(QString::number(nHex/100.0)+"");
-        }else if(raw_params[0].mid(5,2)=="A8"){
-            label_list[2+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/100.0)+"");
+        }else if(raw_params[0].mid(5,2)=="9A"){
+            label_list[2]->setText(QString::number(nHex/100.0)+"");
+        }else if(raw_params[0].mid(5,2)=="96"){
+            label_list[3]->setText(QString::number(nHex/100.0)+"");
+        }else if(raw_params[0].mid(5,2)=="92"){
+            label_list[4+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/10.0)+"");
         }else if(raw_params[0].mid(5,2)=="9F"){
-            ui->temp_laser_level_label_0->setText(QString::number(nHex/10.0,'d',2)+" C");
+            label_list[7+raw_params[0].mid(11,2).toInt()]->setText(QString::number(nHex/10.0)+"");
         }
     }
 }
