@@ -4,7 +4,6 @@
 #include <cb_panel.h>
 #include <dc_panel.h>
 #include "device_panel.h"
-#include "tec_panel.h"
 #include <tcp_usb_connector.h>
 #include <user_panel.h>
 QT_BEGIN_NAMESPACE
@@ -18,12 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     dc_panel *dc;
-    tec_panel *tec1;
-    tec_panel *tec2;
+    dc_panel *dc1;
     cb_panel *cb;
     user_panel *user;
     tcp_usb_connector *conn;
     bool dc_err=false;
+    bool dc1_err=false;
     bool cb_err=false;
 signals:
     void send_connection_type(QString,int);

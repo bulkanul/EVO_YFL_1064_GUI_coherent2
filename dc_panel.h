@@ -4,7 +4,18 @@
 #include <QWidget>
 #include <device_panel.h>
 
+#define ON_OFF_LASER 16
+#define CURRENT_LASER 17
+#define TEMP_LASER 18
+#define VOLT_IN_LASER 20
+#define VOLT_OUT_LASER 38
+#define CLR_ERROR_LASER 47
+#define ERROR_LASER 48
+#define MAX_CURR_LASER 37
+#define SAVE_LASER 51
+#define MODE_LASER 36
 
+#define CALL_SUFFIX 128
 namespace Ui {
 class dc_panel;
 }
@@ -21,7 +32,6 @@ public:
     bool connection_lost=true;
     QString internal_address;
     bool first_call=true;
-    QString family="dc";
     QStringList errors_dc_list={"flag_REBOOTED",
                                 "flag_ALARM_INTERLOCK",
                                 "flag_Overtemp",

@@ -82,13 +82,18 @@ QStringList device_panel::double_localizator(QByteArray data){
 
 void device_panel::data_received(QStringList message)
 {
-//    qDebug()<<"data_received call"<<message<<ID<<family<<key;
+    qDebug()<<"data_received call dev"<<message<<ID<<family<<key;
     if(message[0].mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
         raw_params=message;
         count_no_responce=0;
-        emit command_profed();
+        emit command_proofed();
     }
-
+    if(raw_params.length()>0)if(raw_params[0].mid(5,2)=="A5" ||family=="cd"){
+        raw_params=message;
+        count_no_responce=0;
+        emit command_proofed();
+        qDebug()<<"data_received call cd"<<message<<ID<<family<<key;
+    }
 //    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
 //        raw_params=message;
 //        if(silence_count<=0){

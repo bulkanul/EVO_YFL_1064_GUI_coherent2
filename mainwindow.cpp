@@ -10,7 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
     conn=new tcp_usb_connector;
     conn->crypto_version_controller=false;
     connect(this,SIGNAL(send_connection_type(QString,int)),conn, SLOT(init_connection(QString,int)));
-
+//    connect(conn,SIGNAL(connection_state(int)),this,SLOT(display_connection(int)));
+//    connect(conn,SIGNAL(version_failed()),this,SLOT(display_version_error()));
+//    connect(this, SIGNAL(send_ver_command(QString)),conn, SLOT(data_ver_write(QString)));
+//    connect(this, SIGNAL(search_script(int)),conn, SLOT(start_search(int)));
+//    connect(conn, SIGNAL(send_device_list(QList<int>)),this, SLOT(show_dev_list(QList<int>)));
     connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
 
     dc = new dc_panel(this);
@@ -20,25 +24,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dc, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
     connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(dc);
-    dc->ID=0;
+    dc->ID=0; 
 
-    tec1 = new tec_panel(this);
-    connect(tec1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec1, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec1, SLOT(data_received(QStringList)));
-    connect(tec1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec1, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec1);
-    tec1->ID=0;
-
-    tec2 = new tec_panel(this);
-    connect(tec2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec2, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec2, SLOT(data_received(QStringList)));
-    connect(tec2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec2, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec2);
-    tec2->ID=1;
+    dc1 = new dc_panel(this);
+    connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
+    connect(dc1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc1, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc1);
+    dc1->ID=1;
 
     cb = new cb_panel(this);
     cb->ID=0;
@@ -56,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(get_command(QString)),user, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(user);
     user->ID=0;
+
+    connect(this, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+
 
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
@@ -81,8 +79,9 @@ MainWindow::~MainWindow()
 void MainWindow::update_ui(QString name,bool state)
 {
     if(name=="dc0")dc_err=state;
+    else if(name=="dc1")dc1_err=state;
     else if(name=="cb")cb_err=state;
-    ui->pb_error_cleaner->setVisible(dc_err || cb_err);
+    ui->pb_error_cleaner->setVisible(dc_err || dc1_err || cb_err);
 }
 
 
@@ -135,6 +134,7 @@ void MainWindow::on_pb_error_cleaner_clicked()
     QString message ="t"+ui->ip_adress_2->text()+"81c00000000000000";
     emit send_command(message.toUtf8()+'\r');
     dc->error_displayer=true;
+    dc1->error_displayer=true;
     cb->error_displayer=true;
 }
 

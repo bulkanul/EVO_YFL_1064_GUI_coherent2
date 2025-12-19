@@ -19,7 +19,6 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QString internal_address;
-    QString family="usr";
 
 public slots:
     void key_catcher(QObject*);

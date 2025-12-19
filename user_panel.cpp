@@ -19,6 +19,7 @@ user_panel::user_panel(QWidget *parent) :
     connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
     ui->spin->installEventFilter(this);
 //    ID=7;
+    family="usr";
 }
 user_panel::~user_panel()
 {

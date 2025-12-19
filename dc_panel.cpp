@@ -1,7 +1,6 @@
 #include "dc_panel.h"
 #include "ui_cb_panel.h"
 #include "ui_dc_panel.h"
-
 #include "device_panel.h"
 #include "mainwindow.h"
 
@@ -26,6 +25,7 @@ dc_panel::dc_panel(QWidget *parent):
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
     //    ID=7;
+    family="dc";
 }
 
 dc_panel::~dc_panel()
@@ -99,7 +99,7 @@ void dc_panel::data_received_and_profed()
         enable_widget(true /*&& raw_params[0].mid(5,2)!="A2"*/);
         qDebug()<<raw_params[0].mid(5,2);
         if(raw_params[0].mid(5,2)=="A0"){
-            ui->temp_label->setText(QString::number(nHex/10.0,'d',2)+" C");
+            ui->temp_label->setText(QString::number(nHex/10.0,'d',1)+" C");
             indicate(nHex/10.0);
         }else if(raw_params[0].mid(5,2)=="99"){
             ui->current_ld_label->setText(QString::number(nHex/100.0,'d',2)+" A");
@@ -173,6 +173,7 @@ void dc_panel::on_on_off_button_clicked(bool checked)
     message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
     emit send_command(message.toUtf8()+'\r');
 }
+
 void dc_panel::telemetry_call(QString family)
 {
     if(count_no_responce>6){
@@ -192,9 +193,8 @@ void dc_panel::telemetry_call(QString family)
             else if(count%5==2) emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
             else if(count%5==3) emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
             else if(count%5==4) emit send_command(QString("t"+internal_address+"89900"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-
-            }
-        qDebug()<<"call"<<family<<ID << count%4;
+        }
+        qDebug()<<"call"<<family<<ID << count;
     }
 
 }

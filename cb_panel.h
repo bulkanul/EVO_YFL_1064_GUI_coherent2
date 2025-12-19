@@ -15,17 +15,17 @@ public:
     QStringList panel_state;
     QTimer* tmr;
     int auto_call=6;
+    int max_curr_call=0;
     bool connection_lost=true;
     QString internal_address;
-    QString family="cd";
     QStringList errors_cb_list={"backward PD 0",
                                 "forward PD 0",
                                 "backward PD 1",
                                 "forward PD 1",
-                                "backward PD 2",
-                                "forward PD 2",
                                 "ITERLOCK",
-                                "Internal ERROR" };
+                                "Internal ERROR",
+                                "Temperature 1",
+                                "Temperature 2" };
 //    QList<QDoubleSpinBox*> dsb_list;
     QList<QLabel*> label_list;
 public slots:
@@ -33,13 +33,14 @@ public slots:
     void key_catcher(QObject*);
     void internal_address_write(QString);
     void telemetry_call(QString);
-private slots:
-     void on_button_error_clicked();
 signals:
     void send_message_window(QString,QString);
     void send_command(QByteArray);
     void call_ui_buttons(QString,bool);
-private:
+   private slots:
+    void on_button_error_clicked();
+
+   private:
     Ui::cb_panel *ui;
 };
 #endif // DC_PANEL_H
