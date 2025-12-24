@@ -261,8 +261,8 @@ QPushButton::hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1015</width>
-                 <height>781</height>
+                 <width>844</width>
+                 <height>66</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -463,8 +463,8 @@ QPushButton::hover {
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset>
-                      <normaloff>images/refresh.png</normaloff>images/refresh.png</iconset>
+                     <iconset resource="res.qrc">
+                      <normaloff>:/images/images/refresh.png</normaloff>:/images/images/refresh.png</iconset>
                     </property>
                    </widget>
                   </item>
@@ -615,6 +615,8 @@ QPushButton::hover {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

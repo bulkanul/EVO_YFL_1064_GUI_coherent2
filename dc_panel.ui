@@ -63,7 +63,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Power DCDC</string>
+           <string>HPLD 1000</string>
           </property>
          </widget>
         </item>

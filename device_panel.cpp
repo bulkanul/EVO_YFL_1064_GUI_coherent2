@@ -88,6 +88,11 @@ void device_panel::data_received(QStringList message)
         count_no_responce=0;
         emit command_profed();
     }
+        if(message[0].mid(5,2)== "A5" || family=="cb"){
+        raw_params=message;
+        count_no_responce=0;
+        emit command_profed();
+    }
 
 //    if((param_check(message,2).toInt()==ID && param_check(message,1)==family) || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
 //        raw_params=message;
@@ -212,7 +217,8 @@ void device_panel::send_pref()
        first=true;
        message+=QString::number(spiner->value(),'d',4);
     }
-    emit sl_data_set("lsconf",ID,message);
+    emit send_command(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+
 }
 
 QString device_panel::pars_bits(unsigned char mess,QStringList list){

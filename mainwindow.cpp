@@ -21,6 +21,17 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(get_command(QString)),dc, SLOT(telemetry_call(QString)));
     ui->groupBox->layout()->addWidget(dc);
     dc->ID=0;
+    dc->name_section()->setText("HPLD 1000 0");
+
+    dc1 = new dc_panel(this);
+    connect(dc1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc1, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc1, SLOT(data_received(QStringList)));
+    connect(dc1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc1, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc1);
+    dc1->ID=1;
+    dc1->name_section()->setText("HPLD 1000 1");
 
     tec1 = new tec_panel(this);
     connect(tec1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));

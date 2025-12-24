@@ -20,7 +20,7 @@ dc_panel::dc_panel(QWidget *parent):
 //    tmr->setInterval(1300);
 //    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
 //    tmr->start();
-    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
+    connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
     connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
 
     ui->spin->installEventFilter(this);
@@ -32,6 +32,8 @@ dc_panel::~dc_panel()
 {
     delete ui;
 }
+
+QLabel* dc_panel::name_section() const { return ui->laser_name_label; }
 
 void dc_panel::key_catcher(QObject* key)
 {

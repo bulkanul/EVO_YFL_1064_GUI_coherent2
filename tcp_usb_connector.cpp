@@ -167,7 +167,7 @@ void tcp_usb_connector::data_write(QString command,int number,QString data){
 
 void tcp_usb_connector::raw_command_write(QByteArray cmd)
 {
-    if(logg)qDebug()<<"fifo add raw "<<pref_identificator<<cmd;
+    qDebug()<<"fifo add raw "<<pref_identificator<<cmd;
     crupto_fifo_command.append(cmd);
 }
 
@@ -304,13 +304,6 @@ void tcp_usb_connector::data_received(){
             first_set_write=false;
         }
         count=0;
-        if(params(0)=="lrvers"){
-            if(!params(1).contains(board_identificator)){
-                emit version_error(board_identificator+" != "+params(1));
-            }else{
-                version_protection=false;
-            }
-        }
         if(logg)qDebug()<<"sl_data_readed "<<pref_identificator<<raw_params;
         if(crypto_version_controller){
             if(!version_protection){

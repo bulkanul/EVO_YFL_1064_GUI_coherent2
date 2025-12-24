@@ -33,7 +33,7 @@ public:
 
     QString serial="";
     bool first_set_write=true;
-    bool logg=true;
+    bool logg=false;
     bool stop_search=false;
 
     bool start_finding=false;

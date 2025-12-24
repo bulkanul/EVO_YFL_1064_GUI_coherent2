@@ -15,7 +15,7 @@ class dc_panel : public device_panel
 public:
     explicit dc_panel(QWidget *parent = nullptr);
     ~dc_panel();
-
+    QLabel* name_section() const;
     QTimer* tmr;
     int auto_call=6;
     bool connection_lost=true;

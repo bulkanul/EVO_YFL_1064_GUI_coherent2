@@ -17,7 +17,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    dc_panel *dc;
+    dc_panel *dc,*dc1;
     tec_panel *tec1;
     tec_panel *tec2;
     cb_panel *cb;

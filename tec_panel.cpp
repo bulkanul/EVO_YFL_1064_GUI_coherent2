@@ -16,7 +16,7 @@ tec_panel::tec_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
+    connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
 
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Сoefficient KP",0,-1});

@@ -26,6 +26,8 @@ public:
     bool first_pref=true;
     bool first_calib=true;
 
+    QString internal_address;
+
     QStringList raw_params;
     QByteArray very_raw_params;
     QStringList double_localizator(QByteArray data);
@@ -69,6 +71,7 @@ signals:
     void sig_dis_enabled(QWidget*,bool);
     void send_message_window(QString,QString);
     void send_command(QString,int,QString);
+    void send_command(QByteArray);
     void enter_event(QObject*);
     void sl_data_set(QString,QString);
     void command_profed();

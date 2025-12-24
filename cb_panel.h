@@ -16,7 +16,9 @@ public:
     QTimer* tmr;
     int auto_call=6;
     bool connection_lost=true;
-    QString internal_address;
+    QStringList commands;
+    QStringList commands_send;
+    QStringList command_setter;
     QString family="cd";
     QStringList errors_cb_list={"backward PD 0",
                                 "forward PD 0",
@@ -27,19 +29,19 @@ public:
                                 "ITERLOCK",
                                 "Internal ERROR" };
 //    QList<QDoubleSpinBox*> dsb_list;
-    QList<QLabel*> label_list;
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);
     void internal_address_write(QString);
     void telemetry_call(QString);
+    void get_pref();
 private slots:
      void on_button_error_clicked();
 signals:
     void send_message_window(QString,QString);
-    void send_command(QByteArray);
     void call_ui_buttons(QString,bool);
 private:
+    QString prepare_str(int value);
     Ui::cb_panel *ui;
 };
 #endif // DC_PANEL_H
