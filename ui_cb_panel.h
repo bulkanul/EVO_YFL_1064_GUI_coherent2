@@ -440,7 +440,7 @@ public:
         tec_temp_0->setFont(font5);
         tec_temp_0->setFocusPolicy(Qt::ClickFocus);
         tec_temp_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        tec_temp_0->setDecimals(1);
+        tec_temp_0->setDecimals(2);
         tec_temp_0->setMinimum(0.000000000000000);
         tec_temp_0->setMaximum(150.000000000000000);
         tec_temp_0->setSingleStep(0.100000000000000);
@@ -476,7 +476,7 @@ public:
         tec_temp_1->setFont(font5);
         tec_temp_1->setFocusPolicy(Qt::ClickFocus);
         tec_temp_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        tec_temp_1->setDecimals(1);
+        tec_temp_1->setDecimals(2);
         tec_temp_1->setMinimum(0.000000000000000);
         tec_temp_1->setMaximum(150.000000000000000);
         tec_temp_1->setSingleStep(0.100000000000000);
@@ -720,7 +720,7 @@ public:
         therm_vref->setFont(font5);
         therm_vref->setFocusPolicy(Qt::ClickFocus);
         therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        therm_vref->setDecimals(2);
+        therm_vref->setDecimals(3);
         therm_vref->setMinimum(0.000000000000000);
         therm_vref->setMaximum(3.000000000000000);
         therm_vref->setSingleStep(0.100000000000000);

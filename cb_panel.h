@@ -16,10 +16,10 @@ public:
     QTimer* tmr;
     int auto_call=6;
     bool connection_lost=true;
+    QList <QLabel*> labels;
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QString family="cd";
     QStringList errors_cb_list={"backward PD 0",
                                 "forward PD 0",
                                 "backward PD 1",
