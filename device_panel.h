@@ -19,7 +19,7 @@ public:
     QTimer* tmr;
     bool key=true;
     bool connection_lost=true;
-    bool error_displayer=true;
+    bool error_displayer=false;
     bool first_status_cmd=true;
 
     bool first_pref_cmd=false;

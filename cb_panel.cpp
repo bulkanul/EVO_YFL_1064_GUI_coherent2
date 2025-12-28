@@ -191,7 +191,7 @@ void cb_panel::data_received_and_profed()
         if(raw_params[0].mid(5,2)=="95"){
             if(error_displayer){
                 call_msg_box(pars_bits(nHex,errors_cb_list));
-                error_displayer=false;
+
             }
             emit call_ui_buttons("cb",nHex!=0);
 

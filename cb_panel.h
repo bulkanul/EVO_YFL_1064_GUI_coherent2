@@ -20,15 +20,14 @@ public:
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QStringList errors_cb_list={"backward PD 0",
-                                "forward PD 0",
-                                "backward PD 1",
-                                "forward PD 1",
-                                "backward PD 2",
-                                "forward PD 2",
-                                "ITERLOCK",
+    QStringList errors_cb_list={"sys overheat",
+                                "pd1 forward under",
+                                "alarm pd1",
+                                "pd2 backward over",
+                                "alarm pd 2",
+                                "Internal ERROR",
+                                "Internal ERROR",
                                 "Internal ERROR" };
-//    QList<QDoubleSpinBox*> dsb_list;
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);
