@@ -28,7 +28,6 @@ public slots:
 
 private slots:
     void on_on_off_button_clicked(bool checked);
-    void indicate(double);
 
 signals:
     void sig_dis_enabled(QWidget*,bool);

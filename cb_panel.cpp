@@ -40,7 +40,6 @@ cb_panel::cb_panel(QWidget *parent):
     ui->backward_treashold_1->installEventFilter(this);
 
     ui->temp_level_0->installEventFilter(this);
-    ui->temp_level_1->installEventFilter(this);
 
     ui->curr_lvl_0->installEventFilter(this);
     ui->curr_lvl_1->installEventFilter(this);
