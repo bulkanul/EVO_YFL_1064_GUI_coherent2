@@ -28,6 +28,17 @@ public:
                                 "Internal ERROR",
                                 "Internal ERROR",
                                 "Internal ERROR" };
+    QStringList errors_dc_list={"flag_REBOOTED",
+                                "flag_ALARM_INTERLOCK",
+                                "flag_Overtemp",
+                                "flag_OverCurrent",
+                                "flag_UnderVoltage_IN",
+                                "flag_OverVoltage_IN",
+                                "flag_UnderVoltage_OUT",
+                                "flag_OverCurrent_IND" };
+    uint cbErrorHex=0;
+    uint dc1ErrorHex=0;
+    uint dc2ErrorHex=0;
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);

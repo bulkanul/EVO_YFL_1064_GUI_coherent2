@@ -25,6 +25,8 @@ dc_panel::dc_panel(QWidget *parent):
 
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
+    ui->button_error->setVisible(false);
+    ui->label_error->setVisible(false);
     //    ID=7;
 }
 
@@ -118,13 +120,13 @@ void dc_panel::data_received_and_profed()
         }else if(raw_params[0].mid(5,2)=="A1"){
             ui->mode_label->setText(ui->mode->itemText(nHex));
         }else if(raw_params[0].mid(5,2)=="A2"){
-            if(error_displayer){
-                call_msg_box(pars_bits(nHex,errors_dc_list));
-                error_displayer=false;
-            }
-            emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
-            ui->button_error->setVisible(nHex!=0);
-            ui->label_error->setVisible(nHex!=0);
+            // if(error_displayer){
+            //     call_msg_box(pars_bits(nHex,errors_dc_list));
+            //     error_displayer=false;
+            // }
+            // emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
+            // ui->button_error->setVisible(nHex!=0);
+            // ui->label_error->setVisible(nHex!=0);
 //            enable_widget(nHex==0);
         }
     }

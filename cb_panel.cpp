@@ -189,12 +189,25 @@ void cb_panel::data_received_and_profed()
         count_no_responce=0;
         enable_widget(true);
         if(raw_params[0].mid(5,2)=="95"){
+          cbErrorHex=nHex;
             if(error_displayer){
-                call_msg_box(pars_bits(nHex,errors_cb_list));
-
+                call_msg_box(pars_bits(dc1ErrorHex,errors_dc_list),pars_bits(dc2ErrorHex,errors_dc_list),pars_bits(cbErrorHex,errors_cb_list));
             }
-            emit call_ui_buttons("cb",nHex!=0);
-
+            emit call_ui_buttons("cb",cbErrorHex!=0||dc1ErrorHex!=0);
+            ui->button_error->setVisible(cbErrorHex!=0||dc1ErrorHex!=0);
+            ui->label_error->setVisible(cbErrorHex!=0||dc1ErrorHex!=0);
+        }else if(raw_params[0].mid(5,2)=="A2"){
+          if(raw_params[0].mid(9,2)=="01"){
+            dc2ErrorHex=nHex;
+          }else{
+            dc1ErrorHex=nHex;
+          }
+            if(error_displayer){
+                call_msg_box(pars_bits(dc1ErrorHex,errors_dc_list),pars_bits(dc2ErrorHex,errors_dc_list),pars_bits(cbErrorHex,errors_cb_list));
+            }
+            emit call_ui_buttons("dc"+QString::number(ID),cbErrorHex!=0||dc1ErrorHex!=0);
+            ui->button_error->setVisible(cbErrorHex!=0||dc1ErrorHex!=0);
+            ui->label_error->setVisible(cbErrorHex!=0||dc1ErrorHex!=0);
         }else if(raw_params[0].mid(5,2)=="A8"){
           if(raw_params[0].mid(9,2)=="00"){
             if(ui->tec_temp_0_label->text()=="N/A")ui->tec_temp_0->setValue(nHex/100.0);

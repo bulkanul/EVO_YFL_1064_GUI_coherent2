@@ -207,12 +207,19 @@ QString device_panel::pars_bits(unsigned char mess,QStringList list){
     return answer;
 }
 
-void device_panel::call_msg_box(QString msg){
-    if(error_displayer && msg!=""){
+void device_panel::call_msg_box(QString msg1,QString msg2,QString msg3){
+    if(error_displayer && (msg1!="" || msg2!="" || msg3!="")){
         error_displayer=false;
 
         QMessageBox *mesg;
-        mesg = new QMessageBox(QMessageBox::Information,family+" Ошибка", msg);
+        QString mesage;
+        if(msg1!=""){mesage+="HPLD 1000 0"; mesage+='\n'+ msg1; mesage+='\n';}
+        qDebug()<<"mesage1"<<msg1;
+        if(msg2!=""){mesage+="HPLD 1000 1"; mesage+='\n'+ msg2; mesage+='\n';}
+        qDebug()<<"mesage2"<<msg2;
+        if(msg3!=""){mesage+="cb 0"; mesage+='\n'+ msg3; mesage+='\n';}
+        qDebug()<<"mesage3"<<msg3;
+        mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
     }

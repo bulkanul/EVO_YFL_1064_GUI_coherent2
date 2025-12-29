@@ -94,8 +94,8 @@ public:
     QLabel *volt_amp_ext_label;
     QLabel *label_55;
     QLabel *over_temp_label;
-    QLabel *label_50;
     QPushButton *button_error;
+    QLabel *label_error;
     QSpacerItem *verticalSpacer;
     QGroupBox *groupBox_16;
     QHBoxLayout *horizontalLayout_2;
@@ -657,18 +657,18 @@ public:
 
         formLayout->setWidget(10, QFormLayout::FieldRole, over_temp_label);
 
-        label_50 = new QLabel(ns_widget);
-        label_50->setObjectName("label_50");
-        label_50->setMinimumSize(QSize(120, 0));
-        label_50->setMaximumSize(QSize(120, 16777215));
-        label_50->setFont(font4);
-
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_50);
-
         button_error = new QPushButton(ns_widget);
         button_error->setObjectName("button_error");
 
         formLayout->setWidget(11, QFormLayout::FieldRole, button_error);
+
+        label_error = new QLabel(ns_widget);
+        label_error->setObjectName("label_error");
+        label_error->setMinimumSize(QSize(120, 0));
+        label_error->setMaximumSize(QSize(120, 16777215));
+        label_error->setFont(font4);
+
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_error);
 
 
         verticalLayout_16->addLayout(formLayout);
@@ -888,8 +888,8 @@ public:
         volt_amp_ext_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_55->setText(QCoreApplication::translate("cb_panel", "Overheat temp:", nullptr));
         over_temp_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_50->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
-        button_error->setText(QCoreApplication::translate("cb_panel", "List", nullptr));
+        button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
         label_29->setText(QCoreApplication::translate("cb_panel", "Forward", nullptr));
         forward_treashold->setSuffix(QString());

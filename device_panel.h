@@ -60,7 +60,7 @@ public slots:
     void enable_widget(bool);
 
     QString pars_bits(unsigned char mess,QStringList);
-    void call_msg_box(QString);
+    void call_msg_box(QString,QString,QString);
     void silence_counter(int);
 
 private slots:
