@@ -250,7 +250,12 @@ void cb_panel::data_received_and_profed()
           qDebug()<<"else"<<raw_params[0].mid(5,2).toInt(&ok,16)<<raw_params[0];
           if(raw_params[0].mid(5,2).toInt(&ok,16)<0x80){
             quint32 value = raw_params[0].mid(5,2).toInt(&ok,16)+0x80;
-            emit send_command(raw_params[0].replace(5,2,QString::number(value, 16).toUpper()).toUtf8()+'\r');
+            QString command=raw_params[0];
+            command.replace(5,2,QString::number(value, 16).toUpper());
+            value = raw_params[0].mid(2,2).toInt(&ok,16);
+            command.replace(2,2,QString::number(raw_params[0].mid(7,2).toInt(&ok,16), 16).toUpper());
+            command.replace(7,2,QString::number(value, 16).toUpper());
+            emit send_command(command.toUtf8()+'\r');
             qDebug()<<"mess cb echo else"<<raw_params[0]<<raw_params[0].mid(5,2);
           }
         }
