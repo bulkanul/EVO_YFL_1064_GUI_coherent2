@@ -76,6 +76,10 @@ public:
     QLabel *tec_temp_0_label;
     QLabel *label_49;
     QLabel *tec_temp_1_label;
+    QLabel *label_50;
+    QLabel *cur_temp_0;
+    QLabel *label_56;
+    QLabel *cur_temp_1;
     QLabel *label_35;
     QLabel *hpld_curr_label_0;
     QLabel *label_36;
@@ -94,8 +98,13 @@ public:
     QLabel *volt_amp_ext_label;
     QLabel *label_55;
     QLabel *over_temp_label;
-    QPushButton *button_error;
+    QLabel *label_40;
+    QLabel *pd_forward;
+    QLabel *label_41;
+    QLabel *pd_backward;
     QLabel *label_error;
+    QPushButton *button_error;
+    QFrame *line_2;
     QSpacerItem *verticalSpacer;
     QGroupBox *groupBox_16;
     QHBoxLayout *horizontalLayout_2;
@@ -119,7 +128,7 @@ public:
     {
         if (cb_panel->objectName().isEmpty())
             cb_panel->setObjectName("cb_panel");
-        cb_panel->resize(1003, 433);
+        cb_panel->resize(1003, 553);
         verticalLayout_2 = new QVBoxLayout(cb_panel);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -190,7 +199,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         label_24->setFont(font1);
-        label_24->setAlignment(Qt::AlignCenter);
+        label_24->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_29->addWidget(label_24);
 
@@ -208,13 +217,13 @@ public:
         QFont font2;
         font2.setPointSize(13);
         hpld_curr_0->setFont(font2);
-        hpld_curr_0->setFocusPolicy(Qt::ClickFocus);
+        hpld_curr_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         hpld_curr_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         hpld_curr_0->setDecimals(2);
         hpld_curr_0->setMinimum(0.000000000000000);
         hpld_curr_0->setMaximum(26.000000000000000);
         hpld_curr_0->setSingleStep(0.100000000000000);
-        hpld_curr_0->setStepType(QAbstractSpinBox::DefaultStepType);
+        hpld_curr_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         hpld_curr_0->setValue(0.000000000000000);
 
         horizontalLayout_17->addWidget(hpld_curr_0);
@@ -231,7 +240,7 @@ public:
         label_30->setObjectName("label_30");
         label_30->setMinimumSize(QSize(0, 0));
         label_30->setFont(font1);
-        label_30->setAlignment(Qt::AlignCenter);
+        label_30->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_34->addWidget(label_30);
 
@@ -244,13 +253,13 @@ public:
         hpld_curr_1->setMinimumSize(QSize(50, 0));
         hpld_curr_1->setMaximumSize(QSize(16777215, 16777215));
         hpld_curr_1->setFont(font2);
-        hpld_curr_1->setFocusPolicy(Qt::ClickFocus);
+        hpld_curr_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         hpld_curr_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         hpld_curr_1->setDecimals(2);
         hpld_curr_1->setMinimum(0.000000000000000);
         hpld_curr_1->setMaximum(26.000000000000000);
         hpld_curr_1->setSingleStep(0.100000000000000);
-        hpld_curr_1->setStepType(QAbstractSpinBox::DefaultStepType);
+        hpld_curr_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         hpld_curr_1->setValue(0.000000000000000);
 
         horizontalLayout_22->addWidget(hpld_curr_1);
@@ -279,7 +288,7 @@ public:
         label_25->setObjectName("label_25");
         label_25->setMinimumSize(QSize(0, 0));
         label_25->setFont(font1);
-        label_25->setAlignment(Qt::AlignCenter);
+        label_25->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_32->addWidget(label_25);
 
@@ -292,13 +301,13 @@ public:
         tec_temp_0->setMinimumSize(QSize(50, 0));
         tec_temp_0->setMaximumSize(QSize(16777215, 16777215));
         tec_temp_0->setFont(font2);
-        tec_temp_0->setFocusPolicy(Qt::ClickFocus);
+        tec_temp_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         tec_temp_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         tec_temp_0->setDecimals(2);
         tec_temp_0->setMinimum(0.000000000000000);
         tec_temp_0->setMaximum(150.000000000000000);
         tec_temp_0->setSingleStep(0.100000000000000);
-        tec_temp_0->setStepType(QAbstractSpinBox::DefaultStepType);
+        tec_temp_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         tec_temp_0->setValue(0.000000000000000);
 
         horizontalLayout_18->addWidget(tec_temp_0);
@@ -315,7 +324,7 @@ public:
         label_26->setObjectName("label_26");
         label_26->setMinimumSize(QSize(0, 0));
         label_26->setFont(font1);
-        label_26->setAlignment(Qt::AlignCenter);
+        label_26->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_33->addWidget(label_26);
 
@@ -328,13 +337,13 @@ public:
         tec_temp_1->setMinimumSize(QSize(50, 0));
         tec_temp_1->setMaximumSize(QSize(16777215, 16777215));
         tec_temp_1->setFont(font2);
-        tec_temp_1->setFocusPolicy(Qt::ClickFocus);
+        tec_temp_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         tec_temp_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         tec_temp_1->setDecimals(2);
         tec_temp_1->setMinimum(0.000000000000000);
         tec_temp_1->setMaximum(150.000000000000000);
         tec_temp_1->setSingleStep(0.100000000000000);
-        tec_temp_1->setStepType(QAbstractSpinBox::DefaultStepType);
+        tec_temp_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         tec_temp_1->setValue(0.000000000000000);
 
         horizontalLayout_19->addWidget(tec_temp_1);
@@ -364,7 +373,7 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         label = new QLabel(groupBox_14);
         label->setObjectName("label");
-        label->setAlignment(Qt::AlignCenter);
+        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout->addWidget(label);
 
@@ -375,13 +384,13 @@ public:
         therm_resis->setMinimumSize(QSize(50, 0));
         therm_resis->setMaximumSize(QSize(16777215, 16777215));
         therm_resis->setFont(font2);
-        therm_resis->setFocusPolicy(Qt::ClickFocus);
+        therm_resis->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         therm_resis->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         therm_resis->setDecimals(0);
         therm_resis->setMinimum(0.000000000000000);
         therm_resis->setMaximum(100000.000000000000000);
         therm_resis->setSingleStep(1.000000000000000);
-        therm_resis->setStepType(QAbstractSpinBox::DefaultStepType);
+        therm_resis->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         therm_resis->setValue(0.000000000000000);
 
         verticalLayout->addWidget(therm_resis);
@@ -393,7 +402,7 @@ public:
         verticalLayout_3->setObjectName("verticalLayout_3");
         label_2 = new QLabel(groupBox_14);
         label_2->setObjectName("label_2");
-        label_2->setAlignment(Qt::AlignCenter);
+        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_3->addWidget(label_2);
 
@@ -404,13 +413,13 @@ public:
         therm_vref->setMinimumSize(QSize(50, 0));
         therm_vref->setMaximumSize(QSize(16777215, 16777215));
         therm_vref->setFont(font2);
-        therm_vref->setFocusPolicy(Qt::ClickFocus);
+        therm_vref->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         therm_vref->setDecimals(3);
         therm_vref->setMinimum(0.000000000000000);
         therm_vref->setMaximum(3.000000000000000);
         therm_vref->setSingleStep(0.100000000000000);
-        therm_vref->setStepType(QAbstractSpinBox::DefaultStepType);
+        therm_vref->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         therm_vref->setValue(0.000000000000000);
 
         verticalLayout_3->addWidget(therm_vref);
@@ -422,7 +431,7 @@ public:
         verticalLayout_4->setObjectName("verticalLayout_4");
         label_3 = new QLabel(groupBox_14);
         label_3->setObjectName("label_3");
-        label_3->setAlignment(Qt::AlignCenter);
+        label_3->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_4->addWidget(label_3);
 
@@ -433,13 +442,13 @@ public:
         therm_beta->setMinimumSize(QSize(50, 0));
         therm_beta->setMaximumSize(QSize(16777215, 16777215));
         therm_beta->setFont(font2);
-        therm_beta->setFocusPolicy(Qt::ClickFocus);
+        therm_beta->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         therm_beta->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         therm_beta->setDecimals(0);
         therm_beta->setMinimum(0.000000000000000);
         therm_beta->setMaximum(100000.000000000000000);
         therm_beta->setSingleStep(1.000000000000000);
-        therm_beta->setStepType(QAbstractSpinBox::DefaultStepType);
+        therm_beta->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         therm_beta->setValue(0.000000000000000);
 
         verticalLayout_4->addWidget(therm_beta);
@@ -453,7 +462,7 @@ public:
         verticalLayout_16 = new QVBoxLayout();
         verticalLayout_16->setSpacing(6);
         verticalLayout_16->setObjectName("verticalLayout_16");
-        verticalLayout_16->setSizeConstraint(QLayout::SetNoConstraint);
+        verticalLayout_16->setSizeConstraint(QLayout::SizeConstraint::SetNoConstraint);
         verticalLayout_16->setContentsMargins(0, 0, 0, 0);
         label_11 = new QLabel(ns_widget);
         label_11->setObjectName("label_11");
@@ -513,13 +522,45 @@ public:
 
         formLayout->setWidget(1, QFormLayout::FieldRole, tec_temp_1_label);
 
+        label_50 = new QLabel(ns_widget);
+        label_50->setObjectName("label_50");
+        label_50->setMinimumSize(QSize(120, 0));
+        label_50->setMaximumSize(QSize(120, 16777215));
+        label_50->setFont(font4);
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_50);
+
+        cur_temp_0 = new QLabel(ns_widget);
+        cur_temp_0->setObjectName("cur_temp_0");
+        cur_temp_0->setMinimumSize(QSize(80, 0));
+        cur_temp_0->setMaximumSize(QSize(80, 16777215));
+        cur_temp_0->setFont(font5);
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, cur_temp_0);
+
+        label_56 = new QLabel(ns_widget);
+        label_56->setObjectName("label_56");
+        label_56->setMinimumSize(QSize(120, 0));
+        label_56->setMaximumSize(QSize(120, 16777215));
+        label_56->setFont(font4);
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_56);
+
+        cur_temp_1 = new QLabel(ns_widget);
+        cur_temp_1->setObjectName("cur_temp_1");
+        cur_temp_1->setMinimumSize(QSize(80, 0));
+        cur_temp_1->setMaximumSize(QSize(80, 16777215));
+        cur_temp_1->setFont(font5);
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, cur_temp_1);
+
         label_35 = new QLabel(ns_widget);
         label_35->setObjectName("label_35");
         label_35->setMinimumSize(QSize(120, 0));
         label_35->setMaximumSize(QSize(120, 16777215));
         label_35->setFont(font4);
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_35);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_35);
 
         hpld_curr_label_0 = new QLabel(ns_widget);
         hpld_curr_label_0->setObjectName("hpld_curr_label_0");
@@ -527,7 +568,7 @@ public:
         hpld_curr_label_0->setMaximumSize(QSize(80, 16777215));
         hpld_curr_label_0->setFont(font5);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, hpld_curr_label_0);
+        formLayout->setWidget(4, QFormLayout::FieldRole, hpld_curr_label_0);
 
         label_36 = new QLabel(ns_widget);
         label_36->setObjectName("label_36");
@@ -535,7 +576,7 @@ public:
         label_36->setMaximumSize(QSize(120, 16777215));
         label_36->setFont(font4);
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_36);
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_36);
 
         hpld_curr_label_1 = new QLabel(ns_widget);
         hpld_curr_label_1->setObjectName("hpld_curr_label_1");
@@ -543,7 +584,7 @@ public:
         hpld_curr_label_1->setMaximumSize(QSize(80, 16777215));
         hpld_curr_label_1->setFont(font5);
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, hpld_curr_label_1);
+        formLayout->setWidget(5, QFormLayout::FieldRole, hpld_curr_label_1);
 
         label_38 = new QLabel(ns_widget);
         label_38->setObjectName("label_38");
@@ -551,7 +592,7 @@ public:
         label_38->setMaximumSize(QSize(120, 16777215));
         label_38->setFont(font4);
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_38);
+        formLayout->setWidget(6, QFormLayout::LabelRole, label_38);
 
         forward_treashold_label = new QLabel(ns_widget);
         forward_treashold_label->setObjectName("forward_treashold_label");
@@ -559,7 +600,7 @@ public:
         forward_treashold_label->setMaximumSize(QSize(80, 16777215));
         forward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, forward_treashold_label);
+        formLayout->setWidget(6, QFormLayout::FieldRole, forward_treashold_label);
 
         label_39 = new QLabel(ns_widget);
         label_39->setObjectName("label_39");
@@ -567,7 +608,7 @@ public:
         label_39->setMaximumSize(QSize(120, 16777215));
         label_39->setFont(font4);
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_39);
+        formLayout->setWidget(7, QFormLayout::LabelRole, label_39);
 
         backward_treashold_label = new QLabel(ns_widget);
         backward_treashold_label->setObjectName("backward_treashold_label");
@@ -575,7 +616,7 @@ public:
         backward_treashold_label->setMaximumSize(QSize(80, 16777215));
         backward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, backward_treashold_label);
+        formLayout->setWidget(7, QFormLayout::FieldRole, backward_treashold_label);
 
         label_52 = new QLabel(ns_widget);
         label_52->setObjectName("label_52");
@@ -583,7 +624,7 @@ public:
         label_52->setMaximumSize(QSize(120, 16777215));
         label_52->setFont(font4);
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, label_52);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_52);
 
         therm_resis_label = new QLabel(ns_widget);
         therm_resis_label->setObjectName("therm_resis_label");
@@ -591,7 +632,7 @@ public:
         therm_resis_label->setMaximumSize(QSize(80, 16777215));
         therm_resis_label->setFont(font5);
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, therm_resis_label);
+        formLayout->setWidget(8, QFormLayout::FieldRole, therm_resis_label);
 
         label_54 = new QLabel(ns_widget);
         label_54->setObjectName("label_54");
@@ -599,7 +640,7 @@ public:
         label_54->setMaximumSize(QSize(120, 16777215));
         label_54->setFont(font4);
 
-        formLayout->setWidget(7, QFormLayout::LabelRole, label_54);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_54);
 
         therm_vref_label = new QLabel(ns_widget);
         therm_vref_label->setObjectName("therm_vref_label");
@@ -607,7 +648,7 @@ public:
         therm_vref_label->setMaximumSize(QSize(80, 16777215));
         therm_vref_label->setFont(font5);
 
-        formLayout->setWidget(7, QFormLayout::FieldRole, therm_vref_label);
+        formLayout->setWidget(9, QFormLayout::FieldRole, therm_vref_label);
 
         label_53 = new QLabel(ns_widget);
         label_53->setObjectName("label_53");
@@ -615,7 +656,7 @@ public:
         label_53->setMaximumSize(QSize(120, 16777215));
         label_53->setFont(font4);
 
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_53);
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_53);
 
         therm_beta_label = new QLabel(ns_widget);
         therm_beta_label->setObjectName("therm_beta_label");
@@ -623,7 +664,7 @@ public:
         therm_beta_label->setMaximumSize(QSize(80, 16777215));
         therm_beta_label->setFont(font5);
 
-        formLayout->setWidget(8, QFormLayout::FieldRole, therm_beta_label);
+        formLayout->setWidget(10, QFormLayout::FieldRole, therm_beta_label);
 
         label_51 = new QLabel(ns_widget);
         label_51->setObjectName("label_51");
@@ -631,7 +672,7 @@ public:
         label_51->setMaximumSize(QSize(120, 16777215));
         label_51->setFont(font4);
 
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_51);
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_51);
 
         volt_amp_ext_label = new QLabel(ns_widget);
         volt_amp_ext_label->setObjectName("volt_amp_ext_label");
@@ -639,7 +680,7 @@ public:
         volt_amp_ext_label->setMaximumSize(QSize(80, 16777215));
         volt_amp_ext_label->setFont(font5);
 
-        formLayout->setWidget(9, QFormLayout::FieldRole, volt_amp_ext_label);
+        formLayout->setWidget(11, QFormLayout::FieldRole, volt_amp_ext_label);
 
         label_55 = new QLabel(ns_widget);
         label_55->setObjectName("label_55");
@@ -647,7 +688,7 @@ public:
         label_55->setMaximumSize(QSize(120, 16777215));
         label_55->setFont(font4);
 
-        formLayout->setWidget(10, QFormLayout::LabelRole, label_55);
+        formLayout->setWidget(12, QFormLayout::LabelRole, label_55);
 
         over_temp_label = new QLabel(ns_widget);
         over_temp_label->setObjectName("over_temp_label");
@@ -655,12 +696,39 @@ public:
         over_temp_label->setMaximumSize(QSize(80, 16777215));
         over_temp_label->setFont(font5);
 
-        formLayout->setWidget(10, QFormLayout::FieldRole, over_temp_label);
+        formLayout->setWidget(12, QFormLayout::FieldRole, over_temp_label);
 
-        button_error = new QPushButton(ns_widget);
-        button_error->setObjectName("button_error");
+        label_40 = new QLabel(ns_widget);
+        label_40->setObjectName("label_40");
+        label_40->setMinimumSize(QSize(120, 0));
+        label_40->setMaximumSize(QSize(120, 16777215));
+        label_40->setFont(font4);
 
-        formLayout->setWidget(11, QFormLayout::FieldRole, button_error);
+        formLayout->setWidget(14, QFormLayout::LabelRole, label_40);
+
+        pd_forward = new QLabel(ns_widget);
+        pd_forward->setObjectName("pd_forward");
+        pd_forward->setMinimumSize(QSize(80, 0));
+        pd_forward->setMaximumSize(QSize(80, 16777215));
+        pd_forward->setFont(font5);
+
+        formLayout->setWidget(14, QFormLayout::FieldRole, pd_forward);
+
+        label_41 = new QLabel(ns_widget);
+        label_41->setObjectName("label_41");
+        label_41->setMinimumSize(QSize(120, 0));
+        label_41->setMaximumSize(QSize(120, 16777215));
+        label_41->setFont(font4);
+
+        formLayout->setWidget(15, QFormLayout::LabelRole, label_41);
+
+        pd_backward = new QLabel(ns_widget);
+        pd_backward->setObjectName("pd_backward");
+        pd_backward->setMinimumSize(QSize(80, 0));
+        pd_backward->setMaximumSize(QSize(80, 16777215));
+        pd_backward->setFont(font5);
+
+        formLayout->setWidget(15, QFormLayout::FieldRole, pd_backward);
 
         label_error = new QLabel(ns_widget);
         label_error->setObjectName("label_error");
@@ -668,7 +736,20 @@ public:
         label_error->setMaximumSize(QSize(120, 16777215));
         label_error->setFont(font4);
 
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_error);
+        formLayout->setWidget(16, QFormLayout::LabelRole, label_error);
+
+        button_error = new QPushButton(ns_widget);
+        button_error->setObjectName("button_error");
+
+        formLayout->setWidget(16, QFormLayout::FieldRole, button_error);
+
+        line_2 = new QFrame(ns_widget);
+        line_2->setObjectName("line_2");
+        line_2->setMinimumSize(QSize(40, 0));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        formLayout->setWidget(13, QFormLayout::SpanningRole, line_2);
 
 
         verticalLayout_16->addLayout(formLayout);
@@ -695,7 +776,7 @@ public:
         label_29->setObjectName("label_29");
         label_29->setMinimumSize(QSize(0, 0));
         label_29->setFont(font1);
-        label_29->setAlignment(Qt::AlignCenter);
+        label_29->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_31->addWidget(label_29);
 
@@ -708,13 +789,13 @@ public:
         forward_treashold->setMinimumSize(QSize(50, 0));
         forward_treashold->setMaximumSize(QSize(16777215, 16777215));
         forward_treashold->setFont(font2);
-        forward_treashold->setFocusPolicy(Qt::ClickFocus);
+        forward_treashold->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         forward_treashold->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         forward_treashold->setDecimals(2);
         forward_treashold->setMinimum(0.000000000000000);
         forward_treashold->setMaximum(3.000000000000000);
         forward_treashold->setSingleStep(0.100000000000000);
-        forward_treashold->setStepType(QAbstractSpinBox::DefaultStepType);
+        forward_treashold->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         forward_treashold->setValue(0.000000000000000);
 
         horizontalLayout_21->addWidget(forward_treashold);
@@ -731,7 +812,7 @@ public:
         label_31->setObjectName("label_31");
         label_31->setMinimumSize(QSize(0, 0));
         label_31->setFont(font1);
-        label_31->setAlignment(Qt::AlignCenter);
+        label_31->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_35->addWidget(label_31);
 
@@ -744,13 +825,13 @@ public:
         backward_treashold->setMinimumSize(QSize(50, 0));
         backward_treashold->setMaximumSize(QSize(16777215, 16777215));
         backward_treashold->setFont(font2);
-        backward_treashold->setFocusPolicy(Qt::ClickFocus);
+        backward_treashold->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         backward_treashold->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         backward_treashold->setDecimals(2);
         backward_treashold->setMinimum(0.000000000000000);
         backward_treashold->setMaximum(3.000000000000000);
         backward_treashold->setSingleStep(0.100000000000000);
-        backward_treashold->setStepType(QAbstractSpinBox::DefaultStepType);
+        backward_treashold->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         backward_treashold->setValue(0.000000000000000);
 
         horizontalLayout_23->addWidget(backward_treashold);
@@ -787,13 +868,13 @@ public:
         volt_amp_ext->setMinimumSize(QSize(50, 0));
         volt_amp_ext->setMaximumSize(QSize(16777215, 16777215));
         volt_amp_ext->setFont(font2);
-        volt_amp_ext->setFocusPolicy(Qt::ClickFocus);
+        volt_amp_ext->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         volt_amp_ext->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         volt_amp_ext->setDecimals(2);
         volt_amp_ext->setMinimum(0.000000000000000);
         volt_amp_ext->setMaximum(3.300000000000000);
         volt_amp_ext->setSingleStep(0.100000000000000);
-        volt_amp_ext->setStepType(QAbstractSpinBox::DefaultStepType);
+        volt_amp_ext->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         volt_amp_ext->setValue(0.000000000000000);
 
         verticalLayout_12->addWidget(volt_amp_ext);
@@ -817,13 +898,13 @@ public:
         over_temp->setMinimumSize(QSize(50, 0));
         over_temp->setMaximumSize(QSize(16777215, 16777215));
         over_temp->setFont(font2);
-        over_temp->setFocusPolicy(Qt::ClickFocus);
+        over_temp->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         over_temp->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         over_temp->setDecimals(2);
         over_temp->setMinimum(0.000000000000000);
         over_temp->setMaximum(150.000000000000000);
         over_temp->setSingleStep(0.100000000000000);
-        over_temp->setStepType(QAbstractSpinBox::DefaultStepType);
+        over_temp->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         over_temp->setValue(0.000000000000000);
 
         verticalLayout_14->addWidget(over_temp);
@@ -870,6 +951,10 @@ public:
         tec_temp_0_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_49->setText(QCoreApplication::translate("cb_panel", "Temp. \320\242\320\225\320\241  1:", nullptr));
         tec_temp_1_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_50->setText(QCoreApplication::translate("cb_panel", "Cur. Temp.  0:", nullptr));
+        cur_temp_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_56->setText(QCoreApplication::translate("cb_panel", "Cur. Temp.  1:", nullptr));
+        cur_temp_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_35->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 0 :", nullptr));
         hpld_curr_label_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_36->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 1 :", nullptr));
@@ -888,8 +973,12 @@ public:
         volt_amp_ext_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_55->setText(QCoreApplication::translate("cb_panel", "Overheat temp:", nullptr));
         over_temp_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        label_40->setText(QCoreApplication::translate("cb_panel", "PD forward :", nullptr));
+        pd_forward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_41->setText(QCoreApplication::translate("cb_panel", "PD backward:", nullptr));
+        pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
+        button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
         label_29->setText(QCoreApplication::translate("cb_panel", "Forward", nullptr));
         forward_treashold->setSuffix(QString());

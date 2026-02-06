@@ -213,11 +213,11 @@ void device_panel::call_msg_box(QString msg1,QString msg2,QString msg3){
 
         QMessageBox *mesg;
         QString mesage;
-        if(msg1!=""){mesage+="HPLD 1000 0"; mesage+='\n'+ msg1; mesage+='\n';}
+        if(msg1!=""){mesage+="---- HPLD 1000 0"; mesage+='\n'+ msg1; mesage+='\n';}
         qDebug()<<"mesage1"<<msg1;
-        if(msg2!=""){mesage+="HPLD 1000 1"; mesage+='\n'+ msg2; mesage+='\n';}
+        if(msg2!=""){mesage+="---- HPLD 1000 1"; mesage+='\n'+ msg2; mesage+='\n';}
         qDebug()<<"mesage2"<<msg2;
-        if(msg3!=""){mesage+="cb 0"; mesage+='\n'+ msg3; mesage+='\n';}
+        if(msg3!=""){mesage+="---- cb 0"; mesage+='\n'+ msg3; mesage+='\n';}
         qDebug()<<"mesage3"<<msg3;
         mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
         mesg->addButton(QMessageBox::Ok);
