@@ -8,16 +8,24 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
     ui->setupUi(this);
 
     ID = num;
-    ui->groupBox->setTitle("Общий канал");
+    ui->groupBox->setTitle("All Channels");
     // ui->groupBox->setCheckable(true);
 
     QGridLayout* layout = new QGridLayout();
     // layout->setMargin(2);
     layout->setContentsMargins(2, 2, 2, 2);
 
+    auto *preampCol = new QVBoxLayout();
+    auto *preampTitle = new QLabel(QString("Preamp (All)"), this);
+    preampTitle->setAlignment(Qt::AlignCenter);
+    QFont titleFont("Arial", 12, QFont::Bold);
+    preampTitle->setFont(titleFont);
+    preampCol->addWidget(preampTitle);
+
     preamp = new preamplifier_all_panel();
     preamp->ID = ID;
-    layout->addWidget(preamp, 0, 0);
+    preampCol->addWidget(preamp);
+    layout->addLayout(preampCol, 0, 0);
 
     QFrame *line;
     line = new QFrame(this);
@@ -25,9 +33,16 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
     line->setFrameShadow(QFrame::Sunken);
     layout->addWidget(line, 0, 1);
 
+    auto *ampCol = new QVBoxLayout();
+    auto *ampTitle = new QLabel(QString("Amp (All)"), this);
+    ampTitle->setAlignment(Qt::AlignCenter);
+    ampTitle->setFont(titleFont);
+    ampCol->addWidget(ampTitle);
+
     amp = new amplifier_all_panel();
     amp->ID = ID;
-    layout->addWidget(amp, 0, 2);
+    ampCol->addWidget(amp);
+    layout->addLayout(ampCol, 0, 2);
 
     ui->groupBox->setLayout(layout);
 }

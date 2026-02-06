@@ -10,7 +10,12 @@
 #include <QFile>
 #include <QTimer>
 
-#define PROTOCOL_VERSION_NAME "1_5kW_coherent_system_main_control_board06092023"
+
+#define PROTOCOL_VERSION_NAME "EVO_YFL_1064_FW Main_board_03022026"
+
+// 0 = auto telemetry OFF (commands only when you send manually)
+// 1 = auto telemetry ON (lgstatus, lgonoff etc. by timer)
+#define AUTO_TELEMETRY_ENABLED 1
 
 class tcp_usb_connector: public QObject
 {
@@ -46,20 +51,17 @@ public:
     bool double_caller=false;
     QStringList fifo_command;
     QStringList fifo_searcher;
-//    QStringList fifo_finder;
     QList<int> fifo_finder;
     bool version_protection =true;
     int standart_delay=30;
     int pool_count=0;
     QTimer* tmr;
-    // QStringList dev_list={"sns0","snscw0","tec0","dc0","usr0"};
     QStringList dev_list={"gen0",
-                          "preamp0","preamp1","preamp2","preamp3","preamp4",
+                          "preamp0","preamp1","preamp2","preamp3",
                           "allpreamp0",
-                          "amp0","amp1","amp2","amp3","amp4",
+                          "amp0","amp1","amp2","amp3",
                           "allamp0",
-                          "usr0",
-                          "div0"};
+                          "usr0"};
     QTimer* tmr1;
 signals:
     void send_to_dev(QStringList);
@@ -67,14 +69,20 @@ signals:
     void send_to_resonator(QStringList);
     void send_to_user(QStringList);
     void connection_state(int);
+    void connection_timeout();
     void version_failed();
     void send_device_list(QList<int>);
     void version_error();
     void get_command(QString);
+    void ip_received(QString ip);
+    void mac_received(QString mac);
+    void hash_received(QString hash);
+    void network_info_received(QString type, QString value);
 
 public slots:
     void data_received();
     void data_write(QString,int,QString);
+    void data_common_write(QString command, QString args = "");
     void data_ver_write(QString);
     void sender();
     void init_connection(QString,int);
@@ -94,6 +102,8 @@ public slots:
     void serial_handle_error(QSerialPort::SerialPortError error);
     void serial_disconnect();
     void get_command_pool();
+    void request_status_manual();  // manual status request (when AUTO_TELEMETRY_ENABLED=0)
+    void request_version_manual();  // manual lgvers (when AUTO_TELEMETRY_ENABLED=0)
 };
 
 #endif // CONNECTOR_H

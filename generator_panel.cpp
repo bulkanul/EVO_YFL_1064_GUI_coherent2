@@ -8,14 +8,12 @@ generator_panel::generator_panel(QWidget *parent) :
     ui(new Ui::generator_panel)
 {
     ui->setupUi(this);
-    connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
-    family="gen";
+    connect(this, SIGNAL(enter_event(QObject*)), this, SLOT(key_catcher(QObject*)));
+    connect(this, SIGNAL(command_proofed()), this, SLOT(data_received_and_profed()));
+    family = "gen";
 
     ui->w_error_box->hide();
-
-    ui->dsb_temp_1->installEventFilter(this);
-    ui->dsb_temp_2->installEventFilter(this);
+    ui->pushButton->setVisible(false);
 }
 
 generator_panel::~generator_panel()
@@ -23,81 +21,87 @@ generator_panel::~generator_panel()
     delete ui;
 }
 
-void generator_panel::on_pb_tec_1_onoff_clicked(bool checked)
-{
-    ui->pb_tec_1_onoff->setChecked(!checked);
-    send_command("lsteconoff gen", ID, "0 " + QString::number(checked));
-}
-
-
-void generator_panel::on_pb_tec_2_onoff_clicked(bool checked)
-{
-    ui->pb_tec_2_onoff->setChecked(!checked);
-    send_command("lsteconoff " + family, ID, "1 " + QString::number(checked));
-}
-
 void generator_panel::data_received_and_profed()
 {
-    if (param_check(raw_params,0) == "lrstatus") {
-        emit sig_usr_changes("l_footer_connection_status", true);
-        ui->l_laser_state->setText(param_check(raw_params,3).toInt()?"ВКЛ.":"ВЫКЛ.");
-        ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
+    // lrstatus gen <id> <started> <flags> <t1> <t2> <tec1_on> <tec2_on> <tec1_t> <tec2_t> <pd1> <pd2> <pd3> <hpld1_on> <hpld2_on> <curr1> <curr2>
+    // [0]      [1]  [2]  [3]       [4]     [5]  [6]  [7]       [8]       [9]      [10]     [11]  [12]  [13]  [14]       [15]       [16]    [17]
 
-        if(param_check(raw_params, 5).toInt()){
-            error_code = param_check(raw_params, 5).toInt();
+    if (param_check(raw_params, 0) == "lrstatus") {
+
+        // 1 Laser State
+        bool isStarted = param_check(raw_params, 3).toInt();
+        ui->pb_laser_onoff->setChecked(isStarted);
+
+        emit sig_usr_changes("l_footer_connection_status", true);
+        emit emission_changed(isStarted);
+
+        // 2 Flags (Errors)
+        int flags = param_check(raw_params, 4).toInt();
+        if (flags) {
+            error_code = flags;
             ui->w_error_box->show();
+            ui->pushButton->setVisible(true);
             error_displayer = false;
         } else {
             ui->w_error_box->hide();
+            ui->pushButton->setVisible(false);
         }
 
-        ui->l_laser_temp_0->setText(QString::number(param_check(raw_params,6).toDouble()) + " °C");
-        ui->l_laser_temp_1->setText(QString::number(param_check(raw_params,7).toDouble()) + " °C");
-        ui->l_laser_temp_2->setText(QString::number(param_check(raw_params,8).toDouble()) + " °C");
-        ui->l_tec_state_1->setText(param_check(raw_params,9).toInt()?"ВКЛ.":"ВЫКЛ.");
-        ui->pb_tec_1_onoff->setChecked(param_check(raw_params,9).toInt());
-        ui->l_tec_state_2->setText(param_check(raw_params,10).toInt()?"ВКЛ.":"ВЫКЛ.");
-        ui->pb_tec_2_onoff->setChecked(param_check(raw_params,10).toInt());
-        ui->l_tec_temp_1->setText(QString::number(param_check(raw_params,11).toDouble()) + " °C");
-        ui->l_tec_temp_2->setText(QString::number(param_check(raw_params,12).toDouble()) + " °C");
-        ui->l_pd_forw->setText(QString::number(param_check(raw_params,13).toDouble()) + " В");
+        double coreT1 = param_check(raw_params, 5).toDouble();
+        double coreT2 = param_check(raw_params, 6).toDouble();
+        ui->l_core_temp_1->setText(QString::number(coreT1, 'f', 1) + " °C");
+        ui->l_core_temp_2->setText(QString::number(coreT2, 'f', 1) + " °C");
+
+        // 3 TEC State & Temps
+        bool tec1 = param_check(raw_params, 7).toInt();
+        bool tec2 = param_check(raw_params, 8).toInt();
+
+        ui->l_tec_1_indicator->setEnabled(tec1);
+        ui->l_tec_2_indicator->setEnabled(tec2);
+
+        double tecTemp1 = param_check(raw_params, 9).toDouble();
+        double tecTemp2 = param_check(raw_params, 10).toDouble();
+        ui->dsb_temp_1->setValue(tecTemp1);
+        ui->dsb_temp_2->setValue(tecTemp2);
+
+        double pd1 = param_check(raw_params, 11).toDouble();
+        double pd2 = param_check(raw_params, 12).toDouble();
+        double pd3 = param_check(raw_params, 13).toDouble();
+        ui->l_pd1_fw->setText(QString::number(pd1, 'f', 2) + " V");
+        ui->l_pd2_bw->setText(QString::number(pd2, 'f', 2) + " V");
+        ui->l_pd3->setText(QString::number(pd3, 'f', 2) + " V");
+
+        // 4 HPLD Status
+        bool hpld1_on = param_check(raw_params, 14).toInt();
+        bool hpld2_on = param_check(raw_params, 15).toInt();
+        double hpld1_cur = param_check(raw_params, 16).toDouble();
+        double hpld2_cur = param_check(raw_params, 17).toDouble();
+
+        ui->l_hpld_1_status->setText(hpld1_on ? "ON" : "OFF");
+        ui->l_hpld_1_status->setStyleSheet(hpld1_on ? "font-weight: bold; color: green;" : "font-weight: bold; color: gray;");
+        ui->l_hpld_1_current->setText(QString::number(hpld1_cur, 'f', 2) + " A");
+
+        ui->l_hpld_2_status->setText(hpld2_on ? "ON" : "OFF");
+        ui->l_hpld_2_status->setStyleSheet(hpld2_on ? "font-weight: bold; color: green;" : "font-weight: bold; color: gray;");
+        ui->l_hpld_2_current->setText(QString::number(hpld2_cur, 'f', 2) + " A");
     }
-    else if (param_check(raw_params,0) == "lronoff"){
-        ui->pb_laser_onoff->setChecked(param_check(raw_params,3).toInt());
-    }
-    else if (param_check(raw_params,0) == "lrteconoff"){
-        if (param_check(raw_params,3).toInt() == 0)
-            ui->pb_tec_1_onoff->setChecked(param_check(raw_params,4).toInt());
-        else if (param_check(raw_params,3).toInt() == 1)
-            ui->pb_tec_2_onoff->setChecked(param_check(raw_params,4).toInt());
+    else if (param_check(raw_params, 0) == "lronoff") {
+        ui->pb_laser_onoff->setChecked(param_check(raw_params, 3).toInt());
     }
 }
 
-void generator_panel::key_catcher(QObject* key)
+void generator_panel::key_catcher(QObject *key)
 {
-    QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
-                                        "Подтверждение",
-                                        "Отправить команду усилителю "+QString::number(ID)+"?",
-                                        QMessageBox::Yes | QMessageBox::No);
-    if(mesg->exec()==QMessageBox::Yes){
-        if(key->objectName() == "dsb_temp_1"){
-            emit sl_data_set("lstemptec", ID,  "0 " + QString::number(ui->dsb_temp_1->value()).replace(",","."));
-        }
-        else if(key->objectName() == "dsb_temp_2"){
-            emit sl_data_set("lstemptec", ID, "1 " + QString::number(ui->dsb_temp_2->value()).replace(",","."));
-        }
-    }
+    Q_UNUSED(key);
 }
 
 void generator_panel::on_pb_laser_onoff_clicked(bool checked)
 {
     ui->pb_laser_onoff->setChecked(!checked);
-    send_command("lsonoff " + family, ID, QString::number(checked));
+    send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
 }
-
 
 void generator_panel::on_pushButton_clicked()
 {
     call_msg_box(parse_bits(error_code, errors_list));
 }
-

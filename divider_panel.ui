@@ -81,7 +81,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Уровень прям. ФП</string>
+             <string>Fwd PD Level</string>
             </property>
            </widget>
           </item>
@@ -100,7 +100,7 @@
              </font>
             </property>
             <property name="suffix">
-             <string> В</string>
+             <string> V</string>
             </property>
             <property name="maximum">
              <double>3.300000000000000</double>
@@ -146,7 +146,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Прям. ФП</string>
+             <string>Fwd PD</string>
             </property>
            </widget>
           </item>
@@ -161,7 +161,7 @@
              </font>
             </property>
             <property name="text">
-             <string>0 В</string>
+             <string>0 V</string>
             </property>
            </widget>
           </item>
@@ -232,7 +232,7 @@
             </font>
            </property>
            <property name="text">
-            <string>ОШИБКА!</string>
+            <string>ERROR!</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -250,7 +250,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Детали</string>
+            <string>Details</string>
            </property>
           </widget>
          </item>

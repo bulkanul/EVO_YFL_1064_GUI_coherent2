@@ -35,47 +35,35 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLabel" name="label_4">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Усилитель</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QVBoxLayout" name="layout_onoff_all_amp">
          <item>
-          <widget class="QPushButton" name="pb_laser_onoff">
-           <property name="minimumSize">
-            <size>
-             <width>36</width>
-             <height>24</height>
-            </size>
+          <widget class="QLabel" name="label_onoff_all_amp">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>36</width>
-             <height>24</height>
-            </size>
+           <property name="text">
+            <string>Off / On</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pb_laser_onoff">
+             <property name="minimumSize">
+              <size>
+               <width>36</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>36</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
 	border-image: url(:/images/images/round_button_switch.png);
 }
 
@@ -98,14 +86,16 @@ QPushButton::checked:disabled  {
 QPushButton::disabled  {
 	border-image: url(:/images/images/round_button_switch_disabled.png);
 }</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -246,7 +236,7 @@ QPushButton::disabled  {
         </font>
        </property>
        <property name="text">
-        <string>Мощность: </string>
+        <string>Power: </string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

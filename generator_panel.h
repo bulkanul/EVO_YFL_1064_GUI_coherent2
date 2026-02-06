@@ -11,15 +11,15 @@ class generator_panel;
 class generator_panel : public device_panel
 {
     Q_OBJECT
-
-QStringList errors_list={"FPD fault",
+QStringList errors_list={
+                         "System Overheat",
+                         "PD1 forward under",
+                         "PD2 backward over",
                          "N\\A",
                          "N\\A",
                          "N\\A",
                          "N\\A",
-                         "N\\A",
-                         "INTERLOCK",
-                         "DCDC fail"
+                         "N\\A"
                         };
 
 public:
@@ -27,15 +27,9 @@ public:
     ~generator_panel();
 
 private slots:
-
-    void on_pb_tec_1_onoff_clicked(bool checked);
-
-    void on_pb_tec_2_onoff_clicked(bool checked);
-
     void data_received_and_profed();
     void key_catcher(QObject *key);
     void on_pb_laser_onoff_clicked(bool checked);
-
     void on_pushButton_clicked();
 
 private:
@@ -44,9 +38,7 @@ private:
 
 signals:
     void sig_usr_changes(QString, int);
-
+    void emission_changed(bool isActive);
 };
-
-
 
 #endif // GENERATOR_PANEL_H

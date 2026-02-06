@@ -12,14 +12,15 @@ class preamplifier_panel : public device_panel
 {
     Q_OBJECT
 
-QStringList errors_list={"Backward PD 0",
-                         "Forward PD 0",
-                         "Backward PD 1",
-                         "Forward PD 1",
-                         "Backward PD 2",
-                         "Forward PD 2",
-                         "INTERLOCK",
-                         "DCDC fail"
+QStringList errors_list={
+                         "Backward PD fault 0",   
+                         "Forward PD fault 0",    
+                         "Backward PD fault 1",   
+                         "Forward PD fault 1",    
+                         "Interlock",             
+                         "System Overheat",       
+                         "N\\A",                  
+                         "N\\A"                   
                         };
 
 public:
@@ -31,10 +32,9 @@ public:
 private slots:
     void data_received_and_profed();
     void key_catcher(QObject *key);
-
     void on_pb_onoff_clicked(bool checked);
-
     void on_pushButton_clicked();
+    void on_pb_reset_clicked();
 
 private:
     Ui::preamplifier_panel *ui;

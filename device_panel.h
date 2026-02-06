@@ -55,7 +55,7 @@ public slots:
     void auto_telemetry_call(QString family);
     void enable_widget(bool);
 
-    QString parse_bits(unsigned char mess,QStringList);
+    QString parse_bits(int mess,QStringList);
     void call_msg_box(QString);
     void silence_counter(int);
 

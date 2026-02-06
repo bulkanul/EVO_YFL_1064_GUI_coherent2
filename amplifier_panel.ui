@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>662</width>
-    <height>113</height>
+    <height>121</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -52,36 +52,22 @@
          </property>
         </spacer>
        </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <widget class="QLabel" name="label_onoff_amp">
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="text">
+          <string>Off / On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="label_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Усилитель</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QPushButton" name="pb_laser_onoff">
+          <widget class="QPushButton" name="pb_laser_onoff">
              <property name="minimumSize">
               <size>
                <width>36</width>
@@ -148,7 +134,7 @@ QPushButton::disabled  {
             </font>
            </property>
            <property name="text">
-            <string>Пилот</string>
+            <string>Pilot</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -225,8 +211,23 @@ QPushButton::disabled  {
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <property name="spacing">
-        <number>0</number>
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
+       <property name="horizontalSpacing">
+        <number>8</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>4</number>
        </property>
        <item row="2" column="0">
         <widget class="QLabel" name="label_2">
@@ -243,7 +244,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>Темп 0:</string>
+          <string>Temp 0:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -302,7 +303,6 @@ QPushButton::disabled  {
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -323,7 +323,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>Мощность: </string>
+          <string>Power: </string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -331,12 +331,18 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="2" column="6">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_diff_pd">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="font">
           <font>
@@ -345,7 +351,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>Вых. ФП:</string>
+          <string>Diff PD:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -353,12 +359,18 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="2" column="4">
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="label_9">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="font">
           <font>
@@ -367,7 +379,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>ПФП 0:</string>
+          <string>PD1 (Back):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -376,46 +388,21 @@ QPushButton::disabled  {
        </item>
        <item row="3" column="6">
         <widget class="QLabel" name="l_diff_pd">
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>11</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>0 В</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QLabel" name="l_temp_2">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>55</width>
            <height>0</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
          <property name="font">
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>0 °C</string>
+          <string>0 V</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -423,12 +410,18 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="2" column="5">
-        <widget class="QLabel" name="label_9">
+        <widget class="QLabel" name="label_10">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="font">
           <font>
@@ -437,7 +430,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>ОФП 0:</string>
+          <string>PD2 (Fwd):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -459,7 +452,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>Темп 1:</string>
+          <string>Temp 1:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -467,10 +460,10 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="3" column="4">
-        <widget class="QLabel" name="l_pd_forw">
+        <widget class="QLabel" name="l_pd_back">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>55</width>
            <height>0</height>
           </size>
          </property>
@@ -484,12 +477,11 @@ QPushButton::disabled  {
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>0 В</string>
+          <string>0 V</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -514,7 +506,6 @@ QPushButton::disabled  {
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -527,10 +518,10 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="3" column="5">
-        <widget class="QLabel" name="l_pd_back">
+        <widget class="QLabel" name="l_pd_forw">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>55</width>
            <height>0</height>
           </size>
          </property>
@@ -544,34 +535,11 @@ QPushButton::disabled  {
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>0 В</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLabel" name="label_13">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Темп 2:</string>
+          <string>0 V</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -596,7 +564,6 @@ QPushButton::disabled  {
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -609,12 +576,18 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="2" column="7">
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="label_calib_power">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>65</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="font">
           <font>
@@ -623,7 +596,7 @@ QPushButton::disabled  {
           </font>
          </property>
          <property name="text">
-          <string>Мощн. ФП</string>
+          <string>Calib Pwr:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -632,16 +605,21 @@ QPushButton::disabled  {
        </item>
        <item row="3" column="7">
         <widget class="QLabel" name="l_pd_power">
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <family>Arial</family>
            <pointsize>11</pointsize>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>0 кВт</string>
+          <string>0 kW</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -712,12 +690,11 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>10</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>ОШИБКА!</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -730,12 +707,10 @@ QPushButton::disabled  {
              <font>
               <family>Arial</family>
               <pointsize>10</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>Детали</string>
+             <string>Details</string>
             </property>
            </widget>
           </item>

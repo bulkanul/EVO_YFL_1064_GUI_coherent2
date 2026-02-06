@@ -5,6 +5,11 @@
 #include <QThread>
 #include <QKeyEvent>
 #include <QButtonGroup>
+#include <QInputDialog>
+#include <QDialog>
+#include <QLineEdit>
+#include <QGridLayout>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     conn = new tcp_usb_connector();
     connect(this,SIGNAL(set_conn_params(QString,int)),conn,SLOT(init_connection(QString,int)));
     connect(conn,SIGNAL(version_error()),this,SLOT(version_conflict()));
-    // connect(this, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
+    connect(conn,SIGNAL(connection_timeout()),this,SLOT(connection_timeout()));
+    connect(conn,SIGNAL(network_info_received(QString,QString)),this,SLOT(on_network_info(QString,QString)));
+    connect(this, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn,SIGNAL(connection_state(int)),this,SLOT(connection_state(int)));
 
     QGridLayout* layout = new QGridLayout(ui->groupBox);
@@ -30,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gen, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), gen, SLOT(data_received(QStringList)));
     connect(conn, SIGNAL(get_command(QString)), gen, SLOT(auto_telemetry_call(QString)));
+    connect(gen, SIGNAL(emission_changed(bool)), this, SLOT(on_emission_changed(bool)));
 
     chan1 = new channel_panel(1, this);
     connect(chan1->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
@@ -58,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(get_command(QString)),chan3->amp, SLOT(auto_telemetry_call(QString)));
     connect(conn, SIGNAL(get_command(QString)),chan3->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan3, 2, 1);
-    chan3->setDisabled(true);
+    // chan3->setDisabled(true);
 
     chan4 = new channel_panel(4, this);
     connect(chan4->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
@@ -68,17 +76,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(get_command(QString)),chan4->amp, SLOT(auto_telemetry_call(QString)));
     connect(conn, SIGNAL(get_command(QString)),chan4->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan4, 3, 1);
-    chan4->setDisabled(true);
-
-    chan5 = new channel_panel(5, this);
-    connect(chan5->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->preamp, SLOT(data_received(QStringList)));
-    connect(chan5->amp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)), chan5->amp, SLOT(data_received(QStringList)));
-    connect(conn, SIGNAL(get_command(QString)),chan5->amp, SLOT(auto_telemetry_call(QString)));
-    connect(conn, SIGNAL(get_command(QString)),chan5->preamp, SLOT(auto_telemetry_call(QString)));
-    layout->addWidget(chan5, 4, 1);
-    chan5->setDisabled(true);
+    // chan4->setDisabled(true);
 
     chan_all = new channel_all_panel(0, this);
     connect(chan_all->preamp, SIGNAL(send_command(QString,int,QString)),conn, SLOT(data_write(QString,int,QString)));
@@ -88,19 +86,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(get_command(QString)),chan_all->amp, SLOT(auto_telemetry_call(QString)));
     connect(conn, SIGNAL(get_command(QString)),chan_all->preamp, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(chan_all, 5, 1);
-    chan_all->setDisabled(true);
+    // chan_all->setDisabled(true);
 
     flags = new flag_panel(this);
+    connect(flags, SIGNAL(sig_usr_critical_error(bool)), this, SLOT(on_usr_critical_error(bool)));
     connect(flags, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
     connect(conn, SIGNAL(send_to_dev(QStringList)), flags, SLOT(data_received(QStringList)));
     connect(conn, SIGNAL(get_command(QString)), flags, SLOT(auto_telemetry_call(QString)));
     layout->addWidget(flags, 3, 0, 2, 1);
-
-    div = new divider_panel(this);
-    connect(div, SIGNAL(send_command(QString,int,QString)), conn, SLOT(data_write(QString,int,QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)), div, SLOT(data_received(QStringList)));
-    connect(conn, SIGNAL(get_command(QString)), div, SLOT(auto_telemetry_call(QString)));
-    layout->addWidget(div, 5, 0);
 
     ui->groupBox->setLayout(layout);
 
@@ -129,6 +122,22 @@ MainWindow::MainWindow(QWidget *parent)
     }
     installEventFilter(this);
     ui->pb_error_cleaner->setVisible(false);
+
+    connect(ui->pb_network_info, &QPushButton::clicked,
+            this, &MainWindow::show_network_info_dialog);
+    connect(ui->pb_bootloader, &QPushButton::clicked,
+            this, &MainWindow::enter_bootloader);
+    connect(ui->pb_request_status, &QPushButton::clicked,
+            conn, &tcp_usb_connector::request_status_manual);
+    connect(ui->pb_request_version, &QPushButton::clicked,
+            conn, &tcp_usb_connector::request_version_manual);
+#if AUTO_TELEMETRY_ENABLED
+    ui->pb_request_status->setVisible(false);
+    ui->pb_request_version->setVisible(false);
+#else
+    ui->pb_request_status->setVisible(true);
+    ui->pb_request_version->setVisible(true);
+#endif
 }
 
 MainWindow::~MainWindow()
@@ -138,35 +147,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::change_interface(QString name, int state)
 {
-//    if(name=="pb_error_cleaner"){
-//        ui->pb_error_cleaner->setVisible(state);
-//    }else if(name.contains("l_footer_emission")==true){
-//        if(name.split(" ")[1]=="cw")light_state[name.split(" ")[2].toUInt()]=state;
-//        else if(name.split(" ")[1]=="dc")light_state[5]=state;
-//        else if(name.split(" ")[1]=="ns")light_state[6]=state;
-//        bool max=0;
-//        for(int i=0;i<7;i++){
-//           max|=light_state[i];
-//        }
-//        ui->l_footer_emission->setEnabled(!max);
-//    }else if(name.contains("l_footer_key")==true){
-//        ui->l_footer_key->setEnabled(state);
-////    if(name=="l_footer_connection_status"){
-////        ui->l_footer_connection_status->setText(state?"Состояние : ПОДКЛЮЧЕНО":"Состояние : ОТКЛЮЧЕНО");
-////    }
-//    }else if(name=="l_footer_interlock"){
-//        ui->l_footer_interlock->setEnabled(state);
-//    }else if(name=="l_footer_acdc_ok"){
-//        ui->l_footer_acdc_ok->setEnabled(state);
-//    }else if(name=="l_footer_acdc_t_alarm"){
-//        ui->l_footer_acdc_t_alarm->setEnabled(state);
-//    }
+    Q_UNUSED(name);
+    Q_UNUSED(state);
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-//    if(ui->pushButton->text()=="Connect"){
-//        laser->first_set_write=true;
         if(ui->rb_tcp->isChecked()){
             conn->connection_is_tcp=true;
             emit set_conn_params(ui->ip_adress->text()/*"127.0.0.1"*/,7878);
@@ -175,13 +161,6 @@ void MainWindow::on_pushButton_clicked()
             emit set_conn_params(ui->serial_combo_box->currentText().split(" ").last(),404);
         }
         on_menu_main_clicked();
-//    }else{
-//        if(conn->connection_is_tcp){
-//            conn->tcp_disconnect();
-//        }else{
-//            conn->serial_disconnect();
-//        }
-//    }
 }
 
 void MainWindow::version_conflict()
@@ -196,11 +175,7 @@ void MainWindow::version_conflict()
 
 void MainWindow::on_menu_button_clicked()
 {
-//    if(ui->stackedWidget->currentIndex()==0){
         ui->stackedWidget->setCurrentIndex(1);
-//    }else if(ui->stackedWidget->currentIndex()==1){
-//        ui->stackedWidget->setCurrentIndex(0);
-//    }
 }
 
 void MainWindow::on_menu_main_clicked()
@@ -219,7 +194,6 @@ void MainWindow::on_refresh_ports_clicked()
     }
     current_port_index = ui->serial_combo_box->findData(conn->serial);
     ui->serial_combo_box->setCurrentIndex(current_port_index);
-//    ui->serial_combo_box->setCurrentText(ui->serial_combo_box->itemText(current_port_index));
 }
 
 void MainWindow::on_pb_error_cleaner_clicked()
@@ -228,16 +202,21 @@ void MainWindow::on_pb_error_cleaner_clicked()
     ui->pb_error_cleaner->setVisible(false);
 }
 
+void MainWindow::on_usr_critical_error(bool show_clear_btn)
+{
+    ui->pb_error_cleaner->setVisible(show_clear_btn);
+}
+
 void MainWindow::on_all_reset_1_clicked()
 {
-    QMessageBox *mesg;
-    mesg = new QMessageBox(QMessageBox::Information,"Conformation", "factory reset?");
-    mesg->addButton(QMessageBox::Yes);
-    mesg->addButton(QMessageBox::No);
-    mesg->show();
-    if(mesg->exec()==QMessageBox::Yes){
-        emit send_command("lsfactrst",0,"");
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Warning, "Factory Reset",
+                           "Are you sure you want to reset to factory settings?\n"
+                           "The device will be rebooted.",
+                           QMessageBox::Yes | QMessageBox::No, this);
+    if(mesg->exec() == QMessageBox::Yes){
+        conn->data_common_write("lsfactrst");
     }
+    delete mesg;
 }
 
 void MainWindow::on_all_save_seed_clicked()
@@ -257,21 +236,29 @@ void MainWindow::on_all_save_in_memory_clicked()
 
 void MainWindow::connection_state(int state)
 {
+    QString connectionInfo;
+    if(conn->connection_is_tcp){
+        connectionInfo = QString("TCP: %1:%2").arg(conn->ip).arg(7878);
+    } else {
+        connectionInfo = QString("Serial: %1").arg(conn->serial);
+    }
+    
     switch (state){
     case 0:
-        ui->l_footer_connection_status->setText("Состояние : ОТКЛЮЧЕНО");
+        ui->l_footer_connection_status->setText("Disconnected");
         break;
     case 1:
-        ui->l_footer_connection_status->setText("Состояние : ПОДКЛЮЧЕНО");
+        ui->l_footer_connection_status->setText(QString("Connected | %1").arg(connectionInfo));
         break;
     case 2:
-        ui->l_footer_connection_status->setText("Состояние : ПЕРЕПОДКЛЮЧЕНИЕ...");
+        ui->l_footer_connection_status->setText(QString("Reconnecting... | %1").arg(connectionInfo));
+        break;
     }
-
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
+    Q_UNUSED(target);
     if(event->type() == QEvent::KeyPress)
     {
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
@@ -296,7 +283,6 @@ void MainWindow::pass_controller(QKeyEvent *keyEvent)
         admin_pass=0;
     }
     if(admin_pass==5){
-        //ui->groupBox_2->setVisible(true);
         user_ui=false;
     }
 
@@ -313,7 +299,6 @@ void MainWindow::pass_controller(QKeyEvent *keyEvent)
         pass="";
     }
     if(user_pass==4){
-        //ui->groupBox_2->setVisible(false);
         user_ui=true;
     }
 
@@ -326,5 +311,133 @@ void MainWindow::on_disconnect_clicked()
     }else{
         conn->serial_disconnect();
     }
-    ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
+    connection_state(0);
+}
+
+void MainWindow::connection_timeout()
+{
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Critical,
+                                        "Connection Error",
+                                        "Failed to connect to device.\n\n"
+                                        "Maximum retry count exceeded.\n"
+                                        "Check connection and try again.",
+                                        QMessageBox::Ok);
+    mesg->exec();
+    delete mesg;    
+    connection_state(0);
+}
+
+void MainWindow::on_emission_changed(bool isActive)
+{
+    this->isEmissionActive = isActive;
+    Q_UNUSED(isActive);
+}
+
+void MainWindow::set_device_ip()
+{
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Set Device IP"),
+                                         tr("New IP Address:"), QLineEdit::Normal,
+                                         "192.168.26.220", &ok);
+    if (ok && !text.isEmpty()) {
+        conn->data_common_write("lsip", text);
+    }
+}
+
+void MainWindow::enter_bootloader()
+{
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Critical, "Bootloader",
+                           "Entering bootloader mode.\nConnection will be lost.",
+                           QMessageBox::Yes | QMessageBox::No, this);
+    if(mesg->exec() == QMessageBox::Yes){
+        conn->data_common_write("lsbootloader");
+    }
+    delete mesg;
+}
+
+void MainWindow::show_network_info_dialog()
+{
+    if (!networkDialog) {
+        networkDialog = new QDialog(this);
+        networkDialog->setWindowTitle(tr("Network Info"));
+        auto *layout = new QGridLayout(networkDialog);
+
+        layout->addWidget(new QLabel(tr("IP address:"), networkDialog), 0, 0);
+        networkIpEdit = new QLineEdit(networkDialog);
+        networkIpEdit->setInputMask("000.000.000.000; ");
+        networkIpEdit->setPlaceholderText("192.168.26.220");
+        networkIpEdit->setText(currentIp.isEmpty() ? ui->ip_adress->text() : currentIp);
+        layout->addWidget(networkIpEdit, 0, 1);
+
+        auto *btnReadIp = new QPushButton(tr("Read"), networkDialog);
+        auto *btnSetIp  = new QPushButton(tr("Set"),  networkDialog);
+        layout->addWidget(btnReadIp, 0, 2);
+        layout->addWidget(btnSetIp,  0, 3);
+
+        layout->addWidget(new QLabel(tr("MAC address:"), networkDialog), 1, 0);
+        networkMacEdit = new QLineEdit(networkDialog);
+        networkMacEdit->setInputMask("HH:HH:HH:HH:HH:HH; ");
+        networkMacEdit->setPlaceholderText("11:22:33:44:55:66");
+        networkMacEdit->setText(currentMac);
+        layout->addWidget(networkMacEdit, 1, 1);
+
+        auto *btnReadMac = new QPushButton(tr("Read"), networkDialog);
+        auto *btnSetMac  = new QPushButton(tr("Set"),  networkDialog);
+        layout->addWidget(btnReadMac, 1, 2);
+        layout->addWidget(btnSetMac,  1, 3);
+
+        auto *btnClose = new QPushButton(tr("Close"), networkDialog);
+        layout->addWidget(btnClose, 2, 0, 1, 4);
+
+        connect(btnClose, &QPushButton::clicked, networkDialog, &QDialog::close);
+
+        // lgip / lsip <ip>
+        connect(btnReadIp, &QPushButton::clicked, this, [this]() {
+            conn->data_common_write("lgip");
+        });
+        connect(btnSetIp, &QPushButton::clicked, this, [this]() {
+            if (networkIpEdit)
+                conn->data_common_write("lsip", networkIpEdit->text());
+        });
+
+        // lgmac / lsmac <xx xx xx xx xx xx>
+        connect(btnReadMac, &QPushButton::clicked, this, [this]() {
+            conn->data_common_write("lgmac");
+        });
+        connect(btnSetMac, &QPushButton::clicked, this, [this]() {
+            if (networkMacEdit) {
+                // Convert HH:HH:HH:HH:HH:HH -> xx xx xx xx xx xx
+                QString mac = networkMacEdit->text().replace(':', ' ');
+                conn->data_common_write("lsmac", mac);
+            }
+        });
+    }
+
+    if (networkIpEdit) {
+        networkIpEdit->setText(currentIp.isEmpty() ? ui->ip_adress->text() : currentIp);
+    }
+    if (networkMacEdit) {
+        // Display MAC in HH:HH:HH:HH:HH:HH format
+        networkMacEdit->setText(currentMac.replace(' ', ':'));
+    }
+
+    networkDialog->show();
+    networkDialog->raise();
+    networkDialog->activateWindow();
+}
+
+void MainWindow::on_network_info(QString type, QString value)
+{
+    if (type == "IP") {
+        currentIp = value;
+        ui->ip_adress->setText(value);
+        if (networkIpEdit) {
+            networkIpEdit->setText(value);
+        }
+    } else if (type == "MAC") {
+        currentMac = value;
+        if (networkMacEdit) {
+            networkMacEdit->setText(value);
+        }
+    }
 }

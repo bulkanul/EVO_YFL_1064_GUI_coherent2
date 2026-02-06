@@ -13,10 +13,6 @@
 
 device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
-//    tmr=new QTimer();
-//    tmr->setInterval(300); // was 1200
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();
 }
 
 bool device_panel::eventFilter(QObject *target, QEvent *event)
@@ -107,55 +103,8 @@ void device_panel::data_received(QStringList message)
     }else if(param_check(message,0)=="lrconf" && param_check(message,1)=="usr"){
         raw_params=message;
         emit command_proofed();
-    }/*else if(param_check(message,1)=="usr"){
-        raw_params=message;
-        count_no_responce=0;
-        enable_widget(true);
-        if(silence_count<=0){
-            emit command_proofed();
-        }else{
-            silence_count--;
-        }
-    }*/
+    }
 }
-
-//void device_panel::data_received(QStringList message)
-//{
-////    qDebug()<<"data_received call"<<message<<ID<<family<<key;
-//    if((param_check(message,2).toInt()==ID && param_check(message,1)==family)){// || (param_check(message,0).contains("conf") && param_check(message,1)=="usr")){
-//        raw_params=message;
-//        count_no_responce=0;
-//        enable_widget(key);
-//        if(silence_count<=0){
-//            emit command_proofed();
-//        }else{
-//            silence_count--;
-//        }
-//    }
-////    if(message.size() == 2 && param_check(message, 1) != "NL_SSL_eth_board_29032023" && family == "debug"){ //debug only
-////        raw_params=message;
-////        emit command_proofed();
-////    }
-//    if(param_check(message,0)=="lrstatus"){
-//       // qDebug();
-//    }
-//    if(param_check(message,3)=="ERR"){
-//        enable_widget(false);
-//    }
-//    if(param_check(raw_params,0)=="lrconf" && family!="usr"){
-//        writed_values.clear();
-//        for (int i=3;i<prefs.length()+3;i++ ) {
-//             prefs[i-3].value=param_check(raw_params,i).toDouble();
-//            if(dialog!=nullptr){
-////                if(container_values.length()>(i-3) && prefs.length()>(i-3)){
-//                    container_values[i-3]->setText(QString::number(param_check(raw_params,i).toDouble(),'d',prefs[i-3].precision));
-////                }
-//            }
-//        }
-//        first_pref_cmd=true;
-////        if(dialog.isVisible())pref_status->setText("Сохранено");
-//    }
-//}
 
 void device_panel::sl_data_set(QString comm,int number,QString data)
 {
@@ -234,9 +183,9 @@ void device_panel::send_pref()
     emit sl_data_set("lsconf",ID,message);
 }
 
-QString device_panel::parse_bits(unsigned char mess,QStringList list){
+QString device_panel::parse_bits(int mess,QStringList list){
     QString answer;
-    for (int i=0;i<8;i++){
+    for (int i=0;i<list.size();i++){
          if(((mess & (1<<(i)))!=0 )){
             answer+= list[i]+'\n';
         }
@@ -245,14 +194,10 @@ QString device_panel::parse_bits(unsigned char mess,QStringList list){
 }
 
 void device_panel::call_msg_box(QString msg){
-//    if(error_displayer && msg!=""){
-//        error_displayer=false;
-
         QMessageBox *mesg;
-        mesg = new QMessageBox(QMessageBox::Information,family+" Ошибка", msg);
+        mesg = new QMessageBox(QMessageBox::Information, family + " Error", msg);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
-//    }
 }
 
 void device_panel::silence_counter(int count)

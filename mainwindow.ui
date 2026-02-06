@@ -128,7 +128,7 @@ QPushButton:hover
 }</string>
            </property>
            <property name="text">
-            <string>Главная</string>
+            <string>Main</string>
            </property>
            <property name="checkable">
             <bool>false</bool>
@@ -230,7 +230,7 @@ QPushButton:hover
 }</string>
            </property>
            <property name="text">
-            <string>Настройки подключения</string>
+            <string>Connection Settings</string>
            </property>
            <property name="checkable">
             <bool>false</bool>
@@ -314,7 +314,95 @@ QPushButton::hover {
 </string>
          </property>
          <property name="text">
-          <string>Очистить ошибки</string>
+          <string>Clear Errors</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_request_status">
+         <property name="maximumSize">
+          <size>
+           <width>130</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Request status from next device (debug: when auto telemetry is off)</string>
+         </property>
+         <property name="text">
+          <string>Request status</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_request_version">
+         <property name="maximumSize">
+          <size>
+           <width>130</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Request version (debug: when auto telemetry is off)</string>
+         </property>
+         <property name="text">
+          <string>Request version</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="all_reset_1">
+         <property name="maximumSize">
+          <size>
+           <width>130</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Reset device to factory settings (device will reboot)</string>
+         </property>
+         <property name="text">
+          <string>Factory Reset</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pb_bootloader">
+         <property name="maximumSize">
+          <size>
+           <width>130</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Enter bootloader mode (connection will be lost)</string>
+         </property>
+         <property name="text">
+          <string>Bootloader</string>
          </property>
         </widget>
        </item>
@@ -522,7 +610,10 @@ QPushButton::hover {
                      </font>
                     </property>
                     <property name="text">
-                     <string>192.168.35.220</string>
+                     <string>192.168.26.220</string>
+                    </property>
+                    <property name="inputMask">
+                     <string>000.000.000.000; </string>
                     </property>
                     <property name="maxLength">
                      <number>15</number>
@@ -563,7 +654,7 @@ QPushButton::hover {
               <item>
                <widget class="QRadioButton" name="rb_serial">
                 <property name="text">
-                 <string>Последовательный порт</string>
+                 <string>Serial Port</string>
                 </property>
                 <attribute name="buttonGroup">
                  <string notr="true">buttonGroup</string>
@@ -580,18 +671,27 @@ QPushButton::hover {
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
-                  <property name="maximumSize">
+                  <property name="minimumSize">
                    <size>
-                    <width>16777215</width>
+                    <width>28</width>
                     <height>22</height>
                    </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>28</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Refresh port list</string>
                   </property>
                   <property name="text">
                    <string/>
                   </property>
                   <property name="icon">
                    <iconset>
-                    <normaloff>images/refresh.png</normaloff>images/refresh.png</iconset>
+                    <normaloff>:/images/images/refresh.png</normaloff>:/images/images/refresh.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -671,6 +771,37 @@ QPushButton::hover {
                </property>
                <property name="text">
                 <string>Disconnect</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_network_info">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>27</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>27</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Network Info</string>
                </property>
               </widget>
              </item>
@@ -772,7 +903,7 @@ QPushButton::hover {
           <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
-          <string>Состояние : ОТКЛЮЧЕНО</string>
+          <string>Disconnected</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

@@ -16,7 +16,6 @@ class channel_panel : public QWidget
 public:
     explicit channel_panel(int num, QWidget *parent = nullptr);
     ~channel_panel();
-
     preamplifier_panel* preamp;
     amplifier_panel* amp;
 

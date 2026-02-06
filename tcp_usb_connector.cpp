@@ -37,6 +37,7 @@ void tcp_usb_connector::serial_connect(QString serial_port)
         _sSocket->flush();
         _sSocket->clear(QSerialPort::AllDirections);
         qDebug("serial port is opened SUCCESSFULLY");
+        display_connected();
     }
 }
 
@@ -91,7 +92,7 @@ void tcp_usb_connector::tcp_reconnect(void)
     if(reconnect){
         qDebug() << "tcp reconnecting ";
         emit connection_state(2);
-        _pSocket->abort();//something
+        _pSocket->abort();
         _pSocket->setProxy(QNetworkProxy::NoProxy);
         _pSocket->connectToHost(ip, quint16(port));
     }
@@ -111,6 +112,16 @@ void tcp_usb_connector::data_write(QString command,int number,QString data){
     if(logg) qDebug() << "Appended to fifo: " << fifo_command.last();
 }
 
+void tcp_usb_connector::data_common_write(QString command, QString args)
+{
+    QString message = command;
+    if(!args.isEmpty()){
+        message += " " + args;
+    }
+    fifo_command.append(message);
+    if(logg) qDebug() << "Common CMD to fifo: " << message;
+}
+
 void tcp_usb_connector::data_ver_write(QString command)
 {
      fifo_command.append("l"+command.toUtf8());
@@ -126,8 +137,10 @@ void tcp_usb_connector::sender()
     if(count>60){
         if(fifo_command.length()>0)
             fifo_command.removeFirst();
+#if AUTO_TELEMETRY_ENABLED
         data_ver_write("gvers");
         display_reconnect();
+#endif
     }
     if(fifo_command.length()>100){
         qDebug() << "danger overfull";
@@ -177,10 +190,21 @@ void tcp_usb_connector::init_connection(QString adress, int port)
 
 void tcp_usb_connector::get_command_pool()
 {
+#if AUTO_TELEMETRY_ENABLED
+    request_status_manual();
+#endif
+}
+
+void tcp_usb_connector::request_status_manual()
+{
     pool_count++;
     if(logg)qDebug()<<"sender count "<<count<<pool_count<<dev_list[pool_count%dev_list.length()];
     emit get_command(dev_list[pool_count%dev_list.length()]);
+}
 
+void tcp_usb_connector::request_version_manual()
+{
+    data_ver_write("gvers");
 }
 
 void tcp_usb_connector::data_received(){
@@ -189,19 +213,11 @@ void tcp_usb_connector::data_received(){
         raw_params=double_localizator(sketched_message.toUtf8());
     }else{
         if(connection_is_tcp){
-            do{
-                int bytes = _pSocket->bytesAvailable();
-                data = _pSocket->readLine();
-                raw_params=double_localizator(data);
-            }while(_pSocket->bytesAvailable() != 0);
+            data = _pSocket->readAll();
+        }else{
+            data = _sSocket->readAll();
         }
-        else{
-            do{
-                int bytes = _sSocket->bytesAvailable();
-                data = _sSocket->readLine();
-                raw_params=double_localizator(data);
-            }while(_sSocket->bytesAvailable() != 0);
-        }
+        raw_params=double_localizator(data);
     }
     if(raw_params.size()>=1){
         if(first_set_write){
@@ -213,23 +229,53 @@ void tcp_usb_connector::data_received(){
          first_set_write=false;
         }
         count=0;
+
         if(params(0)=="lrvers"){
-            if(params(1)!=(PROTOCOL_VERSION_NAME)){
+            QString fullVersion;
+            for(int i = 1; i < raw_params.size(); i++) {
+                if(i > 1) fullVersion += " ";
+                fullVersion += raw_params[i];
+            }
+            fullVersion = fullVersion.trimmed();
+            if(fullVersion != PROTOCOL_VERSION_NAME){
                 emit version_error();
             }else{
                 version_protection=false;
                 fifo_command.clear();
-//                data_write("lgconf sns", 0, "");
-//                data_write("lgconf snscw", 0, "");
-//                data_write("lgconf tec", 0, "");
-//                data_write("lgconf cb", 0, "");
-//                data_write("lgconf usr", 0, "");
             }
         }
-        /*if(logg)*/qDebug()<<"sl_data_readed "<<raw_params;
+        // lrip <xxx.xxx.xxx.xxx> [ERR]
+        else if(params(0)=="lrip") {
+            if(params(1) != "ERR" && raw_params.length() >= 2) {
+                emit network_info_received("IP", params(1));
+                emit ip_received(params(1));
+                qDebug() << "Device IP:" << params(1);
+            }
+        }
+        // lrmac <xx xx xx ...>
+        else if(params(0)=="lrmac") {
+            QString macStr;
+            for(int i=1; i<raw_params.length(); i++) {
+                if(raw_params[i] == "ERR") break;
+                macStr += raw_params[i];
+                if(i < raw_params.length()-1 && raw_params[i+1] != "ERR") macStr += " ";
+            }
+            if(!macStr.isEmpty()) {
+                emit network_info_received("MAC", macStr.trimmed());
+                emit mac_received(macStr.trimmed());
+            }
+        }
+        // lrfactrst [OK/ERR]
+        else if(params(0)=="lrfactrst") {
+            if(params(1)=="OK") qDebug() << "Factory Reset Successful";
+            else qDebug() << "Factory Reset Failed";
+        }
 
+        /*if(logg)*/qDebug()<<"sl_data_readed "<<raw_params;
         if(params(3).indexOf("ERR")!=0 && !version_protection){
+            if(params(0) != "lrip" && params(0) != "lrmac" && params(0) != "lrhash") {
                 emit send_to_dev(raw_params);
+            }
         }
         emit connection_state(1);
     }
@@ -295,6 +341,9 @@ void tcp_usb_connector::display_connected()
 {
     connected=true;
     count=0;
+#if AUTO_TELEMETRY_ENABLED
+    data_ver_write("gvers");
+#endif
 }
 
 void tcp_usb_connector::display_disconnected()
