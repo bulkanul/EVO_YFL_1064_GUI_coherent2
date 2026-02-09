@@ -156,8 +156,8 @@ void device_panel::on_toolButton_clicked()
     QHBoxLayout* splitter = new QHBoxLayout(dialog);
     QPushButton* cancel_button = new QPushButton("Close",dialog);
     QPushButton* write_button = new QPushButton("Write",dialog);
-    connect(cancel_button,SIGNAL(clicked()),dialog,SLOT(close()));
-    connect(write_button,SIGNAL(clicked()),this,SLOT(send_pref()));
+    connect(cancel_button,&QPushButton::clicked,dialog,&QDialog::close);
+    connect(write_button,&QPushButton::clicked,this,&device_panel::send_pref);
     splitter->addWidget(cancel_button);
     splitter->addWidget(write_button);
     dialogLay->addItem(splitter);

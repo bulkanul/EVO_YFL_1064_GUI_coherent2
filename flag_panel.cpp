@@ -9,8 +9,8 @@ flag_panel::flag_panel(QWidget *parent) :
     ID = 0;
     family = "usr";
 
-    connect(this, SIGNAL(enter_event(QObject*)), this, SLOT(key_catcher(QObject*)));
-    connect(this, SIGNAL(command_proofed()), this, SLOT(data_received_and_profed()));
+    connect(this,&device_panel::enter_event,this,&flag_panel::key_catcher);
+    connect(this,&device_panel::command_proofed,this,&flag_panel::data_received_and_profed);
 }
 
 flag_panel::~flag_panel()

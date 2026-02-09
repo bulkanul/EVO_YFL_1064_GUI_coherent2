@@ -8,8 +8,8 @@ amplifier_panel::amplifier_panel(QWidget *parent) :
     ui(new Ui::amplifier)
 {
     ui->setupUi(this);
-    connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
+    connect(this,&device_panel::enter_event,this,&amplifier_panel::key_catcher);
+    connect(this,&device_panel::command_proofed,this,&amplifier_panel::data_received_and_profed);
     family="amp";
 
     ui->w_error_box->hide();

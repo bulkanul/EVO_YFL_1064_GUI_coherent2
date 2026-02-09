@@ -8,8 +8,8 @@ amplifier_all_panel::amplifier_all_panel(QWidget *parent) :
     ui(new Ui::amplifier_all_panel)
 {
     ui->setupUi(this);
-    connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-    connect(this,SIGNAL(command_proofed()),this,SLOT(data_received_and_profed()));
+    connect(this,&device_panel::enter_event,this,&amplifier_all_panel::key_catcher);
+    connect(this,&device_panel::command_proofed,this,&amplifier_all_panel::data_received_and_profed);
     family="allamp";
 
     ui->dsb_power->installEventFilter(this);

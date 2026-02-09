@@ -8,8 +8,9 @@ generator_panel::generator_panel(QWidget *parent) :
     ui(new Ui::generator_panel)
 {
     ui->setupUi(this);
-    connect(this, SIGNAL(enter_event(QObject*)), this, SLOT(key_catcher(QObject*)));
-    connect(this, SIGNAL(command_proofed()), this, SLOT(data_received_and_profed()));
+    
+    connect(this,&device_panel::enter_event,this,&generator_panel::key_catcher);
+    connect(this,&device_panel::command_proofed,this,&generator_panel::data_received_and_profed);
     family = "gen";
 
     ui->w_error_box->hide();
