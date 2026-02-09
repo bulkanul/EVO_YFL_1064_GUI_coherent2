@@ -167,7 +167,7 @@ void tcp_usb_connector::data_write(QString command,int number,QString data){
 
 void tcp_usb_connector::raw_command_write(QByteArray cmd)
 {
-    qDebug()<<"fifo add raw "<<pref_identificator<<cmd;
+    if(logg)qDebug()<<"fifo add raw "<<pref_identificator<<cmd;
     crupto_fifo_command.append(cmd);
 }
 

@@ -20,12 +20,12 @@ public:
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QStringList errors_cb_list={"backward_pd_fault[0]",
-                                "forward_pd_fault[0]",
-                                "backward_pd_fault[1]",
-                                "forward_pd_fault[1]",
-                                "interlock_L_ok_H_bad",
-                                "sys_overheat",
+    QStringList errors_cb_list={"Backward_fault_0",
+                                "Forward_fault_0",
+                                "Backward_fault_1",
+                                "Forward_fault_1",
+                                "Interlock_L_ok_H_bad",
+                                "Sys_overheat",
                                 "Internal ERROR",
                                 "Internal ERROR" };
     QStringList errors_dc_list={"flag_REBOOTED",
