@@ -20,11 +20,11 @@ public:
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QStringList errors_cb_list={"Backward_fault_0",
-                                "Forward_fault_0",
-                                "Backward_fault_1",
-                                "Forward_fault_1",
-                                "Interlock_L_ok_H_bad",
+    QStringList errors_cb_list={"Backward fault_0",
+                                "Forward fault_0",
+                                "Backward fault_1",
+                                "Forward fault_1",
+                                "Interlock",
                                 "Sys_overheat",
                                 "Internal ERROR",
                                 "Internal ERROR" };
