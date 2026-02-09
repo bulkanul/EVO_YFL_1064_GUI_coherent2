@@ -33,24 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     dc1->ID=1;
     dc1->name_section()->setText("HPLD 1000 1");
 
-    tec1 = new tec_panel(this);
-    connect(tec1, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec1, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec1, SLOT(data_received(QStringList)));
-    connect(tec1, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec1, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec1);
-    tec1->ID=0;
-
-    tec2 = new tec_panel(this);
-    connect(tec2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
-    connect(this, SIGNAL(update_internal_address(QString)),tec2, SLOT(internal_address_write(QString)));
-    connect(conn, SIGNAL(send_to_dev(QStringList)),tec2, SLOT(data_received(QStringList)));
-    connect(tec2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
-    connect(conn, SIGNAL(get_command(QString)),tec2, SLOT(telemetry_call(QString)));
-    ui->groupBox->layout()->addWidget(tec2);
-    tec2->ID=1;
-
     cb = new cb_panel(this);
     cb->ID=0;
     connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
