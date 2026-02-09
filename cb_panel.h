@@ -22,9 +22,9 @@ public:
     QStringList command_setter;
     QStringList errors_cb_list={"sys overheat",
                                 "pd1 forward under",
-                                "alarm pd1",
                                 "pd2 backward over",
-                                "alarm pd 2",
+                                "Internal ERROR",
+                                "Internal ERROR",
                                 "Internal ERROR",
                                 "Internal ERROR",
                                 "Internal ERROR" };
