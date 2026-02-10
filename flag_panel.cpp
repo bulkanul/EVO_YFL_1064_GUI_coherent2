@@ -9,7 +9,7 @@ flag_panel::flag_panel(QWidget *parent) :
     ID = 0;
     family = "usr";
 
-    connect(this,&device_panel::enter_event,this,&flag_panel::key_catcher);
+    connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&flag_panel::data_received_and_profed);
 }
 
@@ -18,10 +18,10 @@ flag_panel::~flag_panel()
     delete ui;
 }
 
-void flag_panel::key_catcher(QObject *key)
-{
-    Q_UNUSED(key);
-}
+// void flag_panel::key_catcher(QObject *key)
+// {
+//     Q_UNUSED(key);
+// }
 
 void flag_panel::data_received_and_profed()
 {

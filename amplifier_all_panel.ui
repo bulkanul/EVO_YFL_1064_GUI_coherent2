@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>704</width>
-    <height>80</height>
+    <height>92</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,11 +38,11 @@
         <layout class="QVBoxLayout" name="layout_onoff_all_amp">
          <item>
           <widget class="QLabel" name="label_onoff_all_amp">
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
            <property name="text">
             <string>Off / On</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -188,7 +188,7 @@ QPushButton::disabled  {
       </widget>
      </item>
      <item row="1" column="0" colspan="7">
-      <widget class="QDoubleSpinBox" name="dsb_power">
+      <widget class="QDoubleSpinBox" name="power">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -283,7 +283,6 @@ QPushButton::disabled  {
         <font>
          <family>Arial</family>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>

@@ -17,7 +17,7 @@ public:
     ~flag_panel();
 
 private slots:
-    void key_catcher(QObject *key);
+    // void key_catcher(QObject *key);
     void data_received_and_profed();
     void on_pushButton_clicked();
     void on_pb_stop_onoff_clicked(bool checked);

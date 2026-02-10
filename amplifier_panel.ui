@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>662</width>
-    <height>121</height>
+    <height>122</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -52,22 +52,22 @@
          </property>
         </spacer>
        </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QLabel" name="label_onoff_amp">
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="text">
-          <string>Off / On</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QPushButton" name="pb_laser_onoff">
+          <widget class="QLabel" name="label_onoff_amp">
+           <property name="text">
+            <string>Off / On</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pb_laser_onoff">
              <property name="minimumSize">
               <size>
                <width>36</width>
@@ -252,7 +252,7 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="1" column="0" colspan="7">
-        <widget class="QDoubleSpinBox" name="dsb_power">
+        <widget class="QDoubleSpinBox" name="power">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>

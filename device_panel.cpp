@@ -41,6 +41,36 @@ bool device_panel::eventFilter(QObject *target, QEvent *event)
     return false;
 }
 
+void device_panel::key_catcher(QObject* key)
+{
+    QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
+                                        "Confirm",
+                                        "Send command to " + family + " " + QString::number(ID) + "?",
+                                        QMessageBox::Yes | QMessageBox::No);
+    if(mesg->exec() == QMessageBox::Yes){
+        QDoubleSpinBox* dspn = static_cast<QDoubleSpinBox*>(key);
+        QString paramName = key->objectName();
+        if (paramName.startsWith("dsb_")) {
+            paramName.remove(0, 4);
+        }
+        emit sl_data_set("ls" + paramName, ID, QString::number(dspn->value(), 'f', 2).replace(",", "."));
+    }
+    delete mesg;
+}
+
+void device_panel::check_error_state(int flags, int &error_code_member, QWidget* error_widget, QPushButton* details_btn)
+{
+    if (flags) {
+        error_code_member = flags;
+        if (error_widget) error_widget->show();
+        if (details_btn) details_btn->setVisible(true);
+        error_displayer = false;
+    } else {
+        if (error_widget) error_widget->hide();
+        if (details_btn) details_btn->setVisible(false);
+    }
+}
+
 void device_panel::auto_telemetry_call(QString family)
 {
     if(count_no_responce>6){

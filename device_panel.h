@@ -29,6 +29,7 @@ public:
     QStringList raw_params;
     QStringList double_localizator(QByteArray data);
     QString param_check(QStringList,int);
+    void check_error_state(int flags, int &error_code_member, QWidget* error_widget, QPushButton* details_btn);
     QList<QString> pref_names;
     QList<QString> writed_values;
     QList<QLabel*> container_values;
@@ -58,6 +59,7 @@ public slots:
     QString parse_bits(int mess,QStringList);
     void call_msg_box(QString);
     void silence_counter(int);
+    void key_catcher(QObject *key);
 
 private slots:
 

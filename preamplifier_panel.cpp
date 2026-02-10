@@ -8,7 +8,7 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
     ui(new Ui::preamplifier_panel)
 {
     ui->setupUi(this);
-    connect(this,&device_panel::enter_event,this,&preamplifier_panel::key_catcher);
+    connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&preamplifier_panel::data_received_and_profed);
     family="preamp";
 
@@ -37,15 +37,16 @@ void preamplifier_panel::data_received_and_profed()
 
         // [5] = flags
         int flags = param_check(raw_params, 5).toInt();
-        if (flags) {
-            error_code = flags;
-            ui->w_error_box->show();
-            ui->pushButton->setVisible(true);
-            error_displayer = false;
-        } else {
-            ui->w_error_box->hide();
-            ui->pushButton->setVisible(false);
-        }
+        check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
+        // if (flags) {
+        //     error_code = flags;
+        //     ui->w_error_box->show();
+        //     ui->pushButton->setVisible(true);
+        //     error_displayer = false;
+        // } else {
+        //     ui->w_error_box->hide();
+        //     ui->pushButton->setVisible(false);
+        // }
 
         // [6] = temp1, [7] = temp2
         ui->l_temp_0->setText(QString::number(param_check(raw_params, 6).toDouble(), 'f', 1) + " °C");
@@ -71,10 +72,10 @@ void preamplifier_panel::data_received_and_profed()
     }
 }
 
-void preamplifier_panel::key_catcher(QObject* key)
-{
-    Q_UNUSED(key);
-}
+// void preamplifier_panel::key_catcher(QObject* key)
+// {
+//     Q_UNUSED(key);
+// }
 
 
 void preamplifier_panel::on_pb_onoff_clicked(bool checked)

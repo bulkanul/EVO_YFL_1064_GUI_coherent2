@@ -8,11 +8,11 @@ amplifier_all_panel::amplifier_all_panel(QWidget *parent) :
     ui(new Ui::amplifier_all_panel)
 {
     ui->setupUi(this);
-    connect(this,&device_panel::enter_event,this,&amplifier_all_panel::key_catcher);
+    connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&amplifier_all_panel::data_received_and_profed);
     family="allamp";
 
-    ui->dsb_power->installEventFilter(this);
+    ui->power->installEventFilter(this);
 }
 
 amplifier_all_panel::~amplifier_all_panel()
@@ -56,20 +56,20 @@ void amplifier_all_panel::data_received_and_profed()
     }
 }
 
-void amplifier_all_panel::key_catcher(QObject* key)
-{
-    QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
-                                        "Confirm",
-                                        "Send command to all amplifiers?",
-                                        QMessageBox::Yes | QMessageBox::No);
-    if(mesg->exec()==QMessageBox::Yes){
-        if(key->objectName() == "dsb_power"){
-            // lspower allamp <id> <value>
-            emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value(), 'f', 2).replace(",", "."));
-        }
-    }
-    delete mesg;
-}
+// void amplifier_all_panel::key_catcher(QObject* key)
+// {
+//     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
+//                                         "Confirm",
+//                                         "Send command to all amplifiers?",
+//                                         QMessageBox::Yes | QMessageBox::No);
+//     if(mesg->exec()==QMessageBox::Yes){
+//         if(key->objectName() == "dsb_power"){
+//             // lspower allamp <id> <value>
+//             emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value(), 'f', 2).replace(",", "."));
+//         }
+//     }
+//     delete mesg;
+// }
 
 void amplifier_all_panel::on_pb_laser_onoff_clicked(bool checked)
 {
