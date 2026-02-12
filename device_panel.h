@@ -60,6 +60,7 @@ public slots:
     void call_msg_box(QString);
     void silence_counter(int);
     void key_catcher(QObject *key);
+    void on_on_off_button_clicked(bool checked);
 
 private slots:
 

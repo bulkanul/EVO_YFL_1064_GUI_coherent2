@@ -10,6 +10,8 @@ amplifier_all_panel::amplifier_all_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&amplifier_all_panel::data_received_and_profed);
+    connect(ui->pb_laser_onoff, &QPushButton::clicked, this, &device_panel::on_on_off_button_clicked);
+
     family="allamp";
 
     ui->power->installEventFilter(this);
@@ -71,8 +73,8 @@ void amplifier_all_panel::data_received_and_profed()
 //     delete mesg;
 // }
 
-void amplifier_all_panel::on_pb_laser_onoff_clicked(bool checked)
-{
-    // lsonoff allamp <id> <value>
-    send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-}
+// void amplifier_all_panel::on_pb_laser_onoff_clicked(bool checked)
+// {
+//     // lsonoff allamp <id> <value>
+//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
+// }

@@ -20,7 +20,7 @@ private slots:
     void auto_telemetry_call(QString family);
     void data_received_and_profed();
     // void key_catcher(QObject *key);
-    void on_pb_laser_onoff_clicked(bool checked);
+    // void on_pb_laser_onoff_clicked(bool checked);
 
 private:
     Ui::amplifier_all_panel *ui;

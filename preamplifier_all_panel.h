@@ -19,7 +19,7 @@ public:
 
 private slots:
     void auto_telemetry_call(QString family);
-    void on_pb_onoff_clicked(bool checked);
+    // void on_pb_onoff_clicked(bool checked);
     void data_received_and_profed();
     // void key_catcher(QObject *key);
 

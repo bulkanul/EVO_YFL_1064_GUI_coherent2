@@ -11,6 +11,8 @@ generator_panel::generator_panel(QWidget *parent) :
     
     connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&generator_panel::data_received_and_profed);
+    connect(ui->pb_laser_onoff, &QPushButton::clicked, this, &device_panel::on_on_off_button_clicked);
+
     family = "gen";
 
     ui->w_error_box->hide();
@@ -97,11 +99,11 @@ void generator_panel::data_received_and_profed()
 //     Q_UNUSED(key);
 // }
 
-void generator_panel::on_pb_laser_onoff_clicked(bool checked)
-{
-    ui->pb_laser_onoff->setChecked(!checked);
-    send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-}
+// void generator_panel::on_pb_laser_onoff_clicked(bool checked)
+// {
+//     ui->pb_laser_onoff->setChecked(!checked);
+//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
+// }
 
 void generator_panel::on_pushButton_clicked()
 {

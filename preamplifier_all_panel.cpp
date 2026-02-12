@@ -10,6 +10,8 @@ preamplifier_all_panel::preamplifier_all_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&preamplifier_all_panel::data_received_and_profed);
+    connect(ui->pb_onoff, &QPushButton::clicked, this, &device_panel::on_on_off_button_clicked);
+
     family="allpreamp";
 }
 
@@ -34,12 +36,12 @@ void preamplifier_all_panel::auto_telemetry_call(QString family)
     }
 }
 
-void preamplifier_all_panel::on_pb_onoff_clicked(bool checked)
-{
-    // lsonoff allpreamp <id> <value>
-    ui->pb_onoff->setChecked(!checked);
-    send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-}
+// void preamplifier_all_panel::on_pb_onoff_clicked(bool checked)
+// {
+//     // lsonoff allpreamp <id> <value>
+//     ui->pb_onoff->setChecked(!checked);
+//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
+// }
 
 void preamplifier_all_panel::data_received_and_profed()
 {

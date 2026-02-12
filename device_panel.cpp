@@ -234,3 +234,12 @@ void device_panel::silence_counter(int count)
 {
     silence_count=count;
 }
+
+void device_panel::on_on_off_button_clicked(bool checked)
+{
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if (!button) return;
+    button->setChecked(!checked);
+    emit sl_data_set("lsonoff", ID, QString::number(checked ? 1 : 0));
+    silence_counter(2);
+}

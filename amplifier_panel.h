@@ -33,7 +33,7 @@ public:
 private slots:
     void data_received_and_profed();
     // void key_catcher(QObject *key);
-    void on_pb_laser_onoff_clicked(bool checked);
+    // void on_pb_laser_onoff_clicked(bool checked);
     void on_pb_pilot_onoff_clicked(bool checked);
     void on_pushButton_clicked();
 
