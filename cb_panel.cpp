@@ -81,12 +81,17 @@ void cb_panel::telemetry_call(QString family)
         if(flag){
           this->setEnabled(true);
           QString temp;
-          if(count%3==0)
+          if(count%5==0)
             temp=QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%3==1)
+          else if(count%5==1)
             temp =QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%3==2)
+          else if(count%5==2)
             temp =QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
+          else if(count%5==3)
+            temp =QString("t"+internal_address+"89200"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000");
+          else if(count%5==4)
+            temp =QString("t"+internal_address+"89200"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000");
+
           emit send_command(temp.toUtf8()+'\r');
         }else
           emit send_command(commands[counter].toUtf8()+'\r');
