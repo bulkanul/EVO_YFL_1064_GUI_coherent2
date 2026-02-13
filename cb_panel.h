@@ -17,17 +17,21 @@ public:
     int auto_call=6;
     bool connection_lost=true;
     QList <QLabel*> labels;
+    QList <QDoubleSpinBox*> max_curr_list;
+    QList <QDoubleSpinBox*> curr_treash_list;
+    int dsb_filler;
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QStringList errors_cb_list={"Backward fault_0",
-                                "Forward fault_0",
-                                "Backward fault_1",
-                                "Forward fault_1",
-                                "Interlock",
-                                "Sys_overheat",
-                                "Internal ERROR",
-                                "Internal ERROR" };
+    QStringList errors_cb_list={"Backward fault",
+                                "Forward fault",
+                                "Inner ERROR",
+                                "QBH",
+                                "Inner ERROR",
+                                "Inner ERROR",
+                                "Interlock_L_ok_H_bad",
+                                "AC_DC_problem",
+                                "Sys_overheat" };
     QStringList errors_dc_list={"flag_REBOOTED",
                                 "flag_ALARM_INTERLOCK",
                                 "flag_Overtemp",

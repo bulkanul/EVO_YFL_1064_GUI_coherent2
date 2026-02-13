@@ -36,65 +36,13 @@ public:
     QSpacerItem *horizontalSpacer_14;
     QWidget *ns_widget;
     QGridLayout *gridLayout;
-    QGroupBox *groupBox_16;
-    QGridLayout *gridLayout_2;
-    QVBoxLayout *verticalLayout_31;
-    QLabel *label_29;
-    QHBoxLayout *horizontalLayout_21;
-    QDoubleSpinBox *forward_treashold;
-    QVBoxLayout *verticalLayout_35;
-    QLabel *label_31;
-    QHBoxLayout *horizontalLayout_23;
-    QDoubleSpinBox *backward_treashold;
-    QVBoxLayout *verticalLayout_33;
-    QLabel *label_33;
-    QHBoxLayout *horizontalLayout_25;
-    QDoubleSpinBox *forward_treashold_2;
-    QVBoxLayout *verticalLayout_36;
-    QLabel *label_34;
-    QHBoxLayout *horizontalLayout_26;
-    QDoubleSpinBox *backward_treashold_2;
-    QGroupBox *groupBox_12;
-    QHBoxLayout *horizontalLayout_3;
-    QVBoxLayout *verticalLayout_29;
-    QLabel *label_24;
-    QHBoxLayout *horizontalLayout_17;
-    QDoubleSpinBox *hpld_curr_0;
-    QVBoxLayout *verticalLayout_34;
-    QLabel *label_30;
-    QHBoxLayout *horizontalLayout_22;
-    QDoubleSpinBox *hpld_curr_1;
-    QGroupBox *groupBox_14;
-    QHBoxLayout *horizontalLayout_4;
-    QVBoxLayout *verticalLayout;
-    QLabel *label;
-    QDoubleSpinBox *therm_resis;
-    QVBoxLayout *verticalLayout_3;
-    QLabel *label_2;
-    QDoubleSpinBox *therm_vref;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *label_3;
-    QDoubleSpinBox *therm_beta;
-    QSpacerItem *verticalSpacer_2;
-    QGroupBox *groupBox_19;
-    QVBoxLayout *verticalLayout_14;
-    QDoubleSpinBox *over_temp;
-    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout_16;
     QLabel *label_11;
     QFormLayout *formLayout;
-    QLabel *label_35;
-    QLabel *hpld_curr_label_0;
-    QLabel *label_36;
-    QLabel *hpld_curr_label_1;
     QLabel *label_38;
     QLabel *forward_treashold_label;
-    QLabel *label_42;
-    QLabel *forward_treashold_label_2;
     QLabel *label_39;
     QLabel *backward_treashold_label;
-    QLabel *label_43;
-    QLabel *backward_treashold_label_2;
     QLabel *label_52;
     QLabel *therm_resis_label;
     QLabel *label_54;
@@ -110,22 +58,114 @@ public:
     QLabel *cur_temp_1;
     QLabel *label_40;
     QLabel *pd_forward;
-    QLabel *label_44;
-    QLabel *pd_forward_2;
     QLabel *label_41;
     QLabel *pd_backward;
-    QLabel *label_45;
-    QLabel *pd_backward_2;
     QLabel *label_error;
     QPushButton *button_error;
     QSpacerItem *verticalSpacer;
     QFrame *line;
+    QGroupBox *groupBox_16;
+    QGridLayout *gridLayout_2;
+    QVBoxLayout *verticalLayout_31;
+    QLabel *label_29;
+    QHBoxLayout *horizontalLayout_21;
+    QDoubleSpinBox *forward_treashold;
+    QVBoxLayout *verticalLayout_35;
+    QLabel *label_31;
+    QHBoxLayout *horizontalLayout_23;
+    QDoubleSpinBox *backward_treashold;
+    QGroupBox *groupBox_19;
+    QVBoxLayout *verticalLayout_14;
+    QDoubleSpinBox *over_temp;
+    QGroupBox *groupBox_14;
+    QVBoxLayout *verticalLayout_5;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_3;
+    QDoubleSpinBox *therm_beta;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_2;
+    QDoubleSpinBox *therm_vref;
+    QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QDoubleSpinBox *therm_resis;
+    QSpacerItem *horizontalSpacer;
+    QGroupBox *groupBox_18;
+    QGridLayout *gridLayout_5;
+    QVBoxLayout *verticalLayout_52;
+    QLabel *label_59;
+    QHBoxLayout *horizontalLayout_41;
+    QDoubleSpinBox *curr_max_3;
+    QVBoxLayout *verticalLayout_55;
+    QLabel *label_63;
+    QHBoxLayout *horizontalLayout_45;
+    QDoubleSpinBox *curr_max_6;
+    QVBoxLayout *verticalLayout_34;
+    QLabel *label_60;
+    QHBoxLayout *horizontalLayout_42;
+    QDoubleSpinBox *curr_max_1;
+    QVBoxLayout *verticalLayout_50;
+    QLabel *label_57;
+    QHBoxLayout *horizontalLayout_39;
+    QDoubleSpinBox *curr_max_0;
+    QVBoxLayout *verticalLayout_51;
+    QLabel *label_58;
+    QHBoxLayout *horizontalLayout_40;
+    QDoubleSpinBox *curr_max_2;
+    QVBoxLayout *verticalLayout_53;
+    QLabel *label_61;
+    QHBoxLayout *horizontalLayout_43;
+    QDoubleSpinBox *curr_max_4;
+    QVBoxLayout *verticalLayout_54;
+    QLabel *label_62;
+    QHBoxLayout *horizontalLayout_44;
+    QDoubleSpinBox *curr_max_5;
+    QVBoxLayout *verticalLayout_56;
+    QLabel *label_64;
+    QHBoxLayout *horizontalLayout_46;
+    QDoubleSpinBox *curr_max_7;
+    QGroupBox *groupBox_17;
+    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout_41;
+    QLabel *label_43;
+    QHBoxLayout *horizontalLayout_29;
+    QDoubleSpinBox *diode_treshold_6;
+    QVBoxLayout *verticalLayout_32;
+    QLabel *label_30;
+    QHBoxLayout *horizontalLayout_22;
+    QDoubleSpinBox *diode_treshold_1;
+    QVBoxLayout *verticalLayout_39;
+    QLabel *label_37;
+    QHBoxLayout *horizontalLayout_27;
+    QDoubleSpinBox *diode_treshold_4;
+    QVBoxLayout *verticalLayout_37;
+    QLabel *label_33;
+    QHBoxLayout *horizontalLayout_25;
+    QDoubleSpinBox *diode_treshold_2;
+    QVBoxLayout *verticalLayout_36;
+    QLabel *label_32;
+    QHBoxLayout *horizontalLayout_24;
+    QDoubleSpinBox *diode_treshold_0;
+    QVBoxLayout *verticalLayout_38;
+    QLabel *label_34;
+    QHBoxLayout *horizontalLayout_26;
+    QDoubleSpinBox *diode_treshold_3;
+    QVBoxLayout *verticalLayout_40;
+    QLabel *label_42;
+    QHBoxLayout *horizontalLayout_28;
+    QDoubleSpinBox *diode_treshold_5;
+    QVBoxLayout *verticalLayout_42;
+    QLabel *label_46;
+    QHBoxLayout *horizontalLayout_30;
+    QDoubleSpinBox *diode_treshold_7;
+    QGroupBox *groupBox_12;
+    QHBoxLayout *horizontalLayout_3;
+    QDoubleSpinBox *voltage_pl;
 
     void setupUi(QWidget *cb_panel)
     {
         if (cb_panel->objectName().isEmpty())
             cb_panel->setObjectName("cb_panel");
-        cb_panel->resize(1003, 580);
+        cb_panel->resize(1003, 437);
         verticalLayout_2 = new QVBoxLayout(cb_panel);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -165,13 +205,243 @@ public:
         ns_widget->setMaximumSize(QSize(16777215, 16777215));
         gridLayout = new QGridLayout(ns_widget);
         gridLayout->setObjectName("gridLayout");
-        groupBox_16 = new QGroupBox(ns_widget);
-        groupBox_16->setObjectName("groupBox_16");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
+        verticalLayout_16 = new QVBoxLayout();
+        verticalLayout_16->setSpacing(6);
+        verticalLayout_16->setObjectName("verticalLayout_16");
+        verticalLayout_16->setSizeConstraint(QLayout::SizeConstraint::SetNoConstraint);
+        verticalLayout_16->setContentsMargins(0, 0, 0, 0);
+        label_11 = new QLabel(ns_widget);
+        label_11->setObjectName("label_11");
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(groupBox_16->sizePolicy().hasHeightForWidth());
-        groupBox_16->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(label_11->sizePolicy().hasHeightForWidth());
+        label_11->setSizePolicy(sizePolicy);
+        label_11->setMinimumSize(QSize(220, 0));
+        label_11->setMaximumSize(QSize(220, 100000));
+        QFont font1;
+        font1.setPointSize(12);
+        font1.setBold(true);
+        font1.setUnderline(true);
+        font1.setKerning(true);
+        label_11->setFont(font1);
+
+        verticalLayout_16->addWidget(label_11);
+
+        formLayout = new QFormLayout();
+        formLayout->setObjectName("formLayout");
+        label_38 = new QLabel(ns_widget);
+        label_38->setObjectName("label_38");
+        label_38->setMinimumSize(QSize(120, 0));
+        label_38->setMaximumSize(QSize(120, 16777215));
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Arial")});
+        font2.setPointSize(12);
+        label_38->setFont(font2);
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, label_38);
+
+        forward_treashold_label = new QLabel(ns_widget);
+        forward_treashold_label->setObjectName("forward_treashold_label");
+        forward_treashold_label->setMinimumSize(QSize(80, 0));
+        forward_treashold_label->setMaximumSize(QSize(80, 16777215));
+        QFont font3;
+        font3.setPointSize(12);
+        font3.setBold(true);
+        forward_treashold_label->setFont(font3);
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, forward_treashold_label);
+
+        label_39 = new QLabel(ns_widget);
+        label_39->setObjectName("label_39");
+        label_39->setMinimumSize(QSize(120, 0));
+        label_39->setMaximumSize(QSize(120, 16777215));
+        label_39->setFont(font2);
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_39);
+
+        backward_treashold_label = new QLabel(ns_widget);
+        backward_treashold_label->setObjectName("backward_treashold_label");
+        backward_treashold_label->setMinimumSize(QSize(80, 0));
+        backward_treashold_label->setMaximumSize(QSize(80, 16777215));
+        backward_treashold_label->setFont(font3);
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, backward_treashold_label);
+
+        label_52 = new QLabel(ns_widget);
+        label_52->setObjectName("label_52");
+        label_52->setMinimumSize(QSize(120, 0));
+        label_52->setMaximumSize(QSize(120, 16777215));
+        label_52->setFont(font2);
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_52);
+
+        therm_resis_label = new QLabel(ns_widget);
+        therm_resis_label->setObjectName("therm_resis_label");
+        therm_resis_label->setMinimumSize(QSize(80, 0));
+        therm_resis_label->setMaximumSize(QSize(80, 16777215));
+        therm_resis_label->setFont(font3);
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, therm_resis_label);
+
+        label_54 = new QLabel(ns_widget);
+        label_54->setObjectName("label_54");
+        label_54->setMinimumSize(QSize(120, 0));
+        label_54->setMaximumSize(QSize(120, 16777215));
+        label_54->setFont(font2);
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_54);
+
+        therm_vref_label = new QLabel(ns_widget);
+        therm_vref_label->setObjectName("therm_vref_label");
+        therm_vref_label->setMinimumSize(QSize(80, 0));
+        therm_vref_label->setMaximumSize(QSize(80, 16777215));
+        therm_vref_label->setFont(font3);
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, therm_vref_label);
+
+        label_53 = new QLabel(ns_widget);
+        label_53->setObjectName("label_53");
+        label_53->setMinimumSize(QSize(120, 0));
+        label_53->setMaximumSize(QSize(120, 16777215));
+        label_53->setFont(font2);
+
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_53);
+
+        therm_beta_label = new QLabel(ns_widget);
+        therm_beta_label->setObjectName("therm_beta_label");
+        therm_beta_label->setMinimumSize(QSize(80, 0));
+        therm_beta_label->setMaximumSize(QSize(80, 16777215));
+        therm_beta_label->setFont(font3);
+
+        formLayout->setWidget(4, QFormLayout::FieldRole, therm_beta_label);
+
+        label_55 = new QLabel(ns_widget);
+        label_55->setObjectName("label_55");
+        label_55->setMinimumSize(QSize(120, 0));
+        label_55->setMaximumSize(QSize(120, 16777215));
+        label_55->setFont(font2);
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_55);
+
+        over_temp_label = new QLabel(ns_widget);
+        over_temp_label->setObjectName("over_temp_label");
+        over_temp_label->setMinimumSize(QSize(80, 0));
+        over_temp_label->setMaximumSize(QSize(80, 16777215));
+        over_temp_label->setFont(font3);
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, over_temp_label);
+
+        line_2 = new QFrame(ns_widget);
+        line_2->setObjectName("line_2");
+        line_2->setMinimumSize(QSize(40, 0));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        formLayout->setWidget(6, QFormLayout::SpanningRole, line_2);
+
+        label_50 = new QLabel(ns_widget);
+        label_50->setObjectName("label_50");
+        label_50->setMinimumSize(QSize(120, 0));
+        label_50->setMaximumSize(QSize(120, 16777215));
+        label_50->setFont(font2);
+
+        formLayout->setWidget(7, QFormLayout::LabelRole, label_50);
+
+        cur_temp_0 = new QLabel(ns_widget);
+        cur_temp_0->setObjectName("cur_temp_0");
+        cur_temp_0->setMinimumSize(QSize(80, 0));
+        cur_temp_0->setMaximumSize(QSize(80, 16777215));
+        cur_temp_0->setFont(font3);
+
+        formLayout->setWidget(7, QFormLayout::FieldRole, cur_temp_0);
+
+        label_56 = new QLabel(ns_widget);
+        label_56->setObjectName("label_56");
+        label_56->setMinimumSize(QSize(120, 0));
+        label_56->setMaximumSize(QSize(120, 16777215));
+        label_56->setFont(font2);
+
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_56);
+
+        cur_temp_1 = new QLabel(ns_widget);
+        cur_temp_1->setObjectName("cur_temp_1");
+        cur_temp_1->setMinimumSize(QSize(80, 0));
+        cur_temp_1->setMaximumSize(QSize(80, 16777215));
+        cur_temp_1->setFont(font3);
+
+        formLayout->setWidget(8, QFormLayout::FieldRole, cur_temp_1);
+
+        label_40 = new QLabel(ns_widget);
+        label_40->setObjectName("label_40");
+        label_40->setMinimumSize(QSize(120, 0));
+        label_40->setMaximumSize(QSize(120, 16777215));
+        label_40->setFont(font2);
+
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_40);
+
+        pd_forward = new QLabel(ns_widget);
+        pd_forward->setObjectName("pd_forward");
+        pd_forward->setMinimumSize(QSize(80, 0));
+        pd_forward->setMaximumSize(QSize(80, 16777215));
+        pd_forward->setFont(font3);
+
+        formLayout->setWidget(9, QFormLayout::FieldRole, pd_forward);
+
+        label_41 = new QLabel(ns_widget);
+        label_41->setObjectName("label_41");
+        label_41->setMinimumSize(QSize(120, 0));
+        label_41->setMaximumSize(QSize(120, 16777215));
+        label_41->setFont(font2);
+
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_41);
+
+        pd_backward = new QLabel(ns_widget);
+        pd_backward->setObjectName("pd_backward");
+        pd_backward->setMinimumSize(QSize(80, 0));
+        pd_backward->setMaximumSize(QSize(80, 16777215));
+        pd_backward->setFont(font3);
+
+        formLayout->setWidget(10, QFormLayout::FieldRole, pd_backward);
+
+        label_error = new QLabel(ns_widget);
+        label_error->setObjectName("label_error");
+        label_error->setMinimumSize(QSize(120, 0));
+        label_error->setMaximumSize(QSize(120, 16777215));
+        label_error->setFont(font2);
+
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_error);
+
+        button_error = new QPushButton(ns_widget);
+        button_error->setObjectName("button_error");
+
+        formLayout->setWidget(11, QFormLayout::FieldRole, button_error);
+
+
+        verticalLayout_16->addLayout(formLayout);
+
+        verticalSpacer = new QSpacerItem(20, 5, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        verticalLayout_16->addItem(verticalSpacer);
+
+
+        gridLayout->addLayout(verticalLayout_16, 0, 7, 4, 1);
+
+        line = new QFrame(ns_widget);
+        line->setObjectName("line");
+        line->setMinimumSize(QSize(0, 0));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(line, 0, 6, 7, 1);
+
+        groupBox_16 = new QGroupBox(ns_widget);
+        groupBox_16->setObjectName("groupBox_16");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(groupBox_16->sizePolicy().hasHeightForWidth());
+        groupBox_16->setSizePolicy(sizePolicy1);
         groupBox_16->setFlat(false);
         groupBox_16->setCheckable(false);
         gridLayout_2 = new QGridLayout(groupBox_16);
@@ -182,9 +452,9 @@ public:
         label_29 = new QLabel(groupBox_16);
         label_29->setObjectName("label_29");
         label_29->setMinimumSize(QSize(0, 0));
-        QFont font1;
-        font1.setPointSize(12);
-        label_29->setFont(font1);
+        QFont font4;
+        font4.setPointSize(12);
+        label_29->setFont(font4);
         label_29->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_31->addWidget(label_29);
@@ -193,16 +463,16 @@ public:
         horizontalLayout_21->setObjectName("horizontalLayout_21");
         forward_treashold = new QDoubleSpinBox(groupBox_16);
         forward_treashold->setObjectName("forward_treashold");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
-        sizePolicy1.setHorizontalStretch(100);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(forward_treashold->sizePolicy().hasHeightForWidth());
-        forward_treashold->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+        sizePolicy2.setHorizontalStretch(100);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(forward_treashold->sizePolicy().hasHeightForWidth());
+        forward_treashold->setSizePolicy(sizePolicy2);
         forward_treashold->setMinimumSize(QSize(50, 0));
         forward_treashold->setMaximumSize(QSize(16777215, 16777215));
-        QFont font2;
-        font2.setPointSize(13);
-        forward_treashold->setFont(font2);
+        QFont font5;
+        font5.setPointSize(13);
+        forward_treashold->setFont(font5);
         forward_treashold->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         forward_treashold->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         forward_treashold->setDecimals(2);
@@ -225,7 +495,7 @@ public:
         label_31 = new QLabel(groupBox_16);
         label_31->setObjectName("label_31");
         label_31->setMinimumSize(QSize(0, 0));
-        label_31->setFont(font1);
+        label_31->setFont(font4);
         label_31->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_35->addWidget(label_31);
@@ -234,11 +504,11 @@ public:
         horizontalLayout_23->setObjectName("horizontalLayout_23");
         backward_treashold = new QDoubleSpinBox(groupBox_16);
         backward_treashold->setObjectName("backward_treashold");
-        sizePolicy1.setHeightForWidth(backward_treashold->sizePolicy().hasHeightForWidth());
-        backward_treashold->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(backward_treashold->sizePolicy().hasHeightForWidth());
+        backward_treashold->setSizePolicy(sizePolicy2);
         backward_treashold->setMinimumSize(QSize(50, 0));
         backward_treashold->setMaximumSize(QSize(16777215, 16777215));
-        backward_treashold->setFont(font2);
+        backward_treashold->setFont(font5);
         backward_treashold->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         backward_treashold->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         backward_treashold->setDecimals(2);
@@ -256,274 +526,12 @@ public:
 
         gridLayout_2->addLayout(verticalLayout_35, 0, 2, 1, 1);
 
-        verticalLayout_33 = new QVBoxLayout();
-        verticalLayout_33->setObjectName("verticalLayout_33");
-        label_33 = new QLabel(groupBox_16);
-        label_33->setObjectName("label_33");
-        label_33->setMinimumSize(QSize(0, 0));
-        label_33->setFont(font1);
-        label_33->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        verticalLayout_33->addWidget(label_33);
-
-        horizontalLayout_25 = new QHBoxLayout();
-        horizontalLayout_25->setObjectName("horizontalLayout_25");
-        forward_treashold_2 = new QDoubleSpinBox(groupBox_16);
-        forward_treashold_2->setObjectName("forward_treashold_2");
-        sizePolicy1.setHeightForWidth(forward_treashold_2->sizePolicy().hasHeightForWidth());
-        forward_treashold_2->setSizePolicy(sizePolicy1);
-        forward_treashold_2->setMinimumSize(QSize(50, 0));
-        forward_treashold_2->setMaximumSize(QSize(16777215, 16777215));
-        forward_treashold_2->setFont(font2);
-        forward_treashold_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        forward_treashold_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        forward_treashold_2->setDecimals(2);
-        forward_treashold_2->setMinimum(0.000000000000000);
-        forward_treashold_2->setMaximum(3.000000000000000);
-        forward_treashold_2->setSingleStep(0.100000000000000);
-        forward_treashold_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        forward_treashold_2->setValue(0.000000000000000);
-
-        horizontalLayout_25->addWidget(forward_treashold_2);
-
-
-        verticalLayout_33->addLayout(horizontalLayout_25);
-
-
-        gridLayout_2->addLayout(verticalLayout_33, 1, 1, 1, 1);
-
-        verticalLayout_36 = new QVBoxLayout();
-        verticalLayout_36->setObjectName("verticalLayout_36");
-        label_34 = new QLabel(groupBox_16);
-        label_34->setObjectName("label_34");
-        label_34->setMinimumSize(QSize(0, 0));
-        label_34->setFont(font1);
-        label_34->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout_36->addWidget(label_34);
-
-        horizontalLayout_26 = new QHBoxLayout();
-        horizontalLayout_26->setObjectName("horizontalLayout_26");
-        backward_treashold_2 = new QDoubleSpinBox(groupBox_16);
-        backward_treashold_2->setObjectName("backward_treashold_2");
-        sizePolicy1.setHeightForWidth(backward_treashold_2->sizePolicy().hasHeightForWidth());
-        backward_treashold_2->setSizePolicy(sizePolicy1);
-        backward_treashold_2->setMinimumSize(QSize(50, 0));
-        backward_treashold_2->setMaximumSize(QSize(16777215, 16777215));
-        backward_treashold_2->setFont(font2);
-        backward_treashold_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        backward_treashold_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        backward_treashold_2->setDecimals(2);
-        backward_treashold_2->setMinimum(0.000000000000000);
-        backward_treashold_2->setMaximum(3.000000000000000);
-        backward_treashold_2->setSingleStep(0.100000000000000);
-        backward_treashold_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        backward_treashold_2->setValue(0.000000000000000);
-
-        horizontalLayout_26->addWidget(backward_treashold_2);
-
-
-        verticalLayout_36->addLayout(horizontalLayout_26);
-
-
-        gridLayout_2->addLayout(verticalLayout_36, 1, 2, 1, 1);
-
-
-        gridLayout->addWidget(groupBox_16, 1, 0, 2, 1);
-
-        groupBox_12 = new QGroupBox(ns_widget);
-        groupBox_12->setObjectName("groupBox_12");
-        sizePolicy.setHeightForWidth(groupBox_12->sizePolicy().hasHeightForWidth());
-        groupBox_12->setSizePolicy(sizePolicy);
-        groupBox_12->setFlat(false);
-        groupBox_12->setCheckable(false);
-        horizontalLayout_3 = new QHBoxLayout(groupBox_12);
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        horizontalLayout_3->setContentsMargins(-1, 12, -1, -1);
-        verticalLayout_29 = new QVBoxLayout();
-        verticalLayout_29->setObjectName("verticalLayout_29");
-        label_24 = new QLabel(groupBox_12);
-        label_24->setObjectName("label_24");
-        label_24->setMinimumSize(QSize(0, 0));
-        label_24->setFont(font1);
-        label_24->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout_29->addWidget(label_24);
-
-        horizontalLayout_17 = new QHBoxLayout();
-        horizontalLayout_17->setObjectName("horizontalLayout_17");
-        hpld_curr_0 = new QDoubleSpinBox(groupBox_12);
-        hpld_curr_0->setObjectName("hpld_curr_0");
-        sizePolicy1.setHeightForWidth(hpld_curr_0->sizePolicy().hasHeightForWidth());
-        hpld_curr_0->setSizePolicy(sizePolicy1);
-        hpld_curr_0->setMinimumSize(QSize(50, 0));
-        hpld_curr_0->setMaximumSize(QSize(16777215, 16777215));
-        hpld_curr_0->setFont(font2);
-        hpld_curr_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        hpld_curr_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        hpld_curr_0->setDecimals(2);
-        hpld_curr_0->setMinimum(0.000000000000000);
-        hpld_curr_0->setMaximum(26.000000000000000);
-        hpld_curr_0->setSingleStep(0.100000000000000);
-        hpld_curr_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        hpld_curr_0->setValue(0.000000000000000);
-
-        horizontalLayout_17->addWidget(hpld_curr_0);
-
-
-        verticalLayout_29->addLayout(horizontalLayout_17);
-
-
-        horizontalLayout_3->addLayout(verticalLayout_29);
-
-        verticalLayout_34 = new QVBoxLayout();
-        verticalLayout_34->setObjectName("verticalLayout_34");
-        label_30 = new QLabel(groupBox_12);
-        label_30->setObjectName("label_30");
-        label_30->setMinimumSize(QSize(0, 0));
-        label_30->setFont(font1);
-        label_30->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout_34->addWidget(label_30);
-
-        horizontalLayout_22 = new QHBoxLayout();
-        horizontalLayout_22->setObjectName("horizontalLayout_22");
-        hpld_curr_1 = new QDoubleSpinBox(groupBox_12);
-        hpld_curr_1->setObjectName("hpld_curr_1");
-        sizePolicy1.setHeightForWidth(hpld_curr_1->sizePolicy().hasHeightForWidth());
-        hpld_curr_1->setSizePolicy(sizePolicy1);
-        hpld_curr_1->setMinimumSize(QSize(50, 0));
-        hpld_curr_1->setMaximumSize(QSize(16777215, 16777215));
-        hpld_curr_1->setFont(font2);
-        hpld_curr_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        hpld_curr_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        hpld_curr_1->setDecimals(2);
-        hpld_curr_1->setMinimum(0.000000000000000);
-        hpld_curr_1->setMaximum(26.000000000000000);
-        hpld_curr_1->setSingleStep(0.100000000000000);
-        hpld_curr_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        hpld_curr_1->setValue(0.000000000000000);
-
-        horizontalLayout_22->addWidget(hpld_curr_1);
-
-
-        verticalLayout_34->addLayout(horizontalLayout_22);
-
-
-        horizontalLayout_3->addLayout(verticalLayout_34);
-
-
-        gridLayout->addWidget(groupBox_12, 0, 0, 1, 1);
-
-        groupBox_14 = new QGroupBox(ns_widget);
-        groupBox_14->setObjectName("groupBox_14");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(groupBox_14->sizePolicy().hasHeightForWidth());
-        groupBox_14->setSizePolicy(sizePolicy2);
-        groupBox_14->setFlat(false);
-        groupBox_14->setCheckable(false);
-        horizontalLayout_4 = new QHBoxLayout(groupBox_14);
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setContentsMargins(-1, 12, -1, -1);
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
-        label = new QLabel(groupBox_14);
-        label->setObjectName("label");
-        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout->addWidget(label);
-
-        therm_resis = new QDoubleSpinBox(groupBox_14);
-        therm_resis->setObjectName("therm_resis");
-        sizePolicy1.setHeightForWidth(therm_resis->sizePolicy().hasHeightForWidth());
-        therm_resis->setSizePolicy(sizePolicy1);
-        therm_resis->setMinimumSize(QSize(50, 0));
-        therm_resis->setMaximumSize(QSize(16777215, 16777215));
-        therm_resis->setFont(font2);
-        therm_resis->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        therm_resis->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        therm_resis->setDecimals(0);
-        therm_resis->setMinimum(0.000000000000000);
-        therm_resis->setMaximum(100000.000000000000000);
-        therm_resis->setSingleStep(1.000000000000000);
-        therm_resis->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        therm_resis->setValue(0.000000000000000);
-
-        verticalLayout->addWidget(therm_resis);
-
-
-        horizontalLayout_4->addLayout(verticalLayout);
-
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName("verticalLayout_3");
-        label_2 = new QLabel(groupBox_14);
-        label_2->setObjectName("label_2");
-        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout_3->addWidget(label_2);
-
-        therm_vref = new QDoubleSpinBox(groupBox_14);
-        therm_vref->setObjectName("therm_vref");
-        sizePolicy1.setHeightForWidth(therm_vref->sizePolicy().hasHeightForWidth());
-        therm_vref->setSizePolicy(sizePolicy1);
-        therm_vref->setMinimumSize(QSize(50, 0));
-        therm_vref->setMaximumSize(QSize(16777215, 16777215));
-        therm_vref->setFont(font2);
-        therm_vref->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        therm_vref->setDecimals(3);
-        therm_vref->setMinimum(0.000000000000000);
-        therm_vref->setMaximum(3.000000000000000);
-        therm_vref->setSingleStep(0.100000000000000);
-        therm_vref->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        therm_vref->setValue(0.000000000000000);
-
-        verticalLayout_3->addWidget(therm_vref);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_3);
-
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName("verticalLayout_4");
-        label_3 = new QLabel(groupBox_14);
-        label_3->setObjectName("label_3");
-        label_3->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        verticalLayout_4->addWidget(label_3);
-
-        therm_beta = new QDoubleSpinBox(groupBox_14);
-        therm_beta->setObjectName("therm_beta");
-        sizePolicy1.setHeightForWidth(therm_beta->sizePolicy().hasHeightForWidth());
-        therm_beta->setSizePolicy(sizePolicy1);
-        therm_beta->setMinimumSize(QSize(50, 0));
-        therm_beta->setMaximumSize(QSize(16777215, 16777215));
-        therm_beta->setFont(font2);
-        therm_beta->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        therm_beta->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        therm_beta->setDecimals(0);
-        therm_beta->setMinimum(0.000000000000000);
-        therm_beta->setMaximum(100000.000000000000000);
-        therm_beta->setSingleStep(1.000000000000000);
-        therm_beta->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        therm_beta->setValue(0.000000000000000);
-
-        verticalLayout_4->addWidget(therm_beta);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_4);
-
-
-        gridLayout->addWidget(groupBox_14, 3, 0, 1, 1);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_2, 7, 0, 1, 1);
+        gridLayout->addWidget(groupBox_16, 0, 0, 1, 2);
 
         groupBox_19 = new QGroupBox(ns_widget);
         groupBox_19->setObjectName("groupBox_19");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(groupBox_19->sizePolicy().hasHeightForWidth());
@@ -535,11 +543,11 @@ public:
         verticalLayout_14->setContentsMargins(-1, 12, -1, -1);
         over_temp = new QDoubleSpinBox(groupBox_19);
         over_temp->setObjectName("over_temp");
-        sizePolicy1.setHeightForWidth(over_temp->sizePolicy().hasHeightForWidth());
-        over_temp->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(over_temp->sizePolicy().hasHeightForWidth());
+        over_temp->setSizePolicy(sizePolicy2);
         over_temp->setMinimumSize(QSize(50, 0));
         over_temp->setMaximumSize(QSize(16777215, 16777215));
-        over_temp->setFont(font2);
+        over_temp->setFont(font5);
         over_temp->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         over_temp->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         over_temp->setDecimals(2);
@@ -552,336 +560,742 @@ public:
         verticalLayout_14->addWidget(over_temp);
 
 
-        gridLayout->addWidget(groupBox_19, 4, 0, 1, 1);
+        gridLayout->addWidget(groupBox_19, 1, 1, 1, 1);
+
+        groupBox_14 = new QGroupBox(ns_widget);
+        groupBox_14->setObjectName("groupBox_14");
+        sizePolicy3.setHeightForWidth(groupBox_14->sizePolicy().hasHeightForWidth());
+        groupBox_14->setSizePolicy(sizePolicy3);
+        groupBox_14->setFlat(false);
+        groupBox_14->setCheckable(false);
+        verticalLayout_5 = new QVBoxLayout(groupBox_14);
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_5->setContentsMargins(-1, 12, -1, -1);
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName("verticalLayout_4");
+        label_3 = new QLabel(groupBox_14);
+        label_3->setObjectName("label_3");
+        label_3->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_4->addWidget(label_3);
+
+        therm_beta = new QDoubleSpinBox(groupBox_14);
+        therm_beta->setObjectName("therm_beta");
+        sizePolicy2.setHeightForWidth(therm_beta->sizePolicy().hasHeightForWidth());
+        therm_beta->setSizePolicy(sizePolicy2);
+        therm_beta->setMinimumSize(QSize(50, 0));
+        therm_beta->setMaximumSize(QSize(16777215, 16777215));
+        therm_beta->setFont(font5);
+        therm_beta->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        therm_beta->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        therm_beta->setDecimals(0);
+        therm_beta->setMinimum(0.000000000000000);
+        therm_beta->setMaximum(100000.000000000000000);
+        therm_beta->setSingleStep(1.000000000000000);
+        therm_beta->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        therm_beta->setValue(0.000000000000000);
+
+        verticalLayout_4->addWidget(therm_beta);
+
+
+        verticalLayout_5->addLayout(verticalLayout_4);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        label_2 = new QLabel(groupBox_14);
+        label_2->setObjectName("label_2");
+        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_3->addWidget(label_2);
+
+        therm_vref = new QDoubleSpinBox(groupBox_14);
+        therm_vref->setObjectName("therm_vref");
+        sizePolicy2.setHeightForWidth(therm_vref->sizePolicy().hasHeightForWidth());
+        therm_vref->setSizePolicy(sizePolicy2);
+        therm_vref->setMinimumSize(QSize(50, 0));
+        therm_vref->setMaximumSize(QSize(16777215, 16777215));
+        therm_vref->setFont(font5);
+        therm_vref->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        therm_vref->setDecimals(3);
+        therm_vref->setMinimum(0.000000000000000);
+        therm_vref->setMaximum(3.000000000000000);
+        therm_vref->setSingleStep(0.100000000000000);
+        therm_vref->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        therm_vref->setValue(0.000000000000000);
+
+        verticalLayout_3->addWidget(therm_vref);
+
+
+        verticalLayout_5->addLayout(verticalLayout_3);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        label = new QLabel(groupBox_14);
+        label->setObjectName("label");
+        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout->addWidget(label);
+
+        therm_resis = new QDoubleSpinBox(groupBox_14);
+        therm_resis->setObjectName("therm_resis");
+        sizePolicy2.setHeightForWidth(therm_resis->sizePolicy().hasHeightForWidth());
+        therm_resis->setSizePolicy(sizePolicy2);
+        therm_resis->setMinimumSize(QSize(50, 0));
+        therm_resis->setMaximumSize(QSize(16777215, 16777215));
+        therm_resis->setFont(font5);
+        therm_resis->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        therm_resis->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        therm_resis->setDecimals(0);
+        therm_resis->setMinimum(0.000000000000000);
+        therm_resis->setMaximum(100000.000000000000000);
+        therm_resis->setSingleStep(1.000000000000000);
+        therm_resis->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        therm_resis->setValue(0.000000000000000);
+
+        verticalLayout->addWidget(therm_resis);
+
+
+        verticalLayout_5->addLayout(verticalLayout);
+
+
+        gridLayout->addWidget(groupBox_14, 0, 2, 2, 1);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer, 0, 1, 5, 1);
+        gridLayout->addItem(horizontalSpacer, 0, 5, 1, 1);
 
-        verticalLayout_16 = new QVBoxLayout();
-        verticalLayout_16->setSpacing(6);
-        verticalLayout_16->setObjectName("verticalLayout_16");
-        verticalLayout_16->setSizeConstraint(QLayout::SizeConstraint::SetNoConstraint);
-        verticalLayout_16->setContentsMargins(0, 0, 0, 0);
-        label_11 = new QLabel(ns_widget);
-        label_11->setObjectName("label_11");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(label_11->sizePolicy().hasHeightForWidth());
-        label_11->setSizePolicy(sizePolicy4);
-        label_11->setMinimumSize(QSize(220, 0));
-        label_11->setMaximumSize(QSize(220, 100000));
-        QFont font3;
-        font3.setPointSize(12);
-        font3.setBold(true);
-        font3.setUnderline(true);
-        font3.setKerning(true);
-        label_11->setFont(font3);
+        groupBox_18 = new QGroupBox(ns_widget);
+        groupBox_18->setObjectName("groupBox_18");
+        sizePolicy1.setHeightForWidth(groupBox_18->sizePolicy().hasHeightForWidth());
+        groupBox_18->setSizePolicy(sizePolicy1);
+        groupBox_18->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+        groupBox_18->setFlat(false);
+        groupBox_18->setCheckable(false);
+        gridLayout_5 = new QGridLayout(groupBox_18);
+        gridLayout_5->setObjectName("gridLayout_5");
+        gridLayout_5->setContentsMargins(-1, 12, -1, -1);
+        verticalLayout_52 = new QVBoxLayout();
+        verticalLayout_52->setObjectName("verticalLayout_52");
+        label_59 = new QLabel(groupBox_18);
+        label_59->setObjectName("label_59");
+        label_59->setMinimumSize(QSize(0, 0));
+        label_59->setFont(font4);
+        label_59->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        verticalLayout_16->addWidget(label_11);
+        verticalLayout_52->addWidget(label_59);
 
-        formLayout = new QFormLayout();
-        formLayout->setObjectName("formLayout");
-        label_35 = new QLabel(ns_widget);
-        label_35->setObjectName("label_35");
-        label_35->setMinimumSize(QSize(120, 0));
-        label_35->setMaximumSize(QSize(120, 16777215));
-        QFont font4;
-        font4.setFamilies({QString::fromUtf8("Arial")});
-        font4.setPointSize(12);
-        label_35->setFont(font4);
+        horizontalLayout_41 = new QHBoxLayout();
+        horizontalLayout_41->setObjectName("horizontalLayout_41");
+        curr_max_3 = new QDoubleSpinBox(groupBox_18);
+        curr_max_3->setObjectName("curr_max_3");
+        sizePolicy2.setHeightForWidth(curr_max_3->sizePolicy().hasHeightForWidth());
+        curr_max_3->setSizePolicy(sizePolicy2);
+        curr_max_3->setMinimumSize(QSize(50, 0));
+        curr_max_3->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_3->setFont(font5);
+        curr_max_3->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_3->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_3->setDecimals(2);
+        curr_max_3->setMinimum(0.000000000000000);
+        curr_max_3->setMaximum(3.000000000000000);
+        curr_max_3->setSingleStep(0.100000000000000);
+        curr_max_3->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_3->setValue(0.000000000000000);
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, label_35);
+        horizontalLayout_41->addWidget(curr_max_3);
 
-        hpld_curr_label_0 = new QLabel(ns_widget);
-        hpld_curr_label_0->setObjectName("hpld_curr_label_0");
-        hpld_curr_label_0->setMinimumSize(QSize(80, 0));
-        hpld_curr_label_0->setMaximumSize(QSize(80, 16777215));
-        QFont font5;
-        font5.setPointSize(12);
-        font5.setBold(true);
-        hpld_curr_label_0->setFont(font5);
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, hpld_curr_label_0);
+        verticalLayout_52->addLayout(horizontalLayout_41);
 
-        label_36 = new QLabel(ns_widget);
-        label_36->setObjectName("label_36");
-        label_36->setMinimumSize(QSize(120, 0));
-        label_36->setMaximumSize(QSize(120, 16777215));
-        label_36->setFont(font4);
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, label_36);
+        gridLayout_5->addLayout(verticalLayout_52, 0, 3, 1, 1);
 
-        hpld_curr_label_1 = new QLabel(ns_widget);
-        hpld_curr_label_1->setObjectName("hpld_curr_label_1");
-        hpld_curr_label_1->setMinimumSize(QSize(80, 0));
-        hpld_curr_label_1->setMaximumSize(QSize(80, 16777215));
-        hpld_curr_label_1->setFont(font5);
+        verticalLayout_55 = new QVBoxLayout();
+        verticalLayout_55->setObjectName("verticalLayout_55");
+        label_63 = new QLabel(groupBox_18);
+        label_63->setObjectName("label_63");
+        label_63->setMinimumSize(QSize(0, 0));
+        label_63->setFont(font4);
+        label_63->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, hpld_curr_label_1);
+        verticalLayout_55->addWidget(label_63);
 
-        label_38 = new QLabel(ns_widget);
-        label_38->setObjectName("label_38");
-        label_38->setMinimumSize(QSize(120, 0));
-        label_38->setMaximumSize(QSize(120, 16777215));
-        label_38->setFont(font4);
+        horizontalLayout_45 = new QHBoxLayout();
+        horizontalLayout_45->setObjectName("horizontalLayout_45");
+        curr_max_6 = new QDoubleSpinBox(groupBox_18);
+        curr_max_6->setObjectName("curr_max_6");
+        sizePolicy2.setHeightForWidth(curr_max_6->sizePolicy().hasHeightForWidth());
+        curr_max_6->setSizePolicy(sizePolicy2);
+        curr_max_6->setMinimumSize(QSize(50, 0));
+        curr_max_6->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_6->setFont(font5);
+        curr_max_6->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_6->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_6->setDecimals(2);
+        curr_max_6->setMinimum(0.000000000000000);
+        curr_max_6->setMaximum(3.000000000000000);
+        curr_max_6->setSingleStep(0.100000000000000);
+        curr_max_6->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_6->setValue(0.000000000000000);
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_38);
+        horizontalLayout_45->addWidget(curr_max_6);
 
-        forward_treashold_label = new QLabel(ns_widget);
-        forward_treashold_label->setObjectName("forward_treashold_label");
-        forward_treashold_label->setMinimumSize(QSize(80, 0));
-        forward_treashold_label->setMaximumSize(QSize(80, 16777215));
-        forward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, forward_treashold_label);
+        verticalLayout_55->addLayout(horizontalLayout_45);
 
-        label_42 = new QLabel(ns_widget);
-        label_42->setObjectName("label_42");
-        label_42->setMinimumSize(QSize(120, 0));
-        label_42->setMaximumSize(QSize(120, 16777215));
-        label_42->setFont(font4);
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_42);
+        gridLayout_5->addLayout(verticalLayout_55, 0, 6, 1, 1);
 
-        forward_treashold_label_2 = new QLabel(ns_widget);
-        forward_treashold_label_2->setObjectName("forward_treashold_label_2");
-        forward_treashold_label_2->setMinimumSize(QSize(80, 0));
-        forward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
-        forward_treashold_label_2->setFont(font5);
+        verticalLayout_34 = new QVBoxLayout();
+        verticalLayout_34->setObjectName("verticalLayout_34");
+        label_60 = new QLabel(groupBox_18);
+        label_60->setObjectName("label_60");
+        label_60->setMinimumSize(QSize(0, 0));
+        label_60->setFont(font4);
+        label_60->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, forward_treashold_label_2);
+        verticalLayout_34->addWidget(label_60);
 
-        label_39 = new QLabel(ns_widget);
-        label_39->setObjectName("label_39");
-        label_39->setMinimumSize(QSize(120, 0));
-        label_39->setMaximumSize(QSize(120, 16777215));
-        label_39->setFont(font4);
+        horizontalLayout_42 = new QHBoxLayout();
+        horizontalLayout_42->setObjectName("horizontalLayout_42");
+        curr_max_1 = new QDoubleSpinBox(groupBox_18);
+        curr_max_1->setObjectName("curr_max_1");
+        sizePolicy2.setHeightForWidth(curr_max_1->sizePolicy().hasHeightForWidth());
+        curr_max_1->setSizePolicy(sizePolicy2);
+        curr_max_1->setMinimumSize(QSize(50, 0));
+        curr_max_1->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_1->setFont(font5);
+        curr_max_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_1->setDecimals(2);
+        curr_max_1->setMinimum(0.000000000000000);
+        curr_max_1->setMaximum(3.000000000000000);
+        curr_max_1->setSingleStep(0.100000000000000);
+        curr_max_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_1->setValue(0.000000000000000);
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_39);
+        horizontalLayout_42->addWidget(curr_max_1);
 
-        backward_treashold_label = new QLabel(ns_widget);
-        backward_treashold_label->setObjectName("backward_treashold_label");
-        backward_treashold_label->setMinimumSize(QSize(80, 0));
-        backward_treashold_label->setMaximumSize(QSize(80, 16777215));
-        backward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, backward_treashold_label);
+        verticalLayout_34->addLayout(horizontalLayout_42);
 
-        label_43 = new QLabel(ns_widget);
+
+        gridLayout_5->addLayout(verticalLayout_34, 0, 1, 1, 1);
+
+        verticalLayout_50 = new QVBoxLayout();
+        verticalLayout_50->setObjectName("verticalLayout_50");
+        label_57 = new QLabel(groupBox_18);
+        label_57->setObjectName("label_57");
+        label_57->setMinimumSize(QSize(0, 0));
+        label_57->setFont(font4);
+        label_57->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_50->addWidget(label_57);
+
+        horizontalLayout_39 = new QHBoxLayout();
+        horizontalLayout_39->setObjectName("horizontalLayout_39");
+        curr_max_0 = new QDoubleSpinBox(groupBox_18);
+        curr_max_0->setObjectName("curr_max_0");
+        sizePolicy2.setHeightForWidth(curr_max_0->sizePolicy().hasHeightForWidth());
+        curr_max_0->setSizePolicy(sizePolicy2);
+        curr_max_0->setMinimumSize(QSize(50, 0));
+        curr_max_0->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_0->setFont(font5);
+        curr_max_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_0->setDecimals(2);
+        curr_max_0->setMinimum(0.000000000000000);
+        curr_max_0->setMaximum(3.000000000000000);
+        curr_max_0->setSingleStep(0.100000000000000);
+        curr_max_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_0->setValue(0.000000000000000);
+
+        horizontalLayout_39->addWidget(curr_max_0);
+
+
+        verticalLayout_50->addLayout(horizontalLayout_39);
+
+
+        gridLayout_5->addLayout(verticalLayout_50, 0, 0, 1, 1);
+
+        verticalLayout_51 = new QVBoxLayout();
+        verticalLayout_51->setObjectName("verticalLayout_51");
+        label_58 = new QLabel(groupBox_18);
+        label_58->setObjectName("label_58");
+        label_58->setMinimumSize(QSize(0, 0));
+        label_58->setFont(font4);
+        label_58->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_51->addWidget(label_58);
+
+        horizontalLayout_40 = new QHBoxLayout();
+        horizontalLayout_40->setObjectName("horizontalLayout_40");
+        curr_max_2 = new QDoubleSpinBox(groupBox_18);
+        curr_max_2->setObjectName("curr_max_2");
+        sizePolicy2.setHeightForWidth(curr_max_2->sizePolicy().hasHeightForWidth());
+        curr_max_2->setSizePolicy(sizePolicy2);
+        curr_max_2->setMinimumSize(QSize(50, 0));
+        curr_max_2->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_2->setFont(font5);
+        curr_max_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_2->setDecimals(2);
+        curr_max_2->setMinimum(0.000000000000000);
+        curr_max_2->setMaximum(3.000000000000000);
+        curr_max_2->setSingleStep(0.100000000000000);
+        curr_max_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_2->setValue(0.000000000000000);
+
+        horizontalLayout_40->addWidget(curr_max_2);
+
+
+        verticalLayout_51->addLayout(horizontalLayout_40);
+
+
+        gridLayout_5->addLayout(verticalLayout_51, 0, 2, 1, 1);
+
+        verticalLayout_53 = new QVBoxLayout();
+        verticalLayout_53->setObjectName("verticalLayout_53");
+        label_61 = new QLabel(groupBox_18);
+        label_61->setObjectName("label_61");
+        label_61->setMinimumSize(QSize(0, 0));
+        label_61->setFont(font4);
+        label_61->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_53->addWidget(label_61);
+
+        horizontalLayout_43 = new QHBoxLayout();
+        horizontalLayout_43->setObjectName("horizontalLayout_43");
+        curr_max_4 = new QDoubleSpinBox(groupBox_18);
+        curr_max_4->setObjectName("curr_max_4");
+        sizePolicy2.setHeightForWidth(curr_max_4->sizePolicy().hasHeightForWidth());
+        curr_max_4->setSizePolicy(sizePolicy2);
+        curr_max_4->setMinimumSize(QSize(50, 0));
+        curr_max_4->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_4->setFont(font5);
+        curr_max_4->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_4->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_4->setDecimals(2);
+        curr_max_4->setMinimum(0.000000000000000);
+        curr_max_4->setMaximum(3.000000000000000);
+        curr_max_4->setSingleStep(0.100000000000000);
+        curr_max_4->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_4->setValue(0.000000000000000);
+
+        horizontalLayout_43->addWidget(curr_max_4);
+
+
+        verticalLayout_53->addLayout(horizontalLayout_43);
+
+
+        gridLayout_5->addLayout(verticalLayout_53, 0, 4, 1, 1);
+
+        verticalLayout_54 = new QVBoxLayout();
+        verticalLayout_54->setObjectName("verticalLayout_54");
+        label_62 = new QLabel(groupBox_18);
+        label_62->setObjectName("label_62");
+        label_62->setMinimumSize(QSize(0, 0));
+        label_62->setFont(font4);
+        label_62->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_54->addWidget(label_62);
+
+        horizontalLayout_44 = new QHBoxLayout();
+        horizontalLayout_44->setObjectName("horizontalLayout_44");
+        curr_max_5 = new QDoubleSpinBox(groupBox_18);
+        curr_max_5->setObjectName("curr_max_5");
+        sizePolicy2.setHeightForWidth(curr_max_5->sizePolicy().hasHeightForWidth());
+        curr_max_5->setSizePolicy(sizePolicy2);
+        curr_max_5->setMinimumSize(QSize(50, 0));
+        curr_max_5->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_5->setFont(font5);
+        curr_max_5->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_5->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_5->setDecimals(2);
+        curr_max_5->setMinimum(0.000000000000000);
+        curr_max_5->setMaximum(3.000000000000000);
+        curr_max_5->setSingleStep(0.100000000000000);
+        curr_max_5->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_5->setValue(0.000000000000000);
+
+        horizontalLayout_44->addWidget(curr_max_5);
+
+
+        verticalLayout_54->addLayout(horizontalLayout_44);
+
+
+        gridLayout_5->addLayout(verticalLayout_54, 0, 5, 1, 1);
+
+        verticalLayout_56 = new QVBoxLayout();
+        verticalLayout_56->setObjectName("verticalLayout_56");
+        label_64 = new QLabel(groupBox_18);
+        label_64->setObjectName("label_64");
+        label_64->setMinimumSize(QSize(0, 0));
+        label_64->setFont(font4);
+        label_64->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_56->addWidget(label_64);
+
+        horizontalLayout_46 = new QHBoxLayout();
+        horizontalLayout_46->setObjectName("horizontalLayout_46");
+        curr_max_7 = new QDoubleSpinBox(groupBox_18);
+        curr_max_7->setObjectName("curr_max_7");
+        sizePolicy2.setHeightForWidth(curr_max_7->sizePolicy().hasHeightForWidth());
+        curr_max_7->setSizePolicy(sizePolicy2);
+        curr_max_7->setMinimumSize(QSize(50, 0));
+        curr_max_7->setMaximumSize(QSize(16777215, 16777215));
+        curr_max_7->setFont(font5);
+        curr_max_7->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        curr_max_7->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        curr_max_7->setDecimals(2);
+        curr_max_7->setMinimum(0.000000000000000);
+        curr_max_7->setMaximum(3.000000000000000);
+        curr_max_7->setSingleStep(0.100000000000000);
+        curr_max_7->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        curr_max_7->setValue(0.000000000000000);
+
+        horizontalLayout_46->addWidget(curr_max_7);
+
+
+        verticalLayout_56->addLayout(horizontalLayout_46);
+
+
+        gridLayout_5->addLayout(verticalLayout_56, 0, 7, 1, 1);
+
+
+        gridLayout->addWidget(groupBox_18, 3, 0, 1, 3);
+
+        groupBox_17 = new QGroupBox(ns_widget);
+        groupBox_17->setObjectName("groupBox_17");
+        sizePolicy1.setHeightForWidth(groupBox_17->sizePolicy().hasHeightForWidth());
+        groupBox_17->setSizePolicy(sizePolicy1);
+        groupBox_17->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+        groupBox_17->setFlat(false);
+        groupBox_17->setCheckable(false);
+        gridLayout_3 = new QGridLayout(groupBox_17);
+        gridLayout_3->setObjectName("gridLayout_3");
+        gridLayout_3->setContentsMargins(-1, 12, -1, -1);
+        verticalLayout_41 = new QVBoxLayout();
+        verticalLayout_41->setObjectName("verticalLayout_41");
+        label_43 = new QLabel(groupBox_17);
         label_43->setObjectName("label_43");
-        label_43->setMinimumSize(QSize(120, 0));
-        label_43->setMaximumSize(QSize(120, 16777215));
+        label_43->setMinimumSize(QSize(0, 0));
         label_43->setFont(font4);
+        label_43->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_43);
+        verticalLayout_41->addWidget(label_43);
 
-        backward_treashold_label_2 = new QLabel(ns_widget);
-        backward_treashold_label_2->setObjectName("backward_treashold_label_2");
-        backward_treashold_label_2->setMinimumSize(QSize(80, 0));
-        backward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
-        backward_treashold_label_2->setFont(font5);
+        horizontalLayout_29 = new QHBoxLayout();
+        horizontalLayout_29->setObjectName("horizontalLayout_29");
+        diode_treshold_6 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_6->setObjectName("diode_treshold_6");
+        sizePolicy2.setHeightForWidth(diode_treshold_6->sizePolicy().hasHeightForWidth());
+        diode_treshold_6->setSizePolicy(sizePolicy2);
+        diode_treshold_6->setMinimumSize(QSize(50, 0));
+        diode_treshold_6->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_6->setFont(font5);
+        diode_treshold_6->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_6->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_6->setDecimals(2);
+        diode_treshold_6->setMinimum(0.000000000000000);
+        diode_treshold_6->setMaximum(3.000000000000000);
+        diode_treshold_6->setSingleStep(0.100000000000000);
+        diode_treshold_6->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_6->setValue(0.000000000000000);
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, backward_treashold_label_2);
-
-        label_52 = new QLabel(ns_widget);
-        label_52->setObjectName("label_52");
-        label_52->setMinimumSize(QSize(120, 0));
-        label_52->setMaximumSize(QSize(120, 16777215));
-        label_52->setFont(font4);
-
-        formLayout->setWidget(6, QFormLayout::LabelRole, label_52);
-
-        therm_resis_label = new QLabel(ns_widget);
-        therm_resis_label->setObjectName("therm_resis_label");
-        therm_resis_label->setMinimumSize(QSize(80, 0));
-        therm_resis_label->setMaximumSize(QSize(80, 16777215));
-        therm_resis_label->setFont(font5);
-
-        formLayout->setWidget(6, QFormLayout::FieldRole, therm_resis_label);
-
-        label_54 = new QLabel(ns_widget);
-        label_54->setObjectName("label_54");
-        label_54->setMinimumSize(QSize(120, 0));
-        label_54->setMaximumSize(QSize(120, 16777215));
-        label_54->setFont(font4);
-
-        formLayout->setWidget(7, QFormLayout::LabelRole, label_54);
-
-        therm_vref_label = new QLabel(ns_widget);
-        therm_vref_label->setObjectName("therm_vref_label");
-        therm_vref_label->setMinimumSize(QSize(80, 0));
-        therm_vref_label->setMaximumSize(QSize(80, 16777215));
-        therm_vref_label->setFont(font5);
-
-        formLayout->setWidget(7, QFormLayout::FieldRole, therm_vref_label);
-
-        label_53 = new QLabel(ns_widget);
-        label_53->setObjectName("label_53");
-        label_53->setMinimumSize(QSize(120, 0));
-        label_53->setMaximumSize(QSize(120, 16777215));
-        label_53->setFont(font4);
-
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_53);
-
-        therm_beta_label = new QLabel(ns_widget);
-        therm_beta_label->setObjectName("therm_beta_label");
-        therm_beta_label->setMinimumSize(QSize(80, 0));
-        therm_beta_label->setMaximumSize(QSize(80, 16777215));
-        therm_beta_label->setFont(font5);
-
-        formLayout->setWidget(8, QFormLayout::FieldRole, therm_beta_label);
-
-        label_55 = new QLabel(ns_widget);
-        label_55->setObjectName("label_55");
-        label_55->setMinimumSize(QSize(120, 0));
-        label_55->setMaximumSize(QSize(120, 16777215));
-        label_55->setFont(font4);
-
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_55);
-
-        over_temp_label = new QLabel(ns_widget);
-        over_temp_label->setObjectName("over_temp_label");
-        over_temp_label->setMinimumSize(QSize(80, 0));
-        over_temp_label->setMaximumSize(QSize(80, 16777215));
-        over_temp_label->setFont(font5);
-
-        formLayout->setWidget(9, QFormLayout::FieldRole, over_temp_label);
-
-        line_2 = new QFrame(ns_widget);
-        line_2->setObjectName("line_2");
-        line_2->setMinimumSize(QSize(40, 0));
-        line_2->setFrameShape(QFrame::HLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-
-        formLayout->setWidget(10, QFormLayout::SpanningRole, line_2);
-
-        label_50 = new QLabel(ns_widget);
-        label_50->setObjectName("label_50");
-        label_50->setMinimumSize(QSize(120, 0));
-        label_50->setMaximumSize(QSize(120, 16777215));
-        label_50->setFont(font4);
-
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_50);
-
-        cur_temp_0 = new QLabel(ns_widget);
-        cur_temp_0->setObjectName("cur_temp_0");
-        cur_temp_0->setMinimumSize(QSize(80, 0));
-        cur_temp_0->setMaximumSize(QSize(80, 16777215));
-        cur_temp_0->setFont(font5);
-
-        formLayout->setWidget(11, QFormLayout::FieldRole, cur_temp_0);
-
-        label_56 = new QLabel(ns_widget);
-        label_56->setObjectName("label_56");
-        label_56->setMinimumSize(QSize(120, 0));
-        label_56->setMaximumSize(QSize(120, 16777215));
-        label_56->setFont(font4);
-
-        formLayout->setWidget(12, QFormLayout::LabelRole, label_56);
-
-        cur_temp_1 = new QLabel(ns_widget);
-        cur_temp_1->setObjectName("cur_temp_1");
-        cur_temp_1->setMinimumSize(QSize(80, 0));
-        cur_temp_1->setMaximumSize(QSize(80, 16777215));
-        cur_temp_1->setFont(font5);
-
-        formLayout->setWidget(12, QFormLayout::FieldRole, cur_temp_1);
-
-        label_40 = new QLabel(ns_widget);
-        label_40->setObjectName("label_40");
-        label_40->setMinimumSize(QSize(120, 0));
-        label_40->setMaximumSize(QSize(120, 16777215));
-        label_40->setFont(font4);
-
-        formLayout->setWidget(13, QFormLayout::LabelRole, label_40);
-
-        pd_forward = new QLabel(ns_widget);
-        pd_forward->setObjectName("pd_forward");
-        pd_forward->setMinimumSize(QSize(80, 0));
-        pd_forward->setMaximumSize(QSize(80, 16777215));
-        pd_forward->setFont(font5);
-
-        formLayout->setWidget(13, QFormLayout::FieldRole, pd_forward);
-
-        label_44 = new QLabel(ns_widget);
-        label_44->setObjectName("label_44");
-        label_44->setMinimumSize(QSize(120, 0));
-        label_44->setMaximumSize(QSize(120, 16777215));
-        label_44->setFont(font4);
-
-        formLayout->setWidget(14, QFormLayout::LabelRole, label_44);
-
-        pd_forward_2 = new QLabel(ns_widget);
-        pd_forward_2->setObjectName("pd_forward_2");
-        pd_forward_2->setMinimumSize(QSize(80, 0));
-        pd_forward_2->setMaximumSize(QSize(80, 16777215));
-        pd_forward_2->setFont(font5);
-
-        formLayout->setWidget(14, QFormLayout::FieldRole, pd_forward_2);
-
-        label_41 = new QLabel(ns_widget);
-        label_41->setObjectName("label_41");
-        label_41->setMinimumSize(QSize(120, 0));
-        label_41->setMaximumSize(QSize(120, 16777215));
-        label_41->setFont(font4);
-
-        formLayout->setWidget(15, QFormLayout::LabelRole, label_41);
-
-        pd_backward = new QLabel(ns_widget);
-        pd_backward->setObjectName("pd_backward");
-        pd_backward->setMinimumSize(QSize(80, 0));
-        pd_backward->setMaximumSize(QSize(80, 16777215));
-        pd_backward->setFont(font5);
-
-        formLayout->setWidget(15, QFormLayout::FieldRole, pd_backward);
-
-        label_45 = new QLabel(ns_widget);
-        label_45->setObjectName("label_45");
-        label_45->setMinimumSize(QSize(120, 0));
-        label_45->setMaximumSize(QSize(120, 16777215));
-        label_45->setFont(font4);
-
-        formLayout->setWidget(16, QFormLayout::LabelRole, label_45);
-
-        pd_backward_2 = new QLabel(ns_widget);
-        pd_backward_2->setObjectName("pd_backward_2");
-        pd_backward_2->setMinimumSize(QSize(80, 0));
-        pd_backward_2->setMaximumSize(QSize(80, 16777215));
-        pd_backward_2->setFont(font5);
-
-        formLayout->setWidget(16, QFormLayout::FieldRole, pd_backward_2);
-
-        label_error = new QLabel(ns_widget);
-        label_error->setObjectName("label_error");
-        label_error->setMinimumSize(QSize(120, 0));
-        label_error->setMaximumSize(QSize(120, 16777215));
-        label_error->setFont(font4);
-
-        formLayout->setWidget(17, QFormLayout::LabelRole, label_error);
-
-        button_error = new QPushButton(ns_widget);
-        button_error->setObjectName("button_error");
-
-        formLayout->setWidget(17, QFormLayout::FieldRole, button_error);
+        horizontalLayout_29->addWidget(diode_treshold_6);
 
 
-        verticalLayout_16->addLayout(formLayout);
-
-        verticalSpacer = new QSpacerItem(20, 5, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        verticalLayout_16->addItem(verticalSpacer);
+        verticalLayout_41->addLayout(horizontalLayout_29);
 
 
-        gridLayout->addLayout(verticalLayout_16, 0, 7, 5, 1);
+        gridLayout_3->addLayout(verticalLayout_41, 0, 6, 1, 1);
 
-        line = new QFrame(ns_widget);
-        line->setObjectName("line");
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
+        verticalLayout_32 = new QVBoxLayout();
+        verticalLayout_32->setObjectName("verticalLayout_32");
+        label_30 = new QLabel(groupBox_17);
+        label_30->setObjectName("label_30");
+        label_30->setMinimumSize(QSize(0, 0));
+        label_30->setFont(font4);
+        label_30->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        gridLayout->addWidget(line, 0, 6, 6, 1);
+        verticalLayout_32->addWidget(label_30);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setObjectName("horizontalLayout_22");
+        diode_treshold_1 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_1->setObjectName("diode_treshold_1");
+        sizePolicy2.setHeightForWidth(diode_treshold_1->sizePolicy().hasHeightForWidth());
+        diode_treshold_1->setSizePolicy(sizePolicy2);
+        diode_treshold_1->setMinimumSize(QSize(50, 0));
+        diode_treshold_1->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_1->setFont(font5);
+        diode_treshold_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_1->setDecimals(2);
+        diode_treshold_1->setMinimum(0.000000000000000);
+        diode_treshold_1->setMaximum(3.000000000000000);
+        diode_treshold_1->setSingleStep(0.100000000000000);
+        diode_treshold_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_1->setValue(0.000000000000000);
+
+        horizontalLayout_22->addWidget(diode_treshold_1);
+
+
+        verticalLayout_32->addLayout(horizontalLayout_22);
+
+
+        gridLayout_3->addLayout(verticalLayout_32, 0, 1, 1, 1);
+
+        verticalLayout_39 = new QVBoxLayout();
+        verticalLayout_39->setObjectName("verticalLayout_39");
+        label_37 = new QLabel(groupBox_17);
+        label_37->setObjectName("label_37");
+        label_37->setMinimumSize(QSize(0, 0));
+        label_37->setFont(font4);
+        label_37->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_39->addWidget(label_37);
+
+        horizontalLayout_27 = new QHBoxLayout();
+        horizontalLayout_27->setObjectName("horizontalLayout_27");
+        diode_treshold_4 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_4->setObjectName("diode_treshold_4");
+        sizePolicy2.setHeightForWidth(diode_treshold_4->sizePolicy().hasHeightForWidth());
+        diode_treshold_4->setSizePolicy(sizePolicy2);
+        diode_treshold_4->setMinimumSize(QSize(50, 0));
+        diode_treshold_4->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_4->setFont(font5);
+        diode_treshold_4->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_4->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_4->setDecimals(2);
+        diode_treshold_4->setMinimum(0.000000000000000);
+        diode_treshold_4->setMaximum(3.000000000000000);
+        diode_treshold_4->setSingleStep(0.100000000000000);
+        diode_treshold_4->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_4->setValue(0.000000000000000);
+
+        horizontalLayout_27->addWidget(diode_treshold_4);
+
+
+        verticalLayout_39->addLayout(horizontalLayout_27);
+
+
+        gridLayout_3->addLayout(verticalLayout_39, 0, 4, 1, 1);
+
+        verticalLayout_37 = new QVBoxLayout();
+        verticalLayout_37->setObjectName("verticalLayout_37");
+        label_33 = new QLabel(groupBox_17);
+        label_33->setObjectName("label_33");
+        label_33->setMinimumSize(QSize(0, 0));
+        label_33->setFont(font4);
+        label_33->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_37->addWidget(label_33);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setObjectName("horizontalLayout_25");
+        diode_treshold_2 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_2->setObjectName("diode_treshold_2");
+        sizePolicy2.setHeightForWidth(diode_treshold_2->sizePolicy().hasHeightForWidth());
+        diode_treshold_2->setSizePolicy(sizePolicy2);
+        diode_treshold_2->setMinimumSize(QSize(50, 0));
+        diode_treshold_2->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_2->setFont(font5);
+        diode_treshold_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_2->setDecimals(2);
+        diode_treshold_2->setMinimum(0.000000000000000);
+        diode_treshold_2->setMaximum(3.000000000000000);
+        diode_treshold_2->setSingleStep(0.100000000000000);
+        diode_treshold_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_2->setValue(0.000000000000000);
+
+        horizontalLayout_25->addWidget(diode_treshold_2);
+
+
+        verticalLayout_37->addLayout(horizontalLayout_25);
+
+
+        gridLayout_3->addLayout(verticalLayout_37, 0, 2, 1, 1);
+
+        verticalLayout_36 = new QVBoxLayout();
+        verticalLayout_36->setObjectName("verticalLayout_36");
+        label_32 = new QLabel(groupBox_17);
+        label_32->setObjectName("label_32");
+        label_32->setMinimumSize(QSize(0, 0));
+        label_32->setFont(font4);
+        label_32->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_36->addWidget(label_32);
+
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setObjectName("horizontalLayout_24");
+        diode_treshold_0 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_0->setObjectName("diode_treshold_0");
+        sizePolicy2.setHeightForWidth(diode_treshold_0->sizePolicy().hasHeightForWidth());
+        diode_treshold_0->setSizePolicy(sizePolicy2);
+        diode_treshold_0->setMinimumSize(QSize(50, 0));
+        diode_treshold_0->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_0->setFont(font5);
+        diode_treshold_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_0->setDecimals(2);
+        diode_treshold_0->setMinimum(0.000000000000000);
+        diode_treshold_0->setMaximum(3.000000000000000);
+        diode_treshold_0->setSingleStep(0.100000000000000);
+        diode_treshold_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_0->setValue(0.000000000000000);
+
+        horizontalLayout_24->addWidget(diode_treshold_0);
+
+
+        verticalLayout_36->addLayout(horizontalLayout_24);
+
+
+        gridLayout_3->addLayout(verticalLayout_36, 0, 0, 1, 1);
+
+        verticalLayout_38 = new QVBoxLayout();
+        verticalLayout_38->setObjectName("verticalLayout_38");
+        label_34 = new QLabel(groupBox_17);
+        label_34->setObjectName("label_34");
+        label_34->setMinimumSize(QSize(0, 0));
+        label_34->setFont(font4);
+        label_34->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_38->addWidget(label_34);
+
+        horizontalLayout_26 = new QHBoxLayout();
+        horizontalLayout_26->setObjectName("horizontalLayout_26");
+        diode_treshold_3 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_3->setObjectName("diode_treshold_3");
+        sizePolicy2.setHeightForWidth(diode_treshold_3->sizePolicy().hasHeightForWidth());
+        diode_treshold_3->setSizePolicy(sizePolicy2);
+        diode_treshold_3->setMinimumSize(QSize(50, 0));
+        diode_treshold_3->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_3->setFont(font5);
+        diode_treshold_3->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_3->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_3->setDecimals(2);
+        diode_treshold_3->setMinimum(0.000000000000000);
+        diode_treshold_3->setMaximum(3.000000000000000);
+        diode_treshold_3->setSingleStep(0.100000000000000);
+        diode_treshold_3->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_3->setValue(0.000000000000000);
+
+        horizontalLayout_26->addWidget(diode_treshold_3);
+
+
+        verticalLayout_38->addLayout(horizontalLayout_26);
+
+
+        gridLayout_3->addLayout(verticalLayout_38, 0, 3, 1, 1);
+
+        verticalLayout_40 = new QVBoxLayout();
+        verticalLayout_40->setObjectName("verticalLayout_40");
+        label_42 = new QLabel(groupBox_17);
+        label_42->setObjectName("label_42");
+        label_42->setMinimumSize(QSize(0, 0));
+        label_42->setFont(font4);
+        label_42->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_40->addWidget(label_42);
+
+        horizontalLayout_28 = new QHBoxLayout();
+        horizontalLayout_28->setObjectName("horizontalLayout_28");
+        diode_treshold_5 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_5->setObjectName("diode_treshold_5");
+        sizePolicy2.setHeightForWidth(diode_treshold_5->sizePolicy().hasHeightForWidth());
+        diode_treshold_5->setSizePolicy(sizePolicy2);
+        diode_treshold_5->setMinimumSize(QSize(50, 0));
+        diode_treshold_5->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_5->setFont(font5);
+        diode_treshold_5->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_5->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_5->setDecimals(2);
+        diode_treshold_5->setMinimum(0.000000000000000);
+        diode_treshold_5->setMaximum(3.000000000000000);
+        diode_treshold_5->setSingleStep(0.100000000000000);
+        diode_treshold_5->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_5->setValue(0.000000000000000);
+
+        horizontalLayout_28->addWidget(diode_treshold_5);
+
+
+        verticalLayout_40->addLayout(horizontalLayout_28);
+
+
+        gridLayout_3->addLayout(verticalLayout_40, 0, 5, 1, 1);
+
+        verticalLayout_42 = new QVBoxLayout();
+        verticalLayout_42->setObjectName("verticalLayout_42");
+        label_46 = new QLabel(groupBox_17);
+        label_46->setObjectName("label_46");
+        label_46->setMinimumSize(QSize(0, 0));
+        label_46->setFont(font4);
+        label_46->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        verticalLayout_42->addWidget(label_46);
+
+        horizontalLayout_30 = new QHBoxLayout();
+        horizontalLayout_30->setObjectName("horizontalLayout_30");
+        diode_treshold_7 = new QDoubleSpinBox(groupBox_17);
+        diode_treshold_7->setObjectName("diode_treshold_7");
+        sizePolicy2.setHeightForWidth(diode_treshold_7->sizePolicy().hasHeightForWidth());
+        diode_treshold_7->setSizePolicy(sizePolicy2);
+        diode_treshold_7->setMinimumSize(QSize(50, 0));
+        diode_treshold_7->setMaximumSize(QSize(16777215, 16777215));
+        diode_treshold_7->setFont(font5);
+        diode_treshold_7->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treshold_7->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treshold_7->setDecimals(2);
+        diode_treshold_7->setMinimum(0.000000000000000);
+        diode_treshold_7->setMaximum(3.000000000000000);
+        diode_treshold_7->setSingleStep(0.100000000000000);
+        diode_treshold_7->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treshold_7->setValue(0.000000000000000);
+
+        horizontalLayout_30->addWidget(diode_treshold_7);
+
+
+        verticalLayout_42->addLayout(horizontalLayout_30);
+
+
+        gridLayout_3->addLayout(verticalLayout_42, 0, 7, 1, 1);
+
+
+        gridLayout->addWidget(groupBox_17, 2, 0, 1, 3);
+
+        groupBox_12 = new QGroupBox(ns_widget);
+        groupBox_12->setObjectName("groupBox_12");
+        sizePolicy3.setHeightForWidth(groupBox_12->sizePolicy().hasHeightForWidth());
+        groupBox_12->setSizePolicy(sizePolicy3);
+        groupBox_12->setFlat(false);
+        groupBox_12->setCheckable(false);
+        horizontalLayout_3 = new QHBoxLayout(groupBox_12);
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        horizontalLayout_3->setContentsMargins(-1, 12, -1, -1);
+        voltage_pl = new QDoubleSpinBox(groupBox_12);
+        voltage_pl->setObjectName("voltage_pl");
+        sizePolicy2.setHeightForWidth(voltage_pl->sizePolicy().hasHeightForWidth());
+        voltage_pl->setSizePolicy(sizePolicy2);
+        voltage_pl->setMinimumSize(QSize(50, 0));
+        voltage_pl->setMaximumSize(QSize(16777215, 16777215));
+        voltage_pl->setFont(font5);
+        voltage_pl->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        voltage_pl->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        voltage_pl->setDecimals(2);
+        voltage_pl->setMinimum(0.000000000000000);
+        voltage_pl->setMaximum(26.000000000000000);
+        voltage_pl->setSingleStep(0.100000000000000);
+        voltage_pl->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        voltage_pl->setValue(0.000000000000000);
+
+        horizontalLayout_3->addWidget(voltage_pl);
+
+
+        gridLayout->addWidget(groupBox_12, 1, 0, 1, 1);
 
 
         verticalLayout_28->addWidget(ns_widget);
@@ -900,42 +1314,11 @@ public:
         cb_panel->setWindowTitle(QCoreApplication::translate("cb_panel", "Form", nullptr));
         groupBox->setTitle(QString());
         laser_name_label->setText(QCoreApplication::translate("cb_panel", "Contol Board", nullptr));
-        groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
-        label_29->setText(QCoreApplication::translate("cb_panel", "Forward 1", nullptr));
-        forward_treashold->setSuffix(QString());
-        label_31->setText(QCoreApplication::translate("cb_panel", "Backward 1", nullptr));
-        backward_treashold->setSuffix(QString());
-        label_33->setText(QCoreApplication::translate("cb_panel", "Forward 2", nullptr));
-        forward_treashold_2->setSuffix(QString());
-        label_34->setText(QCoreApplication::translate("cb_panel", "Backward 2", nullptr));
-        backward_treashold_2->setSuffix(QString());
-        groupBox_12->setTitle(QCoreApplication::translate("cb_panel", "Current HPLD", nullptr));
-        label_24->setText(QCoreApplication::translate("cb_panel", "0", nullptr));
-        hpld_curr_0->setSuffix(QString());
-        label_30->setText(QCoreApplication::translate("cb_panel", "1", nullptr));
-        hpld_curr_1->setSuffix(QString());
-        groupBox_14->setTitle(QCoreApplication::translate("cb_panel", "Thermistor", nullptr));
-        label->setText(QCoreApplication::translate("cb_panel", " Resistanse", nullptr));
-        therm_resis->setSuffix(QString());
-        label_2->setText(QCoreApplication::translate("cb_panel", "Vref", nullptr));
-        therm_vref->setSuffix(QString());
-        label_3->setText(QCoreApplication::translate("cb_panel", "Beta", nullptr));
-        therm_beta->setSuffix(QString());
-        groupBox_19->setTitle(QCoreApplication::translate("cb_panel", "Overheat temperature", nullptr));
-        over_temp->setSuffix(QString());
         label_11->setText(QCoreApplication::translate("cb_panel", "Read Values:", nullptr));
-        label_35->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 0 :", nullptr));
-        hpld_curr_label_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_36->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 1 :", nullptr));
-        hpld_curr_label_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_38->setText(QCoreApplication::translate("cb_panel", "Level forward 1:", nullptr));
+        label_38->setText(QCoreApplication::translate("cb_panel", "Level forward:", nullptr));
         forward_treashold_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_42->setText(QCoreApplication::translate("cb_panel", "Level forward 2:", nullptr));
-        forward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_39->setText(QCoreApplication::translate("cb_panel", "Level backw. 1:", nullptr));
+        label_39->setText(QCoreApplication::translate("cb_panel", "Level backw.:", nullptr));
         backward_treashold_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_43->setText(QCoreApplication::translate("cb_panel", "Level backw. 2:", nullptr));
-        backward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_52->setText(QCoreApplication::translate("cb_panel", "Therm. resis. :", nullptr));
         therm_resis_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_54->setText(QCoreApplication::translate("cb_panel", "Therm. Vref:", nullptr));
@@ -948,16 +1331,62 @@ public:
         cur_temp_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_56->setText(QCoreApplication::translate("cb_panel", "Temp.  1:", nullptr));
         cur_temp_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_40->setText(QCoreApplication::translate("cb_panel", "PD forward 1:", nullptr));
+        label_40->setText(QCoreApplication::translate("cb_panel", "PD forward:", nullptr));
         pd_forward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_44->setText(QCoreApplication::translate("cb_panel", "PD forward 2:", nullptr));
-        pd_forward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_41->setText(QCoreApplication::translate("cb_panel", "PD backward 1:", nullptr));
+        label_41->setText(QCoreApplication::translate("cb_panel", "PD backward:", nullptr));
         pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_45->setText(QCoreApplication::translate("cb_panel", "PD backward 2:", nullptr));
-        pd_backward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
         button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
+        label_29->setText(QCoreApplication::translate("cb_panel", "Forward", nullptr));
+        forward_treashold->setSuffix(QString());
+        label_31->setText(QCoreApplication::translate("cb_panel", "Backward", nullptr));
+        backward_treashold->setSuffix(QString());
+        groupBox_19->setTitle(QCoreApplication::translate("cb_panel", "Overheat temperature", nullptr));
+        over_temp->setSuffix(QString());
+        groupBox_14->setTitle(QCoreApplication::translate("cb_panel", "Thermistor", nullptr));
+        label_3->setText(QCoreApplication::translate("cb_panel", "Beta", nullptr));
+        therm_beta->setSuffix(QString());
+        label_2->setText(QCoreApplication::translate("cb_panel", "Vref", nullptr));
+        therm_vref->setSuffix(QString());
+        label->setText(QCoreApplication::translate("cb_panel", " Resistanse", nullptr));
+        therm_resis->setSuffix(QString());
+        groupBox_18->setTitle(QCoreApplication::translate("cb_panel", "HPLD MAX \320\241urrent", nullptr));
+        label_59->setText(QCoreApplication::translate("cb_panel", "3", nullptr));
+        curr_max_3->setSuffix(QString());
+        label_63->setText(QCoreApplication::translate("cb_panel", "6", nullptr));
+        curr_max_6->setSuffix(QString());
+        label_60->setText(QCoreApplication::translate("cb_panel", "1", nullptr));
+        curr_max_1->setSuffix(QString());
+        label_57->setText(QCoreApplication::translate("cb_panel", "0", nullptr));
+        curr_max_0->setSuffix(QString());
+        label_58->setText(QCoreApplication::translate("cb_panel", "2", nullptr));
+        curr_max_2->setSuffix(QString());
+        label_61->setText(QCoreApplication::translate("cb_panel", "4", nullptr));
+        curr_max_4->setSuffix(QString());
+        label_62->setText(QCoreApplication::translate("cb_panel", "5", nullptr));
+        curr_max_5->setSuffix(QString());
+        label_64->setText(QCoreApplication::translate("cb_panel", "7", nullptr));
+        curr_max_7->setSuffix(QString());
+        groupBox_17->setTitle(QCoreApplication::translate("cb_panel", "HPLD \320\241urrent threshold", nullptr));
+        label_43->setText(QCoreApplication::translate("cb_panel", "6", nullptr));
+        diode_treshold_6->setSuffix(QString());
+        label_30->setText(QCoreApplication::translate("cb_panel", "1", nullptr));
+        diode_treshold_1->setSuffix(QString());
+        label_37->setText(QCoreApplication::translate("cb_panel", "4", nullptr));
+        diode_treshold_4->setSuffix(QString());
+        label_33->setText(QCoreApplication::translate("cb_panel", "2", nullptr));
+        diode_treshold_2->setSuffix(QString());
+        label_32->setText(QCoreApplication::translate("cb_panel", "0", nullptr));
+        diode_treshold_0->setSuffix(QString());
+        label_34->setText(QCoreApplication::translate("cb_panel", "3", nullptr));
+        diode_treshold_3->setSuffix(QString());
+        label_42->setText(QCoreApplication::translate("cb_panel", "5", nullptr));
+        diode_treshold_5->setSuffix(QString());
+        label_46->setText(QCoreApplication::translate("cb_panel", "7", nullptr));
+        diode_treshold_7->setSuffix(QString());
+        groupBox_12->setTitle(QCoreApplication::translate("cb_panel", "Pilot laser Voltage DAC", nullptr));
+        voltage_pl->setSuffix(QString());
     } // retranslateUi
 
 };

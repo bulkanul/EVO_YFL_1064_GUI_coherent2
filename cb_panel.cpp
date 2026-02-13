@@ -15,12 +15,45 @@ cb_panel::cb_panel(QWidget *parent):
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
     connect(this,SIGNAL(tool_clicked()),this,SLOT(get_pref()));
 
-    ui->hpld_curr_0->installEventFilter(this);
-    ui->hpld_curr_1->installEventFilter(this);
+    ui->voltage_pl->installEventFilter(this);
     ui->forward_treashold->installEventFilter(this);
     ui->backward_treashold->installEventFilter(this);
-    ui->forward_treashold_2->installEventFilter(this);
-    ui->backward_treashold_2->installEventFilter(this);
+
+    ui->diode_treshold_7->installEventFilter(this);
+    ui->diode_treshold_6->installEventFilter(this);
+    ui->diode_treshold_5->installEventFilter(this);
+    ui->diode_treshold_4->installEventFilter(this);
+    ui->diode_treshold_3->installEventFilter(this);
+    ui->diode_treshold_2->installEventFilter(this);
+    ui->diode_treshold_1->installEventFilter(this);
+    ui->diode_treshold_0->installEventFilter(this);
+    curr_treash_list.append(ui->diode_treshold_0);
+    curr_treash_list.append(ui->diode_treshold_1);
+    curr_treash_list.append(ui->diode_treshold_2);
+    curr_treash_list.append(ui->diode_treshold_3);
+    curr_treash_list.append(ui->diode_treshold_4);
+    curr_treash_list.append(ui->diode_treshold_5);
+    curr_treash_list.append(ui->diode_treshold_6);
+    curr_treash_list.append(ui->diode_treshold_7);
+
+    ui->curr_max_7->installEventFilter(this);
+    ui->curr_max_6->installEventFilter(this);
+    ui->curr_max_5->installEventFilter(this);
+    ui->curr_max_4->installEventFilter(this);
+    ui->curr_max_3->installEventFilter(this);
+    ui->curr_max_2->installEventFilter(this);
+    ui->curr_max_1->installEventFilter(this);
+    ui->curr_max_0->installEventFilter(this);
+    max_curr_list.append(ui->curr_max_0);
+    max_curr_list.append(ui->curr_max_1);
+    max_curr_list.append(ui->curr_max_2);
+    max_curr_list.append(ui->curr_max_3);
+    max_curr_list.append(ui->curr_max_4);
+    max_curr_list.append(ui->curr_max_5);
+    max_curr_list.append(ui->curr_max_6);
+    max_curr_list.append(ui->curr_max_7);
+
+
     ui->therm_resis->installEventFilter(this);
     ui->therm_beta->installEventFilter(this);
     ui->therm_vref->installEventFilter(this);
@@ -29,16 +62,10 @@ cb_panel::cb_panel(QWidget *parent):
 
     labels.append(ui->cur_temp_0);
     labels.append(ui->cur_temp_1);
-    labels.append(ui->hpld_curr_label_0);
-    labels.append(ui->hpld_curr_label_1);
     labels.append(ui->pd_forward);
-    labels.append(ui->pd_forward_2);
     labels.append(ui->pd_backward);
-    labels.append(ui->pd_backward_2);
     labels.append(ui->forward_treashold_label);
-    labels.append(ui->forward_treashold_label_2);
     labels.append(ui->backward_treashold_label);
-    labels.append(ui->backward_treashold_label_2);
     labels.append(ui->therm_resis_label);
     labels.append(ui->therm_vref_label);
     labels.append(ui->therm_beta_label);
@@ -72,34 +99,35 @@ void cb_panel::telemetry_call(QString family)
           bool flag=true;
         int counter=0;
         foreach (QLabel* var, labels) {
-          if(var->text()=="N/A"){
+          if(var->text()=="N/A" && dsb_filler>15){
+
             flag=false;
             break;
           }
           counter++;
+          if(counter==26)
+              counter=11;
+          if(counter>26)
+              counter=0;
         }
         if(flag){
           this->setEnabled(true);
           QString temp;
-          if(count%7==0)
+          if(count%5==0)
             temp=QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%7==1)
+          else if(count%5==1)
             temp =QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%7==2)
+          else if(count%5==2)
             temp =QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%7==3)
-              temp =QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000");
-          else if(count%7==4)
-              temp =QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000");
-          else if(count%7==5)
+          else if(count%5==3)
               temp =QString("t"+internal_address+"89200"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000");
-          else if(count%7==6)
+          else if(count%5==4)
               temp =QString("t"+internal_address+"89200"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000");
           emit send_command(temp.toUtf8()+'\r');
         }else
           emit send_command(commands[counter].toUtf8()+'\r');
 
-        qDebug()<<"else"<<family<<ID << count;
+        qDebug()<<"else"<<family<<ID << counter<<commands[counter];
        }
     }
 }
@@ -138,30 +166,31 @@ void cb_panel::key_catcher(QObject* key)
         QString address="00";
         QString inner_address="00";
         int multiplier=1;
-        if(target->objectName().contains("hpld_curr")){
-          command="25";
-          multiplier=100;
-          if(target->objectName().contains("_1"))address="01";
-        }else if(target->objectName().contains("_treashold")){
+        if(target->objectName().contains("_treashold")){
           if(target->objectName().contains("forward_")){
               if(target->objectName().contains("_2"))inner_address="01";
               command="1A";
           }else if(target->objectName().contains("backward_")){
               if(target->objectName().contains("_2"))inner_address="01";
               command="16";
+          }else if(target->objectName().contains("diode_")){
+              address=QString("%1").arg(target->objectName().split('_')[2].toInt() , 2, 16, QLatin1Char( '0' ));
+              command="37";
           }
           multiplier=100;
         }else if(target->objectName().contains("therm_")){
           if(target->objectName().contains("_resis"))  command="31";
           else if(target->objectName().contains("_vref")){command="38"; multiplier=1000;}
           else if(target->objectName().contains("_beta"))command="32";
+        }else if(target->objectName().contains("curr_max_")){
+          address=QString("%1").arg(target->objectName().split('_')[2].toInt() , 2, 16, QLatin1Char( '0' ));
+          command="25";
         }else if(target->objectName().contains("volt_amp_ext")){
           command="30";
           multiplier=100;
-        }else if(target->objectName().contains("tec_temp")){
-          command="28";
-          multiplier=100;
-          if(target->objectName().contains("_1"))address="01";
+        }else if(target->objectName().contains("voltage_pl")){
+            command="55";
+            multiplier=100;
         }else if(target->objectName().contains("over_temp")){
           command="33";
           multiplier=10;
@@ -193,21 +222,34 @@ void cb_panel::internal_address_write(QString data)
     commands.clear();
     commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(0 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(1 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(0 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(1 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
     commands.append(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
     commands.append(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
     commands.append(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"89600"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
     commands.append(QString("t"+internal_address+"8B100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(2, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(3, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(4, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(5, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(6, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(7, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(2, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(3, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(4, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(5, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(6, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B700"+QString("%1").arg(7, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+
     commands.append(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
 }
 
 void cb_panel::data_received_and_profed()
@@ -244,42 +286,22 @@ void cb_panel::data_received_and_profed()
           }else if(raw_params[0].mid(9,2)=="01"){
             ui->cur_temp_1->setText(QString::number(nHex/100.0)+" C");
           }
-        }else if(raw_params[0].mid(5,2)=="A5"){
-          if(raw_params[0].mid(9,2)=="00"){
-            if(ui->hpld_curr_label_0->text()=="N/A")ui->hpld_curr_0->setValue(nHex/100.0);
-            ui->hpld_curr_label_0->setText(QString::number(nHex/100.0)+" A");
-          }else if(raw_params[0].mid(9,2)=="01"){
-            if(ui->hpld_curr_label_1->text()=="N/A")ui->hpld_curr_1->setValue(nHex/100.0);
-            ui->hpld_curr_label_1->setText(QString::number(nHex/100.0)+" A");
-          }
         }else if(raw_params[0].mid(5,2)=="9A"){
-            if(raw_params[0].mid(11,2)=="00"){
-                if(ui->forward_treashold_label->text()=="N/A")ui->forward_treashold->setValue(nHex/100.0);
-                ui->forward_treashold_label->setText(QString::number(nHex/100.0)+"");
-            }else if(raw_params[0].mid(11,2)=="01"){
-                if(ui->forward_treashold_label_2->text()=="N/A")ui->forward_treashold_2->setValue(nHex/100.0);
-                ui->forward_treashold_label_2->setText(QString::number(nHex/100.0)+"");
-            }
+            if(ui->forward_treashold_label->text()=="N/A")ui->forward_treashold->setValue(nHex/100.0);
+            ui->forward_treashold_label->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="9B"){
-            if(raw_params[0].mid(11,2)=="00"){
-                ui->pd_forward->setText(QString::number(nHex/100.0)+"");
-            }else if(raw_params[0].mid(11,2)=="01"){
-                ui->pd_forward_2->setText(QString::number(nHex/100.0)+"");
-            }
+            ui->pd_forward->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="97"){
-            if(raw_params[0].mid(11,2)=="00"){
-                ui->pd_backward->setText(QString::number(nHex/100.0)+"");
-            }else if(raw_params[0].mid(11,2)=="01"){
-                ui->pd_backward_2->setText(QString::number(nHex/100.0)+"");
-            }
+            ui->pd_backward->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="96"){
-            if(raw_params[0].mid(11,2)=="00"){
-                if(ui->backward_treashold_label->text()=="N/A")ui->backward_treashold->setValue(nHex/100.0);
-                ui->backward_treashold_label->setText(QString::number(nHex/100.0)+"");
-            }else if(raw_params[0].mid(11,2)=="01"){
-                if(ui->backward_treashold_label_2->text()=="N/A")ui->backward_treashold_2->setValue(nHex/100.0);
-                ui->backward_treashold_label_2->setText(QString::number(nHex/100.0)+"");
-            }
+            if(ui->backward_treashold_label->text()=="N/A")ui->backward_treashold->setValue(nHex/100.0);
+            ui->backward_treashold_label->setText(QString::number(nHex/100.0)+"");
+        }else if(raw_params[0].mid(5,2)=="A5"){
+            max_curr_list[raw_params[0].mid(9,2).toInt()]->setValue(nHex/100.0);
+            dsb_filler++;
+        }else if(raw_params[0].mid(5,2)=="B7"){
+            curr_treash_list[raw_params[0].mid(9,2).toInt()]->setValue(nHex/100.0);
+            dsb_filler++;
         }else if(raw_params[0].mid(5,2)=="B1"){
           if(ui->therm_resis_label->text()=="N/A")ui->therm_resis->setValue(nHex);
           ui->therm_resis_label->setText(QString::number(nHex)+" Ohm");
