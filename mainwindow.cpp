@@ -40,44 +40,20 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gen,&generator_panel::emission_changed,this,&MainWindow::on_emission_changed);
 
     chan1 = new channel_panel(1, this);
-    connect(chan1->preamp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan1->preamp,&device_panel::data_received);
-    connect(chan1->amp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan1->amp,&device_panel::data_received);
-    connect(conn,&tcp_usb_connector::get_command,chan1->amp,&device_panel::auto_telemetry_call);
-    connect(conn,&tcp_usb_connector::get_command,chan1->preamp,&device_panel::auto_telemetry_call);
+    connectChannelPanel(chan1);
     layout->addWidget(chan1, 0, 1);
 
-
     chan2 = new channel_panel(2, this);
-    connect(chan2->preamp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan2->preamp,&device_panel::data_received);
-    connect(chan2->amp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan2->amp,&device_panel::data_received);
-    connect(conn,&tcp_usb_connector::get_command,chan2->amp,&device_panel::auto_telemetry_call);
-    connect(conn,&tcp_usb_connector::get_command,chan2->preamp,&device_panel::auto_telemetry_call);
-
+    connectChannelPanel(chan2);
     layout->addWidget(chan2, 1, 1);
 
     chan3 = new channel_panel(3, this);
-    connect(chan3->preamp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan3->preamp,&device_panel::data_received);
-    connect(chan3->amp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan3->amp,&device_panel::data_received);
-    connect(conn,&tcp_usb_connector::get_command,chan3->amp,&device_panel::auto_telemetry_call);
-    connect(conn,&tcp_usb_connector::get_command,chan3->preamp,&device_panel::auto_telemetry_call);
+    connectChannelPanel(chan3);
     layout->addWidget(chan3, 2, 1);
-    // chan3->setDisabled(true);
 
     chan4 = new channel_panel(4, this);
-    connect(chan4->preamp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan4->preamp,&device_panel::data_received);
-    connect(chan4->amp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
-    connect(conn,&tcp_usb_connector::send_to_dev,chan4->amp,&device_panel::data_received);
-    connect(conn,&tcp_usb_connector::get_command,chan4->amp,&device_panel::auto_telemetry_call);
-    connect(conn,&tcp_usb_connector::get_command,chan4->preamp,&device_panel::auto_telemetry_call);
+    connectChannelPanel(chan4);
     layout->addWidget(chan4, 3, 1);
-    // chan4->setDisabled(true);
 
     chan_all = new channel_all_panel(0, this);
     connect(chan_all->preamp,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
@@ -87,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn,&tcp_usb_connector::get_command,chan_all->amp,&device_panel::auto_telemetry_call);
     connect(conn,&tcp_usb_connector::get_command,chan_all->preamp,&device_panel::auto_telemetry_call);
     layout->addWidget(chan_all, 5, 1);
-    // chan_all->setDisabled(true);
 
     flags = new flag_panel(this);
     connect(flags,&flag_panel::sig_usr_critical_error,this,&MainWindow::on_usr_critical_error);
@@ -441,4 +416,14 @@ void MainWindow::on_network_info(QString type, QString value)
             networkMacEdit->setText(value);
         }
     }
+}
+
+void MainWindow::connectChannelPanel(channel_panel* chan)
+{
+    connect(chan->preamp, &device_panel::send_command, conn, &tcp_usb_connector::data_write);
+    connect(conn, &tcp_usb_connector::send_to_dev, chan->preamp, &device_panel::data_received);
+    connect(chan->amp, &device_panel::send_command, conn, &tcp_usb_connector::data_write);
+    connect(conn, &tcp_usb_connector::send_to_dev, chan->amp, &device_panel::data_received);
+    connect(conn, &tcp_usb_connector::get_command, chan->amp, &device_panel::auto_telemetry_call);
+    connect(conn, &tcp_usb_connector::get_command, chan->preamp, &device_panel::auto_telemetry_call);
 }

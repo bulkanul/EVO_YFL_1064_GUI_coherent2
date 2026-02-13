@@ -36,13 +36,6 @@ void preamplifier_all_panel::auto_telemetry_call(QString family)
     }
 }
 
-// void preamplifier_all_panel::on_pb_onoff_clicked(bool checked)
-// {
-//     // lsonoff allpreamp <id> <value>
-//     ui->pb_onoff->setChecked(!checked);
-//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-// }
-
 void preamplifier_all_panel::data_received_and_profed()
 {
     // lrstatus allpreamp <id> <value>
@@ -56,8 +49,3 @@ void preamplifier_all_panel::data_received_and_profed()
         ui->pb_onoff->setChecked(val == 4);
     }
 }
-
-/*void preamplifier_all_panel::key_catcher(QObject* key)
-{
-    Q_UNUSED(key);
-}*/

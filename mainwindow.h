@@ -78,6 +78,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void connectChannelPanel(channel_panel* chan);
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;

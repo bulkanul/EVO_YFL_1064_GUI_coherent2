@@ -18,11 +18,6 @@ flag_panel::~flag_panel()
     delete ui;
 }
 
-// void flag_panel::key_catcher(QObject *key)
-// {
-//     Q_UNUSED(key);
-// }
-
 void flag_panel::data_received_and_profed()
 {
     // lrstatus usr <id> <interlock_1> <interlock_2> <emergency> <keylock> <phase_not_ok> <stop>

@@ -57,24 +57,3 @@ void amplifier_all_panel::data_received_and_profed()
         ui->l_power->setText(QString::number(param_check(raw_params, 3).toDouble(), 'f', 2) + " %");
     }
 }
-
-// void amplifier_all_panel::key_catcher(QObject* key)
-// {
-//     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
-//                                         "Confirm",
-//                                         "Send command to all amplifiers?",
-//                                         QMessageBox::Yes | QMessageBox::No);
-//     if(mesg->exec()==QMessageBox::Yes){
-//         if(key->objectName() == "dsb_power"){
-//             // lspower allamp <id> <value>
-//             emit sl_data_set("lspower", ID, QString::number(ui->dsb_power->value(), 'f', 2).replace(",", "."));
-//         }
-//     }
-//     delete mesg;
-// }
-
-// void amplifier_all_panel::on_pb_laser_onoff_clicked(bool checked)
-// {
-//     // lsonoff allamp <id> <value>
-//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-// }

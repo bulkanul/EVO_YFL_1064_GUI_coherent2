@@ -41,15 +41,6 @@ void generator_panel::data_received_and_profed()
         // 2 Flags (Errors)
         int flags = param_check(raw_params, 4).toInt();
         check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
-        // if (flags) {
-        //     error_code = flags;
-        //     ui->w_error_box->show();
-        //     ui->pushButton->setVisible(true);
-        //     error_displayer = false;
-        // } else {
-        //     ui->w_error_box->hide();
-        //     ui->pushButton->setVisible(false);
-        // }
 
         double coreT1 = param_check(raw_params, 5).toDouble();
         double coreT2 = param_check(raw_params, 6).toDouble();
@@ -93,17 +84,6 @@ void generator_panel::data_received_and_profed()
         ui->pb_laser_onoff->setChecked(param_check(raw_params, 3).toInt());
     }
 }
-
-// void generator_panel::key_catcher(QObject *key)
-// {
-//     Q_UNUSED(key);
-// }
-
-// void generator_panel::on_pb_laser_onoff_clicked(bool checked)
-// {
-//     ui->pb_laser_onoff->setChecked(!checked);
-//     send_command("lsonoff " + family, ID, QString::number(checked ? 1 : 0));
-// }
 
 void generator_panel::on_pushButton_clicked()
 {

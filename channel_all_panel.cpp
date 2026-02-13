@@ -9,16 +9,14 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
 
     ID = num;
     ui->groupBox->setTitle("All Channels");
-    // ui->groupBox->setCheckable(true);
 
     QGridLayout* layout = new QGridLayout();
-    // layout->setMargin(2);
     layout->setContentsMargins(2, 2, 2, 2);
+    QFont titleFont("Arial", 12, QFont::Bold);
 
     auto *preampCol = new QVBoxLayout();
-    auto *preampTitle = new QLabel(QString("Preamp (All)"), this);
+    auto *preampTitle = new QLabel("Preamp (All)", this);
     preampTitle->setAlignment(Qt::AlignCenter);
-    QFont titleFont("Arial", 12, QFont::Bold);
     preampTitle->setFont(titleFont);
     preampCol->addWidget(preampTitle);
 
@@ -27,14 +25,13 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
     preampCol->addWidget(preamp);
     layout->addLayout(preampCol, 0, 0);
 
-    QFrame *line;
-    line = new QFrame(this);
+    auto *line = new QFrame(this);
     line->setFrameShape(QFrame::VLine);
     line->setFrameShadow(QFrame::Sunken);
     layout->addWidget(line, 0, 1);
 
     auto *ampCol = new QVBoxLayout();
-    auto *ampTitle = new QLabel(QString("Amp (All)"), this);
+    auto *ampTitle = new QLabel("Amp (All)", this);
     ampTitle->setAlignment(Qt::AlignCenter);
     ampTitle->setFont(titleFont);
     ampCol->addWidget(ampTitle);
