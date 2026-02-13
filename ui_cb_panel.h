@@ -83,18 +83,18 @@ public:
     QVBoxLayout *verticalLayout_16;
     QLabel *label_11;
     QFormLayout *formLayout;
-    QLabel *label_50;
-    QLabel *cur_temp_0;
-    QLabel *label_56;
-    QLabel *cur_temp_1;
     QLabel *label_35;
     QLabel *hpld_curr_label_0;
     QLabel *label_36;
     QLabel *hpld_curr_label_1;
     QLabel *label_38;
     QLabel *forward_treashold_label;
+    QLabel *label_42;
+    QLabel *forward_treashold_label_2;
     QLabel *label_39;
     QLabel *backward_treashold_label;
+    QLabel *label_43;
+    QLabel *backward_treashold_label_2;
     QLabel *label_52;
     QLabel *therm_resis_label;
     QLabel *label_54;
@@ -104,20 +104,20 @@ public:
     QLabel *label_55;
     QLabel *over_temp_label;
     QFrame *line_2;
+    QLabel *label_50;
+    QLabel *cur_temp_0;
+    QLabel *label_56;
+    QLabel *cur_temp_1;
     QLabel *label_40;
     QLabel *pd_forward;
+    QLabel *label_44;
+    QLabel *pd_forward_2;
     QLabel *label_41;
     QLabel *pd_backward;
+    QLabel *label_45;
+    QLabel *pd_backward_2;
     QLabel *label_error;
     QPushButton *button_error;
-    QLabel *label_42;
-    QLabel *label_43;
-    QLabel *forward_treashold_label_2;
-    QLabel *backward_treashold_label_2;
-    QLabel *label_44;
-    QLabel *label_45;
-    QLabel *pd_forward_2;
-    QLabel *pd_backward_2;
     QSpacerItem *verticalSpacer;
     QFrame *line;
 
@@ -583,59 +583,27 @@ public:
 
         formLayout = new QFormLayout();
         formLayout->setObjectName("formLayout");
-        label_50 = new QLabel(ns_widget);
-        label_50->setObjectName("label_50");
-        label_50->setMinimumSize(QSize(120, 0));
-        label_50->setMaximumSize(QSize(120, 16777215));
-        QFont font4;
-        font4.setFamilies({QString::fromUtf8("Arial")});
-        font4.setPointSize(12);
-        label_50->setFont(font4);
-
-        formLayout->setWidget(0, QFormLayout::LabelRole, label_50);
-
-        cur_temp_0 = new QLabel(ns_widget);
-        cur_temp_0->setObjectName("cur_temp_0");
-        cur_temp_0->setMinimumSize(QSize(80, 0));
-        cur_temp_0->setMaximumSize(QSize(80, 16777215));
-        QFont font5;
-        font5.setPointSize(12);
-        font5.setBold(true);
-        cur_temp_0->setFont(font5);
-
-        formLayout->setWidget(0, QFormLayout::FieldRole, cur_temp_0);
-
-        label_56 = new QLabel(ns_widget);
-        label_56->setObjectName("label_56");
-        label_56->setMinimumSize(QSize(120, 0));
-        label_56->setMaximumSize(QSize(120, 16777215));
-        label_56->setFont(font4);
-
-        formLayout->setWidget(1, QFormLayout::LabelRole, label_56);
-
-        cur_temp_1 = new QLabel(ns_widget);
-        cur_temp_1->setObjectName("cur_temp_1");
-        cur_temp_1->setMinimumSize(QSize(80, 0));
-        cur_temp_1->setMaximumSize(QSize(80, 16777215));
-        cur_temp_1->setFont(font5);
-
-        formLayout->setWidget(1, QFormLayout::FieldRole, cur_temp_1);
-
         label_35 = new QLabel(ns_widget);
         label_35->setObjectName("label_35");
         label_35->setMinimumSize(QSize(120, 0));
         label_35->setMaximumSize(QSize(120, 16777215));
+        QFont font4;
+        font4.setFamilies({QString::fromUtf8("Arial")});
+        font4.setPointSize(12);
         label_35->setFont(font4);
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_35);
+        formLayout->setWidget(0, QFormLayout::LabelRole, label_35);
 
         hpld_curr_label_0 = new QLabel(ns_widget);
         hpld_curr_label_0->setObjectName("hpld_curr_label_0");
         hpld_curr_label_0->setMinimumSize(QSize(80, 0));
         hpld_curr_label_0->setMaximumSize(QSize(80, 16777215));
+        QFont font5;
+        font5.setPointSize(12);
+        font5.setBold(true);
         hpld_curr_label_0->setFont(font5);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, hpld_curr_label_0);
+        formLayout->setWidget(0, QFormLayout::FieldRole, hpld_curr_label_0);
 
         label_36 = new QLabel(ns_widget);
         label_36->setObjectName("label_36");
@@ -643,7 +611,7 @@ public:
         label_36->setMaximumSize(QSize(120, 16777215));
         label_36->setFont(font4);
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label_36);
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_36);
 
         hpld_curr_label_1 = new QLabel(ns_widget);
         hpld_curr_label_1->setObjectName("hpld_curr_label_1");
@@ -651,7 +619,7 @@ public:
         hpld_curr_label_1->setMaximumSize(QSize(80, 16777215));
         hpld_curr_label_1->setFont(font5);
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, hpld_curr_label_1);
+        formLayout->setWidget(1, QFormLayout::FieldRole, hpld_curr_label_1);
 
         label_38 = new QLabel(ns_widget);
         label_38->setObjectName("label_38");
@@ -659,7 +627,7 @@ public:
         label_38->setMaximumSize(QSize(120, 16777215));
         label_38->setFont(font4);
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_38);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_38);
 
         forward_treashold_label = new QLabel(ns_widget);
         forward_treashold_label->setObjectName("forward_treashold_label");
@@ -667,7 +635,23 @@ public:
         forward_treashold_label->setMaximumSize(QSize(80, 16777215));
         forward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, forward_treashold_label);
+        formLayout->setWidget(2, QFormLayout::FieldRole, forward_treashold_label);
+
+        label_42 = new QLabel(ns_widget);
+        label_42->setObjectName("label_42");
+        label_42->setMinimumSize(QSize(120, 0));
+        label_42->setMaximumSize(QSize(120, 16777215));
+        label_42->setFont(font4);
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_42);
+
+        forward_treashold_label_2 = new QLabel(ns_widget);
+        forward_treashold_label_2->setObjectName("forward_treashold_label_2");
+        forward_treashold_label_2->setMinimumSize(QSize(80, 0));
+        forward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
+        forward_treashold_label_2->setFont(font5);
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, forward_treashold_label_2);
 
         label_39 = new QLabel(ns_widget);
         label_39->setObjectName("label_39");
@@ -675,7 +659,7 @@ public:
         label_39->setMaximumSize(QSize(120, 16777215));
         label_39->setFont(font4);
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, label_39);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_39);
 
         backward_treashold_label = new QLabel(ns_widget);
         backward_treashold_label->setObjectName("backward_treashold_label");
@@ -683,7 +667,23 @@ public:
         backward_treashold_label->setMaximumSize(QSize(80, 16777215));
         backward_treashold_label->setFont(font5);
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, backward_treashold_label);
+        formLayout->setWidget(4, QFormLayout::FieldRole, backward_treashold_label);
+
+        label_43 = new QLabel(ns_widget);
+        label_43->setObjectName("label_43");
+        label_43->setMinimumSize(QSize(120, 0));
+        label_43->setMaximumSize(QSize(120, 16777215));
+        label_43->setFont(font4);
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_43);
+
+        backward_treashold_label_2 = new QLabel(ns_widget);
+        backward_treashold_label_2->setObjectName("backward_treashold_label_2");
+        backward_treashold_label_2->setMinimumSize(QSize(80, 0));
+        backward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
+        backward_treashold_label_2->setFont(font5);
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, backward_treashold_label_2);
 
         label_52 = new QLabel(ns_widget);
         label_52->setObjectName("label_52");
@@ -691,7 +691,7 @@ public:
         label_52->setMaximumSize(QSize(120, 16777215));
         label_52->setFont(font4);
 
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_52);
+        formLayout->setWidget(6, QFormLayout::LabelRole, label_52);
 
         therm_resis_label = new QLabel(ns_widget);
         therm_resis_label->setObjectName("therm_resis_label");
@@ -699,7 +699,7 @@ public:
         therm_resis_label->setMaximumSize(QSize(80, 16777215));
         therm_resis_label->setFont(font5);
 
-        formLayout->setWidget(8, QFormLayout::FieldRole, therm_resis_label);
+        formLayout->setWidget(6, QFormLayout::FieldRole, therm_resis_label);
 
         label_54 = new QLabel(ns_widget);
         label_54->setObjectName("label_54");
@@ -707,7 +707,7 @@ public:
         label_54->setMaximumSize(QSize(120, 16777215));
         label_54->setFont(font4);
 
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_54);
+        formLayout->setWidget(7, QFormLayout::LabelRole, label_54);
 
         therm_vref_label = new QLabel(ns_widget);
         therm_vref_label->setObjectName("therm_vref_label");
@@ -715,7 +715,7 @@ public:
         therm_vref_label->setMaximumSize(QSize(80, 16777215));
         therm_vref_label->setFont(font5);
 
-        formLayout->setWidget(9, QFormLayout::FieldRole, therm_vref_label);
+        formLayout->setWidget(7, QFormLayout::FieldRole, therm_vref_label);
 
         label_53 = new QLabel(ns_widget);
         label_53->setObjectName("label_53");
@@ -723,7 +723,7 @@ public:
         label_53->setMaximumSize(QSize(120, 16777215));
         label_53->setFont(font4);
 
-        formLayout->setWidget(10, QFormLayout::LabelRole, label_53);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_53);
 
         therm_beta_label = new QLabel(ns_widget);
         therm_beta_label->setObjectName("therm_beta_label");
@@ -731,7 +731,7 @@ public:
         therm_beta_label->setMaximumSize(QSize(80, 16777215));
         therm_beta_label->setFont(font5);
 
-        formLayout->setWidget(10, QFormLayout::FieldRole, therm_beta_label);
+        formLayout->setWidget(8, QFormLayout::FieldRole, therm_beta_label);
 
         label_55 = new QLabel(ns_widget);
         label_55->setObjectName("label_55");
@@ -739,7 +739,7 @@ public:
         label_55->setMaximumSize(QSize(120, 16777215));
         label_55->setFont(font4);
 
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_55);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_55);
 
         over_temp_label = new QLabel(ns_widget);
         over_temp_label->setObjectName("over_temp_label");
@@ -747,7 +747,7 @@ public:
         over_temp_label->setMaximumSize(QSize(80, 16777215));
         over_temp_label->setFont(font5);
 
-        formLayout->setWidget(11, QFormLayout::FieldRole, over_temp_label);
+        formLayout->setWidget(9, QFormLayout::FieldRole, over_temp_label);
 
         line_2 = new QFrame(ns_widget);
         line_2->setObjectName("line_2");
@@ -755,7 +755,39 @@ public:
         line_2->setFrameShape(QFrame::HLine);
         line_2->setFrameShadow(QFrame::Sunken);
 
-        formLayout->setWidget(12, QFormLayout::SpanningRole, line_2);
+        formLayout->setWidget(10, QFormLayout::SpanningRole, line_2);
+
+        label_50 = new QLabel(ns_widget);
+        label_50->setObjectName("label_50");
+        label_50->setMinimumSize(QSize(120, 0));
+        label_50->setMaximumSize(QSize(120, 16777215));
+        label_50->setFont(font4);
+
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_50);
+
+        cur_temp_0 = new QLabel(ns_widget);
+        cur_temp_0->setObjectName("cur_temp_0");
+        cur_temp_0->setMinimumSize(QSize(80, 0));
+        cur_temp_0->setMaximumSize(QSize(80, 16777215));
+        cur_temp_0->setFont(font5);
+
+        formLayout->setWidget(11, QFormLayout::FieldRole, cur_temp_0);
+
+        label_56 = new QLabel(ns_widget);
+        label_56->setObjectName("label_56");
+        label_56->setMinimumSize(QSize(120, 0));
+        label_56->setMaximumSize(QSize(120, 16777215));
+        label_56->setFont(font4);
+
+        formLayout->setWidget(12, QFormLayout::LabelRole, label_56);
+
+        cur_temp_1 = new QLabel(ns_widget);
+        cur_temp_1->setObjectName("cur_temp_1");
+        cur_temp_1->setMinimumSize(QSize(80, 0));
+        cur_temp_1->setMaximumSize(QSize(80, 16777215));
+        cur_temp_1->setFont(font5);
+
+        formLayout->setWidget(12, QFormLayout::FieldRole, cur_temp_1);
 
         label_40 = new QLabel(ns_widget);
         label_40->setObjectName("label_40");
@@ -773,6 +805,22 @@ public:
 
         formLayout->setWidget(13, QFormLayout::FieldRole, pd_forward);
 
+        label_44 = new QLabel(ns_widget);
+        label_44->setObjectName("label_44");
+        label_44->setMinimumSize(QSize(120, 0));
+        label_44->setMaximumSize(QSize(120, 16777215));
+        label_44->setFont(font4);
+
+        formLayout->setWidget(14, QFormLayout::LabelRole, label_44);
+
+        pd_forward_2 = new QLabel(ns_widget);
+        pd_forward_2->setObjectName("pd_forward_2");
+        pd_forward_2->setMinimumSize(QSize(80, 0));
+        pd_forward_2->setMaximumSize(QSize(80, 16777215));
+        pd_forward_2->setFont(font5);
+
+        formLayout->setWidget(14, QFormLayout::FieldRole, pd_forward_2);
+
         label_41 = new QLabel(ns_widget);
         label_41->setObjectName("label_41");
         label_41->setMinimumSize(QSize(120, 0));
@@ -789,6 +837,22 @@ public:
 
         formLayout->setWidget(15, QFormLayout::FieldRole, pd_backward);
 
+        label_45 = new QLabel(ns_widget);
+        label_45->setObjectName("label_45");
+        label_45->setMinimumSize(QSize(120, 0));
+        label_45->setMaximumSize(QSize(120, 16777215));
+        label_45->setFont(font4);
+
+        formLayout->setWidget(16, QFormLayout::LabelRole, label_45);
+
+        pd_backward_2 = new QLabel(ns_widget);
+        pd_backward_2->setObjectName("pd_backward_2");
+        pd_backward_2->setMinimumSize(QSize(80, 0));
+        pd_backward_2->setMaximumSize(QSize(80, 16777215));
+        pd_backward_2->setFont(font5);
+
+        formLayout->setWidget(16, QFormLayout::FieldRole, pd_backward_2);
+
         label_error = new QLabel(ns_widget);
         label_error->setObjectName("label_error");
         label_error->setMinimumSize(QSize(120, 0));
@@ -801,70 +865,6 @@ public:
         button_error->setObjectName("button_error");
 
         formLayout->setWidget(17, QFormLayout::FieldRole, button_error);
-
-        label_42 = new QLabel(ns_widget);
-        label_42->setObjectName("label_42");
-        label_42->setMinimumSize(QSize(120, 0));
-        label_42->setMaximumSize(QSize(120, 16777215));
-        label_42->setFont(font4);
-
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_42);
-
-        label_43 = new QLabel(ns_widget);
-        label_43->setObjectName("label_43");
-        label_43->setMinimumSize(QSize(120, 0));
-        label_43->setMaximumSize(QSize(120, 16777215));
-        label_43->setFont(font4);
-
-        formLayout->setWidget(7, QFormLayout::LabelRole, label_43);
-
-        forward_treashold_label_2 = new QLabel(ns_widget);
-        forward_treashold_label_2->setObjectName("forward_treashold_label_2");
-        forward_treashold_label_2->setMinimumSize(QSize(80, 0));
-        forward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
-        forward_treashold_label_2->setFont(font5);
-
-        formLayout->setWidget(5, QFormLayout::FieldRole, forward_treashold_label_2);
-
-        backward_treashold_label_2 = new QLabel(ns_widget);
-        backward_treashold_label_2->setObjectName("backward_treashold_label_2");
-        backward_treashold_label_2->setMinimumSize(QSize(80, 0));
-        backward_treashold_label_2->setMaximumSize(QSize(80, 16777215));
-        backward_treashold_label_2->setFont(font5);
-
-        formLayout->setWidget(7, QFormLayout::FieldRole, backward_treashold_label_2);
-
-        label_44 = new QLabel(ns_widget);
-        label_44->setObjectName("label_44");
-        label_44->setMinimumSize(QSize(120, 0));
-        label_44->setMaximumSize(QSize(120, 16777215));
-        label_44->setFont(font4);
-
-        formLayout->setWidget(14, QFormLayout::LabelRole, label_44);
-
-        label_45 = new QLabel(ns_widget);
-        label_45->setObjectName("label_45");
-        label_45->setMinimumSize(QSize(120, 0));
-        label_45->setMaximumSize(QSize(120, 16777215));
-        label_45->setFont(font4);
-
-        formLayout->setWidget(16, QFormLayout::LabelRole, label_45);
-
-        pd_forward_2 = new QLabel(ns_widget);
-        pd_forward_2->setObjectName("pd_forward_2");
-        pd_forward_2->setMinimumSize(QSize(80, 0));
-        pd_forward_2->setMaximumSize(QSize(80, 16777215));
-        pd_forward_2->setFont(font5);
-
-        formLayout->setWidget(14, QFormLayout::FieldRole, pd_forward_2);
-
-        pd_backward_2 = new QLabel(ns_widget);
-        pd_backward_2->setObjectName("pd_backward_2");
-        pd_backward_2->setMinimumSize(QSize(80, 0));
-        pd_backward_2->setMaximumSize(QSize(80, 16777215));
-        pd_backward_2->setFont(font5);
-
-        formLayout->setWidget(16, QFormLayout::FieldRole, pd_backward_2);
 
 
         verticalLayout_16->addLayout(formLayout);
@@ -924,18 +924,18 @@ public:
         groupBox_19->setTitle(QCoreApplication::translate("cb_panel", "Overheat temperature", nullptr));
         over_temp->setSuffix(QString());
         label_11->setText(QCoreApplication::translate("cb_panel", "Read Values:", nullptr));
-        label_50->setText(QCoreApplication::translate("cb_panel", "Cur. Temp.  0:", nullptr));
-        cur_temp_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_56->setText(QCoreApplication::translate("cb_panel", "Cur. Temp.  1:", nullptr));
-        cur_temp_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_35->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 0 :", nullptr));
         hpld_curr_label_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_36->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 1 :", nullptr));
         hpld_curr_label_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_38->setText(QCoreApplication::translate("cb_panel", "Level forward 1:", nullptr));
         forward_treashold_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_42->setText(QCoreApplication::translate("cb_panel", "Level forward 2:", nullptr));
+        forward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_39->setText(QCoreApplication::translate("cb_panel", "Level backw. 1:", nullptr));
         backward_treashold_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_43->setText(QCoreApplication::translate("cb_panel", "Level backw. 2:", nullptr));
+        backward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_52->setText(QCoreApplication::translate("cb_panel", "Therm. resis. :", nullptr));
         therm_resis_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_54->setText(QCoreApplication::translate("cb_panel", "Therm. Vref:", nullptr));
@@ -944,20 +944,20 @@ public:
         therm_beta_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_55->setText(QCoreApplication::translate("cb_panel", "Overheat temp:", nullptr));
         over_temp_label->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_50->setText(QCoreApplication::translate("cb_panel", "Temp.  0:", nullptr));
+        cur_temp_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_56->setText(QCoreApplication::translate("cb_panel", "Temp.  1:", nullptr));
+        cur_temp_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_40->setText(QCoreApplication::translate("cb_panel", "PD forward 1:", nullptr));
         pd_forward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_44->setText(QCoreApplication::translate("cb_panel", "PD forward 2:", nullptr));
+        pd_forward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_41->setText(QCoreApplication::translate("cb_panel", "PD backward 1:", nullptr));
         pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
+        label_45->setText(QCoreApplication::translate("cb_panel", "PD backward 2:", nullptr));
+        pd_backward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
         button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
-        label_42->setText(QCoreApplication::translate("cb_panel", "Level forward 2:", nullptr));
-        label_43->setText(QCoreApplication::translate("cb_panel", "Level backw. 2:", nullptr));
-        forward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        backward_treashold_label_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        label_44->setText(QCoreApplication::translate("cb_panel", "PD forward 2:", nullptr));
-        label_45->setText(QCoreApplication::translate("cb_panel", "PD backward 2:", nullptr));
-        pd_forward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
-        pd_backward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
     } // retranslateUi
 
 };
