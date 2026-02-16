@@ -103,17 +103,6 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::show_network_info_dialog);
     connect(ui->pb_bootloader, &QPushButton::clicked,
             this, &MainWindow::enter_bootloader);
-    connect(ui->pb_request_status, &QPushButton::clicked,
-            conn, &tcp_usb_connector::request_status_manual);
-    connect(ui->pb_request_version, &QPushButton::clicked,
-            conn, &tcp_usb_connector::request_version_manual);
-#if AUTO_TELEMETRY_ENABLED
-    ui->pb_request_status->setVisible(false);
-    ui->pb_request_version->setVisible(false);
-#else
-    ui->pb_request_status->setVisible(true);
-    ui->pb_request_version->setVisible(true);
-#endif
 }
 
 MainWindow::~MainWindow()

@@ -13,10 +13,6 @@
 
 #define PROTOCOL_VERSION_NAME "EVO_YFL_1064_FW Main_board_03022026"
 
-// 0 = auto telemetry OFF (commands only when you send manually)
-// 1 = auto telemetry ON (lgstatus, lgonoff etc. by timer)
-#define AUTO_TELEMETRY_ENABLED 1
-
 class tcp_usb_connector: public QObject
 {
     Q_OBJECT
@@ -102,8 +98,8 @@ public slots:
     void serial_handle_error(QSerialPort::SerialPortError error);
     void serial_disconnect();
     void get_command_pool();
-    void request_status_manual();  // manual status request (when AUTO_TELEMETRY_ENABLED=0)
-    void request_version_manual();  // manual lgvers (when AUTO_TELEMETRY_ENABLED=0)
+    void request_status_manual();
+    void request_version_manual();
 };
 
 #endif // CONNECTOR_H

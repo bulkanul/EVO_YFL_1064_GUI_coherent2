@@ -319,50 +319,6 @@ QPushButton::hover {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_request_status">
-         <property name="maximumSize">
-          <size>
-           <width>130</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Request status from next device (debug: when auto telemetry is off)</string>
-         </property>
-         <property name="text">
-          <string>Request status</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pb_request_version">
-         <property name="maximumSize">
-          <size>
-           <width>130</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Request version (debug: when auto telemetry is off)</string>
-         </property>
-         <property name="text">
-          <string>Request version</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="all_reset_1">
          <property name="maximumSize">
           <size>

@@ -137,10 +137,8 @@ void tcp_usb_connector::sender()
     if(count>60){
         if(fifo_command.length()>0)
             fifo_command.removeFirst();
-#if AUTO_TELEMETRY_ENABLED
         data_ver_write("gvers");
         display_reconnect();
-#endif
     }
     if(fifo_command.length()>100){
         qDebug() << "danger overfull";
@@ -190,9 +188,7 @@ void tcp_usb_connector::init_connection(QString adress, int port)
 
 void tcp_usb_connector::get_command_pool()
 {
-#if AUTO_TELEMETRY_ENABLED
     request_status_manual();
-#endif
 }
 
 void tcp_usb_connector::request_status_manual()
@@ -341,9 +337,7 @@ void tcp_usb_connector::display_connected()
 {
     connected=true;
     count=0;
-#if AUTO_TELEMETRY_ENABLED
     data_ver_write("gvers");
-#endif
 }
 
 void tcp_usb_connector::display_disconnected()
