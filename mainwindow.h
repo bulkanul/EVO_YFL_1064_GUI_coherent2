@@ -17,13 +17,21 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    dc_panel *dc,*dc1;
+    dc_panel *dc,*dc1,*dc2,*dc3,*dc4,*dc5,*dc6,*dc7;
     tec_panel *tec1;
     tec_panel *tec2;
     cb_panel *cb;
     user_panel *user;
     tcp_usb_connector *conn;
     bool dc_err=false;
+    bool dc1_err=false;
+    bool dc2_err=false;
+    bool dc3_err=false;
+    bool dc4_err=false;
+    bool dc5_err=false;
+    bool dc6_err=false;
+    bool dc7_err=false;
+
     bool cb_err=false;
 signals:
     void send_connection_type(QString,int);

@@ -62,6 +62,8 @@ public:
     QLabel *pd_backward;
     QLabel *label_error;
     QPushButton *button_error;
+    QLabel *label_65;
+    QLabel *pilot_laser_v_dac;
     QSpacerItem *verticalSpacer;
     QFrame *line;
     QGroupBox *groupBox_16;
@@ -128,35 +130,35 @@ public:
     QVBoxLayout *verticalLayout_41;
     QLabel *label_43;
     QHBoxLayout *horizontalLayout_29;
-    QDoubleSpinBox *diode_treshold_6;
+    QDoubleSpinBox *diode_treashold_6;
     QVBoxLayout *verticalLayout_32;
     QLabel *label_30;
     QHBoxLayout *horizontalLayout_22;
-    QDoubleSpinBox *diode_treshold_1;
+    QDoubleSpinBox *diode_treashold_1;
     QVBoxLayout *verticalLayout_39;
     QLabel *label_37;
     QHBoxLayout *horizontalLayout_27;
-    QDoubleSpinBox *diode_treshold_4;
+    QDoubleSpinBox *diode_treashold_4;
     QVBoxLayout *verticalLayout_37;
     QLabel *label_33;
     QHBoxLayout *horizontalLayout_25;
-    QDoubleSpinBox *diode_treshold_2;
+    QDoubleSpinBox *diode_treashold_2;
     QVBoxLayout *verticalLayout_36;
     QLabel *label_32;
     QHBoxLayout *horizontalLayout_24;
-    QDoubleSpinBox *diode_treshold_0;
+    QDoubleSpinBox *diode_treashold_0;
     QVBoxLayout *verticalLayout_38;
     QLabel *label_34;
     QHBoxLayout *horizontalLayout_26;
-    QDoubleSpinBox *diode_treshold_3;
+    QDoubleSpinBox *diode_treashold_3;
     QVBoxLayout *verticalLayout_40;
     QLabel *label_42;
     QHBoxLayout *horizontalLayout_28;
-    QDoubleSpinBox *diode_treshold_5;
+    QDoubleSpinBox *diode_treashold_5;
     QVBoxLayout *verticalLayout_42;
     QLabel *label_46;
     QHBoxLayout *horizontalLayout_30;
-    QDoubleSpinBox *diode_treshold_7;
+    QDoubleSpinBox *diode_treashold_7;
     QGroupBox *groupBox_12;
     QHBoxLayout *horizontalLayout_3;
     QDoubleSpinBox *voltage_pl;
@@ -165,7 +167,7 @@ public:
     {
         if (cb_panel->objectName().isEmpty())
             cb_panel->setObjectName("cb_panel");
-        cb_panel->resize(1003, 437);
+        cb_panel->resize(1003, 439);
         verticalLayout_2 = new QVBoxLayout(cb_panel);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -322,7 +324,7 @@ public:
         label_55->setMaximumSize(QSize(120, 16777215));
         label_55->setFont(font2);
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_55);
+        formLayout->setWidget(6, QFormLayout::LabelRole, label_55);
 
         over_temp_label = new QLabel(ns_widget);
         over_temp_label->setObjectName("over_temp_label");
@@ -330,7 +332,7 @@ public:
         over_temp_label->setMaximumSize(QSize(80, 16777215));
         over_temp_label->setFont(font3);
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, over_temp_label);
+        formLayout->setWidget(6, QFormLayout::FieldRole, over_temp_label);
 
         line_2 = new QFrame(ns_widget);
         line_2->setObjectName("line_2");
@@ -338,7 +340,7 @@ public:
         line_2->setFrameShape(QFrame::HLine);
         line_2->setFrameShadow(QFrame::Sunken);
 
-        formLayout->setWidget(6, QFormLayout::SpanningRole, line_2);
+        formLayout->setWidget(7, QFormLayout::SpanningRole, line_2);
 
         label_50 = new QLabel(ns_widget);
         label_50->setObjectName("label_50");
@@ -346,7 +348,7 @@ public:
         label_50->setMaximumSize(QSize(120, 16777215));
         label_50->setFont(font2);
 
-        formLayout->setWidget(7, QFormLayout::LabelRole, label_50);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_50);
 
         cur_temp_0 = new QLabel(ns_widget);
         cur_temp_0->setObjectName("cur_temp_0");
@@ -354,7 +356,7 @@ public:
         cur_temp_0->setMaximumSize(QSize(80, 16777215));
         cur_temp_0->setFont(font3);
 
-        formLayout->setWidget(7, QFormLayout::FieldRole, cur_temp_0);
+        formLayout->setWidget(8, QFormLayout::FieldRole, cur_temp_0);
 
         label_56 = new QLabel(ns_widget);
         label_56->setObjectName("label_56");
@@ -362,7 +364,7 @@ public:
         label_56->setMaximumSize(QSize(120, 16777215));
         label_56->setFont(font2);
 
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_56);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_56);
 
         cur_temp_1 = new QLabel(ns_widget);
         cur_temp_1->setObjectName("cur_temp_1");
@@ -370,7 +372,7 @@ public:
         cur_temp_1->setMaximumSize(QSize(80, 16777215));
         cur_temp_1->setFont(font3);
 
-        formLayout->setWidget(8, QFormLayout::FieldRole, cur_temp_1);
+        formLayout->setWidget(9, QFormLayout::FieldRole, cur_temp_1);
 
         label_40 = new QLabel(ns_widget);
         label_40->setObjectName("label_40");
@@ -378,7 +380,7 @@ public:
         label_40->setMaximumSize(QSize(120, 16777215));
         label_40->setFont(font2);
 
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_40);
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_40);
 
         pd_forward = new QLabel(ns_widget);
         pd_forward->setObjectName("pd_forward");
@@ -386,7 +388,7 @@ public:
         pd_forward->setMaximumSize(QSize(80, 16777215));
         pd_forward->setFont(font3);
 
-        formLayout->setWidget(9, QFormLayout::FieldRole, pd_forward);
+        formLayout->setWidget(10, QFormLayout::FieldRole, pd_forward);
 
         label_41 = new QLabel(ns_widget);
         label_41->setObjectName("label_41");
@@ -394,7 +396,7 @@ public:
         label_41->setMaximumSize(QSize(120, 16777215));
         label_41->setFont(font2);
 
-        formLayout->setWidget(10, QFormLayout::LabelRole, label_41);
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_41);
 
         pd_backward = new QLabel(ns_widget);
         pd_backward->setObjectName("pd_backward");
@@ -402,7 +404,7 @@ public:
         pd_backward->setMaximumSize(QSize(80, 16777215));
         pd_backward->setFont(font3);
 
-        formLayout->setWidget(10, QFormLayout::FieldRole, pd_backward);
+        formLayout->setWidget(11, QFormLayout::FieldRole, pd_backward);
 
         label_error = new QLabel(ns_widget);
         label_error->setObjectName("label_error");
@@ -410,12 +412,28 @@ public:
         label_error->setMaximumSize(QSize(120, 16777215));
         label_error->setFont(font2);
 
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_error);
+        formLayout->setWidget(12, QFormLayout::LabelRole, label_error);
 
         button_error = new QPushButton(ns_widget);
         button_error->setObjectName("button_error");
 
-        formLayout->setWidget(11, QFormLayout::FieldRole, button_error);
+        formLayout->setWidget(12, QFormLayout::FieldRole, button_error);
+
+        label_65 = new QLabel(ns_widget);
+        label_65->setObjectName("label_65");
+        label_65->setMinimumSize(QSize(120, 0));
+        label_65->setMaximumSize(QSize(120, 16777215));
+        label_65->setFont(font2);
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_65);
+
+        pilot_laser_v_dac = new QLabel(ns_widget);
+        pilot_laser_v_dac->setObjectName("pilot_laser_v_dac");
+        pilot_laser_v_dac->setMinimumSize(QSize(80, 0));
+        pilot_laser_v_dac->setMaximumSize(QSize(80, 16777215));
+        pilot_laser_v_dac->setFont(font3);
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, pilot_laser_v_dac);
 
 
         verticalLayout_16->addLayout(formLayout);
@@ -988,23 +1006,23 @@ public:
 
         horizontalLayout_29 = new QHBoxLayout();
         horizontalLayout_29->setObjectName("horizontalLayout_29");
-        diode_treshold_6 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_6->setObjectName("diode_treshold_6");
-        sizePolicy2.setHeightForWidth(diode_treshold_6->sizePolicy().hasHeightForWidth());
-        diode_treshold_6->setSizePolicy(sizePolicy2);
-        diode_treshold_6->setMinimumSize(QSize(50, 0));
-        diode_treshold_6->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_6->setFont(font5);
-        diode_treshold_6->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_6->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_6->setDecimals(2);
-        diode_treshold_6->setMinimum(0.000000000000000);
-        diode_treshold_6->setMaximum(3.000000000000000);
-        diode_treshold_6->setSingleStep(0.100000000000000);
-        diode_treshold_6->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_6->setValue(0.000000000000000);
+        diode_treashold_6 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_6->setObjectName("diode_treashold_6");
+        sizePolicy2.setHeightForWidth(diode_treashold_6->sizePolicy().hasHeightForWidth());
+        diode_treashold_6->setSizePolicy(sizePolicy2);
+        diode_treashold_6->setMinimumSize(QSize(50, 0));
+        diode_treashold_6->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_6->setFont(font5);
+        diode_treashold_6->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_6->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_6->setDecimals(2);
+        diode_treashold_6->setMinimum(0.000000000000000);
+        diode_treashold_6->setMaximum(3.000000000000000);
+        diode_treashold_6->setSingleStep(0.100000000000000);
+        diode_treashold_6->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_6->setValue(0.000000000000000);
 
-        horizontalLayout_29->addWidget(diode_treshold_6);
+        horizontalLayout_29->addWidget(diode_treashold_6);
 
 
         verticalLayout_41->addLayout(horizontalLayout_29);
@@ -1024,23 +1042,23 @@ public:
 
         horizontalLayout_22 = new QHBoxLayout();
         horizontalLayout_22->setObjectName("horizontalLayout_22");
-        diode_treshold_1 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_1->setObjectName("diode_treshold_1");
-        sizePolicy2.setHeightForWidth(diode_treshold_1->sizePolicy().hasHeightForWidth());
-        diode_treshold_1->setSizePolicy(sizePolicy2);
-        diode_treshold_1->setMinimumSize(QSize(50, 0));
-        diode_treshold_1->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_1->setFont(font5);
-        diode_treshold_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_1->setDecimals(2);
-        diode_treshold_1->setMinimum(0.000000000000000);
-        diode_treshold_1->setMaximum(3.000000000000000);
-        diode_treshold_1->setSingleStep(0.100000000000000);
-        diode_treshold_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_1->setValue(0.000000000000000);
+        diode_treashold_1 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_1->setObjectName("diode_treashold_1");
+        sizePolicy2.setHeightForWidth(diode_treashold_1->sizePolicy().hasHeightForWidth());
+        diode_treashold_1->setSizePolicy(sizePolicy2);
+        diode_treashold_1->setMinimumSize(QSize(50, 0));
+        diode_treashold_1->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_1->setFont(font5);
+        diode_treashold_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_1->setDecimals(2);
+        diode_treashold_1->setMinimum(0.000000000000000);
+        diode_treashold_1->setMaximum(3.000000000000000);
+        diode_treashold_1->setSingleStep(0.100000000000000);
+        diode_treashold_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_1->setValue(0.000000000000000);
 
-        horizontalLayout_22->addWidget(diode_treshold_1);
+        horizontalLayout_22->addWidget(diode_treashold_1);
 
 
         verticalLayout_32->addLayout(horizontalLayout_22);
@@ -1060,23 +1078,23 @@ public:
 
         horizontalLayout_27 = new QHBoxLayout();
         horizontalLayout_27->setObjectName("horizontalLayout_27");
-        diode_treshold_4 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_4->setObjectName("diode_treshold_4");
-        sizePolicy2.setHeightForWidth(diode_treshold_4->sizePolicy().hasHeightForWidth());
-        diode_treshold_4->setSizePolicy(sizePolicy2);
-        diode_treshold_4->setMinimumSize(QSize(50, 0));
-        diode_treshold_4->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_4->setFont(font5);
-        diode_treshold_4->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_4->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_4->setDecimals(2);
-        diode_treshold_4->setMinimum(0.000000000000000);
-        diode_treshold_4->setMaximum(3.000000000000000);
-        diode_treshold_4->setSingleStep(0.100000000000000);
-        diode_treshold_4->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_4->setValue(0.000000000000000);
+        diode_treashold_4 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_4->setObjectName("diode_treashold_4");
+        sizePolicy2.setHeightForWidth(diode_treashold_4->sizePolicy().hasHeightForWidth());
+        diode_treashold_4->setSizePolicy(sizePolicy2);
+        diode_treashold_4->setMinimumSize(QSize(50, 0));
+        diode_treashold_4->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_4->setFont(font5);
+        diode_treashold_4->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_4->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_4->setDecimals(2);
+        diode_treashold_4->setMinimum(0.000000000000000);
+        diode_treashold_4->setMaximum(3.000000000000000);
+        diode_treashold_4->setSingleStep(0.100000000000000);
+        diode_treashold_4->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_4->setValue(0.000000000000000);
 
-        horizontalLayout_27->addWidget(diode_treshold_4);
+        horizontalLayout_27->addWidget(diode_treashold_4);
 
 
         verticalLayout_39->addLayout(horizontalLayout_27);
@@ -1096,23 +1114,23 @@ public:
 
         horizontalLayout_25 = new QHBoxLayout();
         horizontalLayout_25->setObjectName("horizontalLayout_25");
-        diode_treshold_2 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_2->setObjectName("diode_treshold_2");
-        sizePolicy2.setHeightForWidth(diode_treshold_2->sizePolicy().hasHeightForWidth());
-        diode_treshold_2->setSizePolicy(sizePolicy2);
-        diode_treshold_2->setMinimumSize(QSize(50, 0));
-        diode_treshold_2->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_2->setFont(font5);
-        diode_treshold_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_2->setDecimals(2);
-        diode_treshold_2->setMinimum(0.000000000000000);
-        diode_treshold_2->setMaximum(3.000000000000000);
-        diode_treshold_2->setSingleStep(0.100000000000000);
-        diode_treshold_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_2->setValue(0.000000000000000);
+        diode_treashold_2 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_2->setObjectName("diode_treashold_2");
+        sizePolicy2.setHeightForWidth(diode_treashold_2->sizePolicy().hasHeightForWidth());
+        diode_treashold_2->setSizePolicy(sizePolicy2);
+        diode_treashold_2->setMinimumSize(QSize(50, 0));
+        diode_treashold_2->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_2->setFont(font5);
+        diode_treashold_2->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_2->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_2->setDecimals(2);
+        diode_treashold_2->setMinimum(0.000000000000000);
+        diode_treashold_2->setMaximum(3.000000000000000);
+        diode_treashold_2->setSingleStep(0.100000000000000);
+        diode_treashold_2->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_2->setValue(0.000000000000000);
 
-        horizontalLayout_25->addWidget(diode_treshold_2);
+        horizontalLayout_25->addWidget(diode_treashold_2);
 
 
         verticalLayout_37->addLayout(horizontalLayout_25);
@@ -1132,23 +1150,23 @@ public:
 
         horizontalLayout_24 = new QHBoxLayout();
         horizontalLayout_24->setObjectName("horizontalLayout_24");
-        diode_treshold_0 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_0->setObjectName("diode_treshold_0");
-        sizePolicy2.setHeightForWidth(diode_treshold_0->sizePolicy().hasHeightForWidth());
-        diode_treshold_0->setSizePolicy(sizePolicy2);
-        diode_treshold_0->setMinimumSize(QSize(50, 0));
-        diode_treshold_0->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_0->setFont(font5);
-        diode_treshold_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_0->setDecimals(2);
-        diode_treshold_0->setMinimum(0.000000000000000);
-        diode_treshold_0->setMaximum(3.000000000000000);
-        diode_treshold_0->setSingleStep(0.100000000000000);
-        diode_treshold_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_0->setValue(0.000000000000000);
+        diode_treashold_0 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_0->setObjectName("diode_treashold_0");
+        sizePolicy2.setHeightForWidth(diode_treashold_0->sizePolicy().hasHeightForWidth());
+        diode_treashold_0->setSizePolicy(sizePolicy2);
+        diode_treashold_0->setMinimumSize(QSize(50, 0));
+        diode_treashold_0->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_0->setFont(font5);
+        diode_treashold_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_0->setDecimals(2);
+        diode_treashold_0->setMinimum(0.000000000000000);
+        diode_treashold_0->setMaximum(3.000000000000000);
+        diode_treashold_0->setSingleStep(0.100000000000000);
+        diode_treashold_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_0->setValue(0.000000000000000);
 
-        horizontalLayout_24->addWidget(diode_treshold_0);
+        horizontalLayout_24->addWidget(diode_treashold_0);
 
 
         verticalLayout_36->addLayout(horizontalLayout_24);
@@ -1168,23 +1186,23 @@ public:
 
         horizontalLayout_26 = new QHBoxLayout();
         horizontalLayout_26->setObjectName("horizontalLayout_26");
-        diode_treshold_3 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_3->setObjectName("diode_treshold_3");
-        sizePolicy2.setHeightForWidth(diode_treshold_3->sizePolicy().hasHeightForWidth());
-        diode_treshold_3->setSizePolicy(sizePolicy2);
-        diode_treshold_3->setMinimumSize(QSize(50, 0));
-        diode_treshold_3->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_3->setFont(font5);
-        diode_treshold_3->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_3->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_3->setDecimals(2);
-        diode_treshold_3->setMinimum(0.000000000000000);
-        diode_treshold_3->setMaximum(3.000000000000000);
-        diode_treshold_3->setSingleStep(0.100000000000000);
-        diode_treshold_3->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_3->setValue(0.000000000000000);
+        diode_treashold_3 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_3->setObjectName("diode_treashold_3");
+        sizePolicy2.setHeightForWidth(diode_treashold_3->sizePolicy().hasHeightForWidth());
+        diode_treashold_3->setSizePolicy(sizePolicy2);
+        diode_treashold_3->setMinimumSize(QSize(50, 0));
+        diode_treashold_3->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_3->setFont(font5);
+        diode_treashold_3->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_3->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_3->setDecimals(2);
+        diode_treashold_3->setMinimum(0.000000000000000);
+        diode_treashold_3->setMaximum(3.000000000000000);
+        diode_treashold_3->setSingleStep(0.100000000000000);
+        diode_treashold_3->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_3->setValue(0.000000000000000);
 
-        horizontalLayout_26->addWidget(diode_treshold_3);
+        horizontalLayout_26->addWidget(diode_treashold_3);
 
 
         verticalLayout_38->addLayout(horizontalLayout_26);
@@ -1204,23 +1222,23 @@ public:
 
         horizontalLayout_28 = new QHBoxLayout();
         horizontalLayout_28->setObjectName("horizontalLayout_28");
-        diode_treshold_5 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_5->setObjectName("diode_treshold_5");
-        sizePolicy2.setHeightForWidth(diode_treshold_5->sizePolicy().hasHeightForWidth());
-        diode_treshold_5->setSizePolicy(sizePolicy2);
-        diode_treshold_5->setMinimumSize(QSize(50, 0));
-        diode_treshold_5->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_5->setFont(font5);
-        diode_treshold_5->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_5->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_5->setDecimals(2);
-        diode_treshold_5->setMinimum(0.000000000000000);
-        diode_treshold_5->setMaximum(3.000000000000000);
-        diode_treshold_5->setSingleStep(0.100000000000000);
-        diode_treshold_5->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_5->setValue(0.000000000000000);
+        diode_treashold_5 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_5->setObjectName("diode_treashold_5");
+        sizePolicy2.setHeightForWidth(diode_treashold_5->sizePolicy().hasHeightForWidth());
+        diode_treashold_5->setSizePolicy(sizePolicy2);
+        diode_treashold_5->setMinimumSize(QSize(50, 0));
+        diode_treashold_5->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_5->setFont(font5);
+        diode_treashold_5->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_5->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_5->setDecimals(2);
+        diode_treashold_5->setMinimum(0.000000000000000);
+        diode_treashold_5->setMaximum(3.000000000000000);
+        diode_treashold_5->setSingleStep(0.100000000000000);
+        diode_treashold_5->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_5->setValue(0.000000000000000);
 
-        horizontalLayout_28->addWidget(diode_treshold_5);
+        horizontalLayout_28->addWidget(diode_treashold_5);
 
 
         verticalLayout_40->addLayout(horizontalLayout_28);
@@ -1240,23 +1258,23 @@ public:
 
         horizontalLayout_30 = new QHBoxLayout();
         horizontalLayout_30->setObjectName("horizontalLayout_30");
-        diode_treshold_7 = new QDoubleSpinBox(groupBox_17);
-        diode_treshold_7->setObjectName("diode_treshold_7");
-        sizePolicy2.setHeightForWidth(diode_treshold_7->sizePolicy().hasHeightForWidth());
-        diode_treshold_7->setSizePolicy(sizePolicy2);
-        diode_treshold_7->setMinimumSize(QSize(50, 0));
-        diode_treshold_7->setMaximumSize(QSize(16777215, 16777215));
-        diode_treshold_7->setFont(font5);
-        diode_treshold_7->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        diode_treshold_7->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        diode_treshold_7->setDecimals(2);
-        diode_treshold_7->setMinimum(0.000000000000000);
-        diode_treshold_7->setMaximum(3.000000000000000);
-        diode_treshold_7->setSingleStep(0.100000000000000);
-        diode_treshold_7->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        diode_treshold_7->setValue(0.000000000000000);
+        diode_treashold_7 = new QDoubleSpinBox(groupBox_17);
+        diode_treashold_7->setObjectName("diode_treashold_7");
+        sizePolicy2.setHeightForWidth(diode_treashold_7->sizePolicy().hasHeightForWidth());
+        diode_treashold_7->setSizePolicy(sizePolicy2);
+        diode_treashold_7->setMinimumSize(QSize(50, 0));
+        diode_treashold_7->setMaximumSize(QSize(16777215, 16777215));
+        diode_treashold_7->setFont(font5);
+        diode_treashold_7->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        diode_treashold_7->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        diode_treashold_7->setDecimals(2);
+        diode_treashold_7->setMinimum(0.000000000000000);
+        diode_treashold_7->setMaximum(3.000000000000000);
+        diode_treashold_7->setSingleStep(0.100000000000000);
+        diode_treashold_7->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        diode_treashold_7->setValue(0.000000000000000);
 
-        horizontalLayout_30->addWidget(diode_treshold_7);
+        horizontalLayout_30->addWidget(diode_treashold_7);
 
 
         verticalLayout_42->addLayout(horizontalLayout_30);
@@ -1337,6 +1355,8 @@ public:
         pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
         button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        label_65->setText(QCoreApplication::translate("cb_panel", "Pilot las. V. DAC:", nullptr));
+        pilot_laser_v_dac->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
         label_29->setText(QCoreApplication::translate("cb_panel", "Forward", nullptr));
         forward_treashold->setSuffix(QString());
@@ -1370,21 +1390,21 @@ public:
         curr_max_7->setSuffix(QString());
         groupBox_17->setTitle(QCoreApplication::translate("cb_panel", "HPLD \320\241urrent threshold", nullptr));
         label_43->setText(QCoreApplication::translate("cb_panel", "6", nullptr));
-        diode_treshold_6->setSuffix(QString());
+        diode_treashold_6->setSuffix(QString());
         label_30->setText(QCoreApplication::translate("cb_panel", "1", nullptr));
-        diode_treshold_1->setSuffix(QString());
+        diode_treashold_1->setSuffix(QString());
         label_37->setText(QCoreApplication::translate("cb_panel", "4", nullptr));
-        diode_treshold_4->setSuffix(QString());
+        diode_treashold_4->setSuffix(QString());
         label_33->setText(QCoreApplication::translate("cb_panel", "2", nullptr));
-        diode_treshold_2->setSuffix(QString());
+        diode_treashold_2->setSuffix(QString());
         label_32->setText(QCoreApplication::translate("cb_panel", "0", nullptr));
-        diode_treshold_0->setSuffix(QString());
+        diode_treashold_0->setSuffix(QString());
         label_34->setText(QCoreApplication::translate("cb_panel", "3", nullptr));
-        diode_treshold_3->setSuffix(QString());
+        diode_treashold_3->setSuffix(QString());
         label_42->setText(QCoreApplication::translate("cb_panel", "5", nullptr));
-        diode_treshold_5->setSuffix(QString());
+        diode_treashold_5->setSuffix(QString());
         label_46->setText(QCoreApplication::translate("cb_panel", "7", nullptr));
-        diode_treshold_7->setSuffix(QString());
+        diode_treashold_7->setSuffix(QString());
         groupBox_12->setTitle(QCoreApplication::translate("cb_panel", "Pilot laser Voltage DAC", nullptr));
         voltage_pl->setSuffix(QString());
     } // retranslateUi

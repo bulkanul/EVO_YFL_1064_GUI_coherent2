@@ -33,6 +33,68 @@ MainWindow::MainWindow(QWidget *parent)
     dc1->ID=1;
     dc1->name_section()->setText("HPLD 1000 1");
 
+
+    dc2 = new dc_panel(this);
+    connect(dc2, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc2, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc2, SLOT(data_received(QStringList)));
+    connect(dc2, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc2, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc2);
+    dc2->ID=2;
+    dc2->name_section()->setText("HPLD 1000 2");
+
+    dc3 = new dc_panel(this);
+    connect(dc3, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc3, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc3, SLOT(data_received(QStringList)));
+    connect(dc3, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc3, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc3);
+    dc3->ID=3;
+    dc3->name_section()->setText("HPLD 1000 3");
+
+    dc4 = new dc_panel(this);
+    connect(dc4, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc4, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc4, SLOT(data_received(QStringList)));
+    connect(dc4, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc4, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc4);
+    dc4->ID=4;
+    dc4->name_section()->setText("HPLD 1000 4");
+
+    dc5 = new dc_panel(this);
+    connect(dc5, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc5, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc5, SLOT(data_received(QStringList)));
+    connect(dc5, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc5, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc5);
+    dc5->ID=5;
+    dc5->name_section()->setText("HPLD 1000 5");
+
+    dc6 = new dc_panel(this);
+    connect(dc6, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc6, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc6, SLOT(data_received(QStringList)));
+    connect(dc6, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc6, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc6);
+    dc6->ID=6;
+    dc6->name_section()->setText("HPLD 1000 6");
+
+    dc7 = new dc_panel(this);
+    connect(dc7, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
+    connect(this, SIGNAL(update_internal_address(QString)),dc7, SLOT(internal_address_write(QString)));
+    connect(conn, SIGNAL(send_to_dev(QStringList)),dc7, SLOT(data_received(QStringList)));
+    connect(dc7, SIGNAL(call_ui_buttons(QString,bool)),this, SLOT(update_ui(QString,bool)));
+    connect(conn, SIGNAL(get_command(QString)),dc7, SLOT(telemetry_call(QString)));
+    ui->groupBox->layout()->addWidget(dc7);
+    dc7->ID=7;
+    dc7->name_section()->setText("HPLD 1000 7");
+
+
     cb = new cb_panel(this);
     cb->ID=0;
     connect(cb, SIGNAL(send_command(QByteArray)),conn, SLOT(raw_command_write(QByteArray)));
@@ -74,8 +136,15 @@ MainWindow::~MainWindow()
 void MainWindow::update_ui(QString name,bool state)
 {
     if(name=="dc0")dc_err=state;
+    else if(name=="dc1")dc1_err=state;
+    else if(name=="dc2")dc2_err=state;
+    else if(name=="dc3")dc3_err=state;
+    else if(name=="dc4")dc4_err=state;
+    else if(name=="dc5")dc5_err=state;
+    else if(name=="dc6")dc6_err=state;
+    else if(name=="dc7")dc7_err=state;
     else if(name=="cb")cb_err=state;
-    ui->pb_error_cleaner->setVisible(dc_err || cb_err);
+    ui->pb_error_cleaner->setVisible(dc_err || dc1_err ||dc2_err ||dc3_err ||dc4_err ||dc5_err ||dc6_err ||dc7_err ||cb_err);
 }
 
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>437</height>
+    <height>439</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -405,7 +405,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
+             <item row="6" column="0">
               <widget class="QLabel" name="label_55">
                <property name="minimumSize">
                 <size>
@@ -430,7 +430,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="6" column="1">
               <widget class="QLabel" name="over_temp_label">
                <property name="minimumSize">
                 <size>
@@ -455,7 +455,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0" colspan="2">
+             <item row="7" column="0" colspan="2">
               <widget class="Line" name="line_2">
                <property name="minimumSize">
                 <size>
@@ -468,7 +468,7 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="0">
               <widget class="QLabel" name="label_50">
                <property name="minimumSize">
                 <size>
@@ -493,7 +493,7 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="1">
+             <item row="8" column="1">
               <widget class="QLabel" name="cur_temp_0">
                <property name="minimumSize">
                 <size>
@@ -518,7 +518,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="9" column="0">
               <widget class="QLabel" name="label_56">
                <property name="minimumSize">
                 <size>
@@ -543,7 +543,7 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
+             <item row="9" column="1">
               <widget class="QLabel" name="cur_temp_1">
                <property name="minimumSize">
                 <size>
@@ -568,7 +568,7 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
+             <item row="10" column="0">
               <widget class="QLabel" name="label_40">
                <property name="minimumSize">
                 <size>
@@ -593,7 +593,7 @@
                </property>
               </widget>
              </item>
-             <item row="9" column="1">
+             <item row="10" column="1">
               <widget class="QLabel" name="pd_forward">
                <property name="minimumSize">
                 <size>
@@ -618,7 +618,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="11" column="0">
               <widget class="QLabel" name="label_41">
                <property name="minimumSize">
                 <size>
@@ -643,7 +643,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="1">
+             <item row="11" column="1">
               <widget class="QLabel" name="pd_backward">
                <property name="minimumSize">
                 <size>
@@ -668,7 +668,7 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="0">
+             <item row="12" column="0">
               <widget class="QLabel" name="label_error">
                <property name="minimumSize">
                 <size>
@@ -693,10 +693,60 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="1">
+             <item row="12" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
                 <string>Детали</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_65">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Pilot las. V. DAC:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLabel" name="pilot_laser_v_dac">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -1983,7 +2033,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_29">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_6">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_6">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2066,7 +2116,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_22">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_1">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_1">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2149,7 +2199,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_27">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_4">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_4">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2232,7 +2282,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_25">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_2">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_2">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2315,7 +2365,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_24">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_0">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_0">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2398,7 +2448,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_26">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_3">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_3">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2481,7 +2531,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_28">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_5">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_5">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -2564,7 +2614,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_30">
                 <item>
-                 <widget class="QDoubleSpinBox" name="diode_treshold_7">
+                 <widget class="QDoubleSpinBox" name="diode_treashold_7">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>

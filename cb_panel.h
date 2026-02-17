@@ -16,33 +16,23 @@ public:
     QTimer* tmr;
     int auto_call=6;
     bool connection_lost=true;
+    QList <bool> dsbs={0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0};
     QList <QLabel*> labels;
     QList <QDoubleSpinBox*> max_curr_list;
     QList <QDoubleSpinBox*> curr_treash_list;
-    int dsb_filler;
     QStringList commands;
     QStringList commands_send;
     QStringList command_setter;
-    QStringList errors_cb_list={"Backward fault",
-                                "Forward fault",
+    QStringList errors_cb_list={"backward pd fault 0",
+                                "forward pd fault 0",
                                 "Inner ERROR",
                                 "QBH",
                                 "Inner ERROR",
                                 "Inner ERROR",
-                                "Interlock_L_ok_H_bad",
-                                "AC_DC_problem",
-                                "Sys_overheat" };
-    QStringList errors_dc_list={"flag_REBOOTED",
-                                "flag_ALARM_INTERLOCK",
-                                "flag_Overtemp",
-                                "flag_OverCurrent",
-                                "flag_UnderVoltage_IN",
-                                "flag_OverVoltage_IN",
-                                "flag_UnderVoltage_OUT",
-                                "flag_OverCurrent_IND" };
-    uint cbErrorHex=0;
-    uint dc1ErrorHex=0;
-    uint dc2ErrorHex=0;
+                                "Interlock",
+                                "AC/DC problem",
+                                "sys overheat"};
+    int cbErrorHex=0;
 public slots:
     void data_received_and_profed();
     void key_catcher(QObject*);

@@ -197,15 +197,30 @@ void device_panel::send_pref()
 
 }
 
-QString device_panel::pars_bits(unsigned char mess,QStringList list){
+QString device_panel::pars_bits(int mess,QStringList list){
     QString answer;
-    for (int i=0;i<8;i++){
+    for (int i=0;i<=list.length();i++){
          if(((mess & (1<<(i)))!=0 )){
             answer+= list[i]+'\n';
         }
     }
     return answer;
 }
+void device_panel::call_msg_box(QString msg1){
+    if(error_displayer && (msg1!="")){
+        error_displayer=false;
+
+        QMessageBox *mesg;
+        QString mesage;
+        if(msg1!=""){mesage+="---- HPLD 1000 "+QString::number(ID); mesage+='\n'+ msg1; mesage+='\n';}
+        qDebug()<<"mesage1"<<msg1;
+
+        mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
+        mesg->addButton(QMessageBox::Ok);
+        mesg->show();
+    }
+}
+
 
 void device_panel::call_msg_box(QString msg1,QString msg2,QString msg3){
     if(error_displayer && (msg1!="" || msg2!="" || msg3!="")){
