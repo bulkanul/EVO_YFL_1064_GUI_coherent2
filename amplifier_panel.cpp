@@ -18,6 +18,12 @@ amplifier_panel::amplifier_panel(QWidget *parent) :
     ui->pushButton->setVisible(false);
 
     ui->power->installEventFilter(this);
+
+    for(int i = 0; i < 6; ++i) {
+        ui->gridLayout->setColumnStretch(i, 1);
+    }
+    ui->horizontalLayout_4->setStretch(0, 0);
+    ui->horizontalLayout_4->setStretch(1, 1);
 }
 
 amplifier_panel::~amplifier_panel()

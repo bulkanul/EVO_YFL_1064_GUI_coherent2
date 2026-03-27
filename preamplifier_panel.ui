@@ -7,20 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>624</width>
-    <height>93</height>
+    <height>160</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>420</width>
-    <height>0</height>
-   </size>
   </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>420</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -43,12 +43,25 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label_onoff_preamp">
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_onoff_preamp">
          <property name="text">
           <string>Off / On</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -104,6 +117,50 @@ QPushButton::disabled  {
         </layout>
        </item>
        <item>
+        <widget class="QWidget" name="w_error_box" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_error_box">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Details</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_reset">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Clear Errors</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -122,14 +179,105 @@ QPushButton::disabled  {
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
-         <property name="spacing">
-          <number>3</number>
-         </property>
          <property name="horizontalSpacing">
           <number>4</number>
          </property>
+         <property name="verticalSpacing">
+          <number>3</number>
+         </property>
+         <item row="2" column="0">
+          <widget class="QLabel" name="l_temp_0">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>0 °C</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>72</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>PD1 (Back):</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_9">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>72</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>72</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Temp 1:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="4">
-          <widget class="QLabel" name="l_pd_2_back">
+          <widget class="QLabel" name="l_pd_3_fwd">
            <property name="minimumSize">
             <size>
              <width>70</width>
@@ -157,29 +305,28 @@ QPushButton::disabled  {
            </property>
           </widget>
          </item>
-         <item row="2" column="6">
-          <widget class="QLabel" name="l_pd_4_fwd">
+         <item row="1" column="3">
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
-             <width>70</width>
+             <width>72</width>
              <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
             </size>
            </property>
            <property name="font">
             <font>
              <family>Arial</family>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>0 V</string>
+            <string>PD2 (Back):</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -216,46 +363,18 @@ QPushButton::disabled  {
           </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QLabel" name="label_11">
-           <property name="minimumSize">
-            <size>
-             <width>72</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>PD3 (Fwd):</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="6">
           <widget class="QLabel" name="label_12">
-           <property name="minimumSize">
-            <size>
-             <width>72</width>
-             <height>0</height>
-            </size>
-           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>72</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="font">
             <font>
@@ -271,13 +390,61 @@ QPushButton::disabled  {
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_8">
+         <item row="0" column="1">
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="5">
+          <widget class="QLabel" name="l_pd_4_fwd">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>70</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>0 V</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLabel" name="label_11">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>72</width>
+             <height>0</height>
+            </size>
            </property>
            <property name="font">
             <font>
@@ -286,14 +453,14 @@ QPushButton::disabled  {
             </font>
            </property>
            <property name="text">
-            <string>Temp 0:</string>
+            <string>PD3 (Fwd):</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
-         <item row="2" column="3">
+         <item row="2" column="2">
           <widget class="QLabel" name="l_pd_1_back">
            <property name="minimumSize">
             <size>
@@ -322,13 +489,25 @@ QPushButton::disabled  {
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QLabel" name="label_9">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_8">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>72</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>72</width>
+             <height>16777215</height>
+            </size>
            </property>
            <property name="font">
             <font>
@@ -337,44 +516,15 @@ QPushButton::disabled  {
             </font>
            </property>
            <property name="text">
-            <string>Temp 1:</string>
+            <string>Temp 0:</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="l_temp_0">
-           <property name="minimumSize">
-            <size>
-             <width>70</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>0 °C</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QLabel" name="l_pd_3_fwd">
+         <item row="2" column="3">
+          <widget class="QLabel" name="l_pd_2_back">
            <property name="minimumSize">
             <size>
              <width>70</width>
@@ -402,206 +552,18 @@ QPushButton::disabled  {
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
-          <widget class="QLabel" name="label_2">
-           <property name="minimumSize">
+         <item row="3" column="1">
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>72</width>
-             <height>0</height>
+             <width>20</width>
+             <height>40</height>
             </size>
            </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>PD1 (Back):</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="4">
-          <widget class="QLabel" name="label_3">
-           <property name="minimumSize">
-            <size>
-             <width>72</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>PD2 (Back):</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_power">
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Power:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="2">
-          <widget class="QProgressBar" name="progressBar_power">
-           <property name="minimumSize">
-            <size>
-             <width>120</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Arial</family>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="maximum">
-            <number>100</number>
-           </property>
-           <property name="value">
-            <number>0</number>
-           </property>
-           <property name="format">
-            <string>%p%</string>
-           </property>
-           <property name="textVisible">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5" colspan="2">
-          <widget class="QWidget" name="w_error_box" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="palette">
-               <palette>
-                <active>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>255</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </active>
-                <inactive>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>255</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </inactive>
-                <disabled>
-                 <colorrole role="WindowText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>120</red>
-                    <green>120</green>
-                    <blue>120</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </disabled>
-               </palette>
-              </property>
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Details</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pb_reset">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Clear Errors</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+          </spacer>
          </item>
         </layout>
        </item>

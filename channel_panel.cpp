@@ -43,6 +43,9 @@ channel_panel::channel_panel(int num, QWidget *parent) :
     ampCol->addWidget(amp);
     layout->addLayout(ampCol, 0, 2);
 
+    layout->setColumnStretch(0, 1);
+    layout->setColumnStretch(2, 1);
+
     ui->groupBox->setLayout(layout);
 }
 

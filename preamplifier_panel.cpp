@@ -17,9 +17,23 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
     ui->w_error_box->hide();
     ui->pushButton->setVisible(false);
     ui->pb_reset->setVisible(false);
-    ui->progressBar_power->setVisible(false);
-    ui->label_power->setVisible(false);
 
+    ui->l_temp_0->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->l_temp_1->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->label_8->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->label_9->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->l_pd_1_back->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->l_pd_2_back->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->l_pd_3_fwd->setMaximumWidth(QWIDGETSIZE_MAX);
+    ui->l_pd_4_fwd->setMaximumWidth(QWIDGETSIZE_MAX);
+
+    ui->horizontalLayout_3->setStretch(0, 0);
+    ui->horizontalLayout_3->setStretch(1, 1);
+
+    this->setMinimumWidth(0);
+    for (int i =0; i<6; ++i){
+        ui->gridLayout_2->setColumnStretch(i, 1);
+    }
 }
 
 preamplifier_panel::~preamplifier_panel()

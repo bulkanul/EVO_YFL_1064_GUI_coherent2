@@ -40,6 +40,8 @@ channel_all_panel::channel_all_panel(int num, QWidget *parent) :
     amp->ID = ID;
     ampCol->addWidget(amp);
     layout->addLayout(ampCol, 0, 2);
+    layout->setColumnStretch(0, 1);
+    layout->setColumnStretch(2, 1);
 
     ui->groupBox->setLayout(layout);
 }
