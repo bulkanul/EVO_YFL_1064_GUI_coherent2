@@ -63,7 +63,6 @@
       <font>
        <family>Arial</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -100,7 +99,6 @@
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -141,7 +139,6 @@ QLabel:enabled { border-image: url(:/images/images/round_button_indicator_on_hov
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -182,7 +179,6 @@ QLabel:enabled { border-image: url(:/images/images/round_button_indicator_on_hov
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -223,7 +219,6 @@ QLabel:enabled { border-image: url(:/images/images/round_button_indicator_on_hov
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -264,7 +259,6 @@ QLabel:enabled { border-image: url(:/images/images/round_button_indicator_on_hov
            <font>
             <family>Arial</family>
             <pointsize>10</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -325,7 +319,6 @@ QLabel:enabled { border-image: url(:/images/images/round_button_indicator_on_hov
            <font>
             <family>Arial</family>
             <pointsize>12</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -370,7 +363,6 @@ QPushButton:checked:hover {
            <font>
             <family>Arial</family>
             <pointsize>9</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -396,7 +388,38 @@ QPushButton:checked:hover {
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QWidget" name="w_error_box" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_error_box">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Details</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_init">
           <property name="minimumSize">
            <size>
             <width>0</width>

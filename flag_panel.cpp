@@ -20,8 +20,8 @@ flag_panel::~flag_panel()
 
 void flag_panel::data_received_and_profed()
 {
-    // lrstatus usr <id> <interlock_1> <interlock_2> <emergency> <keylock> <phase_not_ok> <stop>
-    //   [0]    [1] [2]     [3]           [4]            [5]        [6]       [7]         [8]
+    // lrstatus usr <id> <interlock_1> <interlock_2> <emergency> <keylock> <phase_not_ok> <stop> <alarm>
+    //   [0]    [1] [2]     [3]           [4]            [5]        [6]       [7]         [8]      [9]
     
     if (param_check(raw_params, 0) == "lrstatus") {
         int interlock_1  = param_check(raw_params, 3).toInt();
@@ -39,19 +39,23 @@ void flag_panel::data_received_and_profed()
         ui->l_stop->setText(stop ? "Active" : "Inactive");
         ui->pb_stop_onoff->setChecked(stop);
 
-        // Clear Errors button show when any critical usr param is 1 (not ok)
-        bool has_critical = (interlock_1 || interlock_2 || emergency || phase_not_ok);
-        emit sig_usr_critical_error(has_critical);
+        int alarm_flags = param_check(raw_params, 9).toInt();
+        check_error_state(alarm_flags, error_code, ui->w_error_box, ui->pushButton);
     }
     else if (param_check(raw_params, 0) == "lrerrclr") {
         emit sig_usr_critical_error(false);
     }
 }
 
-void flag_panel::on_pushButton_clicked()
+void flag_panel::on_pushButton_init_clicked()
 {
     // lsinitall usr <id>
     emit sl_data_set("lsinitall", ID, "");
+}
+
+void flag_panel::on_pushButton_clicked()
+{
+    call_msg_box(parse_bits(error_code, errors_list));
 }
 
 void flag_panel::on_pb_stop_onoff_clicked(bool checked)
