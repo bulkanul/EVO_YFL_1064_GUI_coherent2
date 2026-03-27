@@ -243,6 +243,37 @@ QPushButton::disabled  {
        </property>
       </widget>
      </item>
+    <item row="0" column="1">
+     <widget class="QProgressBar" name="progressBar_power">
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="format">
+       <string>%p%</string>
+      </property>
+      <property name="textVisible">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
      <item row="2" column="6">
       <widget class="QLabel" name="label">
        <property name="font">

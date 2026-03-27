@@ -39,6 +39,7 @@ void amplifier_panel::data_received_and_profed()
         
         // [5] = power_percent
         ui->l_power->setText(QString::number(param_check(raw_params, 5).toDouble(), 'f', 2) + " %");
+        ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 5).toDouble()));
 
         // [6] = flags
         int flags = param_check(raw_params, 6).toInt();
@@ -68,6 +69,7 @@ void amplifier_panel::data_received_and_profed()
     }
     else if (param_check(raw_params,0) == "lrpower"){
         // lrpower amp <id> <value>
+        ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 3).toDouble()));
     }
 }
 
