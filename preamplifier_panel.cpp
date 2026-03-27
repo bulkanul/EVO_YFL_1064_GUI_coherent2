@@ -16,6 +16,10 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
 
     ui->w_error_box->hide();
     ui->pushButton->setVisible(false);
+    ui->pb_reset->setVisible(false);
+    ui->progressBar_power->setVisible(false);
+    ui->label_power->setVisible(false);
+
 }
 
 preamplifier_panel::~preamplifier_panel()
@@ -35,7 +39,7 @@ void preamplifier_panel::data_received_and_profed()
         ui->pb_onoff->setChecked(isStarted);
         
         // [4] = power value (0-100)
-        ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 4).toDouble()));
+        // ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 4).toDouble()));
 
         // [5] = flags
         int flags = param_check(raw_params, 5).toInt();
@@ -57,7 +61,7 @@ void preamplifier_panel::data_received_and_profed()
     }
     else if (param_check(raw_params,0) == "lrpower"){
         // lrpower preamp <id> <value>
-        ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 3).toDouble()));
+        // ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 3).toDouble()));
     }
     else if (param_check(raw_params,0) == "lrreset"){
         // lrreset preamp <id>
@@ -72,5 +76,5 @@ void preamplifier_panel::on_pushButton_clicked()
 
 void preamplifier_panel::on_pb_reset_clicked()
 {
-    emit sl_data_set("lsreset", ID, "");
+    // emit sl_data_set("lsreset", ID, "");
 }

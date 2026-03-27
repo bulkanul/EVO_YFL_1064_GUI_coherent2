@@ -10,6 +10,7 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QRegularExpressionValidator>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -103,6 +104,14 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::show_network_info_dialog);
     connect(ui->pb_bootloader, &QPushButton::clicked,
             this, &MainWindow::enter_bootloader);
+
+    ui->pb_bootloader->setVisible(false);
+    ui->all_reset_1->setVisible(false);
+
+    ui->ip_adress->setInputMask("");
+    ui->ip_adress->setPlaceholderText("192.168.26.220");
+    QRegularExpression ipRegex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+    ui->ip_adress->setValidator(new QRegularExpressionValidator(ipRegex, this));
 }
 
 MainWindow::~MainWindow()
@@ -329,7 +338,9 @@ void MainWindow::show_network_info_dialog()
 
         layout->addWidget(new QLabel(tr("IP address:"), networkDialog), 0, 0);
         networkIpEdit = new QLineEdit(networkDialog);
-        networkIpEdit->setInputMask("000.000.000.000; ");
+
+        QRegularExpression ipRegex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+        networkIpEdit->setValidator(new QRegularExpressionValidator(ipRegex, networkDialog));
         networkIpEdit->setPlaceholderText("192.168.26.220");
         networkIpEdit->setText(currentIp.isEmpty() ? ui->ip_adress->text() : currentIp);
         layout->addWidget(networkIpEdit, 0, 1);
@@ -341,7 +352,7 @@ void MainWindow::show_network_info_dialog()
 
         layout->addWidget(new QLabel(tr("MAC address:"), networkDialog), 1, 0);
         networkMacEdit = new QLineEdit(networkDialog);
-        networkMacEdit->setInputMask("HH:HH:HH:HH:HH:HH; ");
+        networkMacEdit->setInputMask(">HH:HH:HH:HH:HH:HH; ");
         networkMacEdit->setPlaceholderText("11:22:33:44:55:66");
         networkMacEdit->setText(currentMac);
         layout->addWidget(networkMacEdit, 1, 1);
