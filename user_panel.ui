@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>789</width>
-    <height>256</height>
+    <width>798</width>
+    <height>280</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -280,7 +280,7 @@ QPushButton::disabled  {
                 </font>
                </property>
                <property name="text">
-                <string>Aim laser</string>
+                <string>Pilot laser</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -610,6 +610,9 @@ QProgressBar::chunk:disabled {
                  <property name="text">
                   <string>Calibration coefficient</string>
                  </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -708,24 +711,27 @@ QProgressBar::chunk:disabled {
            </item>
            <item>
             <layout class="QFormLayout" name="formLayout_2">
+             <property name="verticalSpacing">
+              <number>6</number>
+             </property>
              <property name="leftMargin">
-              <number>3</number>
+              <number>0</number>
              </property>
              <property name="topMargin">
-              <number>3</number>
+              <number>0</number>
              </property>
              <property name="rightMargin">
-              <number>3</number>
+              <number>0</number>
              </property>
              <property name="bottomMargin">
-              <number>3</number>
+              <number>0</number>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_28">
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -771,12 +777,63 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_30">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>21</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Pilot laser:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="pilot_state_label">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>OFF</string>
+               </property>
+              </widget>
+             </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_31">
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -822,63 +879,12 @@ QProgressBar::chunk:disabled {
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_30">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>120</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Aim laser:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="pilot_state_label">
-               <property name="minimumSize">
-                <size>
-                 <width>80</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>80</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>12</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>OFF</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_33">
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -929,7 +935,7 @@ QProgressBar::chunk:disabled {
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -980,7 +986,7 @@ QProgressBar::chunk:disabled {
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -1031,7 +1037,7 @@ QProgressBar::chunk:disabled {
                <property name="minimumSize">
                 <size>
                  <width>120</width>
-                 <height>0</height>
+                 <height>21</height>
                 </size>
                </property>
                <property name="maximumSize">

@@ -58,7 +58,7 @@ cb_panel::cb_panel(QWidget *parent):
     ui->therm_beta->installEventFilter(this);
     ui->therm_vref->installEventFilter(this);
     ui->over_temp_00->installEventFilter(this);
-
+    ui->over_temp_01->installEventFilter(this);
 
     labels.append(ui->cur_temp_0);
     labels.append(ui->cur_temp_1);
@@ -187,9 +187,9 @@ void cb_panel::key_catcher(QObject* key)
             }
             multiplier=100;
         }else if(target->objectName().contains("therm_")){
-          if(target->objectName().contains("_resis"))  command="31";
+          if(target->objectName().contains("_resis")){command="31";multiplier=100;}
           else if(target->objectName().contains("_vref")){command="38"; multiplier=1000;}
-          else if(target->objectName().contains("_beta"))command="32";
+          else if(target->objectName().contains("_beta")){command="32";multiplier=100;}
         }else if(target->objectName().contains("curr_max_")){
           address=QString("%1").arg(target->objectName().split('_')[2].toInt() , 2, 16, QLatin1Char( '0' ));
           command="25";
@@ -304,14 +304,14 @@ void cb_panel::data_received_and_profed()
             curr_treash_list[index]->setValue(nHex/100.0);
             dsbs[index+8]=1;
         }else if(raw_params[0].mid(5,2)=="B1"){
-          if(ui->therm_resis_label->text()=="N/A")ui->therm_resis->setValue(nHex);
-          ui->therm_resis_label->setText(QString::number(nHex)+" Ohm");
+          if(ui->therm_resis_label->text()=="N/A")ui->therm_resis->setValue(nHex/100.0);
+          ui->therm_resis_label->setText(QString::number(nHex/100.0)+" Ohm");
         }else if(raw_params[0].mid(5,2)=="B8"){
           if(ui->therm_vref_label->text()=="N/A")ui->therm_vref->setValue(nHex/1000.0);
           ui->therm_vref_label->setText(QString::number(nHex/1000.0)+" V");
         }else if(raw_params[0].mid(5,2)=="B2"){
-          if(ui->therm_beta_label->text()=="N/A")ui->therm_beta->setValue(nHex);
-          ui->therm_beta_label->setText(QString::number(nHex)+"");
+          if(ui->therm_beta_label->text()=="N/A")ui->therm_beta->setValue(nHex/100.0);
+          ui->therm_beta_label->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="B3"){
             if(raw_params[0].mid(11,2)=="00"){
                 if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
