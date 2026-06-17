@@ -220,6 +220,7 @@ void cb_panel::key_catcher(QObject* key)
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
         emit send_command(message.toUtf8()+'\r');
+        qDebug()<<"message"<<message;
     }
 
 }
@@ -279,9 +280,9 @@ void cb_panel::data_received_and_profed()
             ui->label_error->setVisible(cbErrorHex!=0);
         }else if(raw_params[0].mid(5,2)=="92"){
           if(raw_params[0].mid(9,2)=="00"){
-            ui->cur_temp_0->setText(QString::number(nHex/100.0)+" C");
+            ui->cur_temp_0->setText(QString::number(nHex/10.0)+" C");
           }else if(raw_params[0].mid(9,2)=="01"){
-            ui->cur_temp_1->setText(QString::number(nHex/100.0)+" C");
+            ui->cur_temp_1->setText(QString::number(nHex/10.0)+" C");
           }
         }else if(raw_params[0].mid(5,2)=="9A"){
             if(ui->forward_treashold_label->text()=="N/A")ui->forward_treashold->setValue(nHex/100.0);
