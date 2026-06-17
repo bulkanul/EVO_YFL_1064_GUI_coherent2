@@ -57,7 +57,7 @@ cb_panel::cb_panel(QWidget *parent):
     ui->therm_resis->installEventFilter(this);
     ui->therm_beta->installEventFilter(this);
     ui->therm_vref->installEventFilter(this);
-    ui->over_temp->installEventFilter(this);
+    ui->over_temp_00->installEventFilter(this);
 
 
     labels.append(ui->cur_temp_0);
@@ -70,7 +70,8 @@ cb_panel::cb_panel(QWidget *parent):
     labels.append(ui->therm_vref_label);
     labels.append(ui->therm_beta_label);
     labels.append(ui->pilot_laser_v_dac);
-    labels.append(ui->over_temp_label);
+    labels.append(ui->over_temp_label_0);
+    labels.append(ui->over_temp_label_1);
     family="cb";
     this->setEnabled(false);
 }
@@ -174,17 +175,17 @@ void cb_panel::key_catcher(QObject* key)
         QString inner_address="00";
         int multiplier=1;
         if(target->objectName().contains("_treashold")){
-          if(target->objectName().contains("forward_")){
+            if(target->objectName().contains("forward_")){
               if(target->objectName().contains("_2"))inner_address="01";
               command="1A";
-          }else if(target->objectName().contains("backward_")){
+            }else if(target->objectName().contains("backward_")){
               if(target->objectName().contains("_2"))inner_address="01";
               command="16";
-          }else if(target->objectName().contains("diode_")){
+            }else if(target->objectName().contains("diode_")){
               address=QString("%1").arg(target->objectName().split('_')[2].toInt() , 2, 16, QLatin1Char( '0' ));
               command="37";
-          }
-          multiplier=100;
+            }
+            multiplier=100;
         }else if(target->objectName().contains("therm_")){
           if(target->objectName().contains("_resis"))  command="31";
           else if(target->objectName().contains("_vref")){command="38"; multiplier=1000;}
@@ -201,6 +202,7 @@ void cb_panel::key_catcher(QObject* key)
             multiplier=100;
         }else if(target->objectName().contains("over_temp")){
           command="33";
+          inner_address=target->objectName().split("_")[2];
           multiplier=10;
         }
 
@@ -217,8 +219,6 @@ void cb_panel::key_catcher(QObject* key)
         unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
-        // emit send_command(message.toUtf8()+'\r');
-        // emit send_command(message.toUtf8()+'\r');
         emit send_command(message.toUtf8()+'\r');
     }
 
@@ -239,6 +239,7 @@ void cb_panel::internal_address_write(QString data)
     commands.append(QString("t"+internal_address+"8B200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"85500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
 
     commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8A500"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000"));
@@ -312,10 +313,17 @@ void cb_panel::data_received_and_profed()
           if(ui->therm_beta_label->text()=="N/A")ui->therm_beta->setValue(nHex);
           ui->therm_beta_label->setText(QString::number(nHex)+"");
         }else if(raw_params[0].mid(5,2)=="B3"){
-          if(ui->over_temp_label->text()=="N/A")ui->over_temp->setValue(nHex/10.0);
-          ui->over_temp_label->setText(QString::number(nHex/10.0)+" C");
+            if(raw_params[0].mid(11,2)=="00"){
+                if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
+                ui->over_temp_label_0->setText(QString::number(nHex/10.0)+" C");
+            }else if(raw_params[0].mid(11,2)=="01"){
+                if(ui->over_temp_label_1->text()=="N/A")ui->over_temp_01->setValue(nHex/10.0);
+                ui->over_temp_label_1->setText(QString::number(nHex/10.0)+" C");
+            }
+
+
         }else if(raw_params[0].mid(5,2)=="D5"){
-            if(ui->voltage_pl->text()=="N/A")ui->over_temp->setValue(nHex/10.0);
+            if(ui->voltage_pl->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
             ui->pilot_laser_v_dac->setText(QString::number(nHex/10.0)+" V");
         }else{
           bool ok=true;
