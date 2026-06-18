@@ -73,7 +73,8 @@ cb_panel::cb_panel(QWidget *parent):
     labels.append(ui->over_temp_label_0);
     labels.append(ui->over_temp_label_1);
     family="cb";
-    this->setEnabled(false);
+    // this->setEnabled(false);
+
 }
 
 cb_panel::~cb_panel()
@@ -127,9 +128,9 @@ void cb_panel::telemetry_call(QString family)
           else if(count%5==2)
             temp =QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
           else if(count%5==3)
-              temp =QString("t"+internal_address+"89200"+QString("%1").arg(0, 2, 16, QLatin1Char( '0' ))+"0000000000");
+              temp =QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000");
           else if(count%5==4)
-              temp =QString("t"+internal_address+"89200"+QString("%1").arg(1, 2, 16, QLatin1Char( '0' ))+"0000000000");
+              temp =QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000");
           emit send_command(temp.toUtf8()+'\r');
         }else{
         this->setEnabled(false);
@@ -204,6 +205,13 @@ void cb_panel::key_catcher(QObject* key)
           command="33";
           inner_address=target->objectName().split("_")[2];
           multiplier=10;
+          // raw_params.clear();
+          // raw_params.append("t05589200000000000010/r");
+          // data_received_and_profed();
+          // raw_params.clear();
+          // raw_params.append("t05589200000100000020/r");
+          // data_received_and_profed();
+          // return;
         }
 
         QString message ="t";
@@ -229,8 +237,8 @@ void cb_panel::internal_address_write(QString data)
     bool ok=false;
     internal_address =QString("%1").arg(data.toInt(&ok,16), 3, 16, QLatin1Char( '0' )).toUpper();
     commands.clear();
-    commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(0 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(1 , 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"89200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
     commands.append(QString("t"+internal_address+"89B00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"89700"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"89A00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
@@ -263,6 +271,7 @@ void cb_panel::internal_address_write(QString data)
     commands.append(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
 }
 
+
 void cb_panel::data_received_and_profed()
 {
     bool bStatus = false;
@@ -279,9 +288,9 @@ void cb_panel::data_received_and_profed()
             ui->button_error->setVisible(cbErrorHex!=0);
             ui->label_error->setVisible(cbErrorHex!=0);
         }else if(raw_params[0].mid(5,2)=="92"){
-          if(raw_params[0].mid(9,2)=="00"){
+          if(raw_params[0].mid(11,2)=="00"){
             ui->cur_temp_0->setText(QString::number(nHex/10.0)+" C");
-          }else if(raw_params[0].mid(9,2)=="01"){
+          }else if(raw_params[0].mid(11,2)=="01"){
             ui->cur_temp_1->setText(QString::number(nHex/10.0)+" C");
           }
         }else if(raw_params[0].mid(5,2)=="9A"){
