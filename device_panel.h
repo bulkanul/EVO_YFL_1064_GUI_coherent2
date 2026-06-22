@@ -61,6 +61,8 @@ public slots:
 
     QString pars_bits(unsigned char mess,QStringList);
     void call_msg_box(QString,QString,QString);
+    void call_msg_box(QString msg1);
+    void call_msg_box(QString name, QString msg1);
     void silence_counter(int);
 
 private slots:
@@ -79,6 +81,8 @@ signals:
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;
+private:
+
 };
 
 #endif // DEVICE_PANEL_H
