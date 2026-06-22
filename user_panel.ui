@@ -773,7 +773,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>OFF</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -824,7 +824,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>OFF</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -875,7 +875,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>0.0 %</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -926,7 +926,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>0.0 %</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -977,7 +977,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>0.0</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -1028,7 +1028,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>0.0</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>
@@ -1079,7 +1079,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>0.0</string>
+                <string>N/A</string>
                </property>
               </widget>
              </item>

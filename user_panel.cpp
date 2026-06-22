@@ -85,10 +85,7 @@ void user_panel::data_received_and_profed()
             ui->koeffi_label->setText(QString::number(nHex/1000.0,'d',3));
         }else if(raw_params[0].mid(5,2)=="A4"){
             ui->ret_pow_label->setText(QString::number(nHex/100.0,'d',2)+"кВт");
-        }
-    }
-    if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==0){
-        if(raw_params[0].mid(5,2)=="9E"){
+        }else if(raw_params[0].mid(5,2)=="9E"){
             ui->diff_pd_label->setText(QString::number(nHex/100.0,'d',2)+" V");
         }
     }
@@ -142,11 +139,13 @@ void user_panel::telemetry_call(QString family)
     if(family==this->family){
         count_no_responce++;
         count++;
-        if(count%6==0)      emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-        else if(count%6==1) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-        else if(count%6==2) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
-        else if(count%6==3) emit send_command(QString("t"+internal_address+"89d00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-        else if(count%6==4) emit send_command(QString("t"+internal_address+"8A300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-        else if(count%6==5) emit send_command(QString("t"+internal_address+"8A400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        if(count%7==0)      emit send_command(QString("t"+internal_address+"89000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        else if(count%7==1) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        else if(count%7==2) emit send_command(QString("t"+internal_address+"89100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000").toUtf8()+'\r');
+        else if(count%7==3) emit send_command(QString("t"+internal_address+"89d00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        else if(count%7==4) emit send_command(QString("t"+internal_address+"8A300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        else if(count%7==5) emit send_command(QString("t"+internal_address+"8A400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+        else if(count%7==6) emit send_command(QString("t"+internal_address+"89E00"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
+
     }
 }
