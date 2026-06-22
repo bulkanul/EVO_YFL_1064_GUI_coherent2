@@ -246,7 +246,7 @@ void cb_panel::internal_address_write(QString data)
     commands.append(QString("t"+internal_address+"8B100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B800"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    commands.append(QString("t"+internal_address+"85500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
+    commands.append(QString("t"+internal_address+"8D500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0100000000"));
 
@@ -282,7 +282,7 @@ void cb_panel::data_received_and_profed()
         if(raw_params[0].mid(5,2)=="95"){
           cbErrorHex=nHex;
             if(error_displayer){
-                call_msg_box(pars_bits(cbErrorHex,errors_cb_list));
+                call_msg_box("Contol Board ",pars_bits(cbErrorHex,errors_cb_list));
             }
             emit call_ui_buttons("cb",cbErrorHex!=0);
             ui->button_error->setVisible(cbErrorHex!=0);
@@ -333,8 +333,8 @@ void cb_panel::data_received_and_profed()
 
 
         }else if(raw_params[0].mid(5,2)=="D5"){
-            if(ui->voltage_pl->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
-            ui->pilot_laser_v_dac->setText(QString::number(nHex/10.0)+" V");
+            if(ui->voltage_pl->text()=="N/A")ui->over_temp_00->setValue(nHex/100.0);
+            ui->pilot_laser_v_dac->setText(QString::number(nHex/100.0)+" V");
         }else{
           bool ok=true;
 

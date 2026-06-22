@@ -259,7 +259,7 @@ void tcp_usb_connector::get_command_pool()
 {
    pool_count++;
    if(logg)qDebug()<<"sender count "<<count<<pool_count<<crupto_fifo_command.length();
-   emit get_command(dev_list[pool_count%5]);
+   emit get_command(dev_list[pool_count%dev_list.length()]);
 
 }
 

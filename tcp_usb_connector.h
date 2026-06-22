@@ -56,7 +56,7 @@ public:
 //    bool crypto=true;
     bool crypto_version_controller=true;
 
-    QStringList dev_list={"dc0","tec0","tec1","cb","usr"};
+    QStringList dev_list={"dc0","dc1","dc2","dc3","dc4","dc5","dc6","dc7","tec0","tec1","cb","usr"};
 
 signals:
     void send_to_dev(QStringList);

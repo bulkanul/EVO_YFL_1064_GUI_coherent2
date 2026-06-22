@@ -61,6 +61,7 @@ public slots:
 
     QString pars_bits(int mess,QStringList);
     void call_msg_box(QString,QString,QString);
+    void call_msg_box(QString,QString);
     void call_msg_box(QString);
     void silence_counter(int);
 

@@ -24,6 +24,7 @@ dc_panel::dc_panel(QWidget *parent):
     connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
 
     ui->spin->installEventFilter(this);
+    ui->mode->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
     ui->button_error->setVisible(false);
     ui->label_error->setVisible(false);
@@ -127,7 +128,7 @@ void dc_panel::data_received_and_profed()
             emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
             ui->button_error->setVisible(nHex!=0);
             ui->label_error->setVisible(nHex!=0);
-           enable_widget(nHex==0);
+           // enable_widget(nHex==0);
         }
     }
 }
