@@ -152,9 +152,9 @@ void cb_panel::key_catcher(QObject* key)
           }
           multiplier=100;
         }else if(target->objectName().contains("therm_")){
-          if(target->objectName().contains("_resis"))  command="31";
-          else if(target->objectName().contains("_vref")){command="38"; multiplier=1000;}
-          else if(target->objectName().contains("_beta"))command="32";
+            if(target->objectName().contains("_resis")){command="31";multiplier=100;}
+            else if(target->objectName().contains("_vref")){command="38"; multiplier=1000;}
+            else if(target->objectName().contains("_beta")){command="32";multiplier=100;}
         }else if(target->objectName().contains("volt_amp_ext")){
           command="30";
           multiplier=100;
@@ -164,6 +164,7 @@ void cb_panel::key_catcher(QObject* key)
           if(target->objectName().contains("_1"))address="01";
         }else if(target->objectName().contains("over_temp")){
           command="33";
+          inner_address=target->objectName().split("_")[2];
           multiplier=10;
         }
 
@@ -180,8 +181,6 @@ void cb_panel::key_catcher(QObject* key)
         unsigned char letters[] = {bytes[3],bytes[2],bytes[1],bytes[0]};
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
-        // emit send_command(message.toUtf8()+'\r');
-        // emit send_command(message.toUtf8()+'\r');
         emit send_command(message.toUtf8()+'\r');
     }
 
@@ -294,7 +293,6 @@ void cb_panel::data_received_and_profed()
           ui->over_temp_label->setText(QString::number(nHex/10.0)+" C");
         }else{
           bool ok=true;
-
           if(raw_params[0].mid(5,2).toInt(&ok,16)<0x80){
             quint32 value = raw_params[0].mid(5,2).toInt(&ok,16)+0x80;
             QString command=raw_params[0];
