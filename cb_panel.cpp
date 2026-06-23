@@ -292,8 +292,6 @@ void cb_panel::data_received_and_profed()
           if(ui->therm_beta_label->text()=="N/A")ui->therm_beta->setValue(nHex);
           ui->therm_beta_label->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="B3"){
-          if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
-          ui->over_temp_label_0->setText(QString::number(nHex/10.0)+" C");
           if(raw_params[0].mid(11,2)=="00"){
               if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
               ui->over_temp_label_0->setText(QString::number(nHex/10.0)+" C");
