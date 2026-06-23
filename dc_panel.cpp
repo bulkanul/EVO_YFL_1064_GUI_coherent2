@@ -199,7 +199,7 @@ void dc_panel::telemetry_call(QString family)
             else if(count%5==4) emit send_command(QString("t"+internal_address+"89900"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 
         }
-        qDebug()<<"call"<<family<<ID << count%4;
+        qDebug()<<"call"<<family<<ID << count%5;
     }
 
 }

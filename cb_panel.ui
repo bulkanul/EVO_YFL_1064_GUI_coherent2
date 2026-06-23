@@ -788,7 +788,7 @@
                  <double>0.000000000000000</double>
                 </property>
                 <property name="maximum">
-                 <double>3.000000000000000</double>
+                 <double>3.300000000000000</double>
                 </property>
                 <property name="singleStep">
                  <double>0.100000000000000</double>
@@ -904,63 +904,175 @@
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_14">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <property name="topMargin">
              <number>12</number>
             </property>
             <item>
-             <widget class="QDoubleSpinBox" name="over_temp">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>100</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>13</pointsize>
-               </font>
-              </property>
-              <property name="focusPolicy">
-               <enum>Qt::FocusPolicy::ClickFocus</enum>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background: rgb(255,255,255)</string>
-              </property>
-              <property name="suffix">
-               <string/>
-              </property>
-              <property name="decimals">
-               <number>2</number>
-              </property>
-              <property name="minimum">
-               <double>0.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>150.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.100000000000000</double>
-              </property>
-              <property name="stepType">
-               <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
-              </property>
-              <property name="value">
-               <double>0.000000000000000</double>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_30">
+              <item>
+               <widget class="QLabel" name="label_25">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <widget class="QDoubleSpinBox" name="over_temp_0">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <horstretch>100</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>13</pointsize>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::ClickFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background: rgb(255,255,255)</string>
+                  </property>
+                  <property name="suffix">
+                   <string/>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>150.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="stepType">
+                   <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+                  </property>
+                  <property name="value">
+                   <double>0.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_32">
+              <item>
+               <widget class="QLabel" name="label_26">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>1</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                <item>
+                 <widget class="QDoubleSpinBox" name="over_temp_1">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <horstretch>100</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>50</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>13</pointsize>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::FocusPolicy::ClickFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background: rgb(255,255,255)</string>
+                  </property>
+                  <property name="suffix">
+                   <string/>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>150.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="stepType">
+                   <enum>QAbstractSpinBox::StepType::DefaultStepType</enum>
+                  </property>
+                  <property name="value">
+                   <double>0.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -1507,12 +1619,12 @@
                 </font>
                </property>
                <property name="text">
-                <string>Overheat temp:</string>
+                <string>Overheat temp.0:</string>
                </property>
               </widget>
              </item>
              <item row="9" column="1">
-              <widget class="QLabel" name="over_temp_label">
+              <widget class="QLabel" name="over_temp_label_0">
                <property name="minimumSize">
                 <size>
                  <width>80</width>
@@ -1536,7 +1648,7 @@
                </property>
               </widget>
              </item>
-             <item row="10" column="0" colspan="2">
+             <item row="11" column="0" colspan="2">
               <widget class="Line" name="line_2">
                <property name="minimumSize">
                 <size>
@@ -1549,7 +1661,7 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="0">
+             <item row="12" column="0">
               <widget class="QLabel" name="label_50">
                <property name="minimumSize">
                 <size>
@@ -1574,7 +1686,7 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="1">
+             <item row="12" column="1">
               <widget class="QLabel" name="cur_temp_0">
                <property name="minimumSize">
                 <size>
@@ -1599,7 +1711,7 @@
                </property>
               </widget>
              </item>
-             <item row="12" column="0">
+             <item row="13" column="0">
               <widget class="QLabel" name="label_56">
                <property name="minimumSize">
                 <size>
@@ -1624,7 +1736,7 @@
                </property>
               </widget>
              </item>
-             <item row="12" column="1">
+             <item row="13" column="1">
               <widget class="QLabel" name="cur_temp_1">
                <property name="minimumSize">
                 <size>
@@ -1649,7 +1761,7 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="0">
+             <item row="14" column="0">
               <widget class="QLabel" name="label_40">
                <property name="minimumSize">
                 <size>
@@ -1674,7 +1786,7 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="1">
+             <item row="14" column="1">
               <widget class="QLabel" name="pd_forward">
                <property name="minimumSize">
                 <size>
@@ -1699,7 +1811,7 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="0">
+             <item row="15" column="0">
               <widget class="QLabel" name="label_44">
                <property name="minimumSize">
                 <size>
@@ -1724,7 +1836,7 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="1">
+             <item row="15" column="1">
               <widget class="QLabel" name="pd_forward_2">
                <property name="minimumSize">
                 <size>
@@ -1749,7 +1861,7 @@
                </property>
               </widget>
              </item>
-             <item row="15" column="0">
+             <item row="16" column="0">
               <widget class="QLabel" name="label_41">
                <property name="minimumSize">
                 <size>
@@ -1774,7 +1886,7 @@
                </property>
               </widget>
              </item>
-             <item row="15" column="1">
+             <item row="16" column="1">
               <widget class="QLabel" name="pd_backward">
                <property name="minimumSize">
                 <size>
@@ -1799,7 +1911,7 @@
                </property>
               </widget>
              </item>
-             <item row="16" column="0">
+             <item row="17" column="0">
               <widget class="QLabel" name="label_45">
                <property name="minimumSize">
                 <size>
@@ -1824,7 +1936,7 @@
                </property>
               </widget>
              </item>
-             <item row="16" column="1">
+             <item row="17" column="1">
               <widget class="QLabel" name="pd_backward_2">
                <property name="minimumSize">
                 <size>
@@ -1849,7 +1961,7 @@
                </property>
               </widget>
              </item>
-             <item row="17" column="0">
+             <item row="18" column="0">
               <widget class="QLabel" name="label_error">
                <property name="minimumSize">
                 <size>
@@ -1874,10 +1986,60 @@
                </property>
               </widget>
              </item>
-             <item row="17" column="1">
+             <item row="18" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
                 <string>Детали</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="label_57">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Overheat temp.1:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QLabel" name="over_temp_label_1">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>N/A</string>
                </property>
               </widget>
              </item>
