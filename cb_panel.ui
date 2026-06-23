@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>580</height>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -934,7 +934,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_18">
                 <item>
-                 <widget class="QDoubleSpinBox" name="over_temp_0">
+                 <widget class="QDoubleSpinBox" name="over_temp_00">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>
@@ -1017,7 +1017,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_19">
                 <item>
-                 <widget class="QDoubleSpinBox" name="over_temp_1">
+                 <widget class="QDoubleSpinBox" name="over_temp_01">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>100</horstretch>

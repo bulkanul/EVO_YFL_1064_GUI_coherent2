@@ -81,11 +81,11 @@ public:
     QVBoxLayout *verticalLayout_30;
     QLabel *label_25;
     QHBoxLayout *horizontalLayout_18;
-    QDoubleSpinBox *over_temp_0;
+    QDoubleSpinBox *over_temp_00;
     QVBoxLayout *verticalLayout_32;
     QLabel *label_26;
     QHBoxLayout *horizontalLayout_19;
-    QDoubleSpinBox *over_temp_1;
+    QDoubleSpinBox *over_temp_01;
     QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout_16;
     QLabel *label_11;
@@ -134,7 +134,7 @@ public:
     {
         if (cb_panel->objectName().isEmpty())
             cb_panel->setObjectName("cb_panel");
-        cb_panel->resize(1003, 580);
+        cb_panel->resize(1003, 607);
         verticalLayout_2 = new QVBoxLayout(cb_panel);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -554,23 +554,23 @@ public:
 
         horizontalLayout_18 = new QHBoxLayout();
         horizontalLayout_18->setObjectName("horizontalLayout_18");
-        over_temp_0 = new QDoubleSpinBox(groupBox_19);
-        over_temp_0->setObjectName("over_temp_0");
-        sizePolicy1.setHeightForWidth(over_temp_0->sizePolicy().hasHeightForWidth());
-        over_temp_0->setSizePolicy(sizePolicy1);
-        over_temp_0->setMinimumSize(QSize(50, 0));
-        over_temp_0->setMaximumSize(QSize(16777215, 16777215));
-        over_temp_0->setFont(font2);
-        over_temp_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        over_temp_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        over_temp_0->setDecimals(1);
-        over_temp_0->setMinimum(0.000000000000000);
-        over_temp_0->setMaximum(150.000000000000000);
-        over_temp_0->setSingleStep(0.100000000000000);
-        over_temp_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        over_temp_0->setValue(0.000000000000000);
+        over_temp_00 = new QDoubleSpinBox(groupBox_19);
+        over_temp_00->setObjectName("over_temp_00");
+        sizePolicy1.setHeightForWidth(over_temp_00->sizePolicy().hasHeightForWidth());
+        over_temp_00->setSizePolicy(sizePolicy1);
+        over_temp_00->setMinimumSize(QSize(50, 0));
+        over_temp_00->setMaximumSize(QSize(16777215, 16777215));
+        over_temp_00->setFont(font2);
+        over_temp_00->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        over_temp_00->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        over_temp_00->setDecimals(1);
+        over_temp_00->setMinimum(0.000000000000000);
+        over_temp_00->setMaximum(150.000000000000000);
+        over_temp_00->setSingleStep(0.100000000000000);
+        over_temp_00->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        over_temp_00->setValue(0.000000000000000);
 
-        horizontalLayout_18->addWidget(over_temp_0);
+        horizontalLayout_18->addWidget(over_temp_00);
 
 
         verticalLayout_30->addLayout(horizontalLayout_18);
@@ -590,23 +590,23 @@ public:
 
         horizontalLayout_19 = new QHBoxLayout();
         horizontalLayout_19->setObjectName("horizontalLayout_19");
-        over_temp_1 = new QDoubleSpinBox(groupBox_19);
-        over_temp_1->setObjectName("over_temp_1");
-        sizePolicy1.setHeightForWidth(over_temp_1->sizePolicy().hasHeightForWidth());
-        over_temp_1->setSizePolicy(sizePolicy1);
-        over_temp_1->setMinimumSize(QSize(50, 0));
-        over_temp_1->setMaximumSize(QSize(16777215, 16777215));
-        over_temp_1->setFont(font2);
-        over_temp_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        over_temp_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        over_temp_1->setDecimals(1);
-        over_temp_1->setMinimum(0.000000000000000);
-        over_temp_1->setMaximum(150.000000000000000);
-        over_temp_1->setSingleStep(0.100000000000000);
-        over_temp_1->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        over_temp_1->setValue(0.000000000000000);
+        over_temp_01 = new QDoubleSpinBox(groupBox_19);
+        over_temp_01->setObjectName("over_temp_01");
+        sizePolicy1.setHeightForWidth(over_temp_01->sizePolicy().hasHeightForWidth());
+        over_temp_01->setSizePolicy(sizePolicy1);
+        over_temp_01->setMinimumSize(QSize(50, 0));
+        over_temp_01->setMaximumSize(QSize(16777215, 16777215));
+        over_temp_01->setFont(font2);
+        over_temp_01->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        over_temp_01->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        over_temp_01->setDecimals(1);
+        over_temp_01->setMinimum(0.000000000000000);
+        over_temp_01->setMaximum(150.000000000000000);
+        over_temp_01->setSingleStep(0.100000000000000);
+        over_temp_01->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        over_temp_01->setValue(0.000000000000000);
 
-        horizontalLayout_19->addWidget(over_temp_1);
+        horizontalLayout_19->addWidget(over_temp_01);
 
 
         verticalLayout_32->addLayout(horizontalLayout_19);
@@ -1002,9 +1002,9 @@ public:
         therm_beta->setSuffix(QString());
         groupBox_19->setTitle(QCoreApplication::translate("cb_panel", "Overheat temperature", nullptr));
         label_25->setText(QCoreApplication::translate("cb_panel", "0", nullptr));
-        over_temp_0->setSuffix(QString());
+        over_temp_00->setSuffix(QString());
         label_26->setText(QCoreApplication::translate("cb_panel", "1", nullptr));
-        over_temp_1->setSuffix(QString());
+        over_temp_01->setSuffix(QString());
         label_11->setText(QCoreApplication::translate("cb_panel", "Read Values:", nullptr));
         label_35->setText(QCoreApplication::translate("cb_panel", "Cur. HPLD 0 :", nullptr));
         hpld_curr_label_0->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));

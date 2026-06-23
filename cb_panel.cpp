@@ -24,8 +24,8 @@ cb_panel::cb_panel(QWidget *parent):
     ui->therm_resis->installEventFilter(this);
     ui->therm_beta->installEventFilter(this);
     ui->therm_vref->installEventFilter(this);
-    ui->over_temp_0->installEventFilter(this);
-    ui->over_temp_1->installEventFilter(this);
+    ui->over_temp_00->installEventFilter(this);
+    ui->over_temp_01->installEventFilter(this);
 
     labels.append(ui->cur_temp_0);
     labels.append(ui->cur_temp_1);
@@ -292,8 +292,15 @@ void cb_panel::data_received_and_profed()
           if(ui->therm_beta_label->text()=="N/A")ui->therm_beta->setValue(nHex);
           ui->therm_beta_label->setText(QString::number(nHex/100.0)+"");
         }else if(raw_params[0].mid(5,2)=="B3"){
-          if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_0->setValue(nHex/10.0);
+          if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
           ui->over_temp_label_0->setText(QString::number(nHex/10.0)+" C");
+          if(raw_params[0].mid(11,2)=="00"){
+              if(ui->over_temp_label_0->text()=="N/A")ui->over_temp_00->setValue(nHex/10.0);
+              ui->over_temp_label_0->setText(QString::number(nHex/10.0)+" C");
+          }else if(raw_params[0].mid(11,2)=="01"){
+              if(ui->over_temp_label_1->text()=="N/A")ui->over_temp_01->setValue(nHex/10.0);
+              ui->over_temp_label_1->setText(QString::number(nHex/10.0)+" C");
+          }
         }else{
           bool ok=true;
           if(raw_params[0].mid(5,2).toInt(&ok,16)<0x80){
