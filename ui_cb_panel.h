@@ -105,6 +105,8 @@ public:
     QLabel *pd_backward;
     QLabel *label_error;
     QPushButton *button_error;
+    QLabel *label_42;
+    QLabel *pd_3;
     QSpacerItem *verticalSpacer;
     QGroupBox *groupBox_16;
     QHBoxLayout *horizontalLayout_2;
@@ -122,7 +124,7 @@ public:
     QDoubleSpinBox *volt_amp_ext;
     QGroupBox *groupBox_19;
     QVBoxLayout *verticalLayout_14;
-    QDoubleSpinBox *over_temp;
+    QDoubleSpinBox *over_temp_0;
 
     void setupUi(QWidget *cb_panel)
     {
@@ -303,7 +305,7 @@ public:
         tec_temp_0->setFont(font2);
         tec_temp_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         tec_temp_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        tec_temp_0->setDecimals(2);
+        tec_temp_0->setDecimals(1);
         tec_temp_0->setMinimum(0.000000000000000);
         tec_temp_0->setMaximum(150.000000000000000);
         tec_temp_0->setSingleStep(0.100000000000000);
@@ -339,7 +341,7 @@ public:
         tec_temp_1->setFont(font2);
         tec_temp_1->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         tec_temp_1->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        tec_temp_1->setDecimals(2);
+        tec_temp_1->setDecimals(1);
         tec_temp_1->setMinimum(0.000000000000000);
         tec_temp_1->setMaximum(150.000000000000000);
         tec_temp_1->setSingleStep(0.100000000000000);
@@ -417,7 +419,7 @@ public:
         therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         therm_vref->setDecimals(3);
         therm_vref->setMinimum(0.000000000000000);
-        therm_vref->setMaximum(3.000000000000000);
+        therm_vref->setMaximum(3.300000000000000);
         therm_vref->setSingleStep(0.100000000000000);
         therm_vref->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         therm_vref->setValue(0.000000000000000);
@@ -744,12 +746,28 @@ public:
         label_error->setMaximumSize(QSize(120, 16777215));
         label_error->setFont(font4);
 
-        formLayout->setWidget(16, QFormLayout::LabelRole, label_error);
+        formLayout->setWidget(17, QFormLayout::LabelRole, label_error);
 
         button_error = new QPushButton(ns_widget);
         button_error->setObjectName("button_error");
 
-        formLayout->setWidget(16, QFormLayout::FieldRole, button_error);
+        formLayout->setWidget(17, QFormLayout::FieldRole, button_error);
+
+        label_42 = new QLabel(ns_widget);
+        label_42->setObjectName("label_42");
+        label_42->setMinimumSize(QSize(120, 0));
+        label_42->setMaximumSize(QSize(120, 16777215));
+        label_42->setFont(font4);
+
+        formLayout->setWidget(16, QFormLayout::LabelRole, label_42);
+
+        pd_3 = new QLabel(ns_widget);
+        pd_3->setObjectName("pd_3");
+        pd_3->setMinimumSize(QSize(80, 0));
+        pd_3->setMaximumSize(QSize(80, 16777215));
+        pd_3->setFont(font5);
+
+        formLayout->setWidget(16, QFormLayout::FieldRole, pd_3);
 
 
         verticalLayout_16->addLayout(formLayout);
@@ -891,23 +909,23 @@ public:
         verticalLayout_14 = new QVBoxLayout(groupBox_19);
         verticalLayout_14->setObjectName("verticalLayout_14");
         verticalLayout_14->setContentsMargins(-1, 12, -1, -1);
-        over_temp = new QDoubleSpinBox(groupBox_19);
-        over_temp->setObjectName("over_temp");
-        sizePolicy1.setHeightForWidth(over_temp->sizePolicy().hasHeightForWidth());
-        over_temp->setSizePolicy(sizePolicy1);
-        over_temp->setMinimumSize(QSize(50, 0));
-        over_temp->setMaximumSize(QSize(16777215, 16777215));
-        over_temp->setFont(font2);
-        over_temp->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
-        over_temp->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
-        over_temp->setDecimals(2);
-        over_temp->setMinimum(0.000000000000000);
-        over_temp->setMaximum(150.000000000000000);
-        over_temp->setSingleStep(0.100000000000000);
-        over_temp->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
-        over_temp->setValue(0.000000000000000);
+        over_temp_0 = new QDoubleSpinBox(groupBox_19);
+        over_temp_0->setObjectName("over_temp_0");
+        sizePolicy1.setHeightForWidth(over_temp_0->sizePolicy().hasHeightForWidth());
+        over_temp_0->setSizePolicy(sizePolicy1);
+        over_temp_0->setMinimumSize(QSize(50, 0));
+        over_temp_0->setMaximumSize(QSize(16777215, 16777215));
+        over_temp_0->setFont(font2);
+        over_temp_0->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
+        over_temp_0->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
+        over_temp_0->setDecimals(1);
+        over_temp_0->setMinimum(0.000000000000000);
+        over_temp_0->setMaximum(150.000000000000000);
+        over_temp_0->setSingleStep(0.100000000000000);
+        over_temp_0->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
+        over_temp_0->setValue(0.000000000000000);
 
-        verticalLayout_14->addWidget(over_temp);
+        verticalLayout_14->addWidget(over_temp_0);
 
 
         gridLayout->addWidget(groupBox_19, 1, 4, 1, 1);
@@ -979,6 +997,8 @@ public:
         pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
         button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        label_42->setText(QCoreApplication::translate("cb_panel", "PD 3:", nullptr));
+        pd_3->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
         label_29->setText(QCoreApplication::translate("cb_panel", "Forward", nullptr));
         forward_treashold->setSuffix(QString());
@@ -987,7 +1007,7 @@ public:
         groupBox_17->setTitle(QCoreApplication::translate("cb_panel", "Voltage amplifier external", nullptr));
         volt_amp_ext->setSuffix(QString());
         groupBox_19->setTitle(QCoreApplication::translate("cb_panel", "Overheat temperature", nullptr));
-        over_temp->setSuffix(QString());
+        over_temp_0->setSuffix(QString());
     } // retranslateUi
 
 };

@@ -185,7 +185,7 @@ public:
         label->setMaximumSize(QSize(106, 28));
         label->setPixmap(QPixmap(QString::fromUtf8("images/NordL_logo.png")));
         label->setScaledContents(true);
-        label->setAlignment(Qt::AlignCenter);
+        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         horizontalLayout_59->addWidget(label);
 
@@ -206,7 +206,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 844, 66));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1015, 781));
         verticalLayout_5 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_5->setSpacing(0);
         verticalLayout_5->setObjectName("verticalLayout_5");
@@ -237,6 +237,8 @@ public:
         horizontalLayout_18->setContentsMargins(3, 3, 3, 3);
         all_save_seed = new QPushButton(groupBox_2);
         all_save_seed->setObjectName("all_save_seed");
+        all_save_seed->setEnabled(false);
+        all_save_seed->setMaximumSize(QSize(0, 16777215));
         QFont font2;
         font2.setPointSize(12);
         all_save_seed->setFont(font2);
@@ -245,6 +247,8 @@ public:
 
         all_restore_seed = new QPushButton(groupBox_2);
         all_restore_seed->setObjectName("all_restore_seed");
+        all_restore_seed->setEnabled(false);
+        all_restore_seed->setMaximumSize(QSize(0, 16777215));
         all_restore_seed->setFont(font2);
 
         horizontalLayout_18->addWidget(all_restore_seed);
@@ -365,7 +369,7 @@ public:
 
         version = new QLabel(connection_page);
         version->setObjectName("version");
-        version->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        version->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         verticalLayout_7->addWidget(version);
 

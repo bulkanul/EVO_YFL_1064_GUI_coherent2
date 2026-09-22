@@ -24,6 +24,7 @@ public:
     user_panel *user;
     tcp_usb_connector *conn;
     bool dc_err=false;
+    bool dc1_err=false;
     bool cb_err=false;
 signals:
     void send_connection_type(QString,int);

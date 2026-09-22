@@ -28,6 +28,7 @@ dc_panel::dc_panel(QWidget *parent):
     ui->button_error->setVisible(false);
     ui->label_error->setVisible(false);
     //    ID=7;
+    qDebug()<<"error "<<pars_bits(3,errors_dc_list);
 }
 
 dc_panel::~dc_panel()
@@ -121,8 +122,8 @@ void dc_panel::data_received_and_profed()
             ui->mode_label->setText(ui->mode->itemText(nHex));
         }else if(raw_params[0].mid(5,2)=="A2"){
             // if(error_displayer){
-            //     call_msg_box(pars_bits(nHex,errors_dc_list));
-            //     error_displayer=false;
+                // call_msg_box(pars_bits(nHex,errors_dc_list));
+                // error_displayer=false;
             // }
             // emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
             // ui->button_error->setVisible(nHex!=0);

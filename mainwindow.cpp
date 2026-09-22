@@ -92,8 +92,9 @@ MainWindow::~MainWindow()
 void MainWindow::update_ui(QString name,bool state)
 {
     if(name=="dc0")dc_err=state;
+    if(name=="dc1")dc1_err=state;
     else if(name=="cb")cb_err=state;
-    ui->pb_error_cleaner->setVisible(dc_err || cb_err);
+    ui->pb_error_cleaner->setVisible(dc1_err || dc_err || cb_err);
 }
 
 
