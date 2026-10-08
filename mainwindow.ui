@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1025</width>
-    <height>868</height>
+    <width>990</width>
+    <height>955</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,8 +37,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>1023</width>
-         <height>823</height>
+         <width>988</width>
+         <height>910</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -120,7 +120,7 @@ QPushButton:hover
 }</string>
              </property>
              <property name="text">
-              <string>Настройки подключения</string>
+              <string>Connection settings</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -188,7 +188,7 @@ QPushButton::hover {
 </string>
              </property>
              <property name="text">
-              <string>Отчистить ошибки</string>
+              <string>Clear errors</string>
              </property>
             </widget>
            </item>
@@ -261,8 +261,8 @@ QPushButton::hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1015</width>
-                 <height>781</height>
+                 <width>256</width>
+                 <height>69</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -372,7 +372,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Сохранить в память</string>
+                      <string>Save to memory</string>
                      </property>
                     </widget>
                    </item>
@@ -397,7 +397,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Сброс до заводских настроек</string>
+                      <string>Factory reset</string>
                      </property>
                     </widget>
                    </item>
@@ -439,7 +439,7 @@ QPushButton::hover {
                <item row="0" column="0">
                 <widget class="QRadioButton" name="rb_serial">
                  <property name="text">
-                  <string>Последовательный порт</string>
+                  <string>COM</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -521,7 +521,7 @@ QPushButton::hover {
                <item row="1" column="1">
                 <widget class="QGroupBox" name="groupBox_3">
                  <property name="title">
-                  <string>Адрес комутационного устройства</string>
+                  <string>Switching device address</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
                   <item>
@@ -626,7 +626,7 @@ QPushButton::hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1025</width>
+     <width>990</width>
      <height>22</height>
     </rect>
    </property>

@@ -72,7 +72,7 @@ public:
     {
         if (tec_panel->objectName().isEmpty())
             tec_panel->setObjectName("tec_panel");
-        tec_panel->resize(854, 141);
+        tec_panel->resize(854, 144);
         verticalLayout_2 = new QVBoxLayout(tec_panel);
         verticalLayout_2->setObjectName("verticalLayout_2");
         verticalLayout_2->setContentsMargins(3, 3, 3, 3);
@@ -143,7 +143,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         label_10->setFont(font1);
-        label_10->setAlignment(Qt::AlignCenter);
+        label_10->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout->addWidget(label_10);
 
@@ -158,7 +158,7 @@ public:
         label_21->setSizePolicy(sizePolicy2);
         label_21->setMinimumSize(QSize(30, 25));
         label_21->setMaximumSize(QSize(16777215, 25));
-        label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        label_21->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_23->addWidget(label_21);
 
@@ -170,7 +170,7 @@ public:
         QFont font2;
         font2.setPointSize(10);
         on_off_button->setFont(font2);
-        on_off_button->setFocusPolicy(Qt::NoFocus);
+        on_off_button->setFocusPolicy(Qt::FocusPolicy::NoFocus);
         on_off_button->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	border-image: url(:/images/images/switch_btn_off_80x25.png);\n"
 "}\n"
@@ -204,7 +204,7 @@ public:
         label_22->setSizePolicy(sizePolicy2);
         label_22->setMinimumSize(QSize(30, 25));
         label_22->setMaximumSize(QSize(16777215, 25));
-        label_22->setAlignment(Qt::AlignCenter);
+        label_22->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         horizontalLayout_23->addWidget(label_22);
 
@@ -220,7 +220,7 @@ public:
         label_25->setObjectName("label_25");
         label_25->setMinimumSize(QSize(0, 0));
         label_25->setFont(font1);
-        label_25->setAlignment(Qt::AlignCenter);
+        label_25->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_12->addWidget(label_25);
 
@@ -248,7 +248,7 @@ public:
         indicator->setMaximum(600);
         indicator->setValue(200);
         indicator->setTextVisible(false);
-        indicator->setTextDirection(QProgressBar::TopToBottom);
+        indicator->setTextDirection(QProgressBar::Direction::TopToBottom);
 
         verticalLayout_14->addWidget(indicator);
 
@@ -292,7 +292,7 @@ public:
         QFont font3;
         font3.setPointSize(13);
         spin->setFont(font3);
-        spin->setFocusPolicy(Qt::ClickFocus);
+        spin->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         spin->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         spin->setDecimals(2);
         spin->setMinimum(10.000000000000000);
@@ -410,17 +410,17 @@ public:
         groupBox->setTitle(QString());
         laser_name_label->setText(QCoreApplication::translate("tec_panel", "TEC Control", nullptr));
         toolButton->setText(QCoreApplication::translate("tec_panel", "...", nullptr));
-        label_10->setText(QCoreApplication::translate("tec_panel", "\320\241\320\276\321\201\321\202\320\276\321\217\320\275\320\270\320\265", nullptr));
-        label_21->setText(QCoreApplication::translate("tec_panel", "\320\222\320\253\320\232\320\233", nullptr));
+        label_10->setText(QCoreApplication::translate("tec_panel", "State", nullptr));
+        label_21->setText(QCoreApplication::translate("tec_panel", "OFF", nullptr));
         on_off_button->setText(QString());
-        label_22->setText(QCoreApplication::translate("tec_panel", "\320\222\320\232\320\233", nullptr));
+        label_22->setText(QCoreApplication::translate("tec_panel", "ON", nullptr));
         label_25->setText(QCoreApplication::translate("tec_panel", "Temperature", nullptr));
         indicator->setFormat(QString());
         curr_min_label_3->setText(QCoreApplication::translate("tec_panel", "10", nullptr));
         curr_max_label_3->setText(QCoreApplication::translate("tec_panel", "50", nullptr));
         spin->setSuffix(QCoreApplication::translate("tec_panel", " C", nullptr));
-        label_11->setText(QCoreApplication::translate("tec_panel", "\320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213:", nullptr));
-        label_28->setText(QCoreApplication::translate("tec_panel", "\320\241\320\276\321\201\321\202\320\276\321\217\320\275\320\270\320\265:", nullptr));
+        label_11->setText(QCoreApplication::translate("tec_panel", "Read values:", nullptr));
+        label_28->setText(QCoreApplication::translate("tec_panel", "State:", nullptr));
         power_state_label->setText(QCoreApplication::translate("tec_panel", "OFF", nullptr));
         label_32->setText(QCoreApplication::translate("tec_panel", "Temperature:", nullptr));
         temp_label->setText(QCoreApplication::translate("tec_panel", "0.0 C", nullptr));
