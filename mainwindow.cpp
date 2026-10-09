@@ -35,11 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
     gen->ID = 0;
     // gen->enable_widget(false);
     layout->addWidget(gen, 0, 0, 3, 1);
-    connect(gen,&generator_panel::sig_usr_changes,this,&MainWindow::change_interface);
     connect(gen,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
     connect(conn,&tcp_usb_connector::send_to_dev,gen,&device_panel::data_received);
     connect(conn,&tcp_usb_connector::get_command,gen,&device_panel::auto_telemetry_call);
-    connect(gen,&generator_panel::emission_changed,this,&MainWindow::on_emission_changed);
     connect(gen, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
 
     chan1 = new channel_panel(1, this);
@@ -135,12 +133,6 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::change_interface(QString name, int state)
-{
-    Q_UNUSED(name);
-    Q_UNUSED(state);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -286,14 +278,17 @@ void MainWindow::connection_state(int state)
     controller_connection_ready = state == 1 && !conn->version_protection;
     if (controller_connection_ready != was_ready) clearLevels();
     if (!controller_connection_ready) {
-        const QList<device_panel*> emittingPanels = {
+        const QList<device_panel*> panels = {
             gen,
             chan1->preamp, chan1->amp,
             chan2->preamp, chan2->amp,
             chan3->preamp, chan3->amp,
-            chan4->preamp, chan4->amp
+            chan4->preamp, chan4->amp,
+            chan_all->preamp, chan_all->amp,
+            flags
         };
-        for (device_panel *panel : emittingPanels) {
+        for (device_panel *panel : panels) {
+            panel->enable_widget(false);
             panel->resetEmissionCommunicationTracking();
         }
     }
@@ -381,12 +376,6 @@ void MainWindow::connection_timeout()
     mesg->exec();
     delete mesg;    
     connection_state(0);
-}
-
-void MainWindow::on_emission_changed(bool isActive)
-{
-    this->isEmissionActive = isActive;
-    Q_UNUSED(isActive);
 }
 
 void MainWindow::set_device_ip()

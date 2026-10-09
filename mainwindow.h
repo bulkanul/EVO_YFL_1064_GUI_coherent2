@@ -35,7 +35,6 @@ class MainWindow : public QMainWindow
     int admin_pass=0;
     QString pass;
     bool user_ui=false;
-    bool isEmissionActive = false;
     QDialog*  networkDialog = nullptr;
     QLineEdit* networkIpEdit = nullptr;
     QLineEdit* networkMacEdit = nullptr;
@@ -47,7 +46,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void change_interface(QString,int);
     void pass_controller(QKeyEvent *keyEvent);
 
 signals:
@@ -72,7 +70,6 @@ private slots:
     void connection_timeout();
     void on_menu_main_clicked();
     void on_disconnect_clicked();
-    void on_emission_changed(bool isActive);
     void set_device_ip();
     void enter_bootloader();
     void show_network_info_dialog();

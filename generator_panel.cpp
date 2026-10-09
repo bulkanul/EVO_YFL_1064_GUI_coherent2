@@ -69,9 +69,6 @@ void generator_panel::data_received_and_profed()
         bool isStarted = param_check(raw_params, 3).toInt();
         ui->pb_laser_onoff->setChecked(isStarted);
 
-        emit sig_usr_changes("l_footer_connection_status", true);
-        emit emission_changed(isStarted);
-
         // 2 Flags (Errors)
         int flags = param_check(raw_params, 4).toInt();
         check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
