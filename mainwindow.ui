@@ -235,7 +235,7 @@ QPushButton::hover {
            </size>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="admin_page">
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -388,18 +388,6 @@ QPushButton::hover {
                       </size>
                      </property>
                     </spacer>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="all_reset">
-                     <property name="font">
-                      <font>
-                       <pointsize>12</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Factory reset</string>
-                     </property>
-                    </widget>
                    </item>
                   </layout>
                  </widget>

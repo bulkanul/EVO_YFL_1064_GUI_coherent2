@@ -59,7 +59,6 @@ public:
     QPushButton *all_restore_seed;
     QPushButton *all_save_in_memory;
     QSpacerItem *horizontalSpacer_18;
-    QPushButton *all_reset;
     QWidget *connection_page;
     QVBoxLayout *verticalLayout_7;
     QGroupBox *groupBox_5;
@@ -263,12 +262,6 @@ public:
 
         horizontalLayout_18->addItem(horizontalSpacer_18);
 
-        all_reset = new QPushButton(groupBox_2);
-        all_reset->setObjectName("all_reset");
-        all_reset->setFont(font2);
-
-        horizontalLayout_18->addWidget(all_reset);
-
 
         verticalLayout_5->addWidget(groupBox_2);
 
@@ -392,7 +385,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -409,7 +402,6 @@ public:
         all_save_seed->setText(QCoreApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\201\320\270\320\264\320\260", nullptr));
         all_restore_seed->setText(QCoreApplication::translate("MainWindow", "\320\222\320\276\321\201\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\201\320\270\320\264\320\260", nullptr));
         all_save_in_memory->setText(QCoreApplication::translate("MainWindow", "Save to memory", nullptr));
-        all_reset->setText(QCoreApplication::translate("MainWindow", "Factory reset", nullptr));
         groupBox_5->setTitle(QString());
         rb_serial->setText(QCoreApplication::translate("MainWindow", "COM", nullptr));
         group_serial->setTitle(QCoreApplication::translate("MainWindow", "Port", nullptr));
