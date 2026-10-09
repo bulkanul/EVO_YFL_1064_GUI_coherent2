@@ -1039,7 +1039,7 @@ public:
         label_45->setText(QCoreApplication::translate("cb_panel", "PD backward 2:", nullptr));
         pd_backward_2->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
-        button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        button_error->setText(QCoreApplication::translate("cb_panel", "List", nullptr));
         label_57->setText(QCoreApplication::translate("cb_panel", "Overheat temp.1:", nullptr));
         over_temp_label_1->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
     } // retranslateUi

@@ -166,7 +166,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         label_10->setFont(font1);
-        label_10->setAlignment(Qt::AlignCenter);
+        label_10->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout->addWidget(label_10);
 
@@ -181,7 +181,7 @@ public:
         label_21->setSizePolicy(sizePolicy2);
         label_21->setMinimumSize(QSize(30, 25));
         label_21->setMaximumSize(QSize(16777215, 25));
-        label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        label_21->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_23->addWidget(label_21);
 
@@ -193,7 +193,7 @@ public:
         QFont font2;
         font2.setPointSize(10);
         on_off_button->setFont(font2);
-        on_off_button->setFocusPolicy(Qt::NoFocus);
+        on_off_button->setFocusPolicy(Qt::FocusPolicy::NoFocus);
         on_off_button->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	border-image: url(:/images/images/switch_btn_off_80x25.png);\n"
 "}\n"
@@ -227,7 +227,7 @@ public:
         label_22->setSizePolicy(sizePolicy2);
         label_22->setMinimumSize(QSize(30, 25));
         label_22->setMaximumSize(QSize(16777215, 25));
-        label_22->setAlignment(Qt::AlignCenter);
+        label_22->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         horizontalLayout_23->addWidget(label_22);
 
@@ -239,7 +239,7 @@ public:
         label_2 = new QLabel(cw_widget);
         label_2->setObjectName("label_2");
         label_2->setFont(font1);
-        label_2->setAlignment(Qt::AlignCenter);
+        label_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_7->addWidget(label_2);
 
@@ -269,7 +269,7 @@ public:
         label_24->setObjectName("label_24");
         label_24->setMinimumSize(QSize(0, 0));
         label_24->setFont(font1);
-        label_24->setAlignment(Qt::AlignCenter);
+        label_24->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_10->addWidget(label_24);
 
@@ -297,7 +297,7 @@ public:
         indicator->setMaximum(250);
         indicator->setValue(200);
         indicator->setTextVisible(false);
-        indicator->setTextDirection(QProgressBar::TopToBottom);
+        indicator->setTextDirection(QProgressBar::Direction::TopToBottom);
 
         verticalLayout_9->addWidget(indicator);
 
@@ -341,7 +341,7 @@ public:
         QFont font3;
         font3.setPointSize(13);
         spin->setFont(font3);
-        spin->setFocusPolicy(Qt::ClickFocus);
+        spin->setFocusPolicy(Qt::FocusPolicy::ClickFocus);
         spin->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         spin->setDecimals(2);
         spin->setMinimum(0.000000000000000);
@@ -369,7 +369,7 @@ public:
         label_25->setObjectName("label_25");
         label_25->setMinimumSize(QSize(0, 0));
         label_25->setFont(font1);
-        label_25->setAlignment(Qt::AlignCenter);
+        label_25->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_12->addWidget(label_25);
 
@@ -397,7 +397,7 @@ public:
         tem_indicator->setMaximum(600);
         tem_indicator->setValue(200);
         tem_indicator->setTextVisible(false);
-        tem_indicator->setTextDirection(QProgressBar::TopToBottom);
+        tem_indicator->setTextDirection(QProgressBar::Direction::TopToBottom);
 
         verticalLayout_14->addWidget(tem_indicator);
 
@@ -551,7 +551,7 @@ public:
         label_29->setMinimumSize(QSize(120, 0));
         label_29->setMaximumSize(QSize(120, 16777215));
         label_29->setFont(font5);
-        label_29->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_29->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
 
         formLayout_2->setWidget(4, QFormLayout::LabelRole, label_29);
 
@@ -560,7 +560,7 @@ public:
         mode_label->setMinimumSize(QSize(80, 36));
         mode_label->setMaximumSize(QSize(80, 36));
         mode_label->setFont(font6);
-        mode_label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        mode_label->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         mode_label->setWordWrap(true);
 
         formLayout_2->setWidget(4, QFormLayout::FieldRole, mode_label);
@@ -589,11 +589,11 @@ public:
         groupBox->setTitle(QString());
         laser_name_label->setText(QCoreApplication::translate("dc_panel", "HPLD 1000", nullptr));
         toolButton->setText(QCoreApplication::translate("dc_panel", "...", nullptr));
-        label_10->setText(QCoreApplication::translate("dc_panel", "\320\241\320\276\321\201\321\202\320\276\321\217\320\275\320\270\320\265", nullptr));
-        label_21->setText(QCoreApplication::translate("dc_panel", "\320\222\320\253\320\232\320\233", nullptr));
+        label_10->setText(QCoreApplication::translate("dc_panel", "State", nullptr));
+        label_21->setText(QCoreApplication::translate("dc_panel", "OFF", nullptr));
         on_off_button->setText(QString());
-        label_22->setText(QCoreApplication::translate("dc_panel", "\320\222\320\232\320\233", nullptr));
-        label_2->setText(QCoreApplication::translate("dc_panel", "\320\240\320\265\320\266\320\270\320\274", nullptr));
+        label_22->setText(QCoreApplication::translate("dc_panel", "ON", nullptr));
+        label_2->setText(QCoreApplication::translate("dc_panel", "Mode", nullptr));
         mode->setItemText(0, QCoreApplication::translate("dc_panel", "Mode CW", nullptr));
         mode->setItemText(1, QCoreApplication::translate("dc_panel", "External TTL", nullptr));
         mode->setItemText(2, QCoreApplication::translate("dc_panel", "External Analog", nullptr));
@@ -607,16 +607,16 @@ public:
         tem_indicator->setFormat(QString());
         curr_min_label_3->setText(QCoreApplication::translate("dc_panel", "10", nullptr));
         curr_max_label_3->setText(QCoreApplication::translate("dc_panel", "70", nullptr));
-        label_11->setText(QCoreApplication::translate("dc_panel", "\320\237\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213:", nullptr));
-        label_28->setText(QCoreApplication::translate("dc_panel", "\320\241\320\276\321\201\321\202\320\276\321\217\320\275\320\270\320\265:", nullptr));
+        label_11->setText(QCoreApplication::translate("dc_panel", "Read values:", nullptr));
+        label_28->setText(QCoreApplication::translate("dc_panel", "State:", nullptr));
         power_state_label->setText(QCoreApplication::translate("dc_panel", "OFF", nullptr));
-        label_31->setText(QCoreApplication::translate("dc_panel", "\320\234\320\276\321\211\320\275\320\276\321\201\321\202\321\214:", nullptr));
+        label_31->setText(QCoreApplication::translate("dc_panel", "Power:", nullptr));
         current_ld_label->setText(QCoreApplication::translate("dc_panel", "0.0 A", nullptr));
         label_32->setText(QCoreApplication::translate("dc_panel", "Temperature:", nullptr));
         temp_label->setText(QCoreApplication::translate("dc_panel", "0.0 C", nullptr));
-        label_error->setText(QCoreApplication::translate("dc_panel", "\320\236\321\210\320\270\320\261\320\272\320\270:", nullptr));
-        button_error->setText(QCoreApplication::translate("dc_panel", "\320\241\320\277\320\270\321\201\320\276\320\272", nullptr));
-        label_29->setText(QCoreApplication::translate("dc_panel", "\320\240\320\265\320\266\320\270\320\274:", nullptr));
+        label_error->setText(QCoreApplication::translate("dc_panel", "Errors:", nullptr));
+        button_error->setText(QCoreApplication::translate("dc_panel", "List", nullptr));
+        label_29->setText(QCoreApplication::translate("dc_panel", "Mode:", nullptr));
         mode_label->setText(QCoreApplication::translate("dc_panel", "Mode CW", nullptr));
     } // retranslateUi
 

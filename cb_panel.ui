@@ -1989,7 +1989,7 @@
              <item row="18" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
-                <string>Детали</string>
+                <string>List</string>
                </property>
               </widget>
              </item>

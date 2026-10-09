@@ -185,7 +185,7 @@ public:
         label->setMaximumSize(QSize(106, 28));
         label->setPixmap(QPixmap(QString::fromUtf8("images/NordL_logo.png")));
         label->setScaledContents(true);
-        label->setAlignment(Qt::AlignCenter);
+        label->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         horizontalLayout_59->addWidget(label);
 
@@ -206,7 +206,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName("scrollAreaWidgetContents_2");
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 844, 66));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1015, 781));
         verticalLayout_5 = new QVBoxLayout(scrollAreaWidgetContents_2);
         verticalLayout_5->setSpacing(0);
         verticalLayout_5->setObjectName("verticalLayout_5");
@@ -365,7 +365,7 @@ public:
 
         version = new QLabel(connection_page);
         version->setObjectName("version");
-        version->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        version->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         verticalLayout_7->addWidget(version);
 
@@ -397,20 +397,20 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        menu_button->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\277\320\276\320\264\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217", nullptr));
-        pb_error_cleaner->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\321\207\320\270\321\201\321\202\320\270\321\202\321\214 \320\276\321\210\320\270\320\261\320\272\320\270", nullptr));
+        menu_button->setText(QCoreApplication::translate("MainWindow", "Connection settings", nullptr));
+        pb_error_cleaner->setText(QCoreApplication::translate("MainWindow", "Clear error", nullptr));
         label->setText(QString());
         groupBox->setTitle(QString());
         groupBox_2->setTitle(QString());
-        all_save_seed->setText(QCoreApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\201\320\270\320\264\320\260", nullptr));
-        all_restore_seed->setText(QCoreApplication::translate("MainWindow", "\320\222\320\276\321\201\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\201\320\270\320\264\320\260", nullptr));
-        all_save_in_memory->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\262 \320\277\320\260\320\274\321\217\321\202\321\214", nullptr));
-        all_reset->setText(QCoreApplication::translate("MainWindow", "\320\241\320\261\321\200\320\276\321\201 \320\264\320\276 \320\267\320\260\320\262\320\276\320\264\321\201\320\272\320\270\321\205 \320\275\320\260\321\201\321\202\321\200\320\276\320\265\320\272", nullptr));
+        all_save_seed->setText(QCoreApplication::translate("MainWindow", "Set seed parameters", nullptr));
+        all_restore_seed->setText(QCoreApplication::translate("MainWindow", "Restore seed parameters", nullptr));
+        all_save_in_memory->setText(QCoreApplication::translate("MainWindow", "Save to memory", nullptr));
+        all_reset->setText(QCoreApplication::translate("MainWindow", "Factory reset", nullptr));
         groupBox_5->setTitle(QString());
-        rb_serial->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\321\201\320\273\320\265\320\264\320\276\320\262\320\260\321\202\320\265\320\273\321\214\320\275\321\213\320\271 \320\277\320\276\321\200\321\202", nullptr));
+        rb_serial->setText(QCoreApplication::translate("MainWindow", "COM", nullptr));
         group_serial->setTitle(QCoreApplication::translate("MainWindow", "Port", nullptr));
         refresh_ports->setText(QString());
-        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "\320\220\320\264\321\200\320\265\321\201 \320\272\320\276\320\274\321\203\321\202\320\260\321\206\320\270\320\276\320\275\320\275\320\276\320\263\320\276 \321\203\321\201\321\202\321\200\320\276\320\271\321\201\321\202\320\262\320\260", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "Switching device address", nullptr));
         ip_adress_2->setText(QCoreApplication::translate("MainWindow", "00a", nullptr));
         connect_btn->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
         version->setText(QString());

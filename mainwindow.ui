@@ -261,8 +261,8 @@ QPushButton::hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>844</width>
-                 <height>69</height>
+                 <width>1015</width>
+                 <height>781</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -330,7 +330,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Установить параметры сида</string>
+                      <string>Set seed parameters</string>
                      </property>
                     </widget>
                    </item>
@@ -342,7 +342,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Восстановить параметры сида</string>
+                      <string>Restore seed parameters</string>
                      </property>
                     </widget>
                    </item>
@@ -354,7 +354,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Сохранить в память</string>
+                      <string>Save to memory</string>
                      </property>
                     </widget>
                    </item>
@@ -379,7 +379,7 @@ QPushButton::hover {
                       </font>
                      </property>
                      <property name="text">
-                      <string>Сброс до заводских настроек</string>
+                      <string>Factory reset</string>
                      </property>
                     </widget>
                    </item>

@@ -17,7 +17,6 @@ tcp_usb_connector::tcp_usb_connector()
 void tcp_usb_connector::init_connection(QString adress, int port)
 {
     first_set_write=true;
-//    qDebug()<<_sSocket->objectName()<<_pSocket->objectName();
     if(_sSocket!=nullptr)_sSocket->close();
     if(_pSocket!=nullptr)_pSocket->abort();
     if(port==404){
@@ -28,8 +27,6 @@ void tcp_usb_connector::init_connection(QString adress, int port)
         connection_is_tcp=true;
     }
     emit start_timer(pref_identificator);
-//    tmr->stop();
-//    tmr->start();
 }
 void tcp_usb_connector::serial_set_prefs(QString serial_port)
 {
@@ -55,7 +52,6 @@ void tcp_usb_connector::serial_connect(QString serial_port)
     {
         _sSocket->flush();
         _sSocket->clear(QSerialPort::AllDirections);
-        qDebug("serial port is opened SUCCESSFULLY");
         display_connected();
             emit raw_command_write(QString("O").toUtf8()+'\r');
             emit raw_command_write(QString("S6").toUtf8()+'\r');
@@ -65,7 +61,6 @@ void tcp_usb_connector::serial_connect(QString serial_port)
 void tcp_usb_connector::serial_reconnect(void)
 {
     _sSocket->close();
-    qDebug("serial port DISONNECTED by soft");
     serial_connect(serial);
 }
 
@@ -77,7 +72,6 @@ void tcp_usb_connector::serial_disconnect(void)
 void tcp_usb_connector::change_timer_delay(int delay)
 {
     if(tmr->interval()!=delay){
-//        tmr->setInterval(delay);
         if(logg)qDebug()<<"now delay is "<< delay;
     }
 }
@@ -88,7 +82,6 @@ void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
     if ( (_sSocket->isOpen()) && (error == QSerialPort::ResourceError))
     {
         _sSocket->close();
-        qDebug("serial port DISONNECTED by error"+ error);
     }
 }
 
@@ -200,7 +193,6 @@ void tcp_usb_connector::sender()
     }else{
         if(!no_reconnect_by_dev && count>20)display_reconnect();
     }
-//    if(logg)qDebug()<<"fifo add "<<pref_identificator<<crupto_fifo_command;
     if(crupto_fifo_command.length()>0){
         if(connection_is_tcp){
             if(_pSocket->isOpen()&&_pSocket->isWritable()){
@@ -295,7 +287,6 @@ void tcp_usb_connector::data_received(){
     }
     if(raw_params.size()>=1){
         if(first_set_write){
-            qDebug() << "saved"<<connection_is_tcp<<ip<<serial;
             QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
             settings.setValue("prev_connection",serial);
             first_set_write=false;
@@ -338,7 +329,6 @@ QStringList tcp_usb_connector::double_localizator(QByteArray data){
             return QStringList("error unknown");
         }else{
             double_caller=false;
-//            if(raw_command.lastIndexOf("lr")>=0){
                 QStringList list;
                 if(raw_command.lastIndexOf("lrerrclr")==0){
                     list =  raw_command.right(raw_command.length()
@@ -350,7 +340,6 @@ QStringList tcp_usb_connector::double_localizator(QByteArray data){
                    list[i].replace(",",".");
                 }
                 list.last().remove("\r");
-//                qDebug()<<"filtred "<<list;
                 return list ;
         }
     }
@@ -380,14 +369,12 @@ void tcp_usb_connector::display_reconnect()
 void tcp_usb_connector::display_connected()
 {
     connected=true;
-//    emit connection_state(0);
     count=0;
 }
 
 void tcp_usb_connector::display_disconnected()
 {
     connected=false;
-//    emit connection_state(1);
     if(count>30){
          display_reconnect();
     }

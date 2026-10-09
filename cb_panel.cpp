@@ -45,7 +45,6 @@ cb_panel::cb_panel(QWidget *parent):
     labels.append(ui->over_temp_label_0);
     labels.append(ui->over_temp_label_1);
     family="cb";
-    // this->setEnabled(false);
 }
 
 cb_panel::~cb_panel()
@@ -63,12 +62,9 @@ void cb_panel::telemetry_call(QString family)
     if(family==this->family){
         count_no_responce++;
         count++;
-        // int counter=1;
-        // int temp=0;
        if(first_pref){
           first_pref=false;
           get_pref();
-//            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
        }else{
           bool flag=true;
         int counter=0;
@@ -99,8 +95,6 @@ void cb_panel::telemetry_call(QString family)
           emit send_command(temp.toUtf8()+'\r');
         }else
           emit send_command(commands[counter].toUtf8()+'\r');
-
-        qDebug()<<"else"<<family<<ID << count;
        }
     }
 }
@@ -183,7 +177,6 @@ void cb_panel::key_catcher(QObject* key)
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
         emit send_command(message.toUtf8()+'\r');
-        qDebug()<<"message"<<message;
     }
 
 }
@@ -311,9 +304,6 @@ void cb_panel::data_received_and_profed()
             command.replace(2,2,temp);
             command.replace(7,2,QString::number(value, 16).toUpper());
             emit send_command(command.toUtf8()+'\r');
-            qDebug()<<"mess cb echo else"<<raw_params[0]<<raw_params[0].mid(5,2);
-          }else{
-            qDebug()<<"unreaded"<<raw_params[0].mid(5,2).toInt(&ok,16)<<raw_params[0];
           }
         }
 

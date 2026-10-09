@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
     if(settings.value("prev_connection").toString()!=""){
-        qDebug() <<"saved writed"<<settings.value("prev_port").toString();
         conn->serial=settings.value("prev_connection").toString();
         if(settings.value("local_addr").toString()!=""){
             ui->ip_adress_2->setText(settings.value("local_addr").toString());
@@ -99,7 +98,6 @@ void MainWindow::on_menu_button_clicked()
     ui->menu_button->setText(ui->stackedWidget->currentIndex()?"Main":"Connection settings");
 }
 
-
 void MainWindow::on_refresh_ports_clicked()
 {
     int current_port_index = 0;
@@ -113,7 +111,6 @@ void MainWindow::on_refresh_ports_clicked()
     ui->serial_combo_box->setCurrentIndex(current_port_index);
     ui->serial_combo_box->setCurrentText(ui->serial_combo_box->itemText(current_port_index));
 }
-
 
 void MainWindow::on_ip_adress_2_editingFinished()
 {
