@@ -15,6 +15,57 @@ device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
 }
 
+void device_panel::updateSensors(const QStringList &message)
+{
+    for (auto &sensor : sensors) {
+        sensor.value = param_check(message, sensor.status_field).toDouble();
+        sensor.value_label->setText(QString::number(sensor.value, 'f', sensor.precision)
+                                    + " " + sensor.unit);
+    }
+    readings_valid = true;
+    refreshReadingColors();
+}
+
+void device_panel::setLevels(const QVector<double> &values)
+{
+    if (values.size() != sensors.size()) return;
+    auto value = values.cbegin();
+    for (auto &sensor : sensors) {
+        sensor.limit = *value++;
+        const bool minimum = sensor.kind == LimitKind::Minimum;
+        sensor.level_label->setText(QString(minimum ? "> " : "< ")
+                                    + QString::number(sensor.limit, 'f', 2)
+                                    + " " + sensor.unit);
+        sensor.level_label->setToolTip(minimum ? "Allowed above this level"
+                                               : "Allowed below this level");
+    }
+    levels_valid = true;
+    refreshReadingColors();
+}
+
+void device_panel::clearLevels()
+{
+    levels_valid = false;
+    readings_valid = false;
+    for (const auto &sensor : sensors) {
+        sensor.level_label->setText(QString::fromUtf8("—"));
+        sensor.level_label->setToolTip("Threshold unavailable");
+    }
+    refreshReadingColors();
+}
+
+void device_panel::refreshReadingColors()
+{
+    for (const auto &sensor : sensors) {
+        if (!levels_valid || !readings_valid) {
+            sensor.value_label->setStyleSheet("");
+            continue;
+        }
+        level_placeholders::colorReading(sensor.value_label, sensor.value,
+                                         sensor.limit, sensor.kind);
+    }
+}
+
 bool device_panel::eventFilter(QObject *target, QEvent *event)
 {
     if(event->type() == QEvent::Wheel)
@@ -272,5 +323,5 @@ void device_panel::on_on_off_button_clicked(bool checked)
     if (!button) return;
     button->setChecked(!checked);
     emit sl_data_set("lsonoff", ID, QString::number(checked ? 1 : 0));
-    silence_counter(2);
+    // silence_counter(2);
 }

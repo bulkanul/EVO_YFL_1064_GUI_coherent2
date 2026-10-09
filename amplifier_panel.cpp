@@ -28,11 +28,18 @@ amplifier_panel::amplifier_panel(QWidget *parent) :
 
     ui->verticalSpacer_4->changeSize(20, 0, QSizePolicy::Minimum, QSizePolicy::Fixed);
     level_placeholders::addHeading(ui->gridLayout, this, 5, 6);
-    level_labels = {
+    QLabel *level_labels[] = {
         level_placeholders::add(ui->gridLayout, this, 6, 0, "l_level_amp_temp_0"),
         level_placeholders::add(ui->gridLayout, this, 6, 1, "l_level_amp_temp_1"),
         level_placeholders::add(ui->gridLayout, this, 6, 2, "l_level_amp_pd_1_fwd"),
         level_placeholders::add(ui->gridLayout, this, 6, 3, "l_level_amp_pd_2_back")
+    };
+    // Display order: Temp 0, Temp 1, Fwd, Back. Fields refer to lrstatus.
+    sensors = {
+        {ui->l_temp_0, level_labels[0], 7, LimitKind::Maximum, "°C", 1},
+        {ui->l_temp_1, level_labels[1], 8, LimitKind::Maximum, "°C", 1},
+        {ui->l_pd_1_fwd, level_labels[2], 10, LimitKind::Minimum, "V", 2},
+        {ui->l_pd_2_back, level_labels[3], 9, LimitKind::Maximum, "V", 2}
     };
     ui->gridLayout->invalidate();
 }
@@ -67,19 +74,7 @@ void amplifier_panel::data_received_and_profed()
             emit qbhFaultChanged(qbh_fault);
         }
 
-        // [7] = temp1, [8] = temp2
-        readings[0] = param_check(raw_params, 7).toDouble();
-        readings[1] = param_check(raw_params, 8).toDouble();
-        ui->l_temp_0->setText(QString::number(readings[0], 'f', 1) + " °C");
-        ui->l_temp_1->setText(QString::number(readings[1], 'f', 1) + " °C");
-        
-        // Protocol order: Back1, Fwd1. Display order: Fwd1, Back1.
-        readings[2] = param_check(raw_params, 10).toDouble();
-        readings[3] = param_check(raw_params, 9).toDouble();
-        ui->l_pd_1_fwd->setText(QString::number(readings[2], 'f', 2) + " V");
-        ui->l_pd_2_back->setText(QString::number(readings[3], 'f', 2) + " V");
-        readings_valid = true;
-        refreshReadingColors();
+        updateSensors(raw_params);
         
         // [11] = diff_pd
         ui->l_diff_pd->setText(QString::number(param_check(raw_params, 11).toDouble(), 'f', 2) + " V");
@@ -98,47 +93,6 @@ void amplifier_panel::data_received_and_profed()
     else if (param_check(raw_params,0) == "lrpower"){
         // lrpower amp <id> <value>
         ui->progressBar_power->setValue(static_cast<int>(param_check(raw_params, 3).toDouble()));
-    }
-}
-
-void amplifier_panel::setLevels(const std::array<double, 4> &values)
-{
-    levels = values;
-    levels_valid = true;
-    for (size_t i = 0; i < level_labels.size(); ++i) {
-        const QString comparison = i == 2 ? "> " : "< ";
-        level_labels[i]->setText(comparison + QString::number(levels[i], 'f', 2) +
-                                 (i < 2 ? " °C" : " V"));
-        level_labels[i]->setToolTip(i == 2 ? "Allowed above this level"
-                                                : "Allowed below this level");
-    }
-    refreshReadingColors();
-}
-
-void amplifier_panel::clearLevels()
-{
-    levels_valid = false;
-    readings_valid = false;
-    for (QLabel *label : level_labels) {
-        label->setText(QString::fromUtf8("—"));
-        label->setToolTip("Threshold unavailable");
-    }
-    refreshReadingColors();
-}
-
-void amplifier_panel::refreshReadingColors()
-{
-    const std::array<QLabel *, 4> sensor_labels = {
-        ui->l_temp_0, ui->l_temp_1, ui->l_pd_1_fwd, ui->l_pd_2_back
-    };
-    for (size_t i = 0; i < sensor_labels.size(); ++i) {
-        if (!levels_valid || !readings_valid) {
-            sensor_labels[i]->setStyleSheet("");
-            continue;
-        }
-        const auto kind = i == 2 ? level_placeholders::LimitKind::Minimum
-                                 : level_placeholders::LimitKind::Maximum;
-        level_placeholders::colorReading(sensor_labels[i], readings[i], levels[i], kind);
     }
 }
 

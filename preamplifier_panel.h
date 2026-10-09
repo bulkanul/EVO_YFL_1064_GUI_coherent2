@@ -2,7 +2,6 @@
 #define PREAMPLIFIER_PANEL_H
 
 #include <QWidget>
-#include <array>
 #include "device_panel.h"
 
 namespace Ui {
@@ -27,9 +26,6 @@ QStringList errors_list={
 public:
     explicit preamplifier_panel(QWidget *parent = nullptr);
     ~preamplifier_panel();
-    // Display order: Temp 0, Temp 1, Fwd1, Back1, Fwd2, Back2.
-    void setLevels(const std::array<double, 6> &values);
-    void clearLevels();
 
     friend class channel_panel;
 
@@ -45,17 +41,11 @@ private slots:
 
 private:
     void refreshErrorState();
-    void refreshReadingColors();
 
     Ui::preamplifier_panel *ui;
     int displayed_error_state = 0;
     int preamp_error_flags = 0;
     bool amp_qbh_fault = false;
-    std::array<QLabel *, 6> level_labels{};
-    std::array<double, 6> levels{};
-    std::array<double, 6> readings{};
-    bool levels_valid = false;
-    bool readings_valid = false;
 };
 
 #endif // PREAMPLIFIER_PANEL_H

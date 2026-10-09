@@ -38,11 +38,18 @@ generator_panel::generator_panel(QWidget *parent) :
     }
     level_placeholders::addSeparator(ui->gridLayout_seed_sensors, this, 2, 0, 4);
     level_placeholders::addSeparator(ui->gridLayout_seed_sensors, this, 5, 0, 4);
-    level_labels = {
+    QLabel *level_labels[] = {
         level_placeholders::add(ui->gridLayout_seed_sensors, this, 1, 1, "l_level_gen_temp_1"),
         level_placeholders::add(ui->gridLayout_seed_sensors, this, 1, 3, "l_level_gen_temp_2"),
         level_placeholders::add(ui->gridLayout_seed_sensors, this, 4, 1, "l_level_gen_pd_1_fwd"),
         level_placeholders::add(ui->gridLayout_seed_sensors, this, 4, 3, "l_level_gen_pd_2_back")
+    };
+    // Display order: Temp 1, Temp 2, Fwd, Back. Fields refer to lrstatus.
+    sensors = {
+        {ui->l_core_temp_1, level_labels[0], 5, LimitKind::Maximum, "°C", 1},
+        {ui->l_core_temp_2, level_labels[1], 6, LimitKind::Maximum, "°C", 1},
+        {ui->l_pd1_fw, level_labels[2], 11, LimitKind::Minimum, "V", 2},
+        {ui->l_pd2_bw, level_labels[3], 12, LimitKind::Maximum, "V", 2}
     };
 }
 
@@ -69,12 +76,7 @@ void generator_panel::data_received_and_profed()
         int flags = param_check(raw_params, 4).toInt();
         check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
 
-        double coreT1 = param_check(raw_params, 5).toDouble();
-        double coreT2 = param_check(raw_params, 6).toDouble();
-        readings[0] = coreT1;
-        readings[1] = coreT2;
-        ui->l_core_temp_1->setText(QString::number(coreT1, 'f', 1) + " °C");
-        ui->l_core_temp_2->setText(QString::number(coreT2, 'f', 1) + " °C");
+        updateSensors(raw_params);
 
         // 3 TEC State & Temps
         bool tec1 = param_check(raw_params, 7).toInt();
@@ -88,15 +90,7 @@ void generator_panel::data_received_and_profed()
         ui->dsb_temp_1->setValue(tecTemp1);
         ui->dsb_temp_2->setValue(tecTemp2);
 
-        double pd1 = param_check(raw_params, 11).toDouble();
-        double pd2 = param_check(raw_params, 12).toDouble();
         double pd3 = param_check(raw_params, 13).toDouble();
-        readings[2] = pd1;
-        readings[3] = pd2;
-        readings_valid = true;
-        refreshReadingColors();
-        ui->l_pd1_fw->setText(QString::number(pd1, 'f', 2) + " V");
-        ui->l_pd2_bw->setText(QString::number(pd2, 'f', 2) + " V");
         ui->l_pd3->setText(QString::number(pd3, 'f', 2) + " V");
 
         // 4 HPLD Status
@@ -115,47 +109,6 @@ void generator_panel::data_received_and_profed()
     }
     else if (param_check(raw_params, 0) == "lronoff") {
         ui->pb_laser_onoff->setChecked(param_check(raw_params, 3).toInt());
-    }
-}
-
-void generator_panel::setLevels(const std::array<double, 4> &values)
-{
-    levels = values;
-    levels_valid = true;
-    for (size_t i = 0; i < level_labels.size(); ++i) {
-        const QString comparison = i == 2 ? "> " : "< ";
-        level_labels[i]->setText(comparison + QString::number(levels[i], 'f', 2) +
-                                 (i < 2 ? " °C" : " V"));
-        level_labels[i]->setToolTip(i == 2 ? "Allowed above this level"
-                                          : "Allowed below this level");
-    }
-    refreshReadingColors();
-}
-
-void generator_panel::clearLevels()
-{
-    levels_valid = false;
-    readings_valid = false;
-    for (QLabel *label : level_labels) {
-        label->setText(QString::fromUtf8("—"));
-        label->setToolTip("Threshold unavailable");
-    }
-    refreshReadingColors();
-}
-
-void generator_panel::refreshReadingColors()
-{
-    const std::array<QLabel *, 4> sensor_labels = {
-        ui->l_core_temp_1, ui->l_core_temp_2, ui->l_pd1_fw, ui->l_pd2_bw
-    };
-    for (size_t i = 0; i < sensor_labels.size(); ++i) {
-        if (!levels_valid || !readings_valid) {
-            sensor_labels[i]->setStyleSheet("");
-            continue;
-        }
-        const auto kind = i == 2 ? level_placeholders::LimitKind::Minimum
-                                 : level_placeholders::LimitKind::Maximum;
-        level_placeholders::colorReading(sensor_labels[i], readings[i], levels[i], kind);
     }
 }
 

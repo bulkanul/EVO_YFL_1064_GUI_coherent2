@@ -38,13 +38,22 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
 
     ui->verticalSpacer_4->changeSize(20, 0, QSizePolicy::Minimum, QSizePolicy::Fixed);
     level_placeholders::addHeading(ui->gridLayout_2, this, 4, 6);
-    level_labels = {
+    QLabel *level_labels[] = {
         level_placeholders::add(ui->gridLayout_2, this, 5, 0, "l_level_preamp_temp_0"),
         level_placeholders::add(ui->gridLayout_2, this, 5, 1, "l_level_preamp_temp_1"),
         level_placeholders::add(ui->gridLayout_2, this, 5, 2, "l_level_preamp_pd_1_fwd"),
         level_placeholders::add(ui->gridLayout_2, this, 5, 3, "l_level_preamp_pd_2_back"),
         level_placeholders::add(ui->gridLayout_2, this, 5, 4, "l_level_preamp_pd_3_fwd"),
         level_placeholders::add(ui->gridLayout_2, this, 5, 5, "l_level_preamp_pd_4_back")
+    };
+    // Display order: Temp 0, Temp 1, Fwd1, Back1, Fwd2, Back2. Fields refer to lrstatus.
+    sensors = {
+        {ui->l_temp_0, level_labels[0], 6, LimitKind::Maximum, "°C", 1},
+        {ui->l_temp_1, level_labels[1], 7, LimitKind::Maximum, "°C", 1},
+        {ui->l_pd_1_fwd, level_labels[2], 10, LimitKind::Minimum, "V", 2},
+        {ui->l_pd_2_back, level_labels[3], 8, LimitKind::Maximum, "V", 2},
+        {ui->l_pd_3_fwd, level_labels[4], 11, LimitKind::Minimum, "V", 2},
+        {ui->l_pd_4_back, level_labels[5], 9, LimitKind::Maximum, "V", 2}
     };
     ui->gridLayout_2->invalidate();
 }
@@ -72,23 +81,7 @@ void preamplifier_panel::data_received_and_profed()
         preamp_error_flags = param_check(raw_params, 5).toInt();
         refreshErrorState();
 
-        // [6] = temp1, [7] = temp2
-        readings[0] = param_check(raw_params, 6).toDouble();
-        readings[1] = param_check(raw_params, 7).toDouble();
-        ui->l_temp_0->setText(QString::number(readings[0], 'f', 1) + " °C");
-        ui->l_temp_1->setText(QString::number(readings[1], 'f', 1) + " °C");
-        
-        // Protocol order: Back1, Back2, Fwd1, Fwd2. Display order: Fwd1, Back1, Fwd2, Back2.
-        readings[2] = param_check(raw_params, 10).toDouble();
-        readings[3] = param_check(raw_params, 8).toDouble();
-        readings[4] = param_check(raw_params, 11).toDouble();
-        readings[5] = param_check(raw_params, 9).toDouble();
-        ui->l_pd_1_fwd->setText(QString::number(readings[2], 'f', 2) + " V");
-        ui->l_pd_2_back->setText(QString::number(readings[3], 'f', 2) + " V");
-        ui->l_pd_3_fwd->setText(QString::number(readings[4], 'f', 2) + " V");
-        ui->l_pd_4_back->setText(QString::number(readings[5], 'f', 2) + " V");
-        readings_valid = true;
-        refreshReadingColors();
+        updateSensors(raw_params);
     }
     else if (param_check(raw_params,0) == "lronoff"){
         // lronoff preamp <id> <value>
@@ -102,48 +95,6 @@ void preamplifier_panel::data_received_and_profed()
         // lrreset preamp <id>
         preamp_error_flags = 0;
         refreshErrorState();
-    }
-}
-
-void preamplifier_panel::setLevels(const std::array<double, 6> &values)
-{
-    levels = values;
-    levels_valid = true;
-    for (size_t i = 0; i < level_labels.size(); ++i) {
-        const QString comparison = i == 2 || i == 4 ? "> " : "< ";
-        level_labels[i]->setText(comparison + QString::number(levels[i], 'f', 2) +
-                                 (i < 2 ? " °C" : " V"));
-        level_labels[i]->setToolTip(i == 2 || i == 4 ? "Allowed above this level"
-                                                       : "Allowed below this level");
-    }
-    refreshReadingColors();
-}
-
-void preamplifier_panel::clearLevels()
-{
-    levels_valid = false;
-    readings_valid = false;
-    for (QLabel *label : level_labels) {
-        label->setText(QString::fromUtf8("—"));
-        label->setToolTip("Threshold unavailable");
-    }
-    refreshReadingColors();
-}
-
-void preamplifier_panel::refreshReadingColors()
-{
-    const std::array<QLabel *, 6> sensor_labels = {
-        ui->l_temp_0, ui->l_temp_1, ui->l_pd_1_fwd,
-        ui->l_pd_2_back, ui->l_pd_3_fwd, ui->l_pd_4_back
-    };
-    for (size_t i = 0; i < sensor_labels.size(); ++i) {
-        if (!levels_valid || !readings_valid) {
-            sensor_labels[i]->setStyleSheet("");
-            continue;
-        }
-        const auto kind = (i == 2 || i == 4) ? level_placeholders::LimitKind::Minimum
-                                              : level_placeholders::LimitKind::Maximum;
-        level_placeholders::colorReading(sensor_labels[i], readings[i], levels[i], kind);
     }
 }
 
