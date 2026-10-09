@@ -134,7 +134,6 @@ void user_panel::telemetry_call(QString family)
     if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
-//        first_call=true;
     }
     if(family==this->family){
         count_no_responce++;

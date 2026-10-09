@@ -50,7 +50,6 @@ void tec_panel::key_catcher(QObject* key)
             QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
             message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
             emit send_command(message.toUtf8()+'\r');
-            //            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
         }
     }
 }
@@ -67,7 +66,6 @@ void tec_panel::data_received_and_profed()
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
         count_no_responce=0;
         enable_widget(true /*&& raw_params[0].mid(5,2)!="A2"*/);
-        qDebug()<<raw_params[0].mid(5,2);
         if(raw_params[0].mid(5,2)=="A4"){
             ui->temp_label->setText(QString::number(nHex/100.0,'d',2)+" C");
             indicate(nHex/10.0);
@@ -80,7 +78,6 @@ void tec_panel::data_received_and_profed()
 
 void tec_panel::send_pref()
 {
-    qDebug()<<"value len"<<spiners.length();
     int count_spins=0;
     if(spiners.length()>2){
         foreach (QDoubleSpinBox *spin, spiners) {
@@ -144,7 +141,6 @@ void tec_panel::telemetry_call(QString family)
             if(count%2==0)      emit send_command(QString("t"+internal_address+"8A400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
             else if(count%2==1) emit send_command(QString("t"+internal_address+"8A300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
         }
-        qDebug()<<"call"<<family<<ID << count;
     }
 
 }

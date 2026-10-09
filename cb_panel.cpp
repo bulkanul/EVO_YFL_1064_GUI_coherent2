@@ -73,8 +73,6 @@ cb_panel::cb_panel(QWidget *parent):
     labels.append(ui->over_temp_label_0);
     labels.append(ui->over_temp_label_1);
     family="cb";
-    // this->setEnabled(false);
-
 }
 
 cb_panel::~cb_panel()
@@ -87,23 +85,19 @@ void cb_panel::telemetry_call(QString family)
     if(count_no_responce>6){
         enable_widget(false);
         connection_lost=true;
-       first_pref=true;
+        first_pref=true;
     }
     if(family==this->family){
         count_no_responce++;
         count++;
-        // int counter=1;
-        // int temp=0;
-       if(first_pref){
-          first_pref=false;
-          get_pref();
-//            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-       }else{
-          bool flag=true;
+        if(first_pref){
+           first_pref=false;
+           get_pref();
+        }else{
+           bool flag=true;
         int counter=0;
         foreach (QLabel* var, labels) {
           if(var->text()=="N/A"){
-
             flag=false;
             break;
           }
@@ -135,7 +129,6 @@ void cb_panel::telemetry_call(QString family)
         }else{
         this->setEnabled(false);
           emit send_command(commands[counter].toUtf8()+'\r');
-            qDebug()<<"else"<<family<<dsbs<<commands[counter];
         }
        }
     }
@@ -205,13 +198,6 @@ void cb_panel::key_catcher(QObject* key)
           command="33";
           inner_address=target->objectName().split("_")[2];
           multiplier=10;
-          // raw_params.clear();
-          // raw_params.append("t05589200000000000010/r");
-          // data_received_and_profed();
-          // raw_params.clear();
-          // raw_params.append("t05589200000100000020/r");
-          // data_received_and_profed();
-          // return;
         }
 
         QString message ="t";
@@ -228,10 +214,9 @@ void cb_panel::key_catcher(QObject* key)
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
         emit send_command(message.toUtf8()+'\r');
-        qDebug()<<"message"<<message;
     }
-
 }
+
 void cb_panel::internal_address_write(QString data)
 {
     bool ok=false;
@@ -330,14 +315,11 @@ void cb_panel::data_received_and_profed()
                 if(ui->over_temp_label_1->text()=="N/A")ui->over_temp_01->setValue(nHex/10.0);
                 ui->over_temp_label_1->setText(QString::number(nHex/10.0)+" C");
             }
-
-
         }else if(raw_params[0].mid(5,2)=="D5"){
             if(ui->voltage_pl->text()=="N/A")ui->over_temp_00->setValue(nHex/100.0);
             ui->pilot_laser_v_dac->setText(QString::number(nHex/100.0)+" V");
         }else{
           bool ok=true;
-
           if(raw_params[0].mid(5,2).toInt(&ok,16)<0x80){
             quint32 value = raw_params[0].mid(5,2).toInt(&ok,16)+0x80;
             QString command=raw_params[0];
@@ -348,9 +330,6 @@ void cb_panel::data_received_and_profed()
             command.replace(2,2,temp);
             command.replace(7,2,QString::number(value, 16).toUpper());
             emit send_command(command.toUtf8()+'\r');
-            qDebug()<<"mess cb echo else"<<raw_params[0]<<raw_params[0].mid(5,2);
-          }else{
-            qDebug()<<"unreaded"<<raw_params[0].mid(5,2).toInt(&ok,16)<<raw_params[0];
           }
         }
 

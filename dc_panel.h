@@ -32,7 +32,6 @@ public:
                                 "flag_OverCurrent_IND" };
 
 public slots:
-    void data_received(QString);
     void key_catcher(QObject*);
     void internal_address_write(QString);
     void data_received_and_profed();
