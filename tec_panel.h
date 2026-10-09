@@ -21,7 +21,7 @@ public:
     bool connection_lost=true;
     QString internal_address;
     bool first_call=true;
-    QString family="tec";
+
 
 public slots:
     void key_catcher(QObject*);

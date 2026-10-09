@@ -18,7 +18,7 @@ dc_panel::dc_panel(QWidget *parent):
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
     connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
-
+    family="dc";
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
     ui->button_error->setVisible(false);

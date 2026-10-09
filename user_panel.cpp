@@ -12,6 +12,7 @@ user_panel::user_panel(QWidget *parent) :
     ui->setupUi(this);
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
+    family="usr";
 }
 user_panel::~user_panel()
 {
