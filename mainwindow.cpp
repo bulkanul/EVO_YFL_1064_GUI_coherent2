@@ -11,6 +11,8 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QRegularExpressionValidator>
+#include <array>
+#include <cmath>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn,&tcp_usb_connector::network_info_received,this,&MainWindow::on_network_info);
     connect(this,&MainWindow::send_command,conn,&tcp_usb_connector::data_write);
     connect(conn,&tcp_usb_connector::connection_state,this,&MainWindow::connection_state);
+    connect(conn,&tcp_usb_connector::levels_response,this,&MainWindow::on_levels_response);
 
     QGridLayout* layout = new QGridLayout(ui->groupBox);
 
@@ -39,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn,&tcp_usb_connector::send_to_dev,gen,&device_panel::data_received);
     connect(conn,&tcp_usb_connector::get_command,gen,&device_panel::auto_telemetry_call);
     connect(gen,&generator_panel::emission_changed,this,&MainWindow::on_emission_changed);
+    connect(gen, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
 
     chan1 = new channel_panel(1, this);
     connectChannelPanel(chan1);
@@ -63,14 +67,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn,&tcp_usb_connector::send_to_dev,chan_all->amp,&device_panel::data_received);
     connect(conn,&tcp_usb_connector::get_command,chan_all->amp,&device_panel::auto_telemetry_call);
     connect(conn,&tcp_usb_connector::get_command,chan_all->preamp,&device_panel::auto_telemetry_call);
+    connect(chan_all->preamp, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
+    connect(chan_all->amp, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
     layout->addWidget(chan_all, 5, 1);
 
     flags = new flag_panel(this);
-    connect(flags,&flag_panel::sig_usr_critical_error,this,&MainWindow::on_usr_critical_error);
+
     connect(flags,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
     connect(conn,&tcp_usb_connector::send_to_dev,flags,&device_panel::data_received);
     connect(conn,&tcp_usb_connector::get_command,flags,&device_panel::auto_telemetry_call);
+    connect(flags, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
     layout->addWidget(flags, 3, 0, 2, 1);
+
+    const QList<device_panel*> emittingPanels = {
+        gen,
+        chan1->preamp, chan1->amp,
+        chan2->preamp, chan2->amp,
+        chan3->preamp, chan3->amp,
+        chan4->preamp, chan4->amp
+    };
+    for (device_panel *panel : emittingPanels) {
+        connect(panel, &device_panel::emittingCommunicationChanged,
+                this, &MainWindow::on_emitting_unit_communication_changed);
+    }
 
     ui->groupBox->setLayout(layout);
 
@@ -173,12 +192,97 @@ void MainWindow::on_refresh_ports_clicked()
 void MainWindow::on_pb_error_cleaner_clicked()
 {
     emit send_command("lserrclr usr",0,"");
-    ui->pb_error_cleaner->setVisible(false);
 }
 
-void MainWindow::on_usr_critical_error(bool show_clear_btn)
+void MainWindow::on_device_error_changed(bool has_error)
 {
-    ui->pb_error_cleaner->setVisible(show_clear_btn);
+    if (has_error) {
+        error_panels.insert(sender());
+    } else {
+        error_panels.remove(sender());
+    }
+    ui->pb_error_cleaner->setVisible(!error_panels.isEmpty());
+}
+
+void MainWindow::on_emitting_unit_communication_changed(bool alarmActive)
+{
+    if (!flags || (alarmActive && !controller_connection_ready)) return;
+
+    auto *panel = qobject_cast<device_panel*>(sender());
+    if (!panel) return;
+
+    QString unit;
+    if (panel->family == "gen") {
+        unit = "Seed";
+    } else if (panel->family == "preamp" || panel->family == "amp") {
+        const QString type = panel->family == "preamp" ? "Preamp" : "Amp";
+        unit = type + " Channel " + QString::number(panel->ID + 1);
+    } else {
+        return;
+    }
+    flags->setCommunicationError(unit, alarmActive);
+}
+
+void MainWindow::requestLevels()
+{
+    if (!controller_connection_ready) return;
+    clearLevels();
+    conn->data_common_write("lglvls usr 0");
+}
+
+void MainWindow::clearLevels()
+{
+    gen->clearLevels();
+    for (channel_panel *channel : {chan1, chan2, chan3, chan4}) {
+        channel->preamp->clearLevels();
+        channel->amp->clearLevels();
+    }
+}
+
+void MainWindow::on_levels_response(const QStringList &message)
+{
+    QStringList parts = message;
+    parts.removeAll(QString());
+    if (parts.size() == 4 && parts[0] == "lrlvls" && parts[3] == "ERR") {
+        qWarning() << "Could not read levels:" << parts;
+        return;
+    }
+    bool idOk = false;
+    constexpr int level_count = 44;
+    if (parts.size() != 3 + level_count ||
+        parts[0] != "lrlvls" || parts[1] != "usr" ||
+        parts[2].toInt(&idOk) != 0 || !idOk) {
+        qWarning() << "Invalid levels response, expected 44 values:" << parts;
+        return;
+    }
+
+    // Wire: Seed backward PD, forward PD, Temp 1, Temp 2; then 40 Preamp/Amp levels.
+    std::array<double, level_count> values{};
+    for (int i = 0; i < level_count; ++i) {
+        bool ok = false;
+        const double value = parts[i + 3].toDouble(&ok);
+        if (!ok || !std::isfinite(value)) {
+            qWarning() << "Invalid level at index" << i << parts[i + 3];
+            return;
+        }
+        values[static_cast<size_t>(i)] = value;
+    }
+
+    gen->setLevels({values[2], values[3], values[1], values[0]});
+    const std::array<channel_panel *, 4> channels = {chan1, chan2, chan3, chan4};
+    for (size_t i = 0; i < channels.size(); ++i) {
+        const size_t preamp = 4 + i * 6;
+        // Wire: Back1, Back2, Fwd1, Fwd2, Temp0, Temp1.
+        channels[i]->preamp->setLevels({
+            values[preamp + 4], values[preamp + 5], values[preamp + 2],
+            values[preamp], values[preamp + 3], values[preamp + 1]
+        });
+        const size_t amp = 28 + i * 4;
+        // Wire: Back1, Fwd1, Temp0, Temp1.
+        channels[i]->amp->setLevels({
+            values[amp + 2], values[amp + 3], values[amp + 1], values[amp]
+        });
+    }
 }
 
 void MainWindow::on_all_reset_1_clicked()
@@ -210,6 +314,22 @@ void MainWindow::on_all_save_in_memory_clicked()
 
 void MainWindow::connection_state(int state)
 {
+    const bool was_ready = controller_connection_ready;
+    controller_connection_ready = state == 1 && !conn->version_protection;
+    if (controller_connection_ready && !was_ready) requestLevels();
+    if (!controller_connection_ready && was_ready) clearLevels();
+    if (!controller_connection_ready) {
+        const QList<device_panel*> emittingPanels = {
+            gen,
+            chan1->preamp, chan1->amp,
+            chan2->preamp, chan2->amp,
+            chan3->preamp, chan3->amp,
+            chan4->preamp, chan4->amp
+        };
+        for (device_panel *panel : emittingPanels) {
+            panel->resetEmissionCommunicationTracking();
+        }
+    }
     QString connectionInfo;
     if(conn->connection_is_tcp){
         connectionInfo = QString("TCP: %1:%2").arg(conn->ip).arg(7878);
@@ -280,12 +400,7 @@ void MainWindow::pass_controller(QKeyEvent *keyEvent)
 
 void MainWindow::on_disconnect_clicked()
 {
-    if(conn->connection_is_tcp){
-        conn->tcp_disconnect();
-    }else{
-        conn->serial_disconnect();
-    }
-    connection_state(0);
+    conn->manual_disconnect();
 }
 
 void MainWindow::connection_timeout()
@@ -426,4 +541,6 @@ void MainWindow::connectChannelPanel(channel_panel* chan)
     connect(conn, &tcp_usb_connector::send_to_dev, chan->amp, &device_panel::data_received);
     connect(conn, &tcp_usb_connector::get_command, chan->amp, &device_panel::auto_telemetry_call);
     connect(conn, &tcp_usb_connector::get_command, chan->preamp, &device_panel::auto_telemetry_call);
+    connect(chan->preamp, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
+    connect(chan->amp, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
 }

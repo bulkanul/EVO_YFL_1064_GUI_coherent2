@@ -69,6 +69,8 @@ void device_panel::check_error_state(int flags, int &error_code_member, QWidget*
         if (error_widget) error_widget->hide();
         if (details_btn) details_btn->setVisible(false);
     }
+
+    emit sig_device_error(flags != 0);
 }
 
 void device_panel::auto_telemetry_call(QString family)
@@ -78,6 +80,10 @@ void device_panel::auto_telemetry_call(QString family)
         first_pref_cmd=false;
         first_status_cmd=true;
         first_calib=true;
+        if (has_confirmed_emission && last_confirmed_emission && !emitting_communication_alarm) {
+            emitting_communication_alarm = true;
+            emit emittingCommunicationChanged(true);
+        }
     }
     if(family==this->family+QString::number(ID)){
         count_no_responce++;
@@ -110,6 +116,19 @@ void device_panel::data_received(QStringList message)
         raw_params=message;
         count_no_responce=0;
         enable_widget(true);
+        if ((family == "gen" || family == "preamp" || family == "amp") &&
+            (param_check(message, 0) == "lrstatus" || param_check(message, 0) == "lronoff")) {
+            bool ok = false;
+            const int emission = param_check(message, 3).toInt(&ok);
+            if (ok && (emission == 0 || emission == 1)) {
+                has_confirmed_emission = true;
+                last_confirmed_emission = emission == 1;
+                if (emitting_communication_alarm) {
+                    emitting_communication_alarm = false;
+                    emit emittingCommunicationChanged(false);
+                }
+            }
+        }
         if(silence_count<=0){
             emit command_proofed();
         }else{
@@ -233,6 +252,16 @@ void device_panel::call_msg_box(QString msg){
 void device_panel::silence_counter(int count)
 {
     silence_count=count;
+}
+
+void device_panel::resetEmissionCommunicationTracking()
+{
+    has_confirmed_emission = false;
+    last_confirmed_emission = false;
+    if (emitting_communication_alarm) {
+        emitting_communication_alarm = false;
+        emit emittingCommunicationChanged(false);
+    }
 }
 
 void device_panel::on_on_off_button_clicked(bool checked)

@@ -2,6 +2,7 @@
 #define PREAMPLIFIER_PANEL_H
 
 #include <QWidget>
+#include <array>
 #include "device_panel.h"
 
 namespace Ui {
@@ -13,10 +14,10 @@ class preamplifier_panel : public device_panel
     Q_OBJECT
 
 QStringList errors_list={
-                         "Backward PD fault 0",   
-                         "Forward PD fault 0",    
-                         "Backward PD fault 1",   
-                         "Forward PD fault 1",    
+                         "PD2 (Back1) fault",
+                         "PD1 (Fwd1) fault",
+                         "PD4 (Back2) fault",
+                         "PD3 (Fwd2) fault",
                          "Interlock",             
                          "System Overheat",       
                          "N\\A",                  
@@ -26,8 +27,14 @@ QStringList errors_list={
 public:
     explicit preamplifier_panel(QWidget *parent = nullptr);
     ~preamplifier_panel();
+    // Display order: Temp 0, Temp 1, Fwd1, Back1, Fwd2, Back2.
+    void setLevels(const std::array<double, 6> &values);
+    void clearLevels();
 
     friend class channel_panel;
+
+public slots:
+    void setAmpQbhFault(bool active);
 
 private slots:
     void data_received_and_profed();
@@ -37,8 +44,18 @@ private slots:
     void on_pb_reset_clicked();
 
 private:
+    void refreshErrorState();
+    void refreshReadingColors();
+
     Ui::preamplifier_panel *ui;
-    int error_code;
+    int displayed_error_state = 0;
+    int preamp_error_flags = 0;
+    bool amp_qbh_fault = false;
+    std::array<QLabel *, 6> level_labels{};
+    std::array<double, 6> levels{};
+    std::array<double, 6> readings{};
+    bool levels_valid = false;
+    bool readings_valid = false;
 };
 
 #endif // PREAMPLIFIER_PANEL_H

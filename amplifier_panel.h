@@ -2,6 +2,7 @@
 #define AMPLIFIER_PANEL_H
 
 #include <QWidget>
+#include <array>
 #include "device_panel.h"
 
 namespace Ui {
@@ -14,8 +15,8 @@ class amplifier_panel : public device_panel
 
 
 QStringList errors_list={
-                         "Backward PD fault 0",   
-                         "Forward PD fault 0",    
+                         "PD2 (Back1) fault",
+                         "PD1 (Fwd1) fault",
                          "N\\A",                  
                          "QBH fault",             
                          "N\\A",                  
@@ -28,8 +29,14 @@ QStringList errors_list={
 public:
     explicit amplifier_panel(QWidget *parent = nullptr);
     ~amplifier_panel();
+    // Display order: Temp 0, Temp 1, Fwd1, Back1.
+    void setLevels(const std::array<double, 4> &values);
+    void clearLevels();
 
     friend class channel_panel;
+signals:
+    void qbhFaultChanged(bool active);
+
 private slots:
     void data_received_and_profed();
     // void key_catcher(QObject *key);
@@ -38,8 +45,15 @@ private slots:
     void on_pushButton_clicked();
 
 private:
+    void refreshReadingColors();
     Ui::amplifier *ui;
-    int error_code;
+    int error_code = 0;
+    bool qbh_fault = false;
+    std::array<QLabel *, 4> level_labels{};
+    std::array<double, 4> levels{};
+    std::array<double, 4> readings{};
+    bool levels_valid = false;
+    bool readings_valid = false;
 };
 
 #endif // AMPLIFIER_PANEL_H

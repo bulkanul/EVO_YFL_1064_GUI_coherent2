@@ -61,7 +61,9 @@ private slots:
     void on_pushButton_clicked();
     void version_conflict();
     void on_pb_error_cleaner_clicked();
-    void on_usr_critical_error(bool show_clear_btn);
+    void on_device_error_changed(bool has_error);
+    void on_emitting_unit_communication_changed(bool alarmActive);
+    void on_levels_response(const QStringList &message);
     void on_all_reset_1_clicked();
     void on_all_save_seed_clicked();
     void on_all_restore_seed_clicked();
@@ -79,6 +81,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void connectChannelPanel(channel_panel* chan);
+    void requestLevels();
+    void clearLevels();
+    QSet<QObject*> error_panels;
+    bool controller_connection_ready = false;
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;

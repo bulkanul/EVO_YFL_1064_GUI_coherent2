@@ -25,7 +25,6 @@ public:
     QTcpSocket* _pSocket=nullptr;
     QSerialPort* _sSocket=nullptr;
 
-    QString sketched_message;
     QByteArray sketch;
 
     QString ip="";
@@ -44,7 +43,6 @@ public:
     bool reconnect=true;
     bool connected=false;
     QStringList raw_params;
-    bool double_caller=false;
     QStringList fifo_command;
     QStringList fifo_searcher;
     QList<int> fifo_finder;
@@ -61,6 +59,7 @@ public:
     QTimer* tmr1;
 signals:
     void send_to_dev(QStringList);
+    void levels_response(QStringList);
     void send_to_amplifaer(QStringList);
     void send_to_resonator(QStringList);
     void send_to_user(QStringList);
@@ -82,7 +81,7 @@ public slots:
     void data_ver_write(QString);
     void sender();
     void init_connection(QString,int);
-    QStringList double_localizator(QByteArray);
+    void manual_disconnect();
     QString params(int);
     void display_reconnect();
     void display_connected();
@@ -90,13 +89,11 @@ public slots:
 
     void tcp_connect(QString,int);
     void tcp_reconnect();
-    void tcp_disconnect();
 
     void serial_connect(QString);
     void serial_set_prefs(QString);
     void serial_reconnect();
     void serial_handle_error(QSerialPort::SerialPortError error);
-    void serial_disconnect();
     void get_command_pool();
     void request_status_manual();
     void request_version_manual();

@@ -59,6 +59,7 @@ public slots:
     QString parse_bits(int mess,QStringList);
     void call_msg_box(QString);
     void silence_counter(int);
+    void resetEmissionCommunicationTracking();
     void key_catcher(QObject *key);
     void on_on_off_button_clicked(bool checked);
 
@@ -73,9 +74,16 @@ signals:
     void enter_event(QObject*);
     void sl_data_set(QString,QString);
     void command_proofed();
+    void sig_device_error(bool has_error);
+    void emittingCommunicationChanged(bool alarmActive);
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;
+
+private:
+    bool has_confirmed_emission = false;
+    bool last_confirmed_emission = false;
+    bool emitting_communication_alarm = false;
 };
 
 #endif // DEVICE_PANEL_H

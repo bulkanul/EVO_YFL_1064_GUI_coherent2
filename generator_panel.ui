@@ -642,7 +642,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="label_pd1">
            <property name="font">
             <font>
@@ -658,7 +658,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="3" column="1">
           <widget class="QLabel" name="l_pd1_fw">
            <property name="font">
             <font>
@@ -674,7 +674,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item row="3" column="2">
           <widget class="QLabel" name="label_pd2">
            <property name="font">
             <font>
@@ -690,7 +690,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
+         <item row="3" column="3">
           <widget class="QLabel" name="l_pd2_bw">
            <property name="font">
             <font>
@@ -706,7 +706,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="6" column="0">
           <widget class="QLabel" name="label_pd3">
            <property name="font">
             <font>
@@ -722,7 +722,7 @@ QLabel::enabled{
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
+         <item row="6" column="1">
           <widget class="QLabel" name="l_pd3">
            <property name="font">
             <font>
