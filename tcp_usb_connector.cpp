@@ -166,6 +166,7 @@ void tcp_usb_connector::init_connection(QString adress, int port)
     sketch.clear();
     version_protection=true;
     first_set_write=true;
+    emit connection_state(0);
     if(_sSocket!=nullptr)_sSocket->close();
     if(_pSocket!=nullptr)_pSocket->abort();
     if(port==404){
@@ -285,9 +286,7 @@ void tcp_usb_connector::data_received(){
         }
 
         /*if(logg)*/qDebug()<<"sl_data_readed "<<raw_params;
-        if(params(0)=="lrlvls") {
-            if(!version_protection) emit levels_response(raw_params);
-        } else if(params(3).indexOf("ERR")!=0 && !version_protection){
+        if((params(3).indexOf("ERR")!=0 || params(0)=="lrlvls") && !version_protection){
             if(params(0) != "lrip" && params(0) != "lrmac" && params(0) != "lrhash") {
                 emit send_to_dev(raw_params);
             }

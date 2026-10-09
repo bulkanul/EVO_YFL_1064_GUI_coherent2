@@ -89,6 +89,8 @@ void device_panel::auto_telemetry_call(QString family)
         count_no_responce++;
         count++;
         sl_data_get("lgstatus",ID,"");
+        if (this->family == "usr" && !first_pref_cmd)
+            sl_data_get("lglvls", ID, "");
     }
 }
 
@@ -143,10 +145,10 @@ void device_panel::data_received(QStringList message)
                 }
             }
         }
-        if(param_check(message,3)=="ERR"){
+        if(param_check(message,3)=="ERR" && param_check(message,0)!="lrlvls"){
             enable_widget(false);
         }
-        if(param_check(raw_params,0)=="lrconf"){
+        if(param_check(raw_params,0)=="lrconf" && family!="usr"){
             first_pref_cmd=true;
         }
     }else if(param_check(message,0)=="lrconf" && param_check(message,1)=="usr"){

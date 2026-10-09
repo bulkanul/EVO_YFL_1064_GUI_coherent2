@@ -59,7 +59,6 @@ public:
     QTimer* tmr1;
 signals:
     void send_to_dev(QStringList);
-    void levels_response(QStringList);
     void send_to_amplifaer(QStringList);
     void send_to_resonator(QStringList);
     void send_to_user(QStringList);

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QSet>
+#include <QVector>
 #include "device_panel.h"
 
 namespace Ui {
@@ -26,6 +27,9 @@ public:
 
     ~flag_panel();
     void setCommunicationError(const QString &unit, bool active);
+
+signals:
+    void levels_received(const QVector<double> &values);
 
 private slots:
     void data_received_and_profed();

@@ -12,7 +12,6 @@
 #include <QPushButton>
 #include <QRegularExpressionValidator>
 #include <array>
-#include <cmath>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,7 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn,&tcp_usb_connector::network_info_received,this,&MainWindow::on_network_info);
     connect(this,&MainWindow::send_command,conn,&tcp_usb_connector::data_write);
     connect(conn,&tcp_usb_connector::connection_state,this,&MainWindow::connection_state);
-    connect(conn,&tcp_usb_connector::levels_response,this,&MainWindow::on_levels_response);
 
     QGridLayout* layout = new QGridLayout(ui->groupBox);
 
@@ -76,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(flags,&device_panel::send_command,conn,&tcp_usb_connector::data_write);
     connect(conn,&tcp_usb_connector::send_to_dev,flags,&device_panel::data_received);
     connect(conn,&tcp_usb_connector::get_command,flags,&device_panel::auto_telemetry_call);
+    connect(flags, &flag_panel::levels_received, this, &MainWindow::on_levels_response);
     connect(flags, &device_panel::sig_device_error, this, &MainWindow::on_device_error_changed);
     layout->addWidget(flags, 3, 0, 2, 1);
 
@@ -223,15 +222,9 @@ void MainWindow::on_emitting_unit_communication_changed(bool alarmActive)
     flags->setCommunicationError(unit, alarmActive);
 }
 
-void MainWindow::requestLevels()
-{
-    if (!controller_connection_ready) return;
-    clearLevels();
-    conn->data_common_write("lglvls usr 0");
-}
-
 void MainWindow::clearLevels()
 {
+    flags->first_pref_cmd = false;
     gen->clearLevels();
     for (channel_panel *channel : {chan1, chan2, chan3, chan4}) {
         channel->preamp->clearLevels();
@@ -239,35 +232,10 @@ void MainWindow::clearLevels()
     }
 }
 
-void MainWindow::on_levels_response(const QStringList &message)
+void MainWindow::on_levels_response(const QVector<double> &values)
 {
-    QStringList parts = message;
-    parts.removeAll(QString());
-    if (parts.size() == 4 && parts[0] == "lrlvls" && parts[3] == "ERR") {
-        qWarning() << "Could not read levels:" << parts;
-        return;
-    }
-    bool idOk = false;
-    constexpr int level_count = 44;
-    if (parts.size() != 3 + level_count ||
-        parts[0] != "lrlvls" || parts[1] != "usr" ||
-        parts[2].toInt(&idOk) != 0 || !idOk) {
-        qWarning() << "Invalid levels response, expected 44 values:" << parts;
-        return;
-    }
-
+    if (values.size() != 44) return;
     // Wire: Seed backward PD, forward PD, Temp 1, Temp 2; then 40 Preamp/Amp levels.
-    std::array<double, level_count> values{};
-    for (int i = 0; i < level_count; ++i) {
-        bool ok = false;
-        const double value = parts[i + 3].toDouble(&ok);
-        if (!ok || !std::isfinite(value)) {
-            qWarning() << "Invalid level at index" << i << parts[i + 3];
-            return;
-        }
-        values[static_cast<size_t>(i)] = value;
-    }
-
     gen->setLevels({values[2], values[3], values[1], values[0]});
     const std::array<channel_panel *, 4> channels = {chan1, chan2, chan3, chan4};
     for (size_t i = 0; i < channels.size(); ++i) {
@@ -316,8 +284,7 @@ void MainWindow::connection_state(int state)
 {
     const bool was_ready = controller_connection_ready;
     controller_connection_ready = state == 1 && !conn->version_protection;
-    if (controller_connection_ready && !was_ready) requestLevels();
-    if (!controller_connection_ready && was_ready) clearLevels();
+    if (controller_connection_ready != was_ready) clearLevels();
     if (!controller_connection_ready) {
         const QList<device_panel*> emittingPanels = {
             gen,

@@ -2,6 +2,7 @@
 #include "ui_flag_panel.h"
 
 #include <QDebug>
+#include <cmath>
 
 flag_panel::flag_panel(QWidget *parent) :
     device_panel(parent),
@@ -64,6 +65,31 @@ void flag_panel::data_received_and_profed()
 
         device_alarms = current_alarms;
         refreshErrorState();
+    }
+    else if (param_check(raw_params, 0) == "lrlvls") {
+        if (first_pref_cmd) return;
+        // if (raw_params.size() == 4 && raw_params[3] == "ERR") {
+        //     first_pref_cmd = true;
+        //     qWarning() << "Could not read levels:" << raw_params;
+        //     return;
+        // }
+        constexpr int level_count = 44;
+        if (raw_params.size() != 3 + level_count) {
+            qWarning() << "Invalid levels response, expected 44 values:" << raw_params;
+            return;
+        }
+        QVector<double> values(level_count);
+        for (int i = 0; i < level_count; ++i) {
+            bool ok = false;
+            const double value = raw_params[i + 3].toDouble(&ok);
+            if (!ok || !std::isfinite(value)) {
+                qWarning() << "Invalid level at index" << i << raw_params[i + 3];
+                return;
+            }
+            values[i] = value;
+        }
+        first_pref_cmd = true;
+        emit levels_received(values);
     }
     else if (param_check(raw_params, 0) == "lrerrclr") {
         device_alarms.clear();
