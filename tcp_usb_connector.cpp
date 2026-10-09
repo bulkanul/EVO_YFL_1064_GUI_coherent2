@@ -224,7 +224,13 @@ void tcp_usb_connector::data_received(){
     while ((line_end = sketch.indexOf('\r')) >= 0) {
         const QByteArray line = sketch.left(line_end);
         sketch.remove(0, line_end + 1);
-        raw_params = QString::fromUtf8(line).simplified().split(' ', Qt::SkipEmptyParts);
+        QString response = QString::fromUtf8(line).simplified();
+        if (!response.startsWith("lr")) {
+            const int response_start = response.indexOf("lr");
+            if (response_start < 0) continue;
+            response = response.mid(response_start);
+        }
+        raw_params = response.split(' ', Qt::SkipEmptyParts);
         for (QString &part : raw_params) part.replace(',', '.');
         if (raw_params.isEmpty()) continue;
         if(first_set_write){
