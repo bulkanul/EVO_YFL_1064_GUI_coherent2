@@ -16,10 +16,6 @@ dc_panel::dc_panel(QWidget *parent):
     ui->setupUi(this);
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
-//    tmr=new QTimer();
-//    tmr->setInterval(1300);
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
     connect(this,SIGNAL(tool_clicked()),this,SLOT(update_pref()));
 
@@ -27,8 +23,6 @@ dc_panel::dc_panel(QWidget *parent):
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
     ui->button_error->setVisible(false);
     ui->label_error->setVisible(false);
-    //    ID=7;
-    qDebug()<<"error "<<pars_bits(3,errors_dc_list);
 }
 
 dc_panel::~dc_panel()
@@ -58,7 +52,6 @@ void dc_panel::key_catcher(QObject* key)
             QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
             message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
             emit send_command(message.toUtf8()+'\r');
-//            emit send_command(CURRENT_LASER,ID,QString::number(ui->spin->value()*10).replace(",","."));
         }
     }
 }
@@ -68,33 +61,6 @@ void dc_panel::internal_address_write(QString data)
     internal_address =data;
 }
 
-void dc_panel::data_received(QString message)
-{
-//    if(ID==404||this->accessibleName()!=""){
-//        qDebug()<<"dc ID"<<this<<this->objectName().split("_");
-//        ID=this->objectName().split("_")[1].toInt();
-//    }
-//    count=0;
-//    connection_lost=false;
-//    bool bStatus = false;
-//    uint nHex = message.right(8).toUInt(&bStatus,16);
-//    if(bStatus){
-//        if(message.indexOf(QString::number(ON_OFF_LASER+CALL_SUFFIX,16))==5 ){
-//            ui->power_state_label->setText(nHex?"ON":"OFF");
-//            ui->on_off_button->setChecked(nHex);
-//        }else if(message.indexOf(QString::number(CURRENT_LASER+CALL_SUFFIX,16))==5){
-//            ui->current_ld_label->setText(QString::number(nHex/10.0)+" A");
-//        }else if(message.indexOf(QString::number(TEMP_LASER+CALL_SUFFIX,16))==5){
-//            ui->temp_label->setText(QString::number(nHex/10.0)+" C");
-//        }else if(message.indexOf(QString::number(MODE_LASER+CALL_SUFFIX,16).toUpper())==5){
-//            ui->mode_label->setText(ui->mode->itemText(nHex));
-//        }else if(message.indexOf(QString::number(VOLT_IN_LASER+CALL_SUFFIX,16).toUpper())==5){
-//            ui->input_voltage_label->setText(QString::number(nHex/10.0)+" V");
-//        }else if(message.indexOf(QString::number(VOLT_OUT_LASER+CALL_SUFFIX,16).toUpper())==5){
-//            ui->output_voltage_label->setText(QString::number(nHex/10.0)+" V");
-//        }
-//    }
-}
 void dc_panel::data_received_and_profed()
 {
     bool bStatus = false;
@@ -102,7 +68,6 @@ void dc_panel::data_received_and_profed()
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055 && raw_params[0].mid(9,2).toUInt(&bStatus,16)==ID){
         count_no_responce=0;
         enable_widget(true /*&& raw_params[0].mid(5,2)!="A2"*/);
-        qDebug()<<raw_params[0].mid(5,2);
         if(raw_params[0].mid(5,2)=="A0"){
             ui->temp_label->setText(QString::number(nHex/10.0,'d',2)+" C");
             indicate(nHex/10.0);
@@ -120,28 +85,13 @@ void dc_panel::data_received_and_profed()
             ui->on_off_button->setChecked(nHex);
         }else if(raw_params[0].mid(5,2)=="A1"){
             ui->mode_label->setText(ui->mode->itemText(nHex));
-        }else if(raw_params[0].mid(5,2)=="A2"){
-            // if(error_displayer){
-                // call_msg_box(pars_bits(nHex,errors_dc_list));
-                // error_displayer=false;
-            // }
-            // emit call_ui_buttons("dc"+QString::number(ID),nHex!=0);
-            // ui->button_error->setVisible(nHex!=0);
-            // ui->label_error->setVisible(nHex!=0);
-//            enable_widget(nHex==0);
         }
     }
 }
 
 void dc_panel::send_pref()
 {
-    qDebug()<<"value len"<<spiners.length();
     if(spiners.length()>0){
-//        qDebug()<<"value"<<spiners[0]->value();
-//        ui->spin->setMaximum(spiners[0]->value());
-//        ui->curr_max_label->setText(QString::number(spiners[0]->value(),'d',1));
-//        ui->indicator->setMaximum(spiners[0]->value()*10);
-
         QString message ="t";
         message.append(internal_address);
         message.append("814");
@@ -197,14 +147,9 @@ void dc_panel::telemetry_call(QString family)
             else if(count%5==2) emit send_command(QString("t"+internal_address+"8A100"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
             else if(count%5==3) emit send_command(QString("t"+internal_address+"8A200"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
             else if(count%5==4) emit send_command(QString("t"+internal_address+"89900"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
-
             }
-        qDebug()<<"call"<<family<<ID << count%4;
     }
-
 }
-
-
 
 void dc_panel::on_button_error_clicked()
 {
@@ -215,8 +160,6 @@ void dc_panel::update_pref()
 {
     emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
 }
-
-
 
 void dc_panel::on_mode_activated(int index)
 {
@@ -232,5 +175,4 @@ void dc_panel::on_mode_activated(int index)
     QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
     message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
     emit send_command(message.toUtf8()+'\r');
-    //    emit send_command(MODE_LASER,ID,QString::number(index));
 }

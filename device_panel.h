@@ -51,7 +51,6 @@ public:
 
 public slots:
     void data_received(QStringList);
-    void data_received(QByteArray);
     void send_laser(QString,QString);
     void sl_data_set(QString, int ,QString);
     void sl_data_get(QString, int ,QString);

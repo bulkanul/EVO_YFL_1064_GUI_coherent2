@@ -13,10 +13,6 @@
 
 device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
-//    tmr=new QTimer();
-//    tmr->setInterval(800);
-//    connect(tmr,SIGNAL(timeout()),this,SLOT(auto_telemetry_call()));
-//    tmr->start();  
 }
 
 bool device_panel::eventFilter(QObject *target, QEvent *event)
@@ -55,7 +51,6 @@ void device_panel::auto_telemetry_call()
          first_status_cmd=true;
          first_calib=true;
     }
-//    qDebug()<<"auto_telemetry_call"<<family<<ID<<count_no_responce;
     if(count%2==0 || first_pref_cmd){
         sl_data_get("lgstatus",ID,"");
     }else{
@@ -82,7 +77,6 @@ QStringList device_panel::double_localizator(QByteArray data){
 
 void device_panel::data_received(QStringList message)
 {
-//    qDebug()<<"data_received call"<<message<<ID<<family<<key;
     if(message[0].mid(9,2)== QString("%1").arg(ID, 2, 16, QLatin1Char( '0' )) ){
         raw_params=message;
         count_no_responce=0;
@@ -93,12 +87,6 @@ void device_panel::data_received(QStringList message)
         count_no_responce=0;
         emit command_profed();
     }
-
-}
-
-void device_panel::data_received(QByteArray data)
-{
-
 }
 
 void device_panel::sl_data_set(QString comm,int number,QString data)
@@ -123,27 +111,13 @@ void device_panel::on_toolButton_clicked()
     dialog->setModal(true);
     dialog->setMinimumWidth(500);
     dialog->setMaximumWidth(500);
-//        dialog->setWindowIcon(QIcon(":/interface/conf_icon.ico"));
     QVBoxLayout* dialogLay = new QVBoxLayout(dialog);
     QLabel* title_label=new QLabel("Laser (" + family +") configuration",dialog);
-//        QLabel* note_label = new QLabel("prefs_note",dialog);
-//        QGroupBox* can_gb = new QGroupBox(dialog);
-//        QVBoxLayout* can_v_layout= new QVBoxLayout(dialog);
     QFont title_font = title_label->font();
-//        note_label->setWordWrap(true);
     title_font.setPointSize(14);
     title_font.setBold(true);
     title_label->setFont(title_font);
-//        can_gb->setStyleSheet(  "QGroupBox {"
-//                                "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #ffffff, stop: 1 #FFFFFF);"
-//                                "border: 1px solid gray;"
-//                                "margin-top: 1ex;"
-//                                "}");
-//        can_gb->setLayout(can_v_layout);
-//        can_gb->layout()->addWidget(new QLabel("Device reset is nessesary after CAN ID change",dialog));
     dialogLay->addWidget(title_label);
-//        dialogLay->addWidget(note_label);
-//        dialogLay->addWidget(can_gb);
     spiners.clear();
     container_values.clear();
     for(int i = 0; i < prefs.length(); i ++)
@@ -161,9 +135,6 @@ void device_panel::on_toolButton_clicked()
         spinbox->setValue(prefs[i].value);
         splitter->addWidget(container_values[i]);
         splitter->addWidget(spinbox);
-//            if(i == 0)
-//                can_v_layout->addLayout(splitter);
-//            else
         dialogLay->addLayout(splitter);
     }
     QHBoxLayout* splitter = new QHBoxLayout(dialog);
@@ -214,11 +185,8 @@ void device_panel::call_msg_box(QString msg1,QString msg2,QString msg3){
         QMessageBox *mesg;
         QString mesage;
         if(msg1!=""){mesage+="---- HPLD 1000 0"; mesage+='\n'+ msg1; mesage+='\n';}
-        qDebug()<<"mesage1"<<msg1;
         if(msg2!=""){mesage+="---- HPLD 1000 1"; mesage+='\n'+ msg2; mesage+='\n';}
-        qDebug()<<"mesage2"<<msg2;
         if(msg3!=""){mesage+="---- cb 0"; mesage+='\n'+ msg3; mesage+='\n';}
-        qDebug()<<"mesage3"<<msg3;
         mesg = new QMessageBox(QMessageBox::Information,"Erorrs",mesage);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();

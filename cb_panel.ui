@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1003</width>
-    <height>553</height>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1577,7 +1577,7 @@
              <item row="17" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
-                <string>Детали</string>
+                <string>List</string>
                </property>
               </widget>
              </item>

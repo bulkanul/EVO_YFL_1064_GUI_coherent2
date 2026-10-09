@@ -63,12 +63,9 @@ void cb_panel::telemetry_call(QString family)
     if(family==this->family){
         count_no_responce++;
         count++;
-        // int counter=1;
-        // int temp=0;
        if(first_pref){
           first_pref=false;
           get_pref();
-//            emit send_command(QString("t"+internal_address+"89400"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000").toUtf8()+'\r');
        }else{
           bool flag=true;
         int counter=0;
@@ -97,8 +94,6 @@ void cb_panel::telemetry_call(QString family)
           emit send_command(temp.toUtf8()+'\r');
         }else
           emit send_command(commands[counter].toUtf8()+'\r');
-
-        qDebug()<<"else"<<family<<ID << count;
        }
     }
 }
@@ -132,10 +127,6 @@ void cb_panel::key_catcher(QObject* key)
                                         "Send command on cb "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
-
-        // raw_params.clear();
-        // raw_params.append("t0558B600000000000045");
-        // data_received_and_profed();
         QDoubleSpinBox *target = static_cast<QDoubleSpinBox*>(key);
         QString command;
         QString address="00";
@@ -179,9 +170,7 @@ void cb_panel::key_catcher(QObject* key)
         QByteArray data=QByteArray(reinterpret_cast<char*>(letters),4);
         message.append(QString("%1").arg(value, 8, 16, QLatin1Char( '0' )));
         emit send_command(message.toUtf8()+'\r');
-        qDebug()<<"message"<<message;
     }
-
 }
 void cb_panel::internal_address_write(QString data)
 {
@@ -204,7 +193,6 @@ void cb_panel::internal_address_write(QString data)
     commands.append(QString("t"+internal_address+"8B000"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"8B300"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
     commands.append(QString("t"+internal_address+"89500"+QString("%1").arg(ID, 2, 16, QLatin1Char( '0' ))+"0000000000"));
-    qDebug()<<"commands"<<commands;
 }
 
 void cb_panel::data_received_and_profed()
@@ -213,7 +201,6 @@ void cb_panel::data_received_and_profed()
     uint nHex = raw_params[0].mid(13,8).toUInt(&bStatus,16);
     QString command=raw_params[0].mid(5,2);
     if(raw_params[0].mid(1,3).toUInt(&bStatus,16)==0x055){
-
         count_no_responce=0;
         enable_widget(true);
         if(raw_params[0].mid(5,2)=="95"){
@@ -287,7 +274,6 @@ void cb_panel::data_received_and_profed()
           ui->over_temp_label->setText(QString::number(nHex/10.0)+" C");
         }else{
           bool ok=true;
-          qDebug()<<"else"<<raw_params[0].mid(5,2).toInt(&ok,16)<<raw_params[0];
           if(raw_params[0].mid(5,2).toInt(&ok,16)<0x80){
             quint32 value = raw_params[0].mid(5,2).toInt(&ok,16)+0x80;
             QString command=raw_params[0];
@@ -298,9 +284,7 @@ void cb_panel::data_received_and_profed()
             command.replace(2,2,temp);
             command.replace(7,2,QString::number(value, 16).toUpper());
             emit send_command(command.toUtf8()+'\r');
-            qDebug()<<"mess cb echo else"<<raw_params[0]<<raw_params[0].mid(5,2);
           }
         }
-
     }
 }

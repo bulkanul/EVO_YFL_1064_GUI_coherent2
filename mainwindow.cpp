@@ -71,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSettings settings(QString("configs/config.ini"), QSettings::IniFormat);
     if(settings.value("prev_connection").toString()!=""){
-        qDebug() <<"saved writed"<<settings.value("prev_port").toString();
         conn->serial=settings.value("prev_connection").toString();
         if(settings.value("local_addr").toString()!=""){
             ui->ip_adress_2->setText(settings.value("local_addr").toString());

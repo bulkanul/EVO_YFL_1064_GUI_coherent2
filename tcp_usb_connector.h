@@ -46,16 +46,13 @@ public:
     bool connected=false;
     QStringList raw_params;
     bool double_caller=false;
-//    QStringList fifo_command;
     QByteArrayList crupto_fifo_command;
     QStringList fifo_searcher;
     QList<int> fifo_finder;
     bool version_protection =true;
     QTimer* tmr;
     QTimer* tmr1;
-//    bool crypto=true;
     bool crypto_version_controller=true;
-
     QStringList dev_list={"dc0","dc1","tec0","tec1","cb","usr"};
 
 signals:

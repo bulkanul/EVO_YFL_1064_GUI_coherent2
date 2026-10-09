@@ -130,7 +130,7 @@ public:
     {
         if (cb_panel->objectName().isEmpty())
             cb_panel->setObjectName("cb_panel");
-        cb_panel->resize(1003, 553);
+        cb_panel->resize(1003, 580);
         verticalLayout_2 = new QVBoxLayout(cb_panel);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -996,7 +996,7 @@ public:
         label_41->setText(QCoreApplication::translate("cb_panel", "PD backward:", nullptr));
         pd_backward->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         label_error->setText(QCoreApplication::translate("cb_panel", "Errors:", nullptr));
-        button_error->setText(QCoreApplication::translate("cb_panel", "\320\224\320\265\321\202\320\260\320\273\320\270", nullptr));
+        button_error->setText(QCoreApplication::translate("cb_panel", "List", nullptr));
         label_42->setText(QCoreApplication::translate("cb_panel", "PD 3:", nullptr));
         pd_3->setText(QCoreApplication::translate("cb_panel", "N/A", nullptr));
         groupBox_16->setTitle(QCoreApplication::translate("cb_panel", "Level", nullptr));
