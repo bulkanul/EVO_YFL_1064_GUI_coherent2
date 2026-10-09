@@ -20,6 +20,7 @@ dc_panel::dc_panel(QWidget *parent):
     prefs.append(prefs_struct{-1,"Max current, A",4,-1});
     ui->button_error->setVisible(false);
     ui->label_error->setVisible(false);
+    family="dc";
 }
 
 dc_panel::~dc_panel()
@@ -33,7 +34,7 @@ void dc_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on dc "+QString::number(ID)+"?",
+                                        "Send command on "+family+" "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){

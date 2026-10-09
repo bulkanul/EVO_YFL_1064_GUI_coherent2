@@ -15,6 +15,7 @@ user_panel::user_panel(QWidget *parent) :
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
     ui->spin->installEventFilter(this);
     ui->calib->installEventFilter(this);
+    family="usr";
 }
 user_panel::~user_panel()
 {
@@ -24,7 +25,7 @@ void user_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on dc "+QString::number(ID)+"?",
+                                        "Send command on "+family+" "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){

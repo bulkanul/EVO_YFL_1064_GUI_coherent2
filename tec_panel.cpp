@@ -17,7 +17,7 @@ tec_panel::tec_panel(QWidget *parent) :
     connect(ui->spin,SIGNAL(valueChanged(double)),this,SLOT(indicate(double)));
     connect(this,SIGNAL(enter_event(QObject*)),this,SLOT(key_catcher(QObject*)));
     connect(this,SIGNAL(command_profed()),this,SLOT(data_received_and_profed()));
-
+    family="tec";
     ui->spin->installEventFilter(this);
     prefs.append(prefs_struct{-1,"Сoefficient KP",0,-1});
     prefs.append(prefs_struct{-1,"Сoefficient KI",0,-1});
@@ -34,7 +34,7 @@ void tec_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on dc "+QString::number(ID)+"?",
+                                        "Send command on "+family+" "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){
