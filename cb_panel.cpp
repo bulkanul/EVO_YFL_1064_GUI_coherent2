@@ -125,7 +125,7 @@ void cb_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on cb "+QString::number(ID)+"?",
+                                        "Send command on "+family+" "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         QDoubleSpinBox *target = static_cast<QDoubleSpinBox*>(key);

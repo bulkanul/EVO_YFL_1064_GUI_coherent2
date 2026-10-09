@@ -22,6 +22,7 @@ tec_panel::tec_panel(QWidget *parent) :
     prefs.append(prefs_struct{-1,"Сoefficient KP",0,-1});
     prefs.append(prefs_struct{-1,"Сoefficient KI",0,-1});
     prefs.append(prefs_struct{-1,"Сoefficient KD",0,-1});
+    family="tec";
 }
 
 tec_panel::~tec_panel()
@@ -34,7 +35,7 @@ void tec_panel::key_catcher(QObject* key)
 {
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Conformation",
-                                        "Send command on dc "+QString::number(ID)+"?",
+                                        "Send command on "+family+" "+QString::number(ID)+"?",
                                         QMessageBox::Yes | QMessageBox::No);
     if(mesg->exec()==QMessageBox::Yes){
         if(key->objectName() == "spin"){
