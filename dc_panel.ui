@@ -146,7 +146,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Состояние</string>
+                  <string>State</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -176,7 +176,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>ВЫКЛ</string>
+                    <string>OFF</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -262,7 +262,7 @@ QPushButton::disabled  {
                     </size>
                    </property>
                    <property name="text">
-                    <string>ВКЛ</string>
+                    <string>ON</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -281,7 +281,7 @@ QPushButton::disabled  {
                     </font>
                    </property>
                    <property name="text">
-                    <string>Режим</string>
+                    <string>Mode</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -711,7 +711,7 @@ QProgressBar::chunk:disabled {
               </font>
              </property>
              <property name="text">
-              <string>Параметры:</string>
+              <string>Read values:</string>
              </property>
             </widget>
            </item>
@@ -750,7 +750,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Состояние:</string>
+                <string>State:</string>
                </property>
               </widget>
              </item>
@@ -801,7 +801,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Мощность:</string>
+                <string>Power:</string>
                </property>
               </widget>
              </item>
@@ -903,14 +903,14 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Ошибки:</string>
+                <string>Error:</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
               <widget class="QPushButton" name="button_error">
                <property name="text">
-                <string>Список</string>
+                <string>List</string>
                </property>
               </widget>
              </item>
@@ -935,7 +935,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Режим:</string>
+                <string>Mode:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>

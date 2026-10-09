@@ -151,7 +151,7 @@ void MainWindow::update_ui(QString name,bool state)
 void MainWindow::on_connect_btn_clicked()
 {
     emit send_connection_type(ui->serial_combo_box->currentData().toString(),404);
-    ui->menu_button->setText("Настройки подключения");
+    ui->menu_button->setText("Connection settings");
     ui->stackedWidget->setCurrentIndex(0);
     if(conn->connected){
         conn->tmr->start();
@@ -165,7 +165,7 @@ void MainWindow::on_connect_btn_clicked()
 void MainWindow::on_menu_button_clicked()
 {
     ui->stackedWidget->setCurrentIndex(!ui->stackedWidget->currentIndex());
-    ui->menu_button->setText(ui->stackedWidget->currentIndex()?"Главная":"Настройки подключения");
+    ui->menu_button->setText(ui->stackedWidget->currentIndex()?"Main":"Connection settings");
 }
 
 

@@ -215,7 +215,7 @@ void device_panel::call_msg_box(QString msg1){
         if(msg1!=""){mesage+="---- HPLD 1000 "+QString::number(ID); mesage+='\n'+ msg1; mesage+='\n';}
         qDebug()<<"mesage1"<<msg1;
 
-        mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
+        mesg = new QMessageBox(QMessageBox::Information,"Errors",mesage);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
     }
@@ -230,7 +230,7 @@ void device_panel::call_msg_box(QString name , QString msg1){
         if(msg1!=""){mesage+=name+QString::number(ID); mesage+='\n'+ msg1; mesage+='\n';}
         qDebug()<<"mesage1"<<msg1;
 
-        mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
+        mesg = new QMessageBox(QMessageBox::Information,"Errors",mesage);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
     }
@@ -249,7 +249,7 @@ void device_panel::call_msg_box(QString msg1,QString msg2,QString msg3){
         qDebug()<<"mesage2"<<msg2;
         if(msg3!=""){mesage+="---- cb 0"; mesage+='\n'+ msg3; mesage+='\n';}
         qDebug()<<"mesage3"<<msg3;
-        mesg = new QMessageBox(QMessageBox::Information,"Ошибки",mesage);
+        mesg = new QMessageBox(QMessageBox::Information,"Errors",mesage);
         mesg->addButton(QMessageBox::Ok);
         mesg->show();
     }
