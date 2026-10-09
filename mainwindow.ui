@@ -120,7 +120,7 @@ QPushButton:hover
 }</string>
              </property>
              <property name="text">
-              <string>Настройки подключения</string>
+              <string>Connection settings</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -139,7 +139,7 @@ QPushButton:hover
            <item>
             <spacer name="horizontalSpacer_34">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -188,7 +188,7 @@ QPushButton::hover {
 </string>
              </property>
              <property name="text">
-              <string>Отчистить ошибки</string>
+              <string>Clear error</string>
              </property>
             </widget>
            </item>
@@ -216,7 +216,7 @@ QPushButton::hover {
               <bool>true</bool>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -262,7 +262,7 @@ QPushButton::hover {
                  <x>0</x>
                  <y>0</y>
                  <width>844</width>
-                 <height>66</height>
+                 <height>69</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -361,7 +361,7 @@ QPushButton::hover {
                    <item>
                     <spacer name="horizontalSpacer_18">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -421,7 +421,7 @@ QPushButton::hover {
                <item row="0" column="0">
                 <widget class="QRadioButton" name="rb_serial">
                  <property name="text">
-                  <string>Последовательный порт</string>
+                  <string>COM</string>
                  </property>
                  <property name="checked">
                   <bool>true</bool>
@@ -490,7 +490,7 @@ QPushButton::hover {
                <item row="1" column="0">
                 <spacer name="horizontalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -503,7 +503,7 @@ QPushButton::hover {
                <item row="1" column="1">
                 <widget class="QGroupBox" name="groupBox_3">
                  <property name="title">
-                  <string>Адрес комутационного устройства</string>
+                  <string>Switching device address</string>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
                   <item>
@@ -573,7 +573,7 @@ QPushButton::hover {
             <item>
              <spacer name="verticalSpacer_4">
               <property name="orientation">
-               <enum>Qt::Vertical</enum>
+               <enum>Qt::Orientation::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -589,7 +589,7 @@ QPushButton::hover {
                <string/>
               </property>
               <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
               </property>
              </widget>
             </item>

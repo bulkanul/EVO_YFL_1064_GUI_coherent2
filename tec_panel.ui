@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>854</width>
-    <height>141</height>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,7 @@
         <item>
          <spacer name="horizontalSpacer_14">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -146,10 +146,10 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Состояние</string>
+                  <string>State</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -176,10 +176,10 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>ВЫКЛ</string>
+                    <string>OFF</string>
                    </property>
                    <property name="alignment">
-                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -206,7 +206,7 @@
                     </font>
                    </property>
                    <property name="focusPolicy">
-                    <enum>Qt::NoFocus</enum>
+                    <enum>Qt::FocusPolicy::NoFocus</enum>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QPushButton {
@@ -262,10 +262,10 @@ QPushButton::disabled  {
                     </size>
                    </property>
                    <property name="text">
-                    <string>ВКЛ</string>
+                    <string>ON</string>
                    </property>
                    <property name="alignment">
-                    <set>Qt::AlignCenter</set>
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -292,7 +292,7 @@ QPushButton::disabled  {
                   <string>Temperature</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -343,7 +343,7 @@ QProgressBar::chunk:disabled {
                       <bool>false</bool>
                      </property>
                      <property name="textDirection">
-                      <enum>QProgressBar::TopToBottom</enum>
+                      <enum>QProgressBar::Direction::TopToBottom</enum>
                      </property>
                      <property name="format">
                       <string/>
@@ -368,7 +368,7 @@ QProgressBar::chunk:disabled {
                      <item>
                       <spacer name="horizontalSpacer_10">
                        <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
+                        <enum>Qt::Orientation::Horizontal</enum>
                        </property>
                        <property name="sizeHint" stdset="0">
                         <size>
@@ -423,7 +423,7 @@ QProgressBar::chunk:disabled {
                       </font>
                      </property>
                      <property name="focusPolicy">
-                      <enum>Qt::ClickFocus</enum>
+                      <enum>Qt::FocusPolicy::ClickFocus</enum>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background: rgb(255,255,255)</string>
@@ -458,7 +458,7 @@ QProgressBar::chunk:disabled {
          <item>
           <widget class="Line" name="line_5">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -496,7 +496,7 @@ QProgressBar::chunk:disabled {
               </font>
              </property>
              <property name="text">
-              <string>Параметры:</string>
+              <string>Read values:</string>
              </property>
             </widget>
            </item>
@@ -535,7 +535,7 @@ QProgressBar::chunk:disabled {
                 </font>
                </property>
                <property name="text">
-                <string>Состояние:</string>
+                <string>State:</string>
                </property>
               </widget>
              </item>

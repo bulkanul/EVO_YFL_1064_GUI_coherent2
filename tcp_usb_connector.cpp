@@ -72,7 +72,6 @@ void tcp_usb_connector::serial_reconnect(void)
 void tcp_usb_connector::serial_disconnect(void)
 {
     _sSocket->close();
-    //    ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО");
 }
 
 void tcp_usb_connector::change_timer_delay(int delay)
@@ -89,8 +88,6 @@ void tcp_usb_connector::serial_handle_error(QSerialPort::SerialPortError error)
     if ( (_sSocket->isOpen()) && (error == QSerialPort::ResourceError))
     {
         _sSocket->close();
-//        interface_enabled(false);
-//        ui->l_footer_connection_status->setText("Состояние: ОТКЛЮЧЕНО ИЗ-ЗА ОШИБКИ");
         qDebug("serial port DISONNECTED by error"+ error);
     }
 }
