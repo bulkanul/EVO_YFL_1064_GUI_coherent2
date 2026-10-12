@@ -149,12 +149,14 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::version_conflict()
 {
+    /*
     QMessageBox *mesg = new QMessageBox(QMessageBox::Information,
                                         "Failed",
                                         "Version Conflict",
                                         QMessageBox::Ok);
     if(mesg->exec()==QMessageBox::Ok){
     }
+    */
 }
 
 void MainWindow::on_menu_button_clicked()
