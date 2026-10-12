@@ -51,8 +51,9 @@ inline void colorReading(QLabel *reading, double value, double limit, LimitKind 
     const bool exceeded = kind == LimitKind::Maximum ? value > limit : value < limit;
     const bool near = limit > 0 &&
             (kind == LimitKind::Maximum ? value >= limit * 0.85 : value <= limit * 1.15);
-    reading->setStyleSheet(exceeded ? "color: #c62828; font-weight: bold;"
-                                    : near ? "color: #a65f00; font-weight: bold;" : "");
+    reading->setStyleSheet(exceeded ? "color: #d32f2f; font-weight: bold;"
+                                    : near ? "color: #e07000; font-weight: bold;"
+                                           : "color: #329448;");
 }
 
 } // namespace level_placeholders
