@@ -66,6 +66,10 @@ void flag_panel::data_received_and_profed()
         device_alarms = current_alarms;
         refreshErrorState();
     }
+    else if (param_check(raw_params, 0) == "lrinitall" && raw_params.size() == 3) {
+        first_pref_cmd = false;
+        sl_data_get("lglvls", ID, "");
+    }
     else if (param_check(raw_params, 0) == "lrlvls") {
         if (first_pref_cmd) return;
         // if (raw_params.size() == 4 && raw_params[3] == "ERR") {
