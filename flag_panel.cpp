@@ -27,10 +27,10 @@ void flag_panel::data_received_and_profed()
 {
     // lrstatus usr <id> <interlock_1> <interlock_2> <emergency> <keylock> <phase_not_ok> <stop>
     //              <alarm_interlock_1> <alarm_interlock_2> <alarm_emergency>
-    //              <alarm_keylock> <alarm_phase_not_ok> <alarm_stop>
+    //              <alarm_keylock> <alarm_phase_not_ok> <alarm_stop> <emission_error_module>
 
     if (param_check(raw_params, 0) == "lrstatus") {
-        if (raw_params.size() < 15) {
+        if (raw_params.size() < 9 + errors_list.size()) {
             qWarning() << "Incomplete usr status:" << raw_params;
             return;
         }

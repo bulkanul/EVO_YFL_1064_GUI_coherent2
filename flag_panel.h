@@ -19,7 +19,8 @@ class flag_panel : public device_panel
                             "ALARM_EMERGENCY",
                             "ALARM_KEYLOCK",
                             "ALARM_PHASE_NOT_OK",
-                            "ALARM_STOP"
+                            "ALARM_STOP",
+                            "ALARM_EMISSION_ERROR_MODULE"
     };
 
 public:
