@@ -419,7 +419,7 @@ public:
         therm_vref->setStyleSheet(QString::fromUtf8("background: rgb(255,255,255)"));
         therm_vref->setDecimals(3);
         therm_vref->setMinimum(0.000000000000000);
-        therm_vref->setMaximum(3.300000000000000);
+        therm_vref->setMaximum(3.400000000000000);
         therm_vref->setSingleStep(0.100000000000000);
         therm_vref->setStepType(QAbstractSpinBox::StepType::DefaultStepType);
         therm_vref->setValue(0.000000000000000);
