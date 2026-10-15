@@ -323,30 +323,6 @@ QPushButton::hover {
                     <number>3</number>
                    </property>
                    <item>
-                    <widget class="QPushButton" name="all_save_seed">
-                     <property name="font">
-                      <font>
-                       <pointsize>12</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Set seed parameters</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="all_restore_seed">
-                     <property name="font">
-                      <font>
-                       <pointsize>12</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Restore seed parameters</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
                     <widget class="QPushButton" name="all_save_in_memory">
                      <property name="font">
                       <font>

@@ -55,11 +55,8 @@ public:
     QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox_2;
     QHBoxLayout *horizontalLayout_18;
-    QPushButton *all_save_seed;
-    QPushButton *all_restore_seed;
     QPushButton *all_save_in_memory;
     QSpacerItem *horizontalSpacer_18;
-    QPushButton *all_reset;
     QWidget *connection_page;
     QVBoxLayout *verticalLayout_7;
     QGroupBox *groupBox_5;
@@ -235,22 +232,10 @@ public:
         horizontalLayout_18 = new QHBoxLayout(groupBox_2);
         horizontalLayout_18->setObjectName("horizontalLayout_18");
         horizontalLayout_18->setContentsMargins(3, 3, 3, 3);
-        all_save_seed = new QPushButton(groupBox_2);
-        all_save_seed->setObjectName("all_save_seed");
-        QFont font2;
-        font2.setPointSize(12);
-        all_save_seed->setFont(font2);
-
-        horizontalLayout_18->addWidget(all_save_seed);
-
-        all_restore_seed = new QPushButton(groupBox_2);
-        all_restore_seed->setObjectName("all_restore_seed");
-        all_restore_seed->setFont(font2);
-
-        horizontalLayout_18->addWidget(all_restore_seed);
-
         all_save_in_memory = new QPushButton(groupBox_2);
         all_save_in_memory->setObjectName("all_save_in_memory");
+        QFont font2;
+        font2.setPointSize(12);
         all_save_in_memory->setFont(font2);
 
         horizontalLayout_18->addWidget(all_save_in_memory);
@@ -258,12 +243,6 @@ public:
         horizontalSpacer_18 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
         horizontalLayout_18->addItem(horizontalSpacer_18);
-
-        all_reset = new QPushButton(groupBox_2);
-        all_reset->setObjectName("all_reset");
-        all_reset->setFont(font2);
-
-        horizontalLayout_18->addWidget(all_reset);
 
 
         verticalLayout_5->addWidget(groupBox_2);
@@ -388,7 +367,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -402,10 +381,7 @@ public:
         label->setText(QString());
         groupBox->setTitle(QString());
         groupBox_2->setTitle(QString());
-        all_save_seed->setText(QCoreApplication::translate("MainWindow", "Set seed parameters", nullptr));
-        all_restore_seed->setText(QCoreApplication::translate("MainWindow", "Restore seed parameters", nullptr));
         all_save_in_memory->setText(QCoreApplication::translate("MainWindow", "Save to memory", nullptr));
-        all_reset->setText(QCoreApplication::translate("MainWindow", "Factory reset", nullptr));
         groupBox_5->setTitle(QString());
         rb_serial->setText(QCoreApplication::translate("MainWindow", "COM", nullptr));
         group_serial->setTitle(QCoreApplication::translate("MainWindow", "Port", nullptr));
