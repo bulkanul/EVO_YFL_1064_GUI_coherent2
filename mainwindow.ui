@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>737</width>
+    <width>1452</width>
     <height>480</height>
    </rect>
   </property>
@@ -68,7 +68,7 @@
          <item>
           <spacer name="verticalSpacer">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -104,7 +104,6 @@
            <property name="font">
             <font>
              <pointsize>16</pointsize>
-             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -147,7 +146,7 @@ QPushButton:hover
          <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -170,7 +169,7 @@ QPushButton:hover
          <item>
           <spacer name="verticalSpacer_5">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -206,7 +205,6 @@ QPushButton:hover
            <property name="font">
             <font>
              <pointsize>16</pointsize>
-             <weight>50</weight>
              <bold>false</bold>
             </font>
            </property>
@@ -249,7 +247,7 @@ QPushButton:hover
          <item>
           <spacer name="verticalSpacer_3">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -264,7 +262,7 @@ QPushButton:hover
        <item>
         <spacer name="horizontalSpacer_34">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -286,7 +284,6 @@ QPushButton:hover
           <font>
            <family>Arial</family>
            <pointsize>-1</pointsize>
-           <weight>75</weight>
            <italic>false</italic>
            <bold>true</bold>
           </font>
@@ -386,7 +383,7 @@ QPushButton::hover {
           <bool>true</bool>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -424,7 +421,7 @@ QPushButton::hover {
         <item>
          <widget class="QScrollArea" name="scrollArea">
           <property name="horizontalScrollBarPolicy">
-           <enum>Qt::ScrollBarAsNeeded</enum>
+           <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
           </property>
           <property name="widgetResizable">
            <bool>true</bool>
@@ -434,8 +431,8 @@ QPushButton::hover {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>735</width>
-             <height>387</height>
+             <width>98</width>
+             <height>28</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -565,11 +562,11 @@ QPushButton::hover {
                       <pointsize>12</pointsize>
                      </font>
                     </property>
+                    <property name="inputMask">
+                     <string>000.000.000.000</string>
+                    </property>
                     <property name="text">
                      <string>192.168.26.220</string>
-                    </property>
-                    <property name="inputMask">
-                     <string>000.000.000.000; </string>
                     </property>
                     <property name="maxLength">
                      <number>15</number>
@@ -646,7 +643,7 @@ QPushButton::hover {
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset>
+                   <iconset resource="res.qrc">
                     <normaloff>:/images/images/refresh.png</normaloff>:/images/images/refresh.png</iconset>
                   </property>
                  </widget>
@@ -764,7 +761,7 @@ QPushButton::hover {
              <item>
               <spacer name="horizontalSpacer">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -782,7 +779,7 @@ QPushButton::hover {
         <item>
          <spacer name="verticalSpacer_4">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -798,7 +795,7 @@ QPushButton::hover {
            <string/>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -862,14 +859,14 @@ QPushButton::hover {
           <string>Disconnected</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer_21">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -886,7 +883,7 @@ QPushButton::hover {
   </widget>
  </widget>
  <resources>
-  <include location="images/images.qrc"/>
+  <include location="res.qrc"/>
   <include location="images/images.qrc"/>
  </resources>
  <connections/>
