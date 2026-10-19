@@ -26,6 +26,10 @@ tags
 Makefile*
 *.prl
 *.app
+.qtc_clangd/*
+debug/*
+release/*
+build/*
 moc_*.cpp
 ui_*.h
 qrc_*.cpp
