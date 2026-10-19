@@ -34,9 +34,6 @@ private:
     Ui::generator_panel *ui;
     int error_code;
 
-signals:
-    void sig_usr_changes(QString, int);
-    void emission_changed(bool isActive);
 };
 
 #endif // GENERATOR_PANEL_H

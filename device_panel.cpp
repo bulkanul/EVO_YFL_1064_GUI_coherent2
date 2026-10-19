@@ -15,6 +15,57 @@ device_panel::device_panel(QWidget *parent) : QWidget(parent)
 {
 }
 
+void device_panel::updateSensors(const QStringList &message)
+{
+    for (auto &sensor : sensors) {
+        sensor.value = param_check(message, sensor.status_field).toDouble();
+        sensor.value_label->setText(QString::number(sensor.value, 'f', sensor.precision)
+                                    + " " + sensor.unit);
+    }
+    readings_valid = true;
+    refreshReadingColors();
+}
+
+void device_panel::setLevels(const QVector<double> &values)
+{
+    if (values.size() != sensors.size()) return;
+    auto value = values.cbegin();
+    for (auto &sensor : sensors) {
+        sensor.limit = *value++;
+        const bool minimum = sensor.kind == LimitKind::Minimum;
+        sensor.level_label->setText(QString(minimum ? "> " : "< ")
+                                    + QString::number(sensor.limit, 'f', 2)
+                                    + " " + sensor.unit);
+        sensor.level_label->setToolTip(minimum ? "Allowed above this level"
+                                               : "Allowed below this level");
+    }
+    levels_valid = true;
+    refreshReadingColors();
+}
+
+void device_panel::clearLevels()
+{
+    levels_valid = false;
+    readings_valid = false;
+    for (const auto &sensor : sensors) {
+        sensor.level_label->setText(QString::fromUtf8("—"));
+        sensor.level_label->setToolTip("Threshold unavailable");
+    }
+    refreshReadingColors();
+}
+
+void device_panel::refreshReadingColors()
+{
+    for (const auto &sensor : sensors) {
+        if (!levels_valid || !readings_valid) {
+            sensor.value_label->setStyleSheet("");
+            continue;
+        }
+        level_placeholders::colorReading(sensor.value_label, sensor.value,
+                                         sensor.limit, sensor.kind);
+    }
+}
+
 bool device_panel::eventFilter(QObject *target, QEvent *event)
 {
     if(event->type() == QEvent::Wheel)
@@ -69,6 +120,8 @@ void device_panel::check_error_state(int flags, int &error_code_member, QWidget*
         if (error_widget) error_widget->hide();
         if (details_btn) details_btn->setVisible(false);
     }
+
+    emit sig_device_error(flags != 0);
 }
 
 void device_panel::auto_telemetry_call(QString family)
@@ -78,11 +131,17 @@ void device_panel::auto_telemetry_call(QString family)
         first_pref_cmd=false;
         first_status_cmd=true;
         first_calib=true;
+        if (has_confirmed_emission && last_confirmed_emission && !emitting_communication_alarm) {
+            emitting_communication_alarm = true;
+            emit emittingCommunicationChanged(true);
+        }
     }
     if(family==this->family+QString::number(ID)){
         count_no_responce++;
         count++;
         sl_data_get("lgstatus",ID,"");
+        if (this->family == "usr" && !first_pref_cmd)
+            sl_data_get("lglvls", ID, "");
     }
 }
 
@@ -110,6 +169,19 @@ void device_panel::data_received(QStringList message)
         raw_params=message;
         count_no_responce=0;
         enable_widget(true);
+        if ((family == "gen" || family == "preamp" || family == "amp") &&
+            (param_check(message, 0) == "lrstatus" || param_check(message, 0) == "lronoff")) {
+            bool ok = false;
+            const int emission = param_check(message, 3).toInt(&ok);
+            if (ok && (emission == 0 || emission == 1)) {
+                has_confirmed_emission = true;
+                last_confirmed_emission = emission == 1;
+                if (emitting_communication_alarm) {
+                    emitting_communication_alarm = false;
+                    emit emittingCommunicationChanged(false);
+                }
+            }
+        }
         if(silence_count<=0){
             emit command_proofed();
         }else{
@@ -124,10 +196,10 @@ void device_panel::data_received(QStringList message)
                 }
             }
         }
-        if(param_check(message,3)=="ERR"){
+        if(param_check(message,3)=="ERR" && param_check(message,0)!="lrlvls"){
             enable_widget(false);
         }
-        if(param_check(raw_params,0)=="lrconf"){
+        if(param_check(raw_params,0)=="lrconf" && family!="usr"){
             first_pref_cmd=true;
         }
     }else if(param_check(message,0)=="lrconf" && param_check(message,1)=="usr"){
@@ -235,11 +307,21 @@ void device_panel::silence_counter(int count)
     silence_count=count;
 }
 
+void device_panel::resetEmissionCommunicationTracking()
+{
+    has_confirmed_emission = false;
+    last_confirmed_emission = false;
+    if (emitting_communication_alarm) {
+        emitting_communication_alarm = false;
+        emit emittingCommunicationChanged(false);
+    }
+}
+
 void device_panel::on_on_off_button_clicked(bool checked)
 {
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     if (!button) return;
     button->setChecked(!checked);
     emit sl_data_set("lsonoff", ID, QString::number(checked ? 1 : 0));
-    silence_counter(2);
+    // silence_counter(2);
 }

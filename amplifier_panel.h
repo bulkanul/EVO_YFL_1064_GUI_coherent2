@@ -14,8 +14,8 @@ class amplifier_panel : public device_panel
 
 
 QStringList errors_list={
-                         "Backward PD fault 0",   
-                         "Forward PD fault 0",    
+                         "PD2 (Back1) fault",
+                         "PD1 (Fwd1) fault",
                          "N\\A",                  
                          "QBH fault",             
                          "N\\A",                  
@@ -30,6 +30,9 @@ public:
     ~amplifier_panel();
 
     friend class channel_panel;
+signals:
+    void qbhFaultChanged(bool active);
+
 private slots:
     void data_received_and_profed();
     // void key_catcher(QObject *key);
@@ -39,7 +42,8 @@ private slots:
 
 private:
     Ui::amplifier *ui;
-    int error_code;
+    int error_code = 0;
+    bool qbh_fault = false;
 };
 
 #endif // AMPLIFIER_PANEL_H

@@ -1,5 +1,6 @@
 #include "generator_panel.h"
 #include "ui_generator_panel.h"
+#include "level_placeholders.h"
 
 #include <QMessageBox>
 
@@ -17,6 +18,39 @@ generator_panel::generator_panel(QWidget *parent) :
 
     ui->w_error_box->hide();
     ui->pushButton->setVisible(false);
+
+    for (QLabel *value : {ui->l_core_temp_1, ui->l_core_temp_2,
+                          ui->l_pd1_fw, ui->l_pd2_bw}) {
+        QFont font = value->font();
+        font.setBold(true);
+        value->setFont(font);
+    }
+
+    const auto addLevelCaption = [this](int row, int column) {
+        auto *caption = new QLabel("Level:", this);
+        caption->setFont(QFont("Arial", 9));
+        caption->setAlignment(Qt::AlignCenter);
+        ui->gridLayout_seed_sensors->addWidget(caption, row, column);
+    };
+    for (int row : {1, 4}) {
+        addLevelCaption(row, 0);
+        addLevelCaption(row, 2);
+    }
+    level_placeholders::addSeparator(ui->gridLayout_seed_sensors, this, 2, 0, 4);
+    level_placeholders::addSeparator(ui->gridLayout_seed_sensors, this, 5, 0, 4);
+    QLabel *level_labels[] = {
+        level_placeholders::add(ui->gridLayout_seed_sensors, this, 1, 1, "l_level_gen_temp_1"),
+        level_placeholders::add(ui->gridLayout_seed_sensors, this, 1, 3, "l_level_gen_temp_2"),
+        level_placeholders::add(ui->gridLayout_seed_sensors, this, 4, 1, "l_level_gen_pd_1_fwd"),
+        level_placeholders::add(ui->gridLayout_seed_sensors, this, 4, 3, "l_level_gen_pd_2_back")
+    };
+    // Display order: Temp 1, Temp 2, Fwd, Back. Fields refer to lrstatus.
+    sensors = {
+        {ui->l_core_temp_1, level_labels[0], 5, LimitKind::Maximum, "°C", 1},
+        {ui->l_core_temp_2, level_labels[1], 6, LimitKind::Maximum, "°C", 1},
+        {ui->l_pd1_fw, level_labels[2], 11, LimitKind::Minimum, "V", 2},
+        {ui->l_pd2_bw, level_labels[3], 12, LimitKind::Maximum, "V", 2}
+    };
 }
 
 generator_panel::~generator_panel()
@@ -35,17 +69,11 @@ void generator_panel::data_received_and_profed()
         bool isStarted = param_check(raw_params, 3).toInt();
         ui->pb_laser_onoff->setChecked(isStarted);
 
-        emit sig_usr_changes("l_footer_connection_status", true);
-        emit emission_changed(isStarted);
-
         // 2 Flags (Errors)
         int flags = param_check(raw_params, 4).toInt();
         check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
 
-        double coreT1 = param_check(raw_params, 5).toDouble();
-        double coreT2 = param_check(raw_params, 6).toDouble();
-        ui->l_core_temp_1->setText(QString::number(coreT1, 'f', 1) + " °C");
-        ui->l_core_temp_2->setText(QString::number(coreT2, 'f', 1) + " °C");
+        updateSensors(raw_params);
 
         // 3 TEC State & Temps
         bool tec1 = param_check(raw_params, 7).toInt();
@@ -59,11 +87,7 @@ void generator_panel::data_received_and_profed()
         ui->dsb_temp_1->setValue(tecTemp1);
         ui->dsb_temp_2->setValue(tecTemp2);
 
-        double pd1 = param_check(raw_params, 11).toDouble();
-        double pd2 = param_check(raw_params, 12).toDouble();
         double pd3 = param_check(raw_params, 13).toDouble();
-        ui->l_pd1_fw->setText(QString::number(pd1, 'f', 2) + " V");
-        ui->l_pd2_bw->setText(QString::number(pd2, 'f', 2) + " V");
         ui->l_pd3->setText(QString::number(pd3, 'f', 2) + " V");
 
         // 4 HPLD Status

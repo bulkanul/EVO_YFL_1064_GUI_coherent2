@@ -35,7 +35,6 @@ class MainWindow : public QMainWindow
     int admin_pass=0;
     QString pass;
     bool user_ui=false;
-    bool isEmissionActive = false;
     QDialog*  networkDialog = nullptr;
     QLineEdit* networkIpEdit = nullptr;
     QLineEdit* networkMacEdit = nullptr;
@@ -47,7 +46,6 @@ public:
     ~MainWindow();
 
 public slots:
-    void change_interface(QString,int);
     void pass_controller(QKeyEvent *keyEvent);
 
 signals:
@@ -61,7 +59,9 @@ private slots:
     void on_pushButton_clicked();
     void version_conflict();
     void on_pb_error_cleaner_clicked();
-    void on_usr_critical_error(bool show_clear_btn);
+    void on_device_error_changed(bool has_error);
+    void on_emitting_unit_communication_changed(bool alarmActive);
+    void on_levels_response(const QVector<double> &values);
     void on_all_reset_1_clicked();
     void on_all_save_seed_clicked();
     void on_all_restore_seed_clicked();
@@ -70,7 +70,6 @@ private slots:
     void connection_timeout();
     void on_menu_main_clicked();
     void on_disconnect_clicked();
-    void on_emission_changed(bool isActive);
     void set_device_ip();
     void enter_bootloader();
     void show_network_info_dialog();
@@ -79,6 +78,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void connectChannelPanel(channel_panel* chan);
+    void clearLevels();
+    QSet<QObject*> error_panels;
+    bool controller_connection_ready = false;
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;

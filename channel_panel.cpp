@@ -40,6 +40,8 @@ channel_panel::channel_panel(int num, QWidget *parent) :
 
     amp = new amplifier_panel();
     amp->ID = ID;
+    connect(amp, &amplifier_panel::qbhFaultChanged,
+            preamp, &preamplifier_panel::setAmpQbhFault);
     ampCol->addWidget(amp);
     layout->addLayout(ampCol, 0, 2);
 

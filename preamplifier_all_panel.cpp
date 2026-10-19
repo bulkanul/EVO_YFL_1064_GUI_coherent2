@@ -23,22 +23,6 @@ preamplifier_all_panel::~preamplifier_all_panel()
     delete ui;
 }
 
-void preamplifier_all_panel::auto_telemetry_call(QString family)
-{
-    if (count_no_responce > 6) {
-        enable_widget(false);
-        first_pref_cmd = false;
-        first_status_cmd = true;
-        first_calib = true;
-    }
-    if (family == this->family + QString::number(ID)) {
-        count_no_responce++;
-        count++;
-        sl_data_get("lgonoff", ID, "");   // lgonoff allpreamp
-        sl_data_get("lgstatus", ID, "");  // lgstatus allpreamp
-    }
-}
-
 void preamplifier_all_panel::data_received_and_profed()
 {
     // lrstatus allpreamp <id> <value>

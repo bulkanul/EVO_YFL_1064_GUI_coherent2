@@ -4,13 +4,17 @@
 #include <QDialog>
 #include <QDoubleSpinBox>
 #include <QLabel>
+#include <QVector>
 #include <QWidget>
+#include "level_placeholders.h"
 
 class device_panel : public QWidget
 {
     Q_OBJECT
 public:
     explicit device_panel(QWidget *parent = nullptr);
+    void setLevels(const QVector<double> &values);
+    void clearLevels();
     int count=0;
     int count_no_responce=0;
     int ID=404;
@@ -59,6 +63,7 @@ public slots:
     QString parse_bits(int mess,QStringList);
     void call_msg_box(QString);
     void silence_counter(int);
+    void resetEmissionCommunicationTracking();
     void key_catcher(QObject *key);
     void on_on_off_button_clicked(bool checked);
 
@@ -73,9 +78,32 @@ signals:
     void enter_event(QObject*);
     void sl_data_set(QString,QString);
     void command_proofed();
+    void sig_device_error(bool has_error);
+    void emittingCommunicationChanged(bool alarmActive);
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;
+    using LimitKind = level_placeholders::LimitKind;
+    struct Sensor {
+        QLabel *value_label;
+        QLabel *level_label;
+        int status_field;
+        LimitKind kind;
+        QString unit;
+        int precision;
+        double value = 0;
+        double limit = 0;
+    };
+    QVector<Sensor> sensors;
+    void updateSensors(const QStringList &message);
+
+private:
+    void refreshReadingColors();
+    bool readings_valid = false;
+    bool levels_valid = false;
+    bool has_confirmed_emission = false;
+    bool last_confirmed_emission = false;
+    bool emitting_communication_alarm = false;
 };
 
 #endif // DEVICE_PANEL_H

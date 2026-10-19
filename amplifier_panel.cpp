@@ -1,5 +1,6 @@
 #include "amplifier_panel.h"
 #include "ui_amplifier_panel.h"
+#include "level_placeholders.h"
 
 #include <QMessageBox>
 
@@ -24,6 +25,23 @@ amplifier_panel::amplifier_panel(QWidget *parent) :
     }
     ui->horizontalLayout_4->setStretch(0, 0);
     ui->horizontalLayout_4->setStretch(1, 1);
+
+    ui->verticalSpacer_4->changeSize(20, 0, QSizePolicy::Minimum, QSizePolicy::Fixed);
+    level_placeholders::addHeading(ui->gridLayout, this, 5, 6);
+    QLabel *level_labels[] = {
+        level_placeholders::add(ui->gridLayout, this, 6, 0, "l_level_amp_temp_0"),
+        level_placeholders::add(ui->gridLayout, this, 6, 1, "l_level_amp_temp_1"),
+        level_placeholders::add(ui->gridLayout, this, 6, 2, "l_level_amp_pd_1_fwd"),
+        level_placeholders::add(ui->gridLayout, this, 6, 3, "l_level_amp_pd_2_back")
+    };
+    // Display order: Temp 0, Temp 1, Fwd, Back. Fields refer to lrstatus.
+    sensors = {
+        {ui->l_temp_0, level_labels[0], 7, LimitKind::Maximum, "°C", 1},
+        {ui->l_temp_1, level_labels[1], 8, LimitKind::Maximum, "°C", 1},
+        {ui->l_pd_1_fwd, level_labels[2], 10, LimitKind::Minimum, "V", 2},
+        {ui->l_pd_2_back, level_labels[3], 9, LimitKind::Maximum, "V", 2}
+    };
+    ui->gridLayout->invalidate();
 }
 
 amplifier_panel::~amplifier_panel()
@@ -50,14 +68,13 @@ void amplifier_panel::data_received_and_profed()
         // [6] = flags
         int flags = param_check(raw_params, 6).toInt();
         check_error_state(flags, error_code, ui->w_error_box, ui->pushButton);
+        const bool qbhFault = (flags & (1 << 3)) != 0;
+        if (qbh_fault != qbhFault) {
+            qbh_fault = qbhFault;
+            emit qbhFaultChanged(qbh_fault);
+        }
 
-        // [7] = temp1, [8] = temp2
-        ui->l_temp_0->setText(QString::number(param_check(raw_params, 7).toDouble(), 'f', 1) + " °C");
-        ui->l_temp_1->setText(QString::number(param_check(raw_params, 8).toDouble(), 'f', 1) + " °C");
-        
-        // [9] = pd1_bw, [10] = pd2_fw
-        ui->l_pd_back->setText(QString::number(param_check(raw_params, 9).toDouble(), 'f', 2) + " V");
-        ui->l_pd_forw->setText(QString::number(param_check(raw_params, 10).toDouble(), 'f', 2) + " V");
+        updateSensors(raw_params);
         
         // [11] = diff_pd
         ui->l_diff_pd->setText(QString::number(param_check(raw_params, 11).toDouble(), 'f', 2) + " V");
@@ -89,5 +106,9 @@ void amplifier_panel::on_pb_pilot_onoff_clicked(bool checked)
 
 void amplifier_panel::on_pushButton_clicked()
 {
-    call_msg_box(parse_bits(error_code, errors_list));
+    QStringList details;
+    for (int bit : {1, 0, 2, 3, 4, 5, 6, 7, 8}) {
+        if (error_code & (1 << bit)) details.append(errors_list.at(bit));
+    }
+    call_msg_box(details.join('\n'));
 }

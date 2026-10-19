@@ -33,6 +33,7 @@ HEADERS += \
     divider_panel.h \
     flag_panel.h \
     generator_panel.h \
+    level_placeholders.h \
     preamplifier_all_panel.h \
     preamplifier_panel.h \
     tcp_usb_connector.h \

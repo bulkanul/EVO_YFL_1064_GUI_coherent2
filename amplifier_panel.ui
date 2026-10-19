@@ -290,7 +290,7 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QLabel" name="l_pd_forw">
+        <widget class="QLabel" name="l_pd_2_back">
          <property name="minimumSize">
           <size>
            <width>55</width>
@@ -370,7 +370,7 @@ QPushButton::disabled  {
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QLabel" name="l_pd_back">
+        <widget class="QLabel" name="l_pd_1_fwd">
          <property name="minimumSize">
           <size>
            <width>55</width>
@@ -510,11 +510,11 @@ QPushButton::disabled  {
          <property name="font">
           <font>
            <family>Arial</family>
-           <pointsize>10</pointsize>
+           <pointsize>9</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>PD2 (Fwd):</string>
+          <string>PD2 (Back1):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -628,11 +628,11 @@ QPushButton::disabled  {
          <property name="font">
           <font>
            <family>Arial</family>
-           <pointsize>10</pointsize>
+           <pointsize>9</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>PD1 (Back):</string>
+          <string>PD1 (Fwd1):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
