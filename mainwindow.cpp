@@ -86,6 +86,9 @@ MainWindow::MainWindow(QWidget *parent)
     for (device_panel *panel : emittingPanels) {
         connect(panel, &device_panel::emittingCommunicationChanged,
                 this, &MainWindow::on_emitting_unit_communication_changed);
+        connect(panel, &device_panel::communicationRestored, this, [this]() {
+            flags->first_pref_cmd = false;
+        });
     }
 
     ui->groupBox->setLayout(layout);
@@ -291,7 +294,7 @@ void MainWindow::connection_state(int state)
         };
         for (device_panel *panel : panels) {
             panel->enable_widget(false);
-            panel->resetEmissionCommunicationTracking();
+            panel->resetCommunicationTracking();
         }
     }
     QString connectionInfo;

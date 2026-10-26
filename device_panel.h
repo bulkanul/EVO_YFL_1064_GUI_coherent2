@@ -22,7 +22,6 @@ public:
     QString family;
     QTimer* tmr;
     bool key=true;
-    bool connection_lost=true;
     bool error_displayer=true;
     bool first_status_cmd=true;
 
@@ -63,7 +62,7 @@ public slots:
     QString parse_bits(int mess,QStringList);
     void call_msg_box(QString);
     void silence_counter(int);
-    void resetEmissionCommunicationTracking();
+    void resetCommunicationTracking();
     void key_catcher(QObject *key);
     void on_on_off_button_clicked(bool checked);
 
@@ -80,6 +79,7 @@ signals:
     void command_proofed();
     void sig_device_error(bool has_error);
     void emittingCommunicationChanged(bool alarmActive);
+    void communicationRestored();
 
 protected:
     bool eventFilter(QObject *target, QEvent *event) override;
@@ -98,6 +98,8 @@ protected:
     void updateSensors(const QStringList &message);
 
 private:
+    enum class CommunicationState { Unknown, Active, Lost };
+    CommunicationState communication_state = CommunicationState::Unknown;
     void refreshReadingColors();
     bool readings_valid = false;
     bool levels_valid = false;

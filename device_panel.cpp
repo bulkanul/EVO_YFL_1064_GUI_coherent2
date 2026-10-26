@@ -128,6 +128,8 @@ void device_panel::auto_telemetry_call(QString family)
 {
     if(count_no_responce>6){
         enable_widget(false);
+        if (communication_state == CommunicationState::Active)
+            communication_state = CommunicationState::Lost;
         first_pref_cmd=false;
         first_status_cmd=true;
         first_calib=true;
@@ -169,6 +171,11 @@ void device_panel::data_received(QStringList message)
         raw_params=message;
         count_no_responce=0;
         enable_widget(true);
+        if (param_check(message, 3) != "ERR") {
+            const bool restored = communication_state == CommunicationState::Lost;
+            communication_state = CommunicationState::Active;
+            if (restored) emit communicationRestored();
+        }
         if ((family == "gen" || family == "preamp" || family == "amp") &&
             (param_check(message, 0) == "lrstatus" || param_check(message, 0) == "lronoff")) {
             bool ok = false;
@@ -307,8 +314,9 @@ void device_panel::silence_counter(int count)
     silence_count=count;
 }
 
-void device_panel::resetEmissionCommunicationTracking()
+void device_panel::resetCommunicationTracking()
 {
+    communication_state = CommunicationState::Unknown;
     has_confirmed_emission = false;
     last_confirmed_emission = false;
     if (emitting_communication_alarm) {
