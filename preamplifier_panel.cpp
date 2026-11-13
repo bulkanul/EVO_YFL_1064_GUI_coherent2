@@ -15,8 +15,7 @@ preamplifier_panel::preamplifier_panel(QWidget *parent) :
 
     family="preamp";
 
-    ui->w_error_box->hide();
-    ui->pushButton->setVisible(false);
+    setupErrorDisplay(ui->w_error_box, ui->pushButton);
     ui->pb_reset->setVisible(false);
 
     ui->l_temp_0->setMaximumWidth(QWIDGETSIZE_MAX);

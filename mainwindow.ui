@@ -50,7 +50,7 @@
         <height>60</height>
        </size>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_59">
+      <layout class="QHBoxLayout" name="horizontalLayout_59" stretch="0,0,1,0,0,0,0">
        <property name="topMargin">
         <number>3</number>
        </property>
@@ -65,19 +65,6 @@
          <property name="rightMargin">
           <number>10</number>
          </property>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item>
           <widget class="QPushButton" name="menu_main">
            <property name="enabled">
@@ -115,7 +102,7 @@
 {
 	text-align: center;
     border: 0px solid gray;
-	vertical-align: bottom;
+    padding: 3px 0px;
 }
 
 QPushButton:hover
@@ -123,7 +110,7 @@ QPushButton:hover
 	text-align: center;
 	color: rgb(170, 0, 0);
     border: 0px solid gray;
-	vertical-align: bottom;
+    padding: 3px 0px;
 }</string>
            </property>
            <property name="text">
@@ -143,19 +130,6 @@ QPushButton:hover
            </property>
           </widget>
          </item>
-         <item>
-          <spacer name="verticalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
         </layout>
        </item>
        <item>
@@ -166,19 +140,6 @@ QPushButton:hover
          <property name="rightMargin">
           <number>10</number>
          </property>
-         <item>
-          <spacer name="verticalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
          <item>
           <widget class="QPushButton" name="menu_button">
            <property name="enabled">
@@ -216,7 +177,7 @@ QPushButton:hover
 {
 	text-align: center;
     border: 0px solid gray;
-	vertical-align: bottom;
+    padding: 3px 0px;
 }
 
 QPushButton:hover
@@ -224,7 +185,7 @@ QPushButton:hover
 	text-align: center;
 	color: rgb(170, 0, 0);
     border: 0px solid gray;
-	vertical-align: bottom;
+    padding: 3px 0px;
 }</string>
            </property>
            <property name="text">
@@ -243,19 +204,6 @@ QPushButton:hover
             <bool>false</bool>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </item>

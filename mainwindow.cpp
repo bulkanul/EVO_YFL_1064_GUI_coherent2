@@ -117,6 +117,9 @@ MainWindow::MainWindow(QWidget *parent)
         on_pushButton_clicked();
     }
     installEventFilter(this);
+    auto error_button_policy = ui->pb_error_cleaner->sizePolicy();
+    error_button_policy.setRetainSizeWhenHidden(true);
+    ui->pb_error_cleaner->setSizePolicy(error_button_policy);
     ui->pb_error_cleaner->setVisible(false);
 
     connect(ui->pb_network_info, &QPushButton::clicked,

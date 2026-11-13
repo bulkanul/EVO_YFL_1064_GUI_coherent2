@@ -82,6 +82,7 @@ signals:
     void communicationRestored();
 
 protected:
+    void setupErrorDisplay(QWidget *error_widget, QPushButton *details_btn);
     bool eventFilter(QObject *target, QEvent *event) override;
     using LimitKind = level_placeholders::LimitKind;
     struct Sensor {

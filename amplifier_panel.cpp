@@ -15,8 +15,7 @@ amplifier_panel::amplifier_panel(QWidget *parent) :
 
     family="amp";
 
-    ui->w_error_box->hide();
-    ui->pushButton->setVisible(false);
+    setupErrorDisplay(ui->w_error_box, ui->pushButton);
 
     ui->power->installEventFilter(this);
 

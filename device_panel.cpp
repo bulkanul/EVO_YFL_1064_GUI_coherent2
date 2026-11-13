@@ -109,6 +109,16 @@ void device_panel::key_catcher(QObject* key)
     delete mesg;
 }
 
+void device_panel::setupErrorDisplay(QWidget *error_widget, QPushButton *details_btn)
+{
+    for (QWidget *widget : {error_widget, static_cast<QWidget *>(details_btn)}) {
+        auto policy = widget->sizePolicy();
+        policy.setRetainSizeWhenHidden(true);
+        widget->setSizePolicy(policy);
+        widget->hide();
+    }
+}
+
 void device_panel::check_error_state(int flags, int &error_code_member, QWidget* error_widget, QPushButton* details_btn)
 {
     if (flags) {

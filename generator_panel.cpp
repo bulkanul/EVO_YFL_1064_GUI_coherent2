@@ -16,8 +16,7 @@ generator_panel::generator_panel(QWidget *parent) :
 
     family = "gen";
 
-    ui->w_error_box->hide();
-    ui->pushButton->setVisible(false);
+    setupErrorDisplay(ui->w_error_box, ui->pushButton);
 
     for (QLabel *value : {ui->l_core_temp_1, ui->l_core_temp_2,
                           ui->l_pd1_fw, ui->l_pd2_bw}) {

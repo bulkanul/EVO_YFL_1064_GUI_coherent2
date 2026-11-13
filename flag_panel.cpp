@@ -14,8 +14,7 @@ flag_panel::flag_panel(QWidget *parent) :
 
     connect(this,&device_panel::enter_event,this,&device_panel::key_catcher);
     connect(this,&device_panel::command_proofed,this,&flag_panel::data_received_and_profed);
-    ui->w_error_box->hide();
-    ui->pushButton->setVisible(false);
+    setupErrorDisplay(ui->w_error_box, ui->pushButton);
 }
 
 flag_panel::~flag_panel()
